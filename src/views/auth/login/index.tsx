@@ -1,6 +1,6 @@
 import styles from './index.module.css';
-import LoginForm from './form.tsx'
-import Sparkles from './sparkles.tsx'
+import LoginForm from './components/form.tsx'
+import Sparkles from './components/sparkles.tsx'
 
 const Login = () => {
   return (

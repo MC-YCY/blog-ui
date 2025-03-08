@@ -1,4 +1,4 @@
-import { SparklesCore } from '@/components/ui/sparkles';
+import { SparklesCore } from '@/components/ui/sparkles.tsx';
 
 const sparkles = () => {
   return (

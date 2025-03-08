@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button.tsx';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import styles from './index.module.css';
+import styles from '../index.module.css';
 import temCaptcha from '@/assets/images/wallhaven-zyl6dw.png';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp.tsx';
 import { ColourfulText } from '@/components/ui/colourful-text.tsx';
