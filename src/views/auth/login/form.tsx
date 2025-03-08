@@ -14,14 +14,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import styles from './index.module.css';
 import temCaptcha from '@/assets/images/wallhaven-zyl6dw.png';
-import { TextGenerateEffect } from '@/components/ui/text-generate-effect.tsx';
-
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp.tsx';
+import { ColourfulText } from '@/components/ui/colourful-text.tsx';
 
 const LoginFormTitle = () => {
   const words = '请好，欢迎登录！';
-  return <div className="mb-4">
-    <TextGenerateEffect words={words} duration={.5} />
-  </div>;
+  return <h1 className='text-2xl mb-4 mt-2'>
+    <ColourfulText text={words} />
+  </h1>;
 };
 
 const LoginForm = () => {
@@ -69,7 +69,7 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel>密码</FormLabel>
                 <FormControl>
-                  <Input placeholder="请输入密码" {...field} />
+                  <Input type="password" placeholder="请输入密码" {...field} />
                 </FormControl>
                 <FormDescription>
                   这是用户密码
@@ -88,7 +88,16 @@ const LoginForm = () => {
                   <FormItem>
                     <FormLabel>验证码</FormLabel>
                     <FormControl>
-                      <Input placeholder="验证码" {...field} />
+                      <InputOTP maxLength={6} {...field}>
+                        <InputOTPGroup className="w-full">
+                          <InputOTPSlot className="flex-1" index={0} />
+                          <InputOTPSlot className="flex-1" index={1} />
+                          <InputOTPSlot className="flex-1" index={2} />
+                          <InputOTPSlot className="flex-1" index={3} />
+                          <InputOTPSlot className="flex-1" index={4} />
+                          <InputOTPSlot className="flex-1" index={5} />
+                        </InputOTPGroup>
+                      </InputOTP>
                     </FormControl>
                     <FormDescription>
                       请输入验证码

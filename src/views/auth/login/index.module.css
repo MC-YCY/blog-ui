@@ -33,8 +33,9 @@
 }
 .login-form-wrap{
     padding:.5rem 1.5rem 1.5rem;
-    border-radius: calc(var(--radius) - 2px);
-    background: var(--background);
+    border-radius: calc(var(--radius) + 2px);
+    background: #fff;
+    box-shadow: -4px -4px 10px #3b6171 ,  4px 4px 10px #324a56;
 }
 .login-form-captcha{
     width: 150px;
