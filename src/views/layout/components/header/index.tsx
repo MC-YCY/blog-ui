@@ -11,6 +11,11 @@ const Header = () => {
   const handleScroll = useCallback(() => {
     const scrollTop = document.documentElement.scrollTop;
     if (headerRef.current) {
+      if(scrollTop > 140){
+        headerRef.current?.classList.remove('border-transparent');
+      }else{
+        headerRef.current?.classList.add('border-transparent');
+      }
       const classList: string[] = ['border-b', 'bg-white', `dark:bg-black`, 'border-neutral-200', `dark:border-white/[0.1]`];
       classList.forEach((classname: string) => {
         if (scrollTop > 140) {

@@ -1,11 +1,10 @@
+import Hero from './components/hero/index.tsx'
+
 const Home = () => {
   return (
     <>
-        <div className="h-screen">123123</div>
-        <div className='h-screen'>123123</div>
-        <div className='h-screen'>123123</div>
-        <div className='h-screen'>123123</div>
+      <Hero></Hero>
     </>
   )
 }
-export default Home;
+export default Home

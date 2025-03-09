@@ -12,9 +12,7 @@ const Layout = () => {
   return (
     <>
       <Header></Header>
-      <div className='max-w-[84rem] w-full mx-auto  relative z-20'>
-        <Outlet></Outlet>
-      </div>
+      <Outlet></Outlet>
     </>
   );
 };
