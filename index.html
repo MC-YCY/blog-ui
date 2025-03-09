@@ -10,4 +10,15 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
+  <!-- 在 public/index.html 中添加初始化脚本,防止主题闪烁 -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme-storage')
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      const theme = savedTheme ? JSON.parse(savedTheme).state.theme : systemTheme
+
+      document.documentElement.className = 'trancy-zh-CN ' + theme
+      document.documentElement.style.colorScheme = theme
+    })()
+  </script>
 </html>
