@@ -55,7 +55,7 @@ export const products = [
     thumbnail: VueBanner,
   },
   {
-    title: 'Vue-router',
+    title: 'Vue-router.ts',
     link: 'https://router.vuejs.org/zh/',
     thumbnail: VueRouterBanner,
   },
@@ -71,7 +71,7 @@ export const products = [
     thumbnail: ReactBanner,
   },
   {
-    title: 'React-router',
+    title: 'React-router.ts',
     link: 'https://reactrouter.com/',
     thumbnail: ReactRouterBanner,
   },

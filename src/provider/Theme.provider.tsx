@@ -1,4 +1,4 @@
-// ThemeProvider.tsx
+// Theme.provider.tsx
 import { useEffect } from 'react'
 import useThemeStore from '@/sotres/themeStore.ts'
 
