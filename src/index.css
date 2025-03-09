@@ -124,3 +124,17 @@
   }
 }
 
+body{
+  position: relative;
+}
+.root-background{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.root-routes{
+  position: absolute;
+  width: 100%;
+  z-index: 999999;
+}

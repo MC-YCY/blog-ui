@@ -1,12 +1,11 @@
-const Home =()=> {
+const Home = () => {
   return (
-    <div>
-      home
-      <div className='h-screen'></div>
-      <div className='h-screen'></div>
-      <div className='h-screen'></div>
-      <div className='h-screen'></div>
-    </div>
-  );
+    <>
+        <div className="h-screen">123123</div>
+        <div className='h-screen'>123123</div>
+        <div className='h-screen'>123123</div>
+        <div className='h-screen'>123123</div>
+    </>
+  )
 }
 export default Home;
