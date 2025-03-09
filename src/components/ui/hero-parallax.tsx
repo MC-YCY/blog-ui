@@ -30,30 +30,30 @@ export const HeroParallax = ({
     offset: ['start start', 'end start'],
   });
 
-  const springConfig = { stiffness: 200, damping: 20, mass: 1.2 };
+  const springConfig = { stiffness: 120, damping: 25, mass: 0.9 };
 
   const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, 1000]),
+    useTransform(scrollYProgress, [0, 1], [0, 800]), // 调整范围，减少位移突兀感
     springConfig
   );
   const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -1000]),
+    useTransform(scrollYProgress, [0, 1], [0, -800]),
     springConfig
   );
   const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.3], [25, 0]),
+    useTransform(scrollYProgress, [0, 0.4], [15, 0]), // 让角度变化更平滑
     springConfig
   );
   const opacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [0.2, 1]),
+    useTransform(scrollYProgress, [0, 0.3], [0.3, 1]), // 让淡入效果更平缓
     springConfig
   );
   const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [20, 0]),
+    useTransform(scrollYProgress, [0, 0.3], [10, 0]), // 旋转幅度减小，避免过度旋转
     springConfig
   );
   const translateY = useSpring(
-    useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
+    useTransform(scrollYProgress, [0, 0.3], [-500, 400]), // 减小垂直位移范围，提升观感
     springConfig
   );
 
