@@ -15,12 +15,12 @@ import { z } from 'zod';
 import styles from '../index.module.css';
 import temCaptcha from '@/assets/images/wallhaven-zyl6dw.png';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp.tsx';
-import { ColourfulText } from '@/components/ui/colourful-text.tsx';
+import { TextGenerateEffect } from '@/components/ui/text-generate-effect.tsx'
 
 const LoginFormTitle = () => {
-  const words = '欢迎回来！';
+  const words = 'L o g i n';
   return <h1 className='text-2xl mb-4 mt-2'>
-    <ColourfulText text={words} />
+    <TextGenerateEffect  words={words} />
   </h1>;
 };
 
@@ -42,7 +42,7 @@ const LoginForm = () => {
 
   };
   return <div className={styles.loginForm}>
-    <div className={styles.loginFormWrap}>
+    <div className={styles.loginFormWrap  + " dark:bg-gray-800"}>
       <LoginFormTitle></LoginFormTitle>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

@@ -4,14 +4,12 @@ import Layout from '@/views/layout/index.tsx'
 import Home from '@/views/home'
 import ThemeProvider from '@/provider/ThemeProvider.tsx'
 import useThemeStore from '@/sotres/themeStore.ts'
-import WrapperBackground from '@/components/wrapper-background/wrapper-background.tsx'
 
 function App() {
   // 初始缓存
   useThemeStore.persist.rehydrate()
   return (<>
     <ThemeProvider></ThemeProvider>
-    <WrapperBackground></WrapperBackground>
     <div className='root-routes'>
       <Router>
         <Routes>
@@ -24,5 +22,4 @@ function App() {
     </div>
   </>)
 }
-
 export default App

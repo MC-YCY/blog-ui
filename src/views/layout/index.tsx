@@ -1,6 +1,7 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Header from './components/header/index.tsx';
+import WrapperBackground from '@/components/wrapper-background/wrapper-background.tsx'
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const Layout = () => {
 
   return (
     <>
+      <WrapperBackground></WrapperBackground>
       <Header></Header>
       <Outlet></Outlet>
     </>
