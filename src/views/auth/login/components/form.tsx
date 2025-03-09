@@ -18,7 +18,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp
 import { ColourfulText } from '@/components/ui/colourful-text.tsx';
 
 const LoginFormTitle = () => {
-  const words = '请好，欢迎登录！';
+  const words = '欢迎回来！';
   return <h1 className='text-2xl mb-4 mt-2'>
     <ColourfulText text={words} />
   </h1>;
