@@ -58,7 +58,7 @@ export const HeroParallax = ({
   );
 
   return (
-    <div className="py-40 overflow-hidden antialiased relative flex flex-col items-center">
+    <div className="overflow-hidden antialiased relative flex flex-col items-center">
       {children}
       <div ref={ref} className="flex flex-col items-center w-full">
         <motion.div
@@ -93,7 +93,7 @@ export const HeroParallax = ({
       </div>
 
       {/* 确保额外内容紧随卡片显示 */}
-      <div className="mt-[740px] w-screen">
+      <div className="mt-[500px] w-screen">
         {content}
       </div>
 
