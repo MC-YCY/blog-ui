@@ -6,30 +6,31 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form.tsx';
-import { Input } from '@/components/ui/input.tsx';
-import { Button } from '@/components/ui/button.tsx';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import styles from '../index.module.css';
-import temCaptcha from '@/assets/images/wallhaven-zyl6dw.png';
-import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp.tsx';
+} from '@/components/ui/form.tsx'
+import { Input } from '@/components/ui/input.tsx'
+import { Button } from '@/components/ui/button.tsx'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import styles from '../index.module.css'
+import temCaptcha from '@/assets/images/wallhaven-zyl6dw.png'
+import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp.tsx'
 import { TextGenerateEffect } from '@/components/ui/text-generate-effect.tsx'
+import LoginBanner from '@/assets/images/login-banner.svg'
 
 const LoginFormTitle = () => {
-  const words = 'L o g i n';
-  return <h1 className='text-2xl mb-4 mt-2'>
-    <TextGenerateEffect  words={words} />
-  </h1>;
-};
+  const words = 'L o g i n'
+  return <h1 className="text-2xl mb-4 mt-2">
+    <TextGenerateEffect words={words} />
+  </h1>
+}
 
 const LoginForm = () => {
   const formSchema = z.object({
     account: z.string().nonempty('请输入您的账号'),
     password: z.string().nonempty('请输入您的密码'),
     captcha: z.string().nonempty('请输入验证码'),
-  });
+  })
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,12 +38,15 @@ const LoginForm = () => {
       password: '',
       captcha: '',
     },
-  });
+  })
   const onSubmit = () => {
 
-  };
-  return <div className={styles.loginForm}>
-    <div className={styles.loginFormWrap  + " dark:bg-gray-800"}>
+  }
+  return <div className={styles.loginForm + ' bg-white dark:bg-gray-800 rounded-lg'}>
+    <div className={styles.loginFormBanner}>
+      <img src={LoginBanner} alt="" />
+    </div>
+    <div className={styles.loginFormContent}>
       <LoginFormTitle></LoginFormTitle>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -115,6 +119,6 @@ const LoginForm = () => {
         </form>
       </Form>
     </div>
-  </div>;
-};
-export default LoginForm;
+  </div>
+}
+export default LoginForm
