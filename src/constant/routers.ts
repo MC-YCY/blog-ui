@@ -1,6 +1,7 @@
 import RootLayout from '@/views/layout/index'
 import Home from '@/views/home'
-import About from '@/views/about'
+import Resume from '@/views/resume'
+import Posts from '@/views/posts'
 import Login from '@/views/auth/login'
 import React, { JSX } from 'react'
 
@@ -29,11 +30,18 @@ export const Routers: MetaRouteObject[] = [
         element: Home,
       },
       {
-        path: 'about',
+        path: 'posts',
         meta: {
-          title: '关于',
+          title: '文章',
         },
-        element: About,
+        element: Posts,
+      },
+      {
+        path: 'resume',
+        meta: {
+          title: '简历',
+        },
+        element: Resume,
       },
     ],
   },

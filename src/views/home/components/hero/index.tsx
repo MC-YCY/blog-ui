@@ -22,7 +22,9 @@ import HeroContent from '../hero-content/index.tsx'
 
 import { Button } from '@/components/ui/button.tsx'
 
-const HeroText = () => {
+import {useNavigate } from 'react-router-dom'
+
+const HeroText = (navigate: any) => {
   return <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 po z-9 pointer-events-none">
     <h1
       className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
@@ -34,10 +36,10 @@ const HeroText = () => {
       偶尔还能 debug 到怀疑人生
     </p>
     <div className="mt-6 flex space-x-4 pointer-events-auto cursor-pointer">
-      <Button variant='destructive'>
+      <Button variant='destructive'  onClick={()=>navigate('/posts')}>
         🔥 文章
       </Button>
-      <Button>
+      <Button onClick={()=>navigate('/resume')}>
         🤔 认识博主
       </Button>
     </div>
@@ -45,7 +47,8 @@ const HeroText = () => {
 }
 
 const Hero = () => {
-  return <HeroParallax products={products} children={HeroText()} content={HeroContent()}>
+  const navigate = useNavigate()
+  return <HeroParallax products={products} children={HeroText(navigate)} content={HeroContent()}>
   </HeroParallax>
 }
 export const products = [
