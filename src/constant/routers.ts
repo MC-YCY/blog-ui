@@ -2,7 +2,7 @@ import RootLayout from '@/views/layout/index'
 import Home from '@/views/home'
 import About from '@/views/about'
 import Login from '@/views/auth/login'
-import { JSX } from 'react'
+import React, { JSX } from 'react'
 
 interface MetaRouteObject {
   meta?: {
