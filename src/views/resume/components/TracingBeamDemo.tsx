@@ -1,9 +1,16 @@
 import { TracingBeam } from "@/components/ui/tracing-beam";
+import Banner1 from '@/assets/images/resume/china.png';
+import Banner2 from '@/assets/images/resume/hua.png';
+import Banner3 from '@/assets/images/resume/lcx.jpg';
+import Banner4 from '@/assets/images/resume/wallhaven-d671ej.png';
+import Banner5 from '@/assets/images/resume/wallhaven-qz13pl.jpg';
+import Banner6 from '@/assets/images/resume/wallhaven-3l828y.jpg';
+import Banner7 from '@/assets/images/resume/wallhaven-9dp3y1.jpg';
 
 export function TracingBeamDemo() {
   return (
     <TracingBeam className="px-6">
-      <div className="max-w-2xl mx-auto antialiased pt-4 relative">
+      <div className="max-w-2xl mx-auto antialiased pt-4 pb-30 relative">
         {dummyContent.map((item, index) => (
           <div key={`content-${index}`} className="mb-12">
             <h2 className="bg-primary text-primary-foreground rounded-full text-sm w-fit px-4 py-1 mb-4">
@@ -19,9 +26,7 @@ export function TracingBeamDemo() {
                 <img
                   src={item.image}
                   alt="blog thumbnail"
-                  height="1000"
-                  width="1000"
-                  className="rounded-lg mb-6 object-cover shadow-md"
+                  className="rounded-lg mb-6 object-cover shadow-md w-[100%] h-[450px] object-cover"
                 />
               )}
               {item.description}
@@ -50,7 +55,7 @@ const dummyContent = [
       </>
     ),
     badge: "Vue",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=3540",
+    image: Banner1,
   },
   {
     title: "图表集网 - 微信小程序",
@@ -72,7 +77,7 @@ const dummyContent = [
       </>
     ),
     badge: "小程序",
-    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=3540",
+    image: Banner2,
   },
   {
     title: "零点数据治理平台（React）",
@@ -88,7 +93,7 @@ const dummyContent = [
       </>
     ),
     badge: "React",
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=3506",
+    image: Banner3,
   },
   {
     title: "济事办 - 政务服务小程序",
@@ -104,7 +109,7 @@ const dummyContent = [
       </>
     ),
     badge: "微信小程序",
-    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=3540",
+    image: Banner4,
   },
   {
     title: "FHarris-Vue 组件创新挑战赛",
@@ -119,7 +124,7 @@ const dummyContent = [
       </>
     ),
     badge: "Vue",
-    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=3540",
+    image: Banner5,
   },
   {
     title: "航空基本认知能力测评系统",
@@ -136,7 +141,7 @@ const dummyContent = [
       </>
     ),
     badge: "Vue & Electron",
-    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=3540",
+    image: Banner6,
   },
   {
     title: "济源政务服务监测系统（大屏可视化）",
@@ -151,7 +156,7 @@ const dummyContent = [
       </>
     ),
     badge: "Vue & Three.js",
-    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=3540",
+    image: Banner7,
   },
 ];
 
