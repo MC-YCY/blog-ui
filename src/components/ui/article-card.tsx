@@ -22,7 +22,7 @@ const tagColors = {
   default: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100',
 }
 
-export const rticleCard = ({
+export const ArticleCard = ({
                               title,
                               excerpt,
                               date,
