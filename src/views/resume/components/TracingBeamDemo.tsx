@@ -10,7 +10,7 @@ import Banner7 from '@/assets/images/resume/wallhaven-9dp3y1.jpg';
 export function TracingBeamDemo() {
   return (
     <TracingBeam className="px-6">
-      <div className="max-w-2xl mx-auto antialiased pt-4 pb-30 relative">
+      <div className="mx-auto antialiased pt-4 pb-30 relative">
         {dummyContent.map((item, index) => (
           <div key={`content-${index}`} className="mb-12">
             <h2 className="bg-primary text-primary-foreground rounded-full text-sm w-fit px-4 py-1 mb-4">
@@ -26,7 +26,7 @@ export function TracingBeamDemo() {
                 <img
                   src={item.image}
                   alt="blog thumbnail"
-                  className="rounded-lg mb-6 object-cover shadow-md w-[100%] h-[450px] object-cover"
+                  className="rounded-lg mb-6 object-cover shadow-md w-[100%] h-[418px] object-cover"
                 />
               )}
               {item.description}
