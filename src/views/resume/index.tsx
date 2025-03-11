@@ -1,10 +1,11 @@
 import { TracingBeamDemo } from "@/views/resume/components/TracingBeamDemo.tsx";
+import Container from '@/components/container.tsx'
 
 const About = () => {
   return (
-    <div className="px-8 flex max-w-[88rem] mx-auto">
+    <Container>
       <TracingBeamDemo></TracingBeamDemo>
-    </div>
+    </Container>
   );
 };
 export default About;

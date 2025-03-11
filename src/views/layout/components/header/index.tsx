@@ -3,6 +3,8 @@ import NavBar from './components/nav-bar.tsx'
 import ThemeButton from './components/theme-button.tsx'
 import UserButton from './components/user-button.tsx'
 import DrawerButton from './components/drawer-button.tsx'
+import Container from '@/components/container.tsx'
+import PostsScreenButton from './components/posts-screen.button.tsx'
 
 
 const Header = () => {
@@ -35,9 +37,9 @@ const Header = () => {
   }, [handleScroll, headerRef]);
 
   return (
-    <header ref={headerRef} className="z-[50] sticky top-0 w-full bg-transparent border-b border-transparent">
+    <header ref={headerRef} className="z-[50] sticky top-0 w-full bg-transparent border-b border-transparent transition-colors">
       <div className="hidden lg:block">
-        <div className="px-8 flex h-16 items-center max-w-[88rem] mx-auto">
+        <Container className={'flex items-center h-16'}>
           <div className="mr-4 hidden md:flex">
             logo
           </div>
@@ -45,10 +47,11 @@ const Header = () => {
             <NavBar></NavBar>
           </nav>
           <div className='flex flex-1 items-center justify-end gap-2 sm:gap-2 md:justify-end'>
+            <PostsScreenButton></PostsScreenButton>
             <ThemeButton></ThemeButton>
             <UserButton></UserButton>
           </div>
-        </div>
+        </Container>
       </div>
       <div className="block lg:hidden">
         <div className='flex justify-between  items-center w-full rounded-md px-4 py-4'>
