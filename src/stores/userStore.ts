@@ -3,11 +3,11 @@ import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
 // 类型定义
-type User = {
+export type User = {
   id: string
   username: string
   email: string
-  avatarUrl?: string
+  avatar?: string
   phone?: string
   createdAt: string
 }

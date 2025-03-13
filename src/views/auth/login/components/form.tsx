@@ -13,10 +13,14 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import styles from '../index.module.css'
-import temCaptcha from '@/assets/images/wallhaven-zyl6dw.png'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp.tsx'
 import { TextGenerateEffect } from '@/components/ui/text-generate-effect.tsx'
 import LoginBanner from '@/assets/images/login-banner.svg'
+import { getCaptchaApi, loginApi } from '@/api/auth.api.ts'
+import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
+import useUserStore from '@/stores/userStore.ts'
+import { useNavigate } from 'react-router-dom'
 
 const LoginFormTitle = () => {
   const words = 'L o g i n'
@@ -26,22 +30,77 @@ const LoginFormTitle = () => {
 }
 
 const LoginForm = () => {
+  const userStore = useUserStore()
+  const navigate = useNavigate()
+
   const formSchema = z.object({
-    account: z.string().nonempty('请输入您的账号'),
-    password: z.string().nonempty('请输入您的密码'),
-    captcha: z.string().nonempty('请输入验证码'),
+    account: z.string()
+      .nonempty('请输入您的账号')
+      .regex(/^[A-Za-z0-9]+$/, '账号只能包含字母和数字'),
+    password: z.string()
+      .nonempty('请输入您的密码')
+      .min(6, '密码长度不能少于6位')
+      .max(12, '密码长度不能超过12位')
+      .regex(/^\w+$/, '密码只能包含字母、数字和下划线'),
+    captchaCode: z.string().min(4, '补全验证码').nonempty('请输入验证码'),
   })
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       account: '',
       password: '',
-      captcha: '',
+      captchaCode: '',
     },
   })
-  const onSubmit = () => {
-
+  const onSubmit = (formState: Record<string, any>) => {
+    let params = {
+      ...formState,
+      captchaId: captcha.captchaId,
+    }
+    loginApi(params).then(res => {
+      userStore.login(res.user,res.access_token)
+      navigate('/home')
+    })
   }
+
+  const [captcha, setCaptcha] = useState<Record<string, string>>({
+    svg: '',
+    captchaId: '',
+  })
+  const [captchaLoading, setCaptchaLoading] = useState<any>(null)
+  const [captchaTime, setCaptchaTime] = useState<any>(null)
+  const getCaptcha = () => {
+    if (captchaLoading) {
+      toast('提示', {
+        description: '等待倒计时结束', action: {
+          label: 'Undo',
+          onClick: ()=>null
+        },
+      })
+      return
+    }
+    getCaptchaApi().then(res => {
+      setCaptchaLoading(true);
+      const s = 15;
+      setCaptchaTime(s);
+      let timer: any = setInterval(()=>{
+        console.log('s')
+        setCaptchaTime((v:number)=>{
+          let newV = v - 1;
+          if(newV <= 0){
+            setCaptchaLoading(false);
+            clearInterval(timer);
+            timer = null;
+          }
+          return newV;
+        });
+      },1000)
+      setCaptcha(res);
+    })
+  }
+  useEffect(() => {
+    getCaptcha()
+  }, [])
   return <div className={styles.loginForm + ' bg-white dark:bg-gray-800 rounded-lg'}>
     <div className={styles.loginFormBanner}>
       <img src={LoginBanner} alt="" />
@@ -87,7 +146,7 @@ const LoginForm = () => {
             <div className="flex-1">
               <FormField
                 control={form.control}
-                name="captcha"
+                name="captchaCode"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>验证码</FormLabel>
@@ -98,8 +157,6 @@ const LoginForm = () => {
                           <InputOTPSlot className="flex-1" index={1} />
                           <InputOTPSlot className="flex-1" index={2} />
                           <InputOTPSlot className="flex-1" index={3} />
-                          <InputOTPSlot className="flex-1" index={4} />
-                          <InputOTPSlot className="flex-1" index={5} />
                         </InputOTPGroup>
                       </InputOTP>
                     </FormControl>
@@ -111,7 +168,10 @@ const LoginForm = () => {
                 )}
               />
             </div>
-            <img className={styles.loginFormCaptcha} src={temCaptcha} alt="" />
+            <div className={styles.loginFormCaptcha} onClick={getCaptcha}>
+              <div className={styles.loginFormCaptchaSvg} dangerouslySetInnerHTML={{ __html: captcha.svg }}></div>
+              {captchaLoading ? <div className={styles.loginFormCaptchaLoading}>{captchaTime}</div> : null}
+            </div>
           </div>
           <div className="flex justify-center">
             <Button type="submit">登录</Button>

@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button.tsx'
 import { SunIcon, MoonIcon } from "@radix-ui/react-icons"
-import useThemeStore from '@/sotres/themeStore.ts'
+import useThemeStore from '@/stores/themeStore.ts'
 
 const ThemeButton = () =>{
   const { theme, toggleTheme } = useThemeStore()

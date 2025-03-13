@@ -1,6 +1,6 @@
 // Theme.provider.tsx
 import { useEffect } from 'react'
-import useThemeStore from '@/sotres/themeStore.ts'
+import useThemeStore from '@/stores/themeStore.ts'
 
 const ThemeProvider = () => {
   const theme = useThemeStore((state) => state.theme)

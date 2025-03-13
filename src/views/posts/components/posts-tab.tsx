@@ -80,6 +80,7 @@ export default function PostsTabs() {
         childrenRightSLot={renderRight()}
         containerClassName={'z-[50] sticky top-[70px]'}
       />
+
       {/* 保持已访问过的组件不被卸载 */}
       {tabs.map((tab) => (
         <div key={tab.value} className={activeTab.value === tab.value ? "block" : "hidden"}>

@@ -39,4 +39,23 @@
     margin-top: 22px;
     cursor: pointer;
     object-fit: cover;
+    position: relative;
+}
+.login-form-captcha-svg{
+    width: 100%;
+    height: 100%;
+}
+.login-form-captcha-svg > svg{
+    width: 100%;
+    height: 100%;
+}
+.login-form-captcha>svg{
+}
+.login-form-captcha-loading {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) translateX(102%);
+    color: var(--color-gray-500);
+    font-size: var(--text-sm);
 }

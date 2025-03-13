@@ -37,7 +37,7 @@ const Header = () => {
   }, [handleScroll, headerRef]);
 
   return (
-    <header ref={headerRef} className="z-[50] sticky top-0 w-full bg-transparent border-b border-transparent transition-colors">
+    <header ref={headerRef} className="z-[150] sticky top-0 w-full bg-transparent border-b border-transparent transition-colors">
       <div className="hidden lg:block">
         <Container className={'flex items-center h-16'}>
           <div className="mr-4 hidden md:flex">
