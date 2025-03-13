@@ -4,6 +4,7 @@ export function LinkPreviewDemo() {
   return (
     <div className="flex justify-center items-center h-[40rem] flex-col px-4">
       <p className="text-neutral-500 dark:text-neutral-400 text-xl md:text-3xl max-w-3xl mx-auto mb-10">
+        我们使用{" "}
         <LinkPreview url="https://tailwindcss.com" className="font-bold">
           Tailwind CSS
         </LinkPreview>{" "}
@@ -11,7 +12,7 @@ export function LinkPreviewDemo() {
         <LinkPreview url="https://framer.com/motion" className="font-bold">
           Framer Motion
         </LinkPreview>{" "}
-        是建立现代网站的好方法.
+        来构建现代、动态的网站。Tailwind 提供了灵活的设计工具，而 Framer Motion 则为网站注入了流畅的动画和交互体验。
       </p>
       <p className="text-neutral-500 dark:text-neutral-400 text-xl md:text-3xl max-w-3xl mx-auto">
         访问{" "}
@@ -21,7 +22,7 @@ export function LinkPreviewDemo() {
         >
           Aceternity UI
         </LinkPreview>{" "}
-        用于惊人的尾风和框架运动组件.
+        探索基于 Tailwind 和 Framer Motion 的惊艳组件库。无论是炫酷的动画效果还是优雅的界面设计，Aceternity UI 都能让您的网站脱颖而出。
       </p>
     </div>
   );
