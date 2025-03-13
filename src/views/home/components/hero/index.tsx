@@ -18,7 +18,6 @@ import GithubBanner from '@/assets/images/hero/github.png'
 import IsqqwBanner from '@/assets/images/hero/isqqw.png'
 import IsqqwSelfBanner from '@/assets/images/hero/isqqw_self.png'
 
-import HeroContent from '../hero-content/index.tsx'
 
 import { Button } from '@/components/ui/button.tsx'
 
@@ -46,9 +45,9 @@ const HeroText = (navigate: any) => {
   </div>
 }
 
-const Hero = () => {
+const Hero = ({children}:{children:React.ReactElement}) => {
   const navigate = useNavigate()
-  return <HeroParallax products={products} children={HeroText(navigate)} content={HeroContent()}>
+  return <HeroParallax products={products} children={HeroText(navigate)} content={children}>
   </HeroParallax>
 }
 export const products = [

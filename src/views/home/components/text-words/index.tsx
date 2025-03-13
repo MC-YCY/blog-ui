@@ -1,6 +1,6 @@
 import { TypewriterEffectSmooth } from '@/components/ui/typewriter-effect.tsx'
 
-const HeroContent = () => {
+const TextWords = () => {
   const words1 = [
     {
       text: '时间轮回,',
@@ -64,4 +64,4 @@ const HeroContent = () => {
     </div>
   )
 }
-export default HeroContent
+export default TextWords
