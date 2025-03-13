@@ -31,7 +31,6 @@ const service: AxiosInstance = axios.create({
 service.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     const { tokens } = useUserStore.getState();
-
     if (tokens?.accessToken) {
       config.headers.Authorization = `Bearer ${tokens.accessToken}`;
     }
@@ -77,11 +76,12 @@ service.interceptors.response.use(
               action: {
                 label: "Undo",
                 onClick: () => {
-                  useUserStore.getState().logout();
+                //
                 },
               },
             });
           }
+          useUserStore.getState().logout();
           break;
         case 403:
           if (showError) {

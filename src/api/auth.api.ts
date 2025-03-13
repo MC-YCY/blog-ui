@@ -6,3 +6,10 @@ export const loginApi = (data: any) =>{
 export const getCaptchaApi =() =>{
   return Get(`/blog/auth/captcha`)
 }
+
+export const getPermissionsApi = () =>{
+  return Get(`/blog/auth/permissions`)
+}
+export const logoutApi = (data: any) =>{
+  return Post('/blog/auth/logout',data)
+}

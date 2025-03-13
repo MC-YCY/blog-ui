@@ -40,8 +40,8 @@ const LoginForm = () => {
     password: z.string()
       .nonempty('请输入您的密码')
       .min(6, '密码长度不能少于6位')
-      .max(12, '密码长度不能超过12位')
-      .regex(/^\w+$/, '密码只能包含字母、数字和下划线'),
+      .max(16, '密码长度不能超过16位')
+      .regex(/^[A-Za-z0-9.]+$/, '账号只能包含字母、数字和"."'),
     captchaCode: z.string().min(4, '补全验证码').nonempty('请输入验证码'),
   })
   const form = useForm<z.infer<typeof formSchema>>({
@@ -58,7 +58,7 @@ const LoginForm = () => {
       captchaId: captcha.captchaId,
     }
     loginApi(params).then(res => {
-      userStore.login(res.user,res.access_token)
+      userStore.login(res.user, { accessToken: res.access_token, refreshToken: res.refresh_token })
       navigate('/home')
     })
   }

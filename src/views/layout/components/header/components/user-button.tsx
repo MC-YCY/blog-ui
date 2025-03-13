@@ -10,7 +10,10 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 
-const UserInfo = ({ user }: { user: User }) => {
+interface ThemeButtonProps {
+  btnList:{label:string,value: string}[]
+}
+const UserInfo = ({ user, btnList }: { user: User, btnList:ThemeButtonProps['btnList'] }) => {
   return <>
     <TooltipProvider delayDuration={100}>
       <Tooltip>
@@ -21,14 +24,13 @@ const UserInfo = ({ user }: { user: User }) => {
           </Avatar>
         </TooltipTrigger>
         <TooltipContent>
-            <li>
-              <a
-                href="#"
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-300"
-              >
-                首页
-              </a>
-            </li>
+          {
+            btnList.map(item=>{
+              return <li key={item.value}>
+                {item.label}
+              </li>
+            })
+          }
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -56,7 +58,7 @@ const UserLogin = ({ toLogin }: any) => {
 
 const ThemeButton = () => {
   // , tokens, isLoggedIn, login, logout, updateUser, updateTokens
-  const { user } = useUserStore()
+  const { user, btnList } = useUserStore()
   const navigate = useNavigate()
 
   const toLogin = (): void => {
@@ -66,7 +68,7 @@ const ThemeButton = () => {
   return <>
     {
       user ?
-        <UserInfo user={user}></UserInfo> :
+        <UserInfo user={user} btnList={btnList}></UserInfo> :
         <UserLogin toLogin={toLogin}></UserLogin>
     }
   </>
