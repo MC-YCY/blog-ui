@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/navigation-menu'
 import { SunIcon } from '@radix-ui/react-icons'
 import { joinPath, NavBarRouters } from '@/constant/routers.ts'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -53,7 +53,12 @@ const components: { title: string; href: string; description: string }[] = [
 ]
 
 const NavBar = () => {
-  const location = useLocation(); // 直接用，不需要 useState
+  const location = useLocation(); // 直接用
+  const navigate = useNavigate()
+  // ，不需要 useState
+  const goRoute = (path: string) =>{
+      navigate(path)
+  }
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -117,7 +122,7 @@ const NavBar = () => {
             }
             return <NavigationMenuItem key={item.path}>
               <div className="cursor-pointer">
-                <NavigationMenuLink href={item.path} className={navigationMenuTriggerStyle()}>
+                <NavigationMenuLink onClick={() => goRoute(itemPath)} className={navigationMenuTriggerStyle()}>
                   <span className={activeClass}>
                   {item.meta?.title}
                   </span>

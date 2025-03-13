@@ -5,11 +5,8 @@ import UserButton from './components/user-button.tsx'
 import DrawerButton from './components/drawer-button.tsx'
 import Container from '@/components/container.tsx'
 import PostsScreenButton from './components/posts-screen.button.tsx'
-import { getPermissionsApi } from '@/api/auth.api.ts'
-import useUserStore from '@/stores/userStore.ts'
 
 const Header = () => {
-  const { setBtnList } = useUserStore()
 
   const headerRef = useRef<HTMLDivElement>(null)
   const handleScroll = useCallback(() => {
@@ -30,13 +27,8 @@ const Header = () => {
       })
     }
   }, [])
-  const getPermissions = () => {
-    getPermissionsApi().then(res => {
-      setBtnList(res.btnList)
-    })
-  }
+
   useEffect(() => {
-    getPermissions()
     document.body.onscroll = handleScroll
     return () => {
       document.body.onscroll = null
