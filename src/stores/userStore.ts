@@ -18,21 +18,46 @@ type AuthTokens = {
   refreshToken: string
 }
 
-type btnList = {
-  label: string
-  value: string
-}[]
+export interface ButtonsType {
+  id: number
+  name: string
+  path: string
+  component: string
+  type: 'menu' | 'button'
+  icon?: string
+  code?: string
+  explain?: string
+  children: MenusType[]
+  level: number
+  disabled?: boolean
+}
+
+export interface MenusType {
+  id: number
+  name: string
+  path: string
+  component: string
+  type: 'menu' | 'button'
+  icon?: string
+  code?: string
+  explain?: string
+  children: MenusType[]
+  level: number
+  disabled?: boolean
+}
 
 type UserState = {
   user: User | null
-  btnList: btnList
+  buttons: ButtonsType[]
+  menus: MenusType[]
   tokens: AuthTokens | null
   isLoggedIn: boolean
   login: (user: User, tokens: AuthTokens) => void
   logout: () => void
   updateUser: (partialUser: Partial<User>) => void
   updateTokens: (tokens: AuthTokens) => void
-  setBtnList: (btnList: btnList) => void
+  setButtons: (buttons: ButtonsType[]) => void
+  setMenus: (menus: MenusType[]) => void
 }
 
 // 初始状态
@@ -40,7 +65,8 @@ const initialState = {
   user: null,
   tokens: null,
   isLoggedIn: false,
-  btnList: []
+  menus: [],
+  buttons:[]
 }
 
 const useUserStore = create<UserState>()(
@@ -72,7 +98,8 @@ const useUserStore = create<UserState>()(
 
       updateTokens: (tokens) => set({ tokens }),
 
-      setBtnList: (list: btnList) => set({ btnList:list })
+      setButtons: (buttons: ButtonsType[]) => set({ buttons }),
+      setMenus: (menus: MenusType[]) => set({ menus }),
     }),
     {
       name: 'user-storage',

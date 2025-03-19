@@ -1,25 +1,28 @@
 import { useEffect, useState } from 'react'
 import useUserStore from '@/stores/userStore.ts'
-import { getPermissionsApi } from '@/api/auth.api.ts'
+import { getUserButtons, getUserMenu } from '@/api/user.api.ts'
 
 // 用来获取 用户 权限按钮的
 const UserBtnListProvider = () => {
-  const { setBtnList, logout } = useUserStore()
-  const [flat,setFlat] = useState<boolean>(false)
-  const getPermissions = () => {
-    getPermissionsApi().then(res => {
-      setBtnList(res.btnList)
-    }).catch(()=>{
-      logout();
-    })
+  const { setButtons, setMenus, logout } = useUserStore()
+  const [flat, setFlat] = useState<boolean>(false)
+  const getPermissions = async () => {
+    try {
+      const menus = await getUserMenu()
+      const buttons = await getUserButtons()
+      setButtons(buttons)
+      setMenus(menus)
+    } catch {
+      logout()
+    }
     setFlat(true)
   }
-  useEffect(()=>{
-    if(flat){
-      return;
+  useEffect(() => {
+    if (flat) {
+      return
     }
     getPermissions()
-  },[flat])
+  }, [flat])
   return null
 }
 
