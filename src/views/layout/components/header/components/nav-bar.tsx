@@ -61,6 +61,7 @@ const NavBar = () => {
             if (itemPath === location.pathname) {
               activeClass = ' text-pink-500'
             }
+            if((item.children && item.children.length)) return null;
             return <NavigationMenuItem key={item.path}>
               <div className="cursor-pointer">
                 <NavigationMenuLink onClick={() => goRoute(itemPath)} className={navigationMenuTriggerStyle()}>
