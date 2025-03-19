@@ -753,7 +753,7 @@ const handleClickWeek = (item) =>{
 ]
 
 export default function(): JSX.Element {
-  return <TracingBeam className="px-6">
+  return <TracingBeam className="px-6 max-w-5xl">
     <div className="mx-auto antialiased pt-4 pb-30 relative">
       {dummyContent.map((item, index) => (
         <div key={`content-${index}`} className="mb-12">

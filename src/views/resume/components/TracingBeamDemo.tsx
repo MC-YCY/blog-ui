@@ -1,15 +1,16 @@
-import { TracingBeam } from "@/components/ui/tracing-beam";
-import Banner1 from '@/assets/images/resume/china.png';
-import Banner2 from '@/assets/images/resume/hua.png';
-import Banner3 from '@/assets/images/resume/lcx.jpg';
-import Banner4 from '@/assets/images/resume/wallhaven-d671ej.png';
-import Banner5 from '@/assets/images/resume/wallhaven-qz13pl.jpg';
-import Banner6 from '@/assets/images/resume/wallhaven-3l828y.jpg';
-import Banner7 from '@/assets/images/resume/wallhaven-9dp3y1.jpg';
+import { TracingBeam } from '@/components/ui/tracing-beam'
+import Banner1 from '@/assets/images/resume/china.png'
+import Banner2 from '@/assets/images/resume/hua.png'
+import Banner3 from '@/assets/images/resume/lcx.jpg'
+import Banner4 from '@/assets/images/resume/wallhaven-d671ej.png'
+import Banner5 from '@/assets/images/resume/wallhaven-qz13pl.jpg'
+import Banner6 from '@/assets/images/resume/wallhaven-3l828y.jpg'
+import Banner7 from '@/assets/images/resume/wallhaven-9dp3y1.jpg'
+
 
 export function TracingBeamDemo() {
   return (
-    <TracingBeam className="px-6">
+    <TracingBeam className="px-6 max-w-6xl">
       <div className="mx-auto antialiased pt-4 pb-30 relative">
         {dummyContent.map((item, index) => (
           <div key={`content-${index}`} className="mb-12">
@@ -35,15 +36,17 @@ export function TracingBeamDemo() {
         ))}
       </div>
     </TracingBeam>
-  );
+  )
 }
 
 const dummyContent = [
   {
-    title: <a href="https://www.isqqw.com/" target="_blank" className="text-blue-600 dark:text-blue-400 hover:underline">ISQQW - ECharts 示例网站</a>,
+    title: <a href="https://www.isqqw.com/" target="_blank"
+              className="text-blue-600 dark:text-blue-400 hover:underline">ISQQW - ECharts 示例网站</a>,
     description: (
       <>
-        <p>ISQQW 是一个 ECharts 演示网站，支持折线图、柱状图、雷达图、地图、3D 地图等主流图表类型。用户可以注册后添加演示作品，并进行收藏、评论、点赞。</p>
+        <p>ISQQW 是一个 ECharts 演示网站，支持折线图、柱状图、雷达图、地图、3D
+          地图等主流图表类型。用户可以注册后添加演示作品，并进行收藏、评论、点赞。</p>
         <ul className="list-disc pl-5">
           <li>支持 ECharts 版本切换、代码编辑器、图表预览、封面设置等功能。</li>
           <li>使用 CDN 或站点托管文件提供版本切换。</li>
@@ -54,11 +57,11 @@ const dummyContent = [
         <p className="mt-4"><strong>成果：</strong> 成为热门 ECharts 示例网站，日 PV 20k，并添加了对其他图表库的支持。</p>
       </>
     ),
-    badge: "Vue",
+    badge: 'Vue',
     image: Banner1,
   },
   {
-    title: "图表集网 - 微信小程序",
+    title: '图表集网 - 微信小程序',
     description: (
       <>
         <p>专为查看 ISQQW 作品而设计的小程序，核心功能包括：</p>
@@ -72,15 +75,16 @@ const dummyContent = [
           小程序包含安全防护功能，防止恶意访问。非 VIP 用户需观看广告获取验证码后才能查看作品。
         </p>
         <p>
-          我负责 <strong>作品列表</strong> 和 <strong>详情模块</strong>。由于个人小程序无法使用 <code>web-view</code>，最终改为 <strong>预览图片 + 代码展示</strong>，并提供复制作品链接的功能。
+          我负责 <strong>作品列表</strong> 和 <strong>详情模块</strong>。由于个人小程序无法使用 <code>web-view</code>，最终改为 <strong>预览图片
+          + 代码展示</strong>，并提供复制作品链接的功能。
         </p>
       </>
     ),
-    badge: "小程序",
+    badge: '小程序',
     image: Banner2,
   },
   {
-    title: "零点数据治理平台（React）",
+    title: '零点数据治理平台（React）',
     description: (
       <>
         <p>该平台用于管理公司 API，提供接口注册、监控、权限管理等功能。</p>
@@ -92,11 +96,11 @@ const dummyContent = [
         </ul>
       </>
     ),
-    badge: "React",
+    badge: 'React',
     image: Banner3,
   },
   {
-    title: "济事办 - 政务服务小程序",
+    title: '济事办 - 政务服务小程序',
     description: (
       <>
         <p>济事办是济源市的政务服务小程序，提供多项便民服务：</p>
@@ -108,11 +112,11 @@ const dummyContent = [
         <p>我主要负责用户身份管理，支持微信手机号注册登录和权限管理，以确保不同用户群体访问不同的页面内容。</p>
       </>
     ),
-    badge: "微信小程序",
+    badge: '微信小程序',
     image: Banner4,
   },
   {
-    title: "FHarris-Vue 组件创新挑战赛",
+    title: 'FHarris-Vue 组件创新挑战赛',
     description: (
       <>
         <p>参与了 FHarris-Vue 组件开发竞赛，基于 Vue3 研发高效可复用的组件库。</p>
@@ -123,11 +127,11 @@ const dummyContent = [
         <p className="mt-4"><strong>成果：</strong> 取得优秀奖，团队名称 "Yes老弟儿"。</p>
       </>
     ),
-    badge: "Vue",
+    badge: 'Vue',
     image: Banner5,
   },
   {
-    title: "航空基本认知能力测评系统",
+    title: '航空基本认知能力测评系统',
     description: (
       <>
         <p>航空测评系统用于评估飞行员的认知能力，如注意力、反应速度、决策能力等。</p>
@@ -140,11 +144,11 @@ const dummyContent = [
         <p className="mt-4"><strong>成果：</strong> 封装了音频组件和富文本编辑器，提高了组件复用性。</p>
       </>
     ),
-    badge: "Vue & Electron",
+    badge: 'Vue & Electron',
     image: Banner6,
   },
   {
-    title: "济源政务服务监测系统（大屏可视化）",
+    title: '济源政务服务监测系统（大屏可视化）',
     description: (
       <>
         <p>可视化大屏展示济源市政务服务大厅的业务数据，提供数据分析和楼层可视化导航。</p>
@@ -155,8 +159,8 @@ const dummyContent = [
         </ul>
       </>
     ),
-    badge: "Vue & Three.js",
+    badge: 'Vue & Three.js',
     image: Banner7,
   },
-];
+]
 
