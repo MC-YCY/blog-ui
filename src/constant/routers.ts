@@ -3,7 +3,10 @@ import Home from '@/views/home'
 import Resume from '@/views/resume'
 import Posts from '@/views/posts'
 import Login from '@/views/auth/login'
+import DocsLayout from '@/views/docs/layout.tsx'
 import React, { JSX } from 'react'
+import SaCalendarReact from '@/views/docs/sa-calendar-react.tsx'
+import SaCalendarVue3 from '@/views/docs/sa-calendar-vue3.tsx'
 
 interface MetaRouteObject {
   meta?: {
@@ -43,6 +46,20 @@ export const Routers: MetaRouteObject[] = [
         },
         element: Resume,
       },
+      {
+        path:'docs',
+        element: DocsLayout,
+        children:[
+          {
+            path:'sa-calendar-react',
+            element: SaCalendarReact
+          },
+          {
+            path:'sa-calendar-vue3',
+            element: SaCalendarVue3
+          }
+        ]
+      }
     ],
   },
   {

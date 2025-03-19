@@ -26,7 +26,7 @@ export function TracingBeamDemo() {
                 <img
                   src={item.image}
                   alt="blog thumbnail"
-                  className="rounded-lg mb-6 object-cover shadow-md w-[100%] h-[418px] object-cover"
+                  className="rounded-lg mb-6 object-cover shadow-md w-[100%] h-[418px]"
                 />
               )}
               {item.description}
