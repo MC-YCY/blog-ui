@@ -24,7 +24,7 @@ import { useRef } from 'react'
 import { localhostUpload } from '@/api/upload.api.ts'
 
 export default function() {
-  const { user,updateUser } = useUserStore()
+  const { user, updateUser } = useUserStore()
   const formSchema = z.object({
     username: z.string()
       .nonempty('请输入用户名'),
@@ -42,32 +42,32 @@ export default function() {
     let params = {
       ...formState,
     }
-    if(user?.id){
-      const newUserInfo = await updateUserInfo(user?.id, params);
+    if (user?.id) {
+      const newUserInfo = await updateUserInfo(user?.id, params)
       updateUser(newUserInfo)
-      userEditEl.current?.click();
+      userEditEl.current?.click()
     }
   }
   const clickEditUserInfo = () => {
-    if(user){
+    if (user) {
       form.setValue('username', user?.username)
       form.setValue('signature', user?.signature)
     }
   }
 
   const fileInputRef = useRef<HTMLInputElement | null>(null)
-  const clickAvatar = () =>{
-    fileInputRef?.current?.click();
+  const clickAvatar = () => {
+    fileInputRef?.current?.click()
   }
-  const fileInputChange = async () =>{
-    if(fileInputRef?.current?.files && fileInputRef?.current?.files.length && user?.id){
-      let file = fileInputRef.current?.files[0];
+  const fileInputChange = async () => {
+    if (fileInputRef?.current?.files && fileInputRef?.current?.files.length && user?.id) {
+      let file = fileInputRef.current?.files[0]
       let formData = new FormData()
-      formData.append('file', file);
-      const { fileUrl:avatar } = await localhostUpload(formData);
+      formData.append('file', file)
+      const { fileUrl: avatar } = await localhostUpload(formData)
       const newUserInfo = await updateUserInfo(user?.id, {
-        avatar
-      });
+        avatar,
+      })
       updateUser(newUserInfo)
     }
   }
@@ -76,7 +76,7 @@ export default function() {
     <div>
       <div className="space-y-1">
         <img className={'w-14 h-14 object-cover'} onClick={clickAvatar} src={user?.avatar} alt="" />
-        <input type="file" style={{ display: 'none' }} ref={fileInputRef} onChange={fileInputChange}/>
+        <input type="file" style={{ display: 'none' }} ref={fileInputRef} onChange={fileInputChange} />
         <h4 className="text-sm font-medium leading-none">{user?.username}</h4>
         <p className="text-sm text-muted-foreground">{user?.signature || '知其然不知其所以然'}</p>
       </div>
@@ -95,10 +95,10 @@ export default function() {
                   control={form.control}
                   name="username"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className={'bg-transparent dark:bg-transparent'}>
                       <FormLabel>用户名</FormLabel>
                       <FormControl>
-                        <Input placeholder="请输入用户名" {...field} />
+                        <Input className={'bg-transparent dark:bg-transparent'} placeholder="请输入用户名" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -108,10 +108,11 @@ export default function() {
                   control={form.control}
                   name="signature"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className={'bg-transparent dark:bg-transparent'}>
                       <FormLabel>个性签名</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="请输入个性签名" {...field} />
+                        <Textarea className={'bg-transparent dark:bg-transparent'}
+                                  placeholder="请输入个性签名" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
