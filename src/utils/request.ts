@@ -208,3 +208,12 @@ export function Del<T = any>(
 ): Promise<T> {
   return service.delete(url, { params, ...config });
 }
+
+
+export function Patch<P = never, T = never>(
+  url: string,
+  data?: P,
+  config?: RequestConfig,
+): Promise<T> {
+  return service.patch(url, data, config)
+}

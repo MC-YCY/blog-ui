@@ -10,10 +10,26 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 
-interface ThemeButtonProps {
-  btnList:{label:string,value: string}[]
-}
-const UserInfo = ({ user, btnList }: { user: User, btnList:ThemeButtonProps['btnList'] }) => {
+const userMenus = [
+  {
+    name: '我的文章',
+    path: '/user/posts',
+  },
+  {
+    name: '我的喜欢',
+    path: '/user/like',
+  },
+  {
+    name: '我的收藏',
+    path: '/user/collect',
+  },
+]
+
+const UserInfo = ({ user, goPath, clickLogout }: {
+  user: User,
+  goPath: (path: string) => void,
+  clickLogout: () => void
+}) => {
   return <>
     <TooltipProvider delayDuration={100}>
       <Tooltip>
@@ -25,12 +41,17 @@ const UserInfo = ({ user, btnList }: { user: User, btnList:ThemeButtonProps['btn
         </TooltipTrigger>
         <TooltipContent>
           {
-            btnList.map(item=>{
-              return <li key={item.value}>
-                {item.label}
-              </li>
+            userMenus.map((item) => {
+              return <div key={item.path} onClick={() => goPath(item.path)}
+                          className={'cursor-pointer group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:text-pink-300  hover:translate-x-1 transition duration-200 text-muted-foreground'}>
+                {item.name}
+              </div>
             })
           }
+          <div onClick={clickLogout}
+               className={'cursor-pointer group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:text-pink-300  hover:translate-x-1 transition duration-200 text-muted-foreground'}>
+            退出登录
+          </div>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -57,18 +78,23 @@ const UserLogin = ({ toLogin }: any) => {
 }
 
 const ThemeButton = () => {
-  // , tokens, isLoggedIn, login, logout, updateUser, updateTokens
-  const { user, btnList } = useUserStore()
+  const { user, logout } = useUserStore()
   const navigate = useNavigate()
 
   const toLogin = (): void => {
     navigate('/login')
   }
-
+  const goPath = (path: string): void => {
+    navigate(path)
+  }
+  const clickLogout = () => {
+    navigate('/');
+    logout()
+  }
   return <>
     {
       user ?
-        <UserInfo user={user} btnList={btnList}></UserInfo> :
+        <UserInfo user={user} goPath={goPath} clickLogout={clickLogout}></UserInfo> :
         <UserLogin toLogin={toLogin}></UserLogin>
     }
   </>

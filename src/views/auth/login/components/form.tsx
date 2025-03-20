@@ -58,8 +58,9 @@ const LoginForm = () => {
       captchaId: captcha.captchaId,
     }
     loginApi(params).then(res => {
-      userStore.login(res.user, { accessToken: res.access_token, refreshToken: res.refresh_token })
-      navigate('/home')
+      userStore.login(res.user, { accessToken: res.access_token, refreshToken: res.refresh_token });
+      const redirect = new URLSearchParams(location.search).get('redirect')
+      navigate(redirect || '/home', { replace: true })
     })
   }
 

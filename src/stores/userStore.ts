@@ -7,6 +7,7 @@ import { logoutApi } from '@/api/auth.api.ts'
 export type User = {
   id: string
   username: string
+  signature: string
   email: string
   avatar?: string
   phone?: string

@@ -7,10 +7,15 @@ import DocsLayout from '@/views/docs/layout.tsx'
 import React, { JSX } from 'react'
 import SaCalendarReact from '@/views/docs/sa-calendar-react.tsx'
 import SaCalendarVue3 from '@/views/docs/sa-calendar-vue3.tsx'
+import UserLayout from '@/views/user/layout.tsx'
+import UserPosts from '@/views/user/posts/index';
+import UserLike from '@/views/user/like/index';
+import UserCollect from '@/views/user/collect/index';
 
-interface MetaRouteObject {
+export interface MetaRouteObject {
   meta?: {
     title: string;
+    auth?: boolean;  //当为true时候，校验token存在，如果不存在则禁止进入，同时返回上一步操作
   };
   path: string;
   element: () => JSX.Element;
@@ -52,11 +57,51 @@ export const Routers: MetaRouteObject[] = [
         children:[
           {
             path:'sa-calendar-react',
+            meta: {
+              title: 'sa-calendar-react',
+            },
             element: SaCalendarReact
           },
           {
             path:'sa-calendar-vue3',
+            meta: {
+              title: 'sa-calendar-vue3',
+            },
             element: SaCalendarVue3
+          }
+        ]
+      },
+      {
+        path:'user',
+        meta:{
+          title: '个人中心',
+          auth:true
+        },
+        element: UserLayout,
+        children:[
+          {
+            path:'posts',
+            meta: {
+              title: '我的文章',
+              auth:true
+            },
+            element: UserPosts
+          },
+          {
+            path:'like',
+            meta: {
+              title: '我的喜欢',
+              auth:true
+            },
+            element: UserLike
+          },
+          {
+            path:'collect',
+            meta: {
+              title: '我的收藏',
+              auth:true
+            },
+            element: UserCollect
           }
         ]
       }

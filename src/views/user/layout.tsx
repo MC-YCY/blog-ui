@@ -1,17 +1,22 @@
 import { JSX } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import UserInfo from './components/user-info/user-info.tsx'
 
 const docsMenu = [
   {
-    title:'calendar',
+    title:'栏目',
     children:[
       {
-        title:'sa-calendar-react',
-        href:'/docs/sa-calendar-react'
+        title:'我的文章',
+        href:'/user/posts'
       },
       {
-        title:'sa-calendar-vue3',
-        href:'/docs/sa-calendar-vue3'
+        title:'我的喜欢',
+        href:'/user/like'
+      },
+      {
+        title:'我的收藏',
+        href:'/user/collect'
       }
     ]
   }
@@ -54,12 +59,13 @@ const renderMenu = (): JSX.Element =>{
 export default function(): JSX.Element {
   return <div>
     <div
-      className={'container mx-auto max-w-[88rem] flex-1 items-start px-4 md:grid md:grid-cols-[180px_minmax(0,1fr)] md:gap-0 lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-0 lg:px-8'}>
+      className={'container mx-auto max-w-[88rem] flex-1 items-start px-4 md:grid md:grid-cols-[200px_minmax(0,1fr)] md:gap-0 lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-0 lg:px-8'}>
       <aside
         className={'fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-80px)] w-full shrink-0 md:sticky md:block md:self-start'}>
+        <UserInfo></UserInfo>
         {renderMenu()}
       </aside>
-      <main className={'relative py-6 lg:gap-10 lg:py-8'}>
+      <main className={'relative lg:gap-10'}>
         <Outlet></Outlet>
       </main>
     </div>

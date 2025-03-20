@@ -1,47 +1,71 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Navigate, useLocation } from 'react-router-dom'
 import { Routers } from '@/constant/routers.ts'
 import RouterLocationProvider from '@/provider/RouterLocation.provider.tsx'
+import useUserStore from '@/stores/userStore.ts'
+import { ReactElement, useEffect } from 'react'
 
-function renderRoutes(routes: any[]) {
+// 路由守卫组件
+const AuthGuard = ({ children, meta }: {
+  children: ReactElement
+  meta?: { auth?: boolean; title: string }
+}) => {
+  const { isLoggedIn } = useUserStore()
+  const location = useLocation()
+
+  // 动态修改页面标题
+  useEffect(() => {
+    if (meta?.title) {
+      document.title = `${meta.title} | Your Site Name`
+    }
+  }, [meta?.title])
+
+  // 权限验证逻辑
+  if (meta?.auth && !isLoggedIn) {
+    return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname)}`} replace />
+  }
+
+  return children
+}
+
+// 递归渲染路由（带类型校验）
+function renderRoutes(routes: typeof Routers): React.ReactNode[] {
   return routes.map((route, index) => {
-    // 生成当前路由的 element JSX
     const Element = route.element
-    const elementJSX = <Element />
+    const elementJSX = (
+      <AuthGuard meta={route.meta}>
+        <Element />
+      </AuthGuard>
+    )
 
-    // 处理嵌套路由
-    if (route.children) {
-      return (
-        <Route
-          key={route.path || index}
-          path={route.path}
-          element={elementJSX}
-        >
-          {/* 递归渲染子路由 */}
-          {renderRoutes(route.children)}
-        </Route>
-      )
+    const routeProps = {
+      key: route.path || index,
+      path: route.path,
+      element: elementJSX
     }
 
-    // 无嵌套的普通路由
-    return (
-      <Route
-        key={route.path || index}
-        path={route.path}
-        element={elementJSX}
-      />
+    return route.children ? (
+      <Route {...routeProps}>
+        {renderRoutes(route.children)}
+      </Route>
+    ) : (
+      <Route {...routeProps} />
     )
   })
 }
 
 const PlayRouter = () => {
-  const RouterComponents = renderRoutes(Routers)
-  return <div className='root-routes'>
-    <BrowserRouter>
-      <RouterLocationProvider></RouterLocationProvider>
-      <Routes>
-        {RouterComponents}
-      </Routes>
-    </BrowserRouter>
-  </div>
+  return (
+    <div className='root-routes'>
+      <BrowserRouter>
+        <RouterLocationProvider />
+        <Routes>
+          {renderRoutes(Routers)}
+          {/* 处理未匹配路由 */}
+          <Route path="*" element={<Navigate to="/home" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  )
 }
-export default PlayRouter;
+
+export default PlayRouter
