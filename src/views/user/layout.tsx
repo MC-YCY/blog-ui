@@ -28,8 +28,8 @@ const renderMenu = (): JSX.Element =>{
   const goRoute = (path: string) =>{
     navigate(path)
   }
-  return <div className={'relative overflow-hidden h-full py-6 pr-6 lg:py-8'}>
-    <div className={'h-full w-full rounded-[inherit]'}>
+  return <div className={'relative overflow-hidden py-6 pr-6 lg:py-8'}>
+    <div className={'h-auto w-full rounded-[inherit]'}>
       <div style={{minWidth:'100%',display:'table'}}>
         <div className={'w-full'}>
           {
