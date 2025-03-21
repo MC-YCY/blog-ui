@@ -8,9 +8,10 @@ import React, { JSX } from 'react'
 import SaCalendarReact from '@/views/docs/sa-calendar-react.tsx'
 import SaCalendarVue3 from '@/views/docs/sa-calendar-vue3.tsx'
 import UserLayout from '@/views/user/layout.tsx'
-import UserPosts from '@/views/user/posts/index';
-import UserLike from '@/views/user/like/index';
-import UserCollect from '@/views/user/collect/index';
+import UserPosts from '@/views/user/posts/index'
+import UserLike from '@/views/user/like/index'
+import UserCollect from '@/views/user/collect/index'
+import Create from '@/views/create/index';
 
 export interface MetaRouteObject {
   meta?: {
@@ -45,6 +46,13 @@ export const Routers: MetaRouteObject[] = [
         element: Posts,
       },
       {
+        path: 'create',
+        meta: {
+          title: '创作',
+        },
+        element: Create,
+      },
+      {
         path: 'resume',
         meta: {
           title: '简历',
@@ -52,59 +60,59 @@ export const Routers: MetaRouteObject[] = [
         element: Resume,
       },
       {
-        path:'docs',
+        path: 'docs',
         element: DocsLayout,
-        children:[
+        children: [
           {
-            path:'sa-calendar-react',
+            path: 'sa-calendar-react',
             meta: {
               title: 'sa-calendar-react',
             },
-            element: SaCalendarReact
+            element: SaCalendarReact,
           },
           {
-            path:'sa-calendar-vue3',
+            path: 'sa-calendar-vue3',
             meta: {
               title: 'sa-calendar-vue3',
             },
-            element: SaCalendarVue3
-          }
-        ]
+            element: SaCalendarVue3,
+          },
+        ],
       },
       {
-        path:'user',
-        meta:{
+        path: 'user',
+        meta: {
           title: '个人中心',
           // auth:true
         },
         element: UserLayout,
-        children:[
+        children: [
           {
-            path:'posts',
+            path: 'posts',
             meta: {
               title: '文章',
               // auth:true
             },
-            element: UserPosts
+            element: UserPosts,
           },
           {
-            path:'like',
+            path: 'like',
             meta: {
               title: '喜欢',
               // auth:true
             },
-            element: UserLike
+            element: UserLike,
           },
           {
-            path:'collect',
+            path: 'collect',
             meta: {
               title: '收藏',
               // auth:true
             },
-            element: UserCollect
-          }
-        ]
-      }
+            element: UserCollect,
+          },
+        ],
+      },
     ],
   },
   {
@@ -116,7 +124,7 @@ export const Routers: MetaRouteObject[] = [
   },
 ]
 
-export const NavBarRouters: MetaRouteObject[] = Routers[0].children ?? [];
+export const NavBarRouters: MetaRouteObject[] = Routers[0].children ?? []
 
 /**
  * 规范化路径拼接，确保没有重复的 `/`
@@ -125,11 +133,11 @@ export const NavBarRouters: MetaRouteObject[] = Routers[0].children ?? [];
  */
 export const joinPath = (...parts: string[]): string => {
   return parts
-    .map((part) => part.replace(/^\/+|\/+$/g, "")) // 移除头部和尾部的 "/"
+    .map((part) => part.replace(/^\/+|\/+$/g, '')) // 移除头部和尾部的 "/"
     .filter((part) => part.length > 0) // 过滤掉空字符串
-    .join("/")
-    .replace(/\/+/g, "/"); // 确保不会出现 "//"
-};
+    .join('/')
+    .replace(/\/+/g, '/') // 确保不会出现 "//"
+}
 
 // 定义路由项的类型
 interface RouteMeta {
@@ -151,22 +159,22 @@ interface RouteItem {
  */
 export const generateRouteMap = (
   routes: RouteItem[],
-  parentPath = "",
-  routeMap = new Map<string, RouteMeta>()
+  parentPath = '',
+  routeMap = new Map<string, RouteMeta>(),
 ) => {
   routes.forEach((route) => {
-    const fullPath = `/${joinPath(parentPath, route.path)}`; // 确保路径以 `/` 开头
+    const fullPath = `/${joinPath(parentPath, route.path)}` // 确保路径以 `/` 开头
 
     if (route.meta) {
-      routeMap.set(fullPath, route.meta);
+      routeMap.set(fullPath, route.meta)
     }
 
     if (route.children) {
-      generateRouteMap(route.children, fullPath, routeMap);
+      generateRouteMap(route.children, fullPath, routeMap)
     }
-  });
+  })
 
-  return routeMap;
-};
+  return routeMap
+}
 
-export const routeMap = generateRouteMap(Routers);
+export const routeMap = generateRouteMap(Routers)
