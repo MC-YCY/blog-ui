@@ -85,7 +85,12 @@ const ThemeButton = () => {
     navigate('/login')
   }
   const goPath = (path: string): void => {
-    navigate(path)
+    let userId = user?.id || '';
+    if (!userId) {
+      navigate(path);
+    }else{
+      navigate(path+'?userId='+userId)
+    }
   }
   const clickLogout = () => {
     navigate('/');

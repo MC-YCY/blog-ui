@@ -33,5 +33,6 @@ export default function() {
       readTime={'1分钟'}
       views={'1.2k'}
     />
+    <div className={'h-screen'}></div>
   </div>
 }

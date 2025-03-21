@@ -75,31 +75,31 @@ export const Routers: MetaRouteObject[] = [
         path:'user',
         meta:{
           title: '个人中心',
-          auth:true
+          // auth:true
         },
         element: UserLayout,
         children:[
           {
             path:'posts',
             meta: {
-              title: '我的文章',
-              auth:true
+              title: '文章',
+              // auth:true
             },
             element: UserPosts
           },
           {
             path:'like',
             meta: {
-              title: '我的喜欢',
-              auth:true
+              title: '喜欢',
+              // auth:true
             },
             element: UserLike
           },
           {
             path:'collect',
             meta: {
-              title: '我的收藏',
-              auth:true
+              title: '收藏',
+              // auth:true
             },
             element: UserCollect
           }

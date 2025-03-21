@@ -1,21 +1,22 @@
 import { JSX } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import UserInfo from './components/user-info/user-info.tsx'
+import Container from '@/components/container.tsx'
 
 const docsMenu = [
   {
     title:'栏目',
     children:[
       {
-        title:'我的文章',
+        title:'文章',
         href:'/user/posts'
       },
       {
-        title:'我的喜欢',
+        title:'喜欢',
         href:'/user/like'
       },
       {
-        title:'我的收藏',
+        title:'收藏',
         href:'/user/collect'
       }
     ]
@@ -26,7 +27,7 @@ const renderMenu = (): JSX.Element =>{
   const navigate = useNavigate()
   // ，不需要 useState
   const goRoute = (path: string) =>{
-    navigate(path)
+    navigate(path+location.search)
   }
   return <div className={'relative overflow-hidden py-6 pr-6 lg:py-8'}>
     <div className={'h-auto w-full rounded-[inherit]'}>
@@ -58,11 +59,13 @@ const renderMenu = (): JSX.Element =>{
 
 export default function(): JSX.Element {
   return <div>
+    <Container>
+      <UserInfo></UserInfo>
+    </Container>
     <div
-      className={'container mx-auto max-w-[88rem] flex-1 items-start px-4 md:grid md:grid-cols-[200px_minmax(0,1fr)] md:gap-0 lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-0 lg:px-8'}>
+      className={'container mx-auto max-w-[88rem] flex-1 items-start px-4 md:grid md:grid-cols-[120px_minmax(0,1fr)] md:gap-0 lg:grid-cols-[120px_minmax(0,1fr)] lg:gap-0 lg:px-8'}>
       <aside
-        className={'fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-80px)] w-full shrink-0 md:sticky md:block md:self-start'}>
-        <UserInfo></UserInfo>
+        className={'fixed top-14 z-30 -ml-2 hidden w-full shrink-0 md:sticky md:block md:self-start'}>
         {renderMenu()}
       </aside>
       <main className={'relative lg:gap-10'}>

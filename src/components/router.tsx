@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes, Navigate, useLocation } from 'react-route
 import { Routers } from '@/constant/routers.ts'
 import RouterLocationProvider from '@/provider/RouterLocation.provider.tsx'
 import useUserStore from '@/stores/userStore.ts'
-import { ReactElement, useEffect } from 'react'
+import React, { ReactElement, useEffect } from 'react'
 
 // 路由守卫组件
 const AuthGuard = ({ children, meta }: {
@@ -15,7 +15,7 @@ const AuthGuard = ({ children, meta }: {
   // 动态修改页面标题
   useEffect(() => {
     if (meta?.title) {
-      document.title = `${meta.title} | Your Site Name`
+      document.title = `${meta.title} | Blog`
     }
   }, [meta?.title])
 
@@ -44,11 +44,11 @@ function renderRoutes(routes: typeof Routers): React.ReactNode[] {
     }
 
     return route.children ? (
-      <Route {...routeProps}>
+      <Route {...routeProps} key={route.path}>
         {renderRoutes(route.children)}
       </Route>
     ) : (
-      <Route {...routeProps} />
+      <Route {...routeProps} key={route.path}/>
     )
   })
 }

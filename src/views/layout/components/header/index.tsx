@@ -17,7 +17,7 @@ const Header = () => {
       } else {
         headerRef.current?.classList.add('border-transparent')
       }
-      const classList: string[] = ['border-b', 'bg-white', `dark:bg-black`, 'border-neutral-200', `dark:border-white/[0.1]`]
+      const classList: string[] = ['border-b', 'border-neutral-200', `dark:border-white/[0.1]`]
       classList.forEach((classname: string) => {
         if (scrollTop > 62) {
           headerRef.current?.classList.add(classname)
@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <header ref={headerRef}
-            className="z-[150] sticky top-0 w-full bg-transparent border-b border-transparent transition-colors">
+            className="z-[150] sticky top-0 w-full dark:bg-black bg-white border-b border-transparent transition-colors">
       <div className="hidden lg:block">
         <Container className={'flex items-center h-16'}>
           <div className="mr-4 hidden md:flex">

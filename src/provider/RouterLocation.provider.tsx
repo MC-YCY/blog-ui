@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom'
-import { routeMap } from "@/constant/routers.ts";
 
 const RouterLocationProvider = () => {
   const location = useLocation();
@@ -11,8 +10,6 @@ const RouterLocationProvider = () => {
     if(location.pathname === '/'){
       navigate('/home', { replace: true });
     }
-    const matchedMeta = routeMap.get(location.pathname);
-    document.title = matchedMeta?.title || "Blog";
   }, [location, navigate]);
 
   return null;

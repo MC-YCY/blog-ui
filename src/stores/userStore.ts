@@ -47,7 +47,7 @@ export interface MenusType {
   disabled?: boolean
 }
 
-type UserState = {
+export type UserState = {
   user: User | null
   buttons: ButtonsType[]
   menus: MenusType[]
