@@ -47,11 +47,11 @@ function renderRoutes(routes: typeof Routers): React.ReactNode[] {
     }
 
     return route.children ? (
-      <Route {...routeProps}>
+      <Route {...routeProps} key={route.path}>
         {renderRoutes(route.children)}
       </Route>
     ) : (
-      <Route {...routeProps} />
+      <Route {...routeProps} key={route.path}/>
     )
   })
 }
