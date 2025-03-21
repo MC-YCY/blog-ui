@@ -34,5 +34,15 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    build:{
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            calendar: ['@/views/docs/sa-calendar-*'],
+            user: ['@/views/user/**']
+          }
+        }
+      }
+    }
   };
 });

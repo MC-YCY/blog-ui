@@ -1,62 +1,54 @@
-import RootLayout from '@/views/layout/index'
-import Home from '@/views/home'
-import Resume from '@/views/resume'
-import Posts from '@/views/posts'
-import Login from '@/views/auth/login'
-import DocsLayout from '@/views/docs/layout.tsx'
 import React, { JSX } from 'react'
-import SaCalendarReact from '@/views/docs/sa-calendar-react.tsx'
-import SaCalendarVue3 from '@/views/docs/sa-calendar-vue3.tsx'
-import UserLayout from '@/views/user/layout.tsx'
-import UserPosts from '@/views/user/posts/index'
-import UserLike from '@/views/user/like/index'
-import UserCollect from '@/views/user/collect/index'
-import Create from '@/views/create/index';
+import { lazy } from 'react'
+import RootLayout from '@/views/layout/index'
+// 使用 Vite 的动态导入语法进行代码分割
+const Home = lazy(() => import('@/views/home'))
+const Resume = lazy(() => import('@/views/resume'))
+const Posts = lazy(() => import('@/views/posts'))
+const Login = lazy(() => import('@/views/auth/login'))
+const DocsLayout = lazy(() => import('@/views/docs/layout'))
+const SaCalendarReact = lazy(() => import('@/views/docs/sa-calendar-react'))
+const SaCalendarVue3 = lazy(() => import('@/views/docs/sa-calendar-vue3'))
+const UserLayout = lazy(() => import('@/views/user/layout'))
+const UserPosts = lazy(() => import('@/views/user/posts/index'))
+const UserLike = lazy(() => import('@/views/user/like/index'))
+const UserCollect = lazy(() => import('@/views/user/collect/index'))
+const Create = lazy(() => import('@/views/create/index'))
 
 export interface MetaRouteObject {
   meta?: {
-    title: string;
-    auth?: boolean;  //当为true时候，校验token存在，如果不存在则禁止进入，同时返回上一步操作
-  };
-  path: string;
-  element: () => JSX.Element;
-  children?: MetaRouteObject[]; // 递归定义子路由
+    title: string
+    auth?: boolean
+  }
+  path: string
+  element: React.LazyExoticComponent<() => JSX.Element> | (() => JSX.Element) // 支持两种类型
+  children?: MetaRouteObject[]
 }
 
 export const Routers: MetaRouteObject[] = [
   {
     path: '/',
-    meta: {
-      title: '',
-    },
-    element: RootLayout,
+    meta: { title: '' },
+    element: RootLayout, // 根布局保持同步加载
     children: [
       {
         path: 'home',
-        meta: {
-          title: '首页',
-        },
+        meta: { title: '首页' },
         element: Home,
       },
       {
         path: 'posts',
-        meta: {
-          title: '文章',
-        },
+        meta: { title: '文章' },
         element: Posts,
       },
       {
         path: 'create',
-        meta: {
-          title: '创作',
-        },
+        meta: { title: '创作' },
         element: Create,
       },
       {
         path: 'resume',
-        meta: {
-          title: '简历',
-        },
+        meta: { title: '简历' },
         element: Resume,
       },
       {
@@ -65,50 +57,34 @@ export const Routers: MetaRouteObject[] = [
         children: [
           {
             path: 'sa-calendar-react',
-            meta: {
-              title: 'sa-calendar-react',
-            },
+            meta: { title: 'sa-calendar-react' },
             element: SaCalendarReact,
           },
           {
             path: 'sa-calendar-vue3',
-            meta: {
-              title: 'sa-calendar-vue3',
-            },
+            meta: { title: 'sa-calendar-vue3' },
             element: SaCalendarVue3,
           },
         ],
       },
       {
         path: 'user',
-        meta: {
-          title: '个人中心',
-          // auth:true
-        },
+        meta: { title: '个人中心' },
         element: UserLayout,
         children: [
           {
             path: 'posts',
-            meta: {
-              title: '文章',
-              // auth:true
-            },
+            meta: { title: '文章' },
             element: UserPosts,
           },
           {
             path: 'like',
-            meta: {
-              title: '喜欢',
-              // auth:true
-            },
+            meta: { title: '喜欢' },
             element: UserLike,
           },
           {
             path: 'collect',
-            meta: {
-              title: '收藏',
-              // auth:true
-            },
+            meta: { title: '收藏' },
             element: UserCollect,
           },
         ],
@@ -117,9 +93,7 @@ export const Routers: MetaRouteObject[] = [
   },
   {
     path: '/login',
-    meta: {
-      title: '登录',
-    },
+    meta: { title: '登录' },
     element: Login,
   },
 ]
