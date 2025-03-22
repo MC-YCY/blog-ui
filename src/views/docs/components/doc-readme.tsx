@@ -1,13 +1,14 @@
 import { JSX } from 'react'
 import { TracingBeam } from '@/components/ui/tracing-beam.tsx'
-import { LazyContent } from '@/components/inview-lazy-content.tsx'
 import { DocReadmeListType } from '@/types/doc-readme-list.type.ts'
+import { useOptimizedDefer } from '@/hooks/useOptimizedDefer.ts'
 
 export default function({ DocReadmeList }: { DocReadmeList: DocReadmeListType }): JSX.Element {
+  const isVisible = useOptimizedDefer(DocReadmeList.length)
   return <TracingBeam className="px-6 max-w-5xl">
     <div className="mx-auto antialiased pt-4 pb-30 relative">
       {DocReadmeList.map((item, index) => (
-        <LazyContent key={`content-${index}`}>
+        isVisible(index) ?
           <div className="mb-12">
             <h2 className="bg-primary text-primary-foreground rounded-full text-sm w-fit px-4 py-1 mb-4">
               {item.badge}
@@ -21,7 +22,7 @@ export default function({ DocReadmeList }: { DocReadmeList: DocReadmeListType })
               {item.description}
             </div>
           </div>
-        </LazyContent>
+          : null
       ))}
     </div>
   </TracingBeam>
