@@ -9,7 +9,7 @@ export default function({ DocReadmeList }: { DocReadmeList: DocReadmeListType })
     <div className="mx-auto antialiased pt-4 pb-30 relative">
       {DocReadmeList.map((item, index) => (
         isVisible(index) ?
-          <div className="mb-12">
+          <div className="mb-12" key={'doc-readme-' + index}>
             <h2 className="bg-primary text-primary-foreground rounded-full text-sm w-fit px-4 py-1 mb-4">
               {item.badge}
             </h2>
