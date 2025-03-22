@@ -1,15 +1,18 @@
 import { JSX } from 'react'
-import { TracingBeam } from '@/components/ui/tracing-beam.tsx'
 import { CodeBlock } from '@/components/ui/code-block'
 import TextCode from './components/text-code.tsx'
+import DocReadme from '@/views/docs/components/doc-readme.tsx'
+import { DocReadmeListType } from '@/types/doc-readme-list.type.ts'
 
-const dummyContent = [
+const dummyContent: DocReadmeListType = [
   {
     badge: '安装',
     title: 'sa-calendar-react',
     description: (
       <>
-        <p>使用pnpm安装它，<a className={'text-pink-500'} href="https://gitee.com/yin-chunyang/react-calendar/blob/calendar-toggle/src/App.tsx" target='_blank'>更多例子</a></p>
+        <p>使用pnpm安装它，<a className={'text-pink-500'}
+                             href="https://gitee.com/yin-chunyang/react-calendar/blob/calendar-toggle/src/App.tsx"
+                             target="_blank">更多例子</a></p>
         <CodeBlock
           language="bash"
           filename="terminal"
@@ -204,48 +207,48 @@ export default App;`}
           </tr>
           </thead>
           <tbody>
-            <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
-              <td
+          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
+            <td
+              className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+              <TextCode code={'onChange'}></TextCode>
+            </td>
+            <td
+              className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+              <TextCode code={'(arg0:CalendarProps,arg1:dateTableType)=>void'}></TextCode>
+            </td>
+            <td width={400}
                 className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
-                <TextCode code={'onChange'}></TextCode>
-              </td>
-              <td
+              更新日期后的事件
+            </td>
+          </tr>
+          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
+            <td
+              className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+              <TextCode code={'onToggle'}></TextCode>
+            </td>
+            <td
+              className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+              <TextCode code={'(arg0:boolean)=>void'}></TextCode>
+            </td>
+            <td width={400}
                 className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
-                <TextCode code={'(arg0:CalendarProps,arg1:dateTableType)=>void'}></TextCode>
-              </td>
-              <td width={400}
-                  className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
-                更新日期后的事件
-              </td>
-            </tr>
-            <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
-              <td
+              组件内mouse交互更新open触发
+            </td>
+          </tr>
+          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
+            <td
+              className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+              <TextCode code={'onClick'}></TextCode>
+            </td>
+            <td
+              className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+              <TextCode code={'(arg0:dateTableCell)=>void'}></TextCode>
+            </td>
+            <td width={400}
                 className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
-                <TextCode code={'onToggle'}></TextCode>
-              </td>
-              <td
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
-                <TextCode code={'(arg0:boolean)=>void'}></TextCode>
-              </td>
-              <td width={400}
-                  className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
-                组件内mouse交互更新open触发
-              </td>
-            </tr>
-            <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
-              <td
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
-                <TextCode code={'onClick'}></TextCode>
-              </td>
-              <td
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
-                <TextCode code={'(arg0:dateTableCell)=>void'}></TextCode>
-              </td>
-              <td width={400}
-                  className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
-                格子点击事件
-              </td>
-            </tr>
+              格子点击事件
+            </td>
+          </tr>
           </tbody>
         </table>
       </>
@@ -354,23 +357,5 @@ export interface CalendarProps extends renderCustom {
 ]
 
 export default function(): JSX.Element {
-  return <TracingBeam className="px-6 max-w-5xl">
-    <div className="mx-auto antialiased pt-4 pb-30 relative">
-      {dummyContent.map((item, index) => (
-        <div key={`content-${index}`} className="mb-12">
-          <h2 className="bg-primary text-primary-foreground rounded-full text-sm w-fit px-4 py-1 mb-4">
-            {item.badge}
-          </h2>
-
-          <p className="text-xl font-semibold text-primary mb-4">
-            {item.title}
-          </p>
-
-          <div className="prose prose-base dark:prose-invert leading-relaxed space-y-4">
-            {item.description}
-          </div>
-        </div>
-      ))}
-    </div>
-  </TracingBeam>
+  return <DocReadme DocReadmeList={dummyContent}></DocReadme>
 }

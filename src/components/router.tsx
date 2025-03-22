@@ -14,9 +14,13 @@ const AuthGuard = ({ children, meta }: {
   const location = useLocation()
 
   useEffect(() => {
-    document.title = meta?.title ? `${meta.title} | Blog` : 'Blog'
+    document.title = meta?.title ? `${meta.title} | Blog` : 'Blog';
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto' // 可选 'smooth' 平滑滚动
+    })
   }, [meta?.title])
-
   if (meta?.auth && !isLoggedIn) {
     return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname)}`} replace />
   }

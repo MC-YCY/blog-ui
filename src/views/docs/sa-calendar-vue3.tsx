@@ -1,9 +1,10 @@
 import { JSX } from 'react'
-import { TracingBeam } from '@/components/ui/tracing-beam.tsx'
 import { CodeBlock } from '@/components/ui/code-block'
 import TextCode from './components/text-code.tsx'
+import DocReadme from '@/views/docs/components/doc-readme.tsx'
+import { DocReadmeListType } from '@/types/doc-readme-list.type.ts'
 
-const dummyContent = [
+const dummyContent: DocReadmeListType = [
   {
     badge: '安装',
     title: 'sa-calendar-vue3',
@@ -753,23 +754,5 @@ const handleClickWeek = (item) =>{
 ]
 
 export default function(): JSX.Element {
-  return <TracingBeam className="px-6 max-w-5xl">
-    <div className="mx-auto antialiased pt-4 pb-30 relative">
-      {dummyContent.map((item, index) => (
-        <div key={`content-${index}`} className="mb-12">
-          <h2 className="bg-primary text-primary-foreground rounded-full text-sm w-fit px-4 py-1 mb-4">
-            {item.badge}
-          </h2>
-
-          <p className="text-xl font-semibold text-primary mb-4">
-            {item.title}
-          </p>
-
-          <div className="prose prose-base dark:prose-invert leading-relaxed space-y-4">
-            {item.description}
-          </div>
-        </div>
-      ))}
-    </div>
-  </TracingBeam>
+  return <DocReadme DocReadmeList={dummyContent}></DocReadme>
 }
