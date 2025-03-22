@@ -28,13 +28,15 @@ export default function LoginForm() {
   // 表单验证规则
   const formSchema = z.object({
     account: z.string()
-      .nonempty('请输入您的账号')
-      .regex(/^[A-Za-z0-9]+$/, '账号只能包含字母和数字'),
+      .nonempty('请输入账号')
+      .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/, '需包含字母和数字组合')
+      .min(6, '请输入账号长度6-16位')
+      .max(16, '请输入账号长度6-16位'),
     password: z.string()
-      .nonempty('请输入您的密码')
-      .min(6, '密码长度不能少于6位')
-      .max(16, '密码长度不能超过16位')
-      .regex(/^[A-Za-z0-9.]+$/, '账号只能包含字母、数字和"."'),
+      .nonempty('请输入密码')
+      .min(6, '密码长度6-16位')
+      .max(16, '密码长度6-16位')
+      .regex(/^[A-Za-z0-9.]+$/, '包含非法字符'),
     captchaCode: z.string().min(4, '补全验证码').nonempty('请输入验证码'),
   })
 
@@ -126,7 +128,7 @@ export default function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 mt-6">
         {/* 账号输入 */}
         <FormField
           control={form.control}
@@ -137,7 +139,6 @@ export default function LoginForm() {
               <FormControl>
                 <Input placeholder="请输入账号" {...field} />
               </FormControl>
-              <FormDescription>这是用户账号</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -153,7 +154,6 @@ export default function LoginForm() {
               <FormControl>
                 <Input type="password" placeholder="请输入密码" {...field} />
               </FormControl>
-              <FormDescription>这是用户密码</FormDescription>
               <FormMessage />
             </FormItem>
           )}

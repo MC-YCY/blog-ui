@@ -1,6 +1,6 @@
 import {
   Form,
-  FormControl,
+  FormControl, FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -42,7 +42,7 @@ export default function RegisterForm() {
       .nonempty('请输入用户名')
       .min(2, '用户名至少2位')
       .max(16, '用户名最多16位'),
-    avatar: z.string().nonempty('请上传头像').optional(),
+    avatar: z.string().optional(),
     captchaCode: z.string().min(4, '验证码').nonempty('请输入验证码'),
   })
 
@@ -150,7 +150,7 @@ export default function RegisterForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-6">
         {/* 头像上传 */}
         <FormField
           control={form.control}
@@ -240,7 +240,7 @@ export default function RegisterForm() {
           )}
         />
 
-        {/* 验证码 */}
+        {/* 验证码区域 */}
         <div className="flex gap-4">
           <div className="flex-1">
             <FormField
@@ -250,7 +250,7 @@ export default function RegisterForm() {
                 <FormItem>
                   <FormLabel>验证码</FormLabel>
                   <FormControl>
-                    <InputOTP maxLength={4} {...field}>
+                    <InputOTP maxLength={6} {...field}>
                       <InputOTPGroup className="w-full">
                         {[...Array(4)].map((_, i) => (
                           <InputOTPSlot key={i} index={i} className="flex-1" />
@@ -258,18 +258,23 @@ export default function RegisterForm() {
                       </InputOTPGroup>
                     </InputOTP>
                   </FormControl>
+                  <FormDescription>请输入验证码</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
 
+          {/* 验证码图形 */}
           <div
             className={styles.loginFormCaptcha}
             onClick={getCaptcha}
             aria-disabled={captchaLoading}
           >
-            <div dangerouslySetInnerHTML={{ __html: captcha.svg }} />
+            <div
+              className={styles.loginFormCaptchaSvg}
+              dangerouslySetInnerHTML={{ __html: captcha.svg }}
+            />
             {captchaLoading && (
               <div className={styles.loginFormCaptchaLoading}>
                 {captchaTime}s
@@ -277,10 +282,11 @@ export default function RegisterForm() {
             )}
           </div>
         </div>
-
-        <Button type="submit" className="w-full" disabled={isSubmitting}>
-          立即注册
-        </Button>
+        <div className={'flex justify-center'}>
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
+            注册并登录
+          </Button>
+        </div>
       </form>
     </Form>
   )
