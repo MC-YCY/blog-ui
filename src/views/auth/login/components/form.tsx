@@ -61,7 +61,7 @@ const form = useForm<z.infer<typeof formSchema>>({
 const LoginForm = () => {
   const [tabValue,setTabValue] = useState('login');
 
-  return <div className={styles.loginForm + ' bg-white dark:bg-gray-800 rounded-lg'}>
+  return <div className={styles.loginForm + ' bg-white dark:bg-slate-900 rounded-lg'}>
     <div className={styles.loginFormBanner}>
       <CodeBlock
         className={'h-full'}

@@ -1,5 +1,6 @@
 import styles from './index.module.css';
 import LoginForm from './components/form.tsx'
+import {ThreeDMarqueeDemo} from './components/marquee.tsx'
 
 const Login = () => {
   return (
@@ -7,6 +8,7 @@ const Login = () => {
       <div className={styles.content}>
         <LoginForm></LoginForm>
       </div>
+      <ThreeDMarqueeDemo></ThreeDMarqueeDemo>
     </div>
   );
 };

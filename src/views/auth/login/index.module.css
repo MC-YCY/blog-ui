@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to right , var(--loginbg1), var(--loginbg2));
+    /*background-image: linear-gradient(to right , var(--loginbg1), var(--loginbg2));*/
 }
 .login-form{
     min-width: 600px;
@@ -13,12 +13,17 @@
     display: flex;
     border: 2px solid var(--loginbg1);
     box-shadow: 0 4px 15px var(--loginbg2), 0 4px 15px var(--loginbg1);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
 }
 .login-form-banner{
     flex: 1;
     border-radius: 24px 0 0 24px;
-    background: radial-gradient(ellipse at top left, var(--loginbg2), var(--loginbg1)),
-    radial-gradient(ellipse at bottom right, var(--loginbg1) 50%, var(--loginbg2));
+    /*background: radial-gradient(ellipse at top left, var(--loginbg2), var(--loginbg1)),*/
+    /*radial-gradient(ellipse at bottom right, var(--loginbg1) 50%, var(--loginbg2));*/
     display: flex;
     align-items: center;
 }
@@ -30,8 +35,8 @@
     padding: 30px 120px;
     border-radius: 0 24px 24px 0;
     min-width: 560px;
+    border-left: 1px solid #262626;
 }
-
 .login-form-captcha{
     width: 150px;
     height: 36px;
