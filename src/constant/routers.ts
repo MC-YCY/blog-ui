@@ -42,11 +42,6 @@ export const Routers: MetaRouteObject[] = [
         element: Posts,
       },
       {
-        path: 'create',
-        meta: { title: '创作' },
-        element: Create,
-      },
-      {
         path: 'resume',
         meta: { title: '简历' },
         element: Resume,
@@ -95,6 +90,11 @@ export const Routers: MetaRouteObject[] = [
     path: '/login',
     meta: { title: '登录' },
     element: Login,
+  },
+  {
+    path: 'create',
+    meta: { title: '创作' },
+    element: Create,
   },
 ]
 

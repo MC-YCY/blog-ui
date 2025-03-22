@@ -149,5 +149,5 @@ body{
 .root-routes{
   position: absolute;
   width: 100%;
-  z-index: 999999;
+  z-index: 40;
 }

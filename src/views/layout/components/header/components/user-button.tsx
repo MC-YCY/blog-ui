@@ -12,6 +12,10 @@ import {
 
 const userMenus = [
   {
+    name: '创作',
+    path: '/create',
+  },
+  {
     name: '我的文章',
     path: '/user/posts',
   },
