@@ -93,7 +93,7 @@ export const Routers: MetaRouteObject[] = [
   },
   {
     path: 'create',
-    meta: { title: '创作' },
+    meta: { title: '创作', auth: true },
     element: Create,
   },
 ]
