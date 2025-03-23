@@ -5,6 +5,7 @@ import UserButton from './components/user-button.tsx'
 import DrawerButton from './components/drawer-button.tsx'
 import Container from '@/components/container.tsx'
 import PostsScreenButton from './components/posts-screen.button.tsx'
+import MessageButton from './components/message-button.tsx'
 
 const Header = () => {
 
@@ -49,6 +50,7 @@ const Header = () => {
           <div className="flex flex-1 items-center justify-end gap-2 sm:gap-2 md:justify-end">
             <PostsScreenButton></PostsScreenButton>
             <ThemeButton></ThemeButton>
+            <MessageButton></MessageButton>
             <UserButton></UserButton>
           </div>
         </Container>

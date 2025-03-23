@@ -2,6 +2,8 @@ import { JSX } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import UserInfo from './components/user-info/user-info.tsx'
 import Container from '@/components/container.tsx'
+import { TooltipContentItem } from '@/components/ui/tooltip.tsx'
+import useUserStore from '@/stores/userStore.ts'
 
 const docsMenu = [
   {
@@ -18,13 +20,18 @@ const docsMenu = [
       {
         title:'收藏',
         href:'/user/collect'
+      },
+      {
+        title:'消息',
+        href:'/user/message'
       }
     ]
   }
 ]
 const renderMenu = (): JSX.Element =>{
   const location = useLocation(); // 直接用
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const {user} = useUserStore();
   // ，不需要 useState
   const goRoute = (path: string) =>{
     navigate(path+location.search)
@@ -41,11 +48,12 @@ const renderMenu = (): JSX.Element =>{
                   {controller.children.map((item)=>{
                     let activeClass = '';
                     if (item.href === location.pathname) {
-                      activeClass = 'text-pink-500 '
+                      activeClass = 'text-pink-500'
                     }
-                    return <div
-                      onClick={()=>goRoute(item.href)}
-                      key={item.href} className={activeClass + ' cursor-pointer group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:text-pink-300  hover:translate-x-1 transition duration-200 text-muted-foreground'}>{item.title}</div>
+                    if(item.href === '/user/message' && !user){
+                      return null;
+                    }
+                    return <TooltipContentItem onClick={()=>goRoute(item.href)} key={item.href} className={activeClass}>{item.title}</TooltipContentItem>
                   })}
                 </div>
               </div>

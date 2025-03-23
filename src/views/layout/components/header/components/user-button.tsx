@@ -5,7 +5,7 @@ import UserIcon from '@/assets/images/user.png'
 import { useNavigate } from 'react-router-dom'
 import {
   Tooltip,
-  TooltipContent,
+  TooltipContent, TooltipContentItem,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
@@ -46,16 +46,14 @@ const UserInfo = ({ user, goPath, clickLogout }: {
         <TooltipContent>
           {
             userMenus.map((item) => {
-              return <div key={item.path} onClick={() => goPath(item.path)}
-                          className={'cursor-pointer group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:text-pink-300  hover:translate-x-1 transition duration-200 text-muted-foreground'}>
+              return <TooltipContentItem key={item.path} onClick={() => goPath(item.path)}>
                 {item.name}
-              </div>
+              </TooltipContentItem>
             })
           }
-          <div onClick={clickLogout}
-               className={'cursor-pointer group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:text-pink-300  hover:translate-x-1 transition duration-200 text-muted-foreground'}>
+          <TooltipContentItem onClick={clickLogout}>
             退出登录
-          </div>
+          </TooltipContentItem>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -89,15 +87,15 @@ const ThemeButton = () => {
     navigate('/login')
   }
   const goPath = (path: string): void => {
-    let userId = user?.id || '';
+    let userId = user?.id || ''
     if (!userId) {
-      navigate(path);
-    }else{
-      navigate(path+'?userId='+userId)
+      navigate(path)
+    } else {
+      navigate(path + '?userId=' + userId)
     }
   }
   const clickLogout = () => {
-    navigate('/');
+    navigate('/')
     logout()
   }
   return <>

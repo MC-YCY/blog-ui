@@ -22,7 +22,8 @@ const AuthGuard = ({ children, meta }: {
     })
   }, [meta?.title])
   if (meta?.auth && !isLoggedIn) {
-    return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname)}`} replace />
+    // return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname)}`} replace />
+    return <Navigate to={`/home`} replace />
   }
 
   return (
