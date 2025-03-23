@@ -83,12 +83,12 @@ const GridLineHorizontal = ({
       style={
         {
           "--background": "#ffffff",
-          "--color": "rgba(0, 0, 0, 0.2)",
+          "--color": "#fff",
           "--height": "1px",
           "--width": "5px",
           "--fade-stop": "90%",
           "--offset": offset || "200px", //-100px if you want to keep the line inside
-          "--color-dark": "rgba(255, 255, 255, 0.2)",
+          "--color-dark": "#fff",
           maskComposite: "exclude",
         } as React.CSSProperties
       }
@@ -118,12 +118,12 @@ const GridLineVertical = ({
       style={
         {
           "--background": "#ffffff",
-          "--color": "rgba(0, 0, 0, 0.2)",
+          "--color": "#fff",
           "--height": "5px",
           "--width": "1px",
           "--fade-stop": "90%",
           "--offset": offset || "150px", //-100px if you want to keep the line inside
-          "--color-dark": "rgba(255, 255, 255, 0.2)",
+          "--color-dark": "#fff",
           maskComposite: "exclude",
         } as React.CSSProperties
       }

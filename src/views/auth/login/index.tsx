@@ -4,7 +4,7 @@ import {ThreeDMarqueeDemo} from './components/marquee.tsx'
 
 const Login = () => {
   return (
-    <div className="w-full h-screen position-relative">
+    <div className="w-full h-screen position-relative bg-[#0f172be8]">
       <div className={styles.content}>
         <LoginForm></LoginForm>
       </div>
