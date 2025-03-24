@@ -33,7 +33,7 @@ export default function PostsTabs() {
   // 记录访问过的 Tabs，初始化时包含默认 tab
   const [visitedTabs, setVisitedTabs] = useState<Set<TabItem["value"]>>(new Set([defaultActiveTab.value]));
   const [activeTab, setActiveTab] = useState<TabItem>(defaultActiveTab);
-  const [webType] = useState<string>();
+  const [webType, setWebType] = useState<string>("All");
 
   // 缓存 tab 内容
   const tabContentMap: Record<TabItem["value"], ReactNode> = useMemo(
@@ -50,13 +50,13 @@ export default function PostsTabs() {
     setActiveTab(tab);
   };
 
-  // 右侧筛选框
+  // 右侧筛选框（使用主题色变量）
   const renderRight = () => (
-    <Select value={webType} defaultValue={'All'} >
-      <SelectTrigger className="w-[180px] bg-white dark:bg-black">
-        <SelectValue placeholder="技术类型"/>
+    <Select value={webType} defaultValue="All" onValueChange={(value) => setWebType(value)}>
+      <SelectTrigger className="w-[180px] bg-background text-foreground">
+        <SelectValue placeholder="技术类型" />
       </SelectTrigger>
-      <SelectContent className="z-[1000000]">
+      <SelectContent className="z-[1000000] bg-popover text-popover-foreground">
         <SelectGroup>
           <SelectLabel>options</SelectLabel>
           <SelectItem value="All">All</SelectItem>
@@ -78,7 +78,7 @@ export default function PostsTabs() {
         tabs={tabs}
         hoverOffset={10}
         childrenRightSLot={renderRight()}
-        containerClassName={'z-[50] sticky top-[70px]'}
+        containerClassName="z-[50] sticky top-[70px]"
       />
 
       {/* 保持已访问过的组件不被卸载 */}

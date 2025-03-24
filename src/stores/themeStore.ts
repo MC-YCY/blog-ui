@@ -2,7 +2,7 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
-type Theme = 'light' | 'dark'
+export type Theme = 'light' | 'dark' | 'spring' | 'summer' | 'autumn' | 'winter'
 
 const getSystemTheme = (): Theme => {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -16,12 +16,20 @@ interface ThemeState {
 
 const useThemeStore = create<ThemeState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       theme: getSystemTheme(), // 默认使用系统主题
-      toggleTheme: () => set((state) => ({
-        theme: state.theme === 'light' ? 'dark' : 'light'
-      })),
-      setTheme: (theme) => set({ theme })
+      toggleTheme: () => {
+        // 如果当前为 light 或 dark，则切换，否则恢复为系统主题
+        const currentTheme = get().theme
+        if (currentTheme === 'light') {
+          set({ theme: 'dark' })
+        } else if (currentTheme === 'dark') {
+          set({ theme: 'light' })
+        } else {
+          set({ theme: getSystemTheme() })
+        }
+      },
+      setTheme: (theme: Theme) => set({ theme })
     }),
     {
       name: 'theme-storage',

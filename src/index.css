@@ -118,6 +118,85 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* 春季主题 - 清新自然 */
+.theme-spring {
+  --background: oklch(0.98 0.02 150);
+  --foreground: oklch(0.15 0.05 80);
+  --primary: oklch(0.68 0.18 160); /* 嫩绿色 */
+  --secondary: oklch(0.95 0.08 60); /* 樱粉色 */
+  --accent: oklch(0.85 0.15 100); /* 鹅黄色 */
+  --muted: oklch(0.92 0.03 120);
+  --destructive: oklch(0.72 0.25 30);
+  --chart-1: oklch(0.65 0.22 160); /* 新绿 */
+  --chart-2: oklch(0.88 0.18 60);  /* 桃花粉 */
+  --chart-3: oklch(0.78 0.15 100); /* 油菜花黄 */
+}
+
+/* 夏季主题 - 活力明亮 */
+.theme-summer {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.12 0.1 240);
+  --primary: oklch(0.65 0.25 240); /* 海洋蓝 */
+  --secondary: oklch(0.95 0.2 80);  /* 阳光黄 */
+  --accent: oklch(0.8 0.3 10);     /* 珊瑚红 */
+  --muted: oklch(0.96 0.05 200);
+  --destructive: oklch(0.75 0.3 30);
+  --chart-1: oklch(0.6 0.25 240);  /* 深蓝 */
+  --chart-2: oklch(0.9 0.2 80);    /* 明黄 */
+  --chart-3: oklch(0.85 0.25 10);  /* 亮红 */
+}
+
+/* 秋季主题 - 温暖丰收 */
+.theme-autumn {
+  --background: oklch(0.96 0.05 50);
+  --foreground: oklch(0.18 0.1 30);
+  --primary: oklch(0.65 0.25 40);  /* 枫叶橙 */
+  --secondary: oklch(0.8 0.2 20);  /* 栗棕色 */
+  --accent: oklch(0.7 0.18 60);    /* 金稻黄 */
+  --muted: oklch(0.92 0.08 35);
+  --destructive: oklch(0.68 0.22 25);
+  --chart-1: oklch(0.6 0.25 40);   /* 深橙 */
+  --chart-2: oklch(0.75 0.2 20);   /* 巧克力棕 */
+  --chart-3: oklch(0.85 0.15 60);  /* 浅金黄 */
+}
+
+/* 冬季主题 - 冷冽纯净 */
+.theme-winter {
+  --background: oklch(0.98 0.01 250);
+  --foreground: oklch(0.15 0.05 260);
+  --primary: oklch(0.55 0.15 260); /* 冰蓝 */
+  --secondary: oklch(0.9 0.05 250); /* 雪白 */
+  --accent: oklch(0.7 0.1 300);    /* 紫晶色 */
+  --muted: oklch(0.95 0.02 240);
+  --destructive: oklch(0.65 0.2 270);
+  --chart-1: oklch(0.5 0.15 260);  /* 深冰蓝 */
+  --chart-2: oklch(0.85 0.1 300);  /* 浅紫晶 */
+  --chart-3: oklch(0.75 0.08 250); /* 雾灰色 */
+}
+
+/* 暗色版本示例（冬季暗色） */
+.dark.theme-winter {
+  --background: oklch(0.15 0.05 260);
+  --foreground: oklch(0.95 0.02 250);
+  --primary: oklch(0.75 0.12 260);
+  --secondary: oklch(0.25 0.08 250);
+  --accent: oklch(0.65 0.15 300);
+  --muted: oklch(0.2 0.05 240);
+}
+
+/* 扩展@theme部分 */
+@theme inline {
+  /* 春季主题变量 */
+  --color-spring-background: var(--background);
+  --color-spring-primary: var(--primary);
+  /* ...其他变量同理... */
+
+  /* 将季节主题色系接入Tailwind */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+}
+
 .no-visible-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
