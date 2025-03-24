@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate, useLocation } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { Routers } from '@/constant/routers.ts'
 import RouterLocationProvider from '@/provider/RouterLocation.provider.tsx'
 import useUserStore from '@/stores/userStore.ts'
@@ -11,8 +11,6 @@ const AuthGuard = ({ children, meta }: {
   meta?: { auth?: boolean; title: string }
 }) => {
   const { isLoggedIn } = useUserStore()
-  const location = useLocation()
-
   useEffect(() => {
     document.title = meta?.title ? `${meta.title} | Blog` : 'Blog';
     window.scrollTo({
@@ -22,7 +20,6 @@ const AuthGuard = ({ children, meta }: {
     })
   }, [meta?.title])
   if (meta?.auth && !isLoggedIn) {
-    // return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname)}`} replace />
     return <Navigate to={`/home`} replace />
   }
 

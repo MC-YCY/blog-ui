@@ -65,7 +65,7 @@ export const Routers: MetaRouteObject[] = [
       },
       {
         path: 'user',
-        meta: { title: '个人中心', auth: true },
+        meta: { title: '个人中心' },
         element: UserLayout,
         children: [
           {
