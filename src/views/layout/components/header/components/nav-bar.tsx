@@ -12,21 +12,9 @@ import {
 } from '@/components/ui/navigation-menu'
 import { joinPath, NavBarRouters } from '@/constant/routers.ts'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { DocsMenu } from '@/constant/docs-menu.ts'
 
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: 'sa-calendar-react',
-    href: '/docs/sa-calendar-react',
-    description:
-      'react一个日历组件，可以收起展示周，展开月的日历；还添加了鼠标按下交互',
-  },
-  {
-    title: 'sa-calendar-vue3',
-    href: '/docs/sa-calendar-vue3',
-    description:
-      'vue3的日历组件，包含了周，月，收缩日历；可通过插槽自行渲染内容（考勤，任务）',
-  },
-]
+const components: { title: string; href: string; description: string }[] = DocsMenu[0].children;
 
 const NavBar = () => {
   const location = useLocation(); // 直接用

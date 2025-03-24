@@ -1,21 +1,7 @@
 import { JSX } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { DocsMenu } from '@/constant/docs-menu.ts'
 
-const docsMenu = [
-  {
-    title:'calendar',
-    children:[
-      {
-        title:'sa-calendar-react',
-        href:'/docs/sa-calendar-react'
-      },
-      {
-        title:'sa-calendar-vue3',
-        href:'/docs/sa-calendar-vue3'
-      }
-    ]
-  }
-]
 const renderMenu = (): JSX.Element =>{
   const location = useLocation(); // 直接用
   const navigate = useNavigate()
@@ -28,7 +14,7 @@ const renderMenu = (): JSX.Element =>{
       <div style={{minWidth:'100%',display:'table'}}>
         <div className={'w-full'}>
           {
-            docsMenu.map((controller,index)=>{
+            DocsMenu.map((controller,index)=>{
               return <div className={'pb-4'} key={'renderMenu'+index}>
                 <h4 className={'mb-1 rounded-md px-2 py-1 text-sm font-semibold text-black dark:text-white'}>{controller.title}</h4>
                 <div className={'grid grid-flow-row auto-rows-max text-sm'}>
