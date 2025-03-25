@@ -137,7 +137,7 @@ export default function LoginForm() {
             <FormItem>
               <FormLabel>账号</FormLabel>
               <FormControl>
-                <Input placeholder="请输入账号" {...field} />
+                <Input className={'bg-transparent'} placeholder="请输入账号" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -152,7 +152,7 @@ export default function LoginForm() {
             <FormItem>
               <FormLabel>密码</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="请输入密码" {...field} />
+                <Input className={'bg-transparent'} type="password" placeholder="请输入密码" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -172,7 +172,7 @@ export default function LoginForm() {
                     <InputOTP maxLength={6} {...field}>
                       <InputOTPGroup className="w-full">
                         {[...Array(4)].map((_, i) => (
-                          <InputOTPSlot key={i} index={i} className="flex-1" />
+                          <InputOTPSlot key={i} index={i} className="flex-1 bg-transparent" />
                         ))}
                       </InputOTPGroup>
                     </InputOTP>

@@ -167,7 +167,7 @@ export default function RegisterForm() {
                       alt="Avatar"
                     />
                   ) : (
-                    <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center">
                       <span className="text-gray-400">预览</span>
                     </div>
                   )}
@@ -203,7 +203,7 @@ export default function RegisterForm() {
             <FormItem>
               <FormLabel>用户名</FormLabel>
               <FormControl>
-                <Input placeholder="请输入用户名" {...field} />
+                <Input className={'bg-transparent'} placeholder="请输入用户名" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -218,7 +218,7 @@ export default function RegisterForm() {
             <FormItem>
               <FormLabel>账号</FormLabel>
               <FormControl>
-                <Input placeholder="6-16位字母数字组合" {...field} />
+                <Input className={'bg-transparent'} placeholder="6-16位字母数字组合" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -233,7 +233,7 @@ export default function RegisterForm() {
             <FormItem>
               <FormLabel>密码</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="6-16位字符" {...field} />
+                <Input className={'bg-transparent'} type="password" placeholder="6-16位字符" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -253,7 +253,7 @@ export default function RegisterForm() {
                     <InputOTP maxLength={6} {...field}>
                       <InputOTPGroup className="w-full">
                         {[...Array(4)].map((_, i) => (
-                          <InputOTPSlot key={i} index={i} className="flex-1" />
+                          <InputOTPSlot key={i} index={i} className="flex-1 bg-transparent" />
                         ))}
                       </InputOTPGroup>
                     </InputOTP>

@@ -62,7 +62,7 @@ const LoginForm = () => {
   const [tabValue, setTabValue] = useState('login');
 
   return (
-    <div className={styles.loginForm + ' bg-white dark:bg-slate-900 rounded-lg'}>
+    <div className={styles.loginForm + ' bg-background rounded-lg'}>
       <div className={styles.loginFormBanner}>
         <CodeBlock
           className={'h-full'}
