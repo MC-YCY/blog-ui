@@ -8,62 +8,92 @@ import {
 } from '@/components/ui/sheet'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/shadcn-tabs.tsx'
 import { FileUpload } from '@/components/ui/file-upload'
-import banner from '@/assets/images/hero/angular.png'
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-} from "@/components/ui/pagination"
+
+import { uploadUserImages, getUserImages } from '@/api/image.api.ts'
+import { useEffect, useState } from 'react'
+import useUserStore from '@/stores/userStore.ts'
+import { Pagination } from 'antd'
+import { toast as Toast } from 'sonner'
 
 const ImageList = () => {
+  const [images, setImages] = useState<any[]>([])
+  const { user } = useUserStore()
+  const [total, setTotal] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
+  const getImages = () => {
+    if (!user) return
+    let params = {
+      pageNo: currentPage,
+      pageSize: 5,
+    }
+    getUserImages(user.id, params).then(res => {
+      setImages(res.records)
+      setTotal(res.total)
+    })
+  }
+  useEffect(() => {
+    getImages()
+  }, [currentPage])
+  const onChange = (p: number) => {
+    setCurrentPage(p)
+  }
+  const clickImg = async (img: { path: string }) => {
+    try {
+      await navigator.clipboard.writeText(img.path)
+      Toast("Tip", {
+        description: '已复制到剪切板',
+        position: 'bottom-left',
+        duration:800
+      });
+      console.log('复制成功')
+      return true
+    } catch (err) {
+
+    }
+  }
   return <>
-    <div className={'flex px-0 py-2'}>
-      <Input placeholder={'请输入文件名'}></Input>
-      <Button>搜索</Button>
-    </div>
     <div className={''}>
-      <div className={'w-full h-[80px] bg-muted p-2 rounded-md mb-2'}>
-        <img src={banner} className={'w-full h-full object-cover rounded-md'} alt="" />
-      </div>
-      <div className={'w-full h-[80px] bg-muted p-2 rounded-md mb-2'}>
-        <img src={banner} className={'w-full h-full object-cover rounded-md'} alt="" />
-      </div>
-      <div className={'w-full h-[80px] bg-muted p-2 rounded-md mb-2'}>
-        <img src={banner} className={'w-full h-full object-cover rounded-md'} alt="" />
-      </div>
-      <div className={'w-full h-[80px] bg-muted p-2 rounded-md mb-2'}>
-        <img src={banner} className={'w-full h-full object-cover rounded-md'} alt="" />
-      </div>
-      <div className={'w-full h-[80px] bg-muted p-2 rounded-md mb-2'}>
-        <img src={banner} className={'w-full h-full object-cover rounded-md'} alt="" />
-      </div>
-      <div className={'w-full h-[80px] bg-muted p-2 rounded-md mb-2'}>
-        <img src={banner} className={'w-full h-full object-cover rounded-md'} alt="" />
-      </div>
+      {
+        images.map((img: { path: string, originalname: string }) => {
+          return <div key={img.path} onClick={() => clickImg(img)} className={'w-full bg-muted p-2 rounded-md mb-2'}>
+            {img.originalname}
+            <img src={img.path} className={'w-full h-[80px] object-cover rounded-md'} alt="" />
+          </div>
+        })
+      }
     </div>
-    <Pagination>
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationLink>1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink isActive>2</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink>3</PaginationLink>
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+    <Pagination onChange={onChange} current={currentPage} defaultCurrent={currentPage} size={'small'} total={total}
+                pageSize={5} pageSizeOptions={[5, 10, 15]}></Pagination>
   </>
 }
 
-export default function() {
+const UploadContent = () => {
+  const [selectFiles, setSelectFiles] = useState<File[]>([])
+  const { user } = useUserStore()
   const handleFileUpload = (files: File[]) => {
-    console.log(files)
+    setSelectFiles([...selectFiles, ...files])
   }
+  const submit = () => {
+    if (selectFiles.length < 0) {
+      return
+    }
+    const formData = new FormData()
+    selectFiles.map((file: File) => {
+      formData.append('files', file)
+    })
+    if (!user) return
+    uploadUserImages(user?.id, formData).then(res => {
+      console.log(res)
+    })
+  }
+  return <div>
+    <FileUpload onChange={handleFileUpload} />
+    <Button className={'w-full'} onClick={submit}>上传</Button>
+  </div>
+}
+
+export default function() {
   return <Sheet>
     <SheetTrigger>
       <div
@@ -87,7 +117,7 @@ export default function() {
             <ImageList></ImageList>
           </TabsContent>
           <TabsContent className={'flex-1 overflow-auto h-[0px]'} value="upload">
-            <FileUpload onChange={handleFileUpload} />
+            <UploadContent></UploadContent>
           </TabsContent>
         </Tabs>
       </div>
