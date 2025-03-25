@@ -42,7 +42,44 @@
   --loginbg2:rgba(1, 130, 231);
 }
 
-.dark {
+.theme-light{
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --loginbg1:rgba(244, 111, 243);
+  --loginbg2:rgba(1, 130, 231);
+}
+.theme-dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
@@ -119,92 +156,343 @@
 }
 
 /* 春季主题 - 清新自然 */
-.theme-spring {
-  --background: oklch(0.98 0.02 150);
-  --foreground: oklch(0.15 0.05 80);
-  --primary: oklch(0.68 0.18 160); /* 嫩绿色 */
-  --secondary: oklch(0.95 0.08 60); /* 樱粉色 */
-  --accent: oklch(0.85 0.15 100); /* 鹅黄色 */
-  --muted: oklch(0.92 0.03 120);
-  --destructive: oklch(0.72 0.25 30);
-  --chart-1: oklch(0.65 0.22 160); /* 新绿 */
-  --chart-2: oklch(0.88 0.18 60);  /* 桃花粉 */
-  --chart-3: oklch(0.78 0.15 100); /* 油菜花黄 */
+.theme-light-spring {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(240, 10%, 3.9%);
+
+  /* 卡片颜色 */
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 10%, 3.9%);
+
+  /* 弹出层颜色 */
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 10%, 3.9%);
+
+  /* 主要颜色 */
+  --primary: hsl(142.1, 76.2%, 36.3%);
+  --primary-foreground: hsl(355.7, 100%, 97.3%);
+
+  /* 次要颜色 */
+  --secondary: hsl(240, 4.8%, 95.9%);
+  --secondary-foreground: hsl(240, 5.9%, 10%);
+
+  /* 静默颜色 */
+  --muted: hsl(240, 4.8%, 95.9%);
+  --muted-foreground: hsl(240, 3.8%, 46.1%);
+
+  /* 强调色 */
+  --accent: hsl(240, 4.8%, 95.9%);
+  --accent-foreground: hsl(240, 5.9%, 10%);
+
+  /* 破坏性颜色 */
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+
+  /* 界面元素 */
+  --border: hsl(240, 5.9%, 90%);
+  --input: hsl(240, 5.9%, 90%);
+  --ring: hsl(142.1, 76.2%, 36.3%);
+
+  /* 图表颜色 */
+  --chart-1: hsl(12, 76%, 61%);
+  --chart-2: hsl(173, 58%, 39%);
+  --chart-3: hsl(197, 37%, 24%);
+  --chart-4: hsl(43, 74%, 66%);
+  --chart-5: hsl(27, 87%, 67%);
+
+  /* 其他 */
+  --radius: 0.5rem;
+}
+.theme-dark-spring  {
+  /* 暗色模式基础 */
+  --background: hsl(20, 14.3%, 4.1%);
+  --foreground: hsl(0, 0%, 95%);
+
+  /* 暗色模式卡片 */
+  --card: hsl(24, 9.8%, 10%);
+  --card-foreground: hsl(0, 0%, 95%);
+
+  /* 暗色模式弹出层 */
+  --popover: hsl(0, 0%, 9%);
+  --popover-foreground: hsl(0, 0%, 95%);
+
+  /* 暗色模式主要颜色 */
+  --primary: hsl(142.1, 70.6%, 45.3%);
+  --primary-foreground: hsl(144.9, 80.4%, 10%);
+
+  /* 暗色模式次要颜色 */
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+
+  /* 暗色模式静默颜色 */
+  --muted: hsl(0, 0%, 15%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+
+  /* 暗色模式强调色 */
+  --accent: hsl(12, 6.5%, 15.1%);
+  --accent-foreground: hsl(0, 0%, 98%);
+
+  /* 暗色模式破坏性颜色 */
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 85.7%, 97.3%);
+
+  /* 暗色模式界面元素 */
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --ring: hsl(142.4, 71.8%, 29.2%);
+
+  /* 暗色模式图表颜色 */
+  --chart-1: hsl(220, 70%, 50%);
+  --chart-2: hsl(160, 60%, 45%);
+  --chart-3: hsl(30, 80%, 55%);
+  --chart-4: hsl(280, 65%, 60%);
+  --chart-5: hsl(340, 75%, 55%);
 }
 
 /* 夏季主题 - 活力明亮 */
-.theme-summer {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.12 0.1 240);
-  --primary: oklch(0.65 0.25 240); /* 海洋蓝 */
-  --secondary: oklch(0.95 0.2 80);  /* 阳光黄 */
-  --accent: oklch(0.8 0.3 10);     /* 珊瑚红 */
-  --muted: oklch(0.96 0.05 200);
-  --destructive: oklch(0.75 0.3 30);
-  --chart-1: oklch(0.6 0.25 240);  /* 深蓝 */
-  --chart-2: oklch(0.9 0.2 80);    /* 明黄 */
-  --chart-3: oklch(0.85 0.25 10);  /* 亮红 */
+.theme-light-summer {
+  /* 基础色 */
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(240, 10%, 3.9%);
+
+  /* 卡片颜色 */
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 10%, 3.9%);
+
+  /* 弹出层 */
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 10%, 3.9%);
+
+  /* 主品牌色 */
+  --primary: hsl(346.8, 77.2%, 49.8%);        /* 亮红色系 */
+  --primary-foreground: hsl(355.7, 100%, 97.3%); /* 配套浅色 */
+
+  /* 辅助色 */
+  --secondary: hsl(240, 4.8%, 95.9%);
+  --secondary-foreground: hsl(240, 5.9%, 10%);
+
+  /* 中性色 */
+  --muted: hsl(240, 4.8%, 95.9%);
+  --muted-foreground: hsl(240, 3.8%, 46.1%);
+
+  /* 强调色 */
+  --accent: hsl(240, 4.8%, 95.9%);
+  --accent-foreground: hsl(240, 5.9%, 10%);
+
+  /* 警告色 */
+  --destructive: hsl(0, 84.2%, 60.2%);       /* 标准红色 */
+  --destructive-foreground: hsl(0, 0%, 98%);
+
+  /* UI元素 */
+  --border: hsl(240, 5.9%, 90%);
+  --input: hsl(240, 5.9%, 90%);
+  --ring: hsl(346.8, 77.2%, 49.8%);          /* 与主色一致 */
+
+  /* 图表色 */
+  --chart-1: hsl(12, 76%, 61%);  /* 橙红色 */
+  --chart-2: hsl(173, 58%, 39%); /* 青绿色 */
+  --chart-3: hsl(197, 37%, 24%); /* 深蓝色 */
+  --chart-4: hsl(43, 74%, 66%);  /* 金黄色 */
+  --chart-5: hsl(27, 87%, 67%);  /* 橙黄色 */
+
+  /* 圆角 */
+  --radius: 0.5rem;
+}
+.theme-dark-summer {
+  /* 暗色模式基础 */
+  --background: hsl(20, 14.3%, 4.1%);       /* 深灰 */
+  --foreground: hsl(0, 0%, 95%);            /* 近白色 */
+
+  /* 卡片深色 */
+  --card: hsl(24, 9.8%, 10%);
+  --card-foreground: hsl(0, 0%, 95%);
+
+  /* 弹出层深色 */
+  --popover: hsl(0, 0%, 9%);
+  --popover-foreground: hsl(0, 0%, 95%);
+
+  /* 深色主品牌 */
+  --primary: hsl(346.8, 77.2%, 49.8%);      /* 保持与亮色模式一致 */
+  --primary-foreground: hsl(355.7, 100%, 97.3%);
+
+  /* 深色辅助 */
+  --secondary: hsl(240, 3.7%, 15.9%);       /* 深灰蓝 */
+  --secondary-foreground: hsl(0, 0%, 98%);
+
+  /* 深色中性 */
+  --muted: hsl(0, 0%, 15%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+
+  /* 深色强调 */
+  --accent: hsl(12, 6.5%, 15.1%);          /* 暖灰色 */
+  --accent-foreground: hsl(0, 0%, 98%);
+
+  /* 深色警告 */
+  --destructive: hsl(0, 62.8%, 30.6%);     /* 暗红色 */
+  --destructive-foreground: hsl(0, 85.7%, 97.3%);
+
+  /* 深色UI元素 */
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --ring: hsl(346.8, 77.2%, 49.8%);
+
+  /* 深色图表 */
+  --chart-1: hsl(220, 70%, 50%);  /* 蓝色 */
+  --chart-2: hsl(160, 60%, 45%); /* 青绿色 */
+  --chart-3: hsl(30, 80%, 55%);  /* 橙色 */
+  --chart-4: hsl(280, 65%, 60%); /* 紫色 */
+  --chart-5: hsl(340, 75%, 55%); /* 玫红色 */
 }
 
 /* 秋季主题 - 温暖丰收 */
-.theme-autumn {
-  --background: oklch(0.96 0.05 50);
-  --foreground: oklch(0.18 0.1 30);
-  --primary: oklch(0.65 0.25 40);  /* 枫叶橙 */
-  --secondary: oklch(0.8 0.2 20);  /* 栗棕色 */
-  --accent: oklch(0.7 0.18 60);    /* 金稻黄 */
-  --muted: oklch(0.92 0.08 35);
-  --destructive: oklch(0.68 0.22 25);
-  --chart-1: oklch(0.6 0.25 40);   /* 深橙 */
-  --chart-2: oklch(0.75 0.2 20);   /* 巧克力棕 */
-  --chart-3: oklch(0.85 0.15 60);  /* 浅金黄 */
+.theme-light-autumn {
+  /* 基础色 */
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+
+  /* 卡片颜色 */
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+
+  /* 弹出层 */
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+
+  /* 主品牌色（橙色系） */
+  --primary: hsl(24.6, 95%, 53.1%);
+  --primary-foreground: hsl(60, 9.1%, 97.8%);
+
+  /* 辅助色 */
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+
+  /* 中性色 */
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+
+  /* 强调色 */
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+
+  /* 警告色 */
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+
+  /* UI元素 */
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --ring: hsl(24.6, 95%, 53.1%);
+
+  /* 图表色 */
+  --chart-1: hsl(12, 76%, 61%);
+  --chart-2: hsl(173, 58%, 39%);
+  --chart-3: hsl(197, 37%, 24%);
+  --chart-4: hsl(43, 74%, 66%);
+  --chart-5: hsl(27, 87%, 67%);
+
+  /* 圆角 */
+  --radius: 0.5rem;
+}
+.theme-dark-autumn {
+  /* 暗色模式基础 */
+  --background: hsl(20, 14.3%, 4.1%);
+  --foreground: hsl(60, 9.1%, 97.8%);
+
+  /* 卡片深色 */
+  --card: hsl(20, 14.3%, 4.1%);
+  --card-foreground: hsl(60, 9.1%, 97.8%);
+
+  /* 弹出层深色 */
+  --popover: hsl(20, 14.3%, 4.1%);
+  --popover-foreground: hsl(60, 9.1%, 97.8%);
+
+  /* 深色主品牌（暗橙色） */
+  --primary: hsl(20.5, 90.2%, 48.2%);
+  --primary-foreground: hsl(60, 9.1%, 97.8%);
+
+  /* 深色辅助 */
+  --secondary: hsl(12, 6.5%, 15.1%);
+  --secondary-foreground: hsl(60, 9.1%, 97.8%);
+
+  /* 深色中性 */
+  --muted: hsl(12, 6.5%, 15.1%);
+  --muted-foreground: hsl(24, 5.4%, 63.9%);
+
+  /* 深色强调 */
+  --accent: hsl(12, 6.5%, 15.1%);
+  --accent-foreground: hsl(60, 9.1%, 97.8%);
+
+  /* 深色警告 */
+  --destructive: hsl(0, 72.2%, 50.6%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+
+  /* 深色UI元素 */
+  --border: hsl(12, 6.5%, 15.1%);
+  --input: hsl(12, 6.5%, 15.1%);
+  --ring: hsl(20.5, 90.2%, 48.2%);
+
+  /* 深色图表 */
+  --chart-1: hsl(220, 70%, 50%);
+  --chart-2: hsl(160, 60%, 45%);
+  --chart-3: hsl(30, 80%, 55%);
+  --chart-4: hsl(280, 65%, 60%);
+  --chart-5: hsl(340, 75%, 55%);
 }
 
 /* 冬季主题 - 冷冽纯净 */
-.theme-winter {
-  --background: oklch(0.98 0.01 250);
-  --foreground: oklch(0.15 0.05 260);
-  --primary: oklch(0.55 0.15 260); /* 冰蓝 */
-  --secondary: oklch(0.9 0.05 250); /* 雪白 */
-  --accent: oklch(0.7 0.1 300);    /* 紫晶色 */
-  --muted: oklch(0.95 0.02 240);
-  --destructive: oklch(0.65 0.2 270);
-  --chart-1: oklch(0.5 0.15 260);  /* 深冰蓝 */
-  --chart-2: oklch(0.85 0.1 300);  /* 浅紫晶 */
-  --chart-3: oklch(0.75 0.08 250); /* 雾灰色 */
+.theme-light-winter {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(222.2, 84%, 4.9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(222.2, 84%, 4.9%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(222.2, 84%, 4.9%);
+  --primary: hsl(221.2, 83.2%, 53.3%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(210, 40%, 96.1%);
+  --secondary-foreground: hsl(222.2, 47.4%, 11.2%);
+  --muted: hsl(210, 40%, 96.1%);
+  --muted-foreground: hsl(215.4, 16.3%, 46.9%);
+  --accent: hsl(210, 40%, 96.1%);
+  --accent-foreground: hsl(222.2, 47.4%, 11.2%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(214.3, 31.8%, 91.4%);
+  --input: hsl(214.3, 31.8%, 91.4%);
+  --ring: hsl(221.2, 83.2%, 53.3%);
+  --radius: 0.5rem;
+  --chart-1: hsl(12, 76%, 61%);
+  --chart-2: hsl(173, 58%, 39%);
+  --chart-3: hsl(197, 37%, 24%);
+  --chart-4: hsl(43, 74%, 66%);
+  --chart-5: hsl(27, 87%, 67%);
 }
-
-/* 暗色版本示例（冬季暗色） */
-.dark.theme-winter {
-  --background: oklch(0.15 0.05 260);
-  --foreground: oklch(0.95 0.02 250);
-  --primary: oklch(0.75 0.12 260);
-  --secondary: oklch(0.25 0.08 250);
-  --accent: oklch(0.65 0.15 300);
-  --muted: oklch(0.2 0.05 240);
-}
-
-/* 扩展@theme部分 */
-@theme inline {
-  /* 春季主题变量 */
-  --color-spring-background: var(--background);
-  --color-spring-primary: var(--primary);
-  /* ...其他变量同理... */
-
-  /* 将季节主题色系接入Tailwind */
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-}
-
-.no-visible-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.no-visible-scrollbar::-webkit-scrollbar {
-  display: none;
+/* 冬季主题 - 冷冽纯净 */
+.theme-dark-winter {
+  --background: hsl(222.2, 84%, 4.9%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(222.2, 84%, 4.9%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --popover: hsl(222.2, 84%, 4.9%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --primary: hsl(217.2, 91.2%, 59.8%);
+  --primary-foreground: hsl(222.2, 47.4%, 11.2%);
+  --secondary: hsl(217.2, 32.6%, 17.5%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217.2, 32.6%, 17.5%);
+  --muted-foreground: hsl(215, 20.2%, 65.1%);
+  --accent: hsl(217.2, 32.6%, 17.5%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(217.2, 32.6%, 17.5%);
+  --input: hsl(217.2, 32.6%, 17.5%);
+  --ring: hsl(224.3, 76.3%, 48%);
+  --chart-1: hsl(220, 70%, 50%);
+  --chart-2: hsl(160, 60%, 45%);
+  --chart-3: hsl(30, 80%, 55%);
+  --chart-4: hsl(280, 65%, 60%);
+  --chart-5: hsl(340, 75%, 55%);
 }
 
 @layer base {
@@ -218,6 +506,15 @@
 
 body{
   position: relative;
+}
+.no-visible-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.no-visible-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 .root-background{
   position: fixed;
