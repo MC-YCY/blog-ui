@@ -72,7 +72,7 @@ const UploadContent = () => {
   const [selectFiles, setSelectFiles] = useState<File[]>([])
   const { user } = useUserStore()
   const handleFileUpload = (files: File[]) => {
-    setSelectFiles([...selectFiles, ...files])
+    setSelectFiles(files)
   }
   const submit = () => {
     if (selectFiles.length < 0) {
