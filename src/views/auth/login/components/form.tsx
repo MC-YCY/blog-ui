@@ -59,31 +59,40 @@ const form = useForm<z.infer<typeof formSchema>>({
 })`
 }
 const LoginForm = () => {
-  const [tabValue,setTabValue] = useState('login');
+  const [tabValue, setTabValue] = useState('login');
 
-  return <div className={styles.loginForm + ' bg-white dark:bg-slate-900 rounded-lg'}>
-    <div className={styles.loginFormBanner}>
-      <CodeBlock
-        className={'h-full'}
-        language="tsx"
-        filename="Form.tsx"
-        code={codeMap[tabValue]}
-      />
+  return (
+    <div className={styles.loginForm + ' bg-white dark:bg-slate-900 rounded-lg'}>
+      <div className={styles.loginFormBanner}>
+        <CodeBlock
+          className={'h-full'}
+          language="tsx"
+          filename="Form.tsx"
+          code={codeMap[tabValue]}
+        />
+      </div>
+      <div className={styles.loginFormContent}>
+        <Tabs
+          defaultValue="login"
+          value={tabValue}
+          onValueChange={setTabValue}
+        >
+          <TabsList className="grid grid-cols-2">
+            <TabsTrigger value="login">登录</TabsTrigger>
+            <TabsTrigger value="register">注册</TabsTrigger>
+          </TabsList>
+
+          {/* 关键修改：添加 forceMount 属性 */}
+          <TabsContent value="login" forceMount style={{ display: tabValue === 'login' ? 'block' : 'none' }}>
+            <FormLogin />
+          </TabsContent>
+
+          <TabsContent value="register" forceMount style={{ display: tabValue === 'register' ? 'block' : 'none' }}>
+            <FormRegister />
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
-    <div className={styles.loginFormContent}>
-      <Tabs defaultValue="login" value={tabValue} onValueChange={setTabValue}>
-        <TabsList className="grid grid-cols-2">
-          <TabsTrigger value="login">登录</TabsTrigger>
-          <TabsTrigger value="register">注册</TabsTrigger>
-        </TabsList>
-        <TabsContent value="login">
-          <FormLogin></FormLogin>
-        </TabsContent>
-        <TabsContent value="register">
-          <FormRegister></FormRegister>
-        </TabsContent>
-      </Tabs>
-    </div>
-  </div>
+  )
 }
 export default LoginForm
