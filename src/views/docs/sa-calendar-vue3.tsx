@@ -88,7 +88,7 @@ const handleDay = (item) => {
         <p>这是sa-calendar-toggle的属性</p>
         <table className={'w-full'}>
           <thead>
-          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
+          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-foreground dark:even:bg-zinc-900'}>
             <th
               className={'border px-4 py-2 text-left text-sm font-bold [&[align=center]]:text-center [&[align=right]]:text-right'}>属性
             </th>
@@ -126,7 +126,7 @@ const handleDay = (item) => {
               <TextCode code={'YYYY-MM-DD'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               日历展示的日期，使用时需要用v-model:date='date'
             </td>
           </tr>
@@ -140,7 +140,7 @@ const handleDay = (item) => {
               <TextCode code={'String'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               data属性日期字段的设置，需要和data属性的日期key一样
             </td>
           </tr>
@@ -154,7 +154,7 @@ const handleDay = (item) => {
               <TextCode code={'1 | 7'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               周的第一个位置是周一还是周日，只能输入1或7
             </td>
           </tr>
@@ -168,7 +168,7 @@ const handleDay = (item) => {
               <TextCode code={'cn | en'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               中英文的周显示 cn和en
             </td>
           </tr>
@@ -182,7 +182,7 @@ const handleDay = (item) => {
               <TextCode code={'Number'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               格子的高度，默认40高度;用的定位容器高度由此计算
             </td>
           </tr>
@@ -196,7 +196,7 @@ const handleDay = (item) => {
               <TextCode code={'Boolean'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               是否固定展示6行
             </td>
           </tr>
@@ -210,7 +210,7 @@ const handleDay = (item) => {
               <TextCode code={'Boolean'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               用于控制显示隐藏,这个使用时需要用v-model:visible; false展开true收起
             </td>
           </tr>
@@ -249,7 +249,7 @@ const handleDay = (item) => {
               <TextCode code={'function(item,date)'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               格子双击事件
             </td>
           </tr>
@@ -265,7 +265,7 @@ const handleDay = (item) => {
         <p>sa-calendar-toggle的插槽</p>
         <table className={'w-full'}>
           <thead>
-          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
+          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-foreground  dark:even:bg-zinc-900'}>
             <th
               className={'border px-4 py-2 text-left text-sm font-bold [&[align=center]]:text-center [&[align=right]]:text-right'}>属性
             </th>
@@ -288,7 +288,7 @@ const handleDay = (item) => {
               <TextCode code={'data'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               顶部日期栏信息
             </td>
           </tr>
@@ -302,7 +302,7 @@ const handleDay = (item) => {
               <TextCode code={'{ data, index }'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               自定义渲染周的方式，data周n为文本
             </td>
           </tr>
@@ -316,7 +316,7 @@ const handleDay = (item) => {
               <TextCode code={'{ data, index, row }'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               自定义渲染每一天，data是每天的对象，index是一周的索引，row则是一周的数组
             </td>
           </tr>
@@ -365,7 +365,7 @@ const handleClickDate = (item) =>{
         <p>sa-calendar的属性</p>
         <table className={'w-full'}>
           <thead>
-          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
+          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-foreground  dark:even:bg-zinc-900'}>
             <th
               className={'border px-4 py-2 text-left text-sm font-bold [&[align=center]]:text-center [&[align=right]]:text-right'}>属性
             </th>
@@ -388,7 +388,7 @@ const handleClickDate = (item) =>{
               <TextCode code={'Array'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               数据需要一个日期格式YYYY-MM-DD的key
             </td>
           </tr>
@@ -402,7 +402,7 @@ const handleClickDate = (item) =>{
               <TextCode code={'Date \ YYYY-MM-DD'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               日历展示的日期
             </td>
           </tr>
@@ -416,7 +416,7 @@ const handleClickDate = (item) =>{
               <TextCode code={'String'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               data属性日期字段的设置，需要和data属性的日期key一样
             </td>
           </tr>
@@ -430,7 +430,7 @@ const handleClickDate = (item) =>{
               <TextCode code={'1 | 7'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               周的第一个位置是周一还是周日
             </td>
           </tr>
@@ -444,7 +444,7 @@ const handleClickDate = (item) =>{
               <TextCode code={'cn | en'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               中英文的周显示
             </td>
           </tr>
@@ -460,7 +460,7 @@ const handleClickDate = (item) =>{
         <p>这是sa-calendar的事件</p>
         <table className={'w-full'}>
           <thead>
-          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
+          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-foreground  dark:even:bg-zinc-900'}>
             <th
               className={'border px-4 py-2 text-left text-sm font-bold [&[align=center]]:text-center [&[align=right]]:text-right'}>属性
             </th>
@@ -483,7 +483,7 @@ const handleClickDate = (item) =>{
               <TextCode code={'function(item)'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               点击单格的事件
             </td>
           </tr>
@@ -499,7 +499,7 @@ const handleClickDate = (item) =>{
         <p>sa-calendar的插槽</p>
         <table className={'w-full'}>
           <thead>
-          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
+          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-foreground  dark:even:bg-zinc-900'}>
             <th
               className={'border px-4 py-2 text-left text-sm font-bold [&[align=center]]:text-center [&[align=right]]:text-right'}>属性
             </th>
@@ -522,7 +522,7 @@ const handleClickDate = (item) =>{
               <TextCode code={'data'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               顶部日期栏信息
             </td>
           </tr>
@@ -536,7 +536,7 @@ const handleClickDate = (item) =>{
               <TextCode code={'{item}'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               自定义渲染每一天，item每天的对象
             </td>
           </tr>
@@ -585,7 +585,7 @@ const handleClickWeek = (item) =>{
         <p>sa-week-calendar props</p>
         <table className={'w-full'}>
           <thead>
-          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
+          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-foreground  dark:even:bg-zinc-900'}>
             <th
               className={'border px-4 py-2 text-left text-sm font-bold [&[align=center]]:text-center [&[align=right]]:text-right'}>属性
             </th>
@@ -608,7 +608,7 @@ const handleClickWeek = (item) =>{
               <TextCode code={'Array'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               数据需要一个日期格式YYYY-MM-DD的key
             </td>
           </tr>
@@ -622,7 +622,7 @@ const handleClickWeek = (item) =>{
               <TextCode code={'Date \ YYYY-MM-DD'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               日历展示的日期
             </td>
           </tr>
@@ -636,7 +636,7 @@ const handleClickWeek = (item) =>{
               <TextCode code={'String'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               data属性日期字段的设置，需要和data属性的日期key一样
             </td>
           </tr>
@@ -650,7 +650,7 @@ const handleClickWeek = (item) =>{
               <TextCode code={'1 | 7'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               周的第一个位置是周一还是周日
             </td>
           </tr>
@@ -664,7 +664,7 @@ const handleClickWeek = (item) =>{
               <TextCode code={'cn | en'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               中英文的周显示
             </td>
           </tr>
@@ -680,7 +680,7 @@ const handleClickWeek = (item) =>{
         <p>这是sa-calendar的事件</p>
         <table className={'w-full'}>
           <thead>
-          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
+          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-foreground  dark:even:bg-zinc-900'}>
             <th
               className={'border px-4 py-2 text-left text-sm font-bold [&[align=center]]:text-center [&[align=right]]:text-right'}>属性
             </th>
@@ -703,7 +703,7 @@ const handleClickWeek = (item) =>{
               <TextCode code={'function(item)'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               点击单格的事件
             </td>
           </tr>
@@ -719,7 +719,7 @@ const handleClickWeek = (item) =>{
         <p>sa-calendar-week slot</p>
         <table className={'w-full'}>
           <thead>
-          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-black dark:text-white dark:even:bg-zinc-900'}>
+          <tr className={'even:bg-muted m-0 border-t p-0 text-sm text-foreground  dark:even:bg-zinc-900'}>
             <th
               className={'border px-4 py-2 text-left text-sm font-bold [&[align=center]]:text-center [&[align=right]]:text-right'}>属性
             </th>
@@ -742,7 +742,7 @@ const handleClickWeek = (item) =>{
               <TextCode code={'{item}'}></TextCode>
             </td>
             <td width={400}
-                className={'border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
+                className={'text-foreground border px-4 py-3 text-left font-sans text-sm [&[align=center]]:text-center [&[align=right]]:text-right'}>
               自定义渲染每一天，item每天的对象
             </td>
           </tr>
