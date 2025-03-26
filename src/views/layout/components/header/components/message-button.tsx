@@ -2,6 +2,7 @@ import { BellIcon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button.tsx'
 import useUserStore from '@/stores/userStore.ts'
 import { useNavigate } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
 
 export default function() {
   const { user } = useUserStore()
@@ -11,6 +12,24 @@ export default function() {
     if (!userId) return
     navigate(`/user/message?userId=${userId}`)
   }
+  const ws = useRef<WebSocket>(null); // 使用 useRef 保存 WebSocket 实例
+
+  useEffect(() => {
+    ws.current = new WebSocket('ws://localhost:3000');
+
+    // 2. 监听连接打开
+    ws.current.onopen = () => {
+      console.log('WebSocket 连接已建立');
+    };
+
+    // 3. 监听接收消息
+    ws.current.onmessage = (event) => {
+      const newMessage = event.data;
+      console.log(newMessage)
+    };
+  })
+
+
   return <>
     {user ?
       <Button
