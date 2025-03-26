@@ -31,6 +31,17 @@ interface UpdateArticleDto {
   status?: ArticleStatus; // 允许创建时指定状态（默认DRAFT）
 }
 
+export interface ArticleItem {
+  title: string;
+  content: string;
+  status?: ArticleStatus; // 允许创建时指定状态（默认DRAFT）
+  tags: string[];
+  readme: string;
+  banner: string;
+  id: number;
+  createdAt: string
+}
+
 export const createUserArticle = (userId: string | number, data: CreateArticleDto) => {
   return Post(`/blog/articles/${userId}`, data)
 }

@@ -1,9 +1,5 @@
 export const ArticleTags = [
   {
-    label:'All',
-    value:' '
-  },
-  {
     label:'Vue',
     value:'Vue',
   },

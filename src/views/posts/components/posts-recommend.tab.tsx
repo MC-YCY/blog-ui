@@ -1,6 +1,6 @@
 import { ArticleCard } from '@/components/ui/article-card.tsx'
 import { useEffect, useState } from 'react'
-import { allArticlesList } from '@/api/article.api.ts'
+import { allArticlesList, ArticleItem } from '@/api/article.api.ts'
 import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
 
 export default function() {
@@ -13,8 +13,8 @@ export default function() {
   }
   const getList = () => {
     let params = {
-      page: 1,
-      limit: 10,
+      page: currentPage,
+      limit: pageSize,
       title: '',
     }
     allArticlesList(params).then(res => {
@@ -29,13 +29,13 @@ export default function() {
     <div className={'fixed bottom-10 flex justify-center w-full left-0'}>
       <SmartPagination
         current={currentPage}
-        total={100}
+        total={total}
         pageSize={pageSize}
         onChange={onChange}
       />
     </div>
     {
-      list.map(item => {
+      list.map((item: ArticleItem) => {
         return <ArticleCard
           key={item.id}
           title={item.title}
