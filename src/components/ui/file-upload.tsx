@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, forwardRef, useImperativeHandle } from 'react'
 import { motion } from 'motion/react'
 import { IconUpload } from '@tabler/icons-react'
 import { useDropzone } from 'react-dropzone'
@@ -27,17 +27,13 @@ const secondaryVariant = {
   },
 }
 
-export const FileUpload = ({
-                             onChange,
-                           }: {
-  onChange?: (files: File[]) => void;
-}) => {
+export const FileUpload = forwardRef((props: { onChange?: (files: File[]) => void }, ref) => {
   const [files, setFiles] = useState<File[]>([])
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFileChange = (newFiles: File[]) => {
     setFiles((prevFiles) => [...prevFiles, ...newFiles])
-    onChange && onChange([...files, ...newFiles])
+    props.onChange && props.onChange([...files, ...newFiles])
   }
 
   const handleClick = () => {
@@ -56,9 +52,21 @@ export const FileUpload = ({
   const removeFIleItem = (event: React.MouseEvent<HTMLDivElement>, idx: number) => {
     files.splice(idx, 1)
     setFiles(files)
-    onChange && onChange([...files])
+    props.onChange && props.onChange([...files])
     event.stopPropagation()
   }
+
+  interface refMethods {
+    clearFiles: () => void,
+  }
+
+  useImperativeHandle(ref, (): refMethods => {
+    return {
+      clearFiles() {
+        setFiles([])
+      },
+    }
+  })
 
   return (
     <div className="w-full" {...getRootProps()}>
@@ -173,4 +181,4 @@ export const FileUpload = ({
       </motion.div>
     </div>
   )
-}
+})

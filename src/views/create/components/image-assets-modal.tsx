@@ -11,7 +11,7 @@ import { FileUpload } from '@/components/ui/file-upload'
 import { Button } from '@/components/ui/button'
 
 import { uploadUserImages, getUserImages } from '@/api/image.api.ts'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import useUserStore from '@/stores/userStore.ts'
 import { Pagination } from 'antd'
 import { toast as Toast } from 'sonner'
@@ -44,10 +44,8 @@ const ImageList = () => {
       Toast("Tip", {
         description: '已复制到剪切板',
         position: 'bottom-left',
-        duration:800
+        duration:1000
       });
-      console.log('复制成功')
-      return true
     } catch (err) {
 
     }
@@ -74,8 +72,14 @@ const UploadContent = () => {
   const handleFileUpload = (files: File[]) => {
     setSelectFiles(files)
   }
+  const uploadFileRef = useRef<{clearFiles:()=>void}>(null)
   const submit = () => {
-    if (selectFiles.length < 0) {
+    if (selectFiles.length <= 0) {
+      Toast("Tip", {
+        description: '请选择图片',
+        position: 'bottom-left',
+        duration:1000
+      });
       return
     }
     const formData = new FormData()
@@ -83,12 +87,17 @@ const UploadContent = () => {
       formData.append('files', file)
     })
     if (!user) return
-    uploadUserImages(user?.id, formData).then(res => {
-      console.log(res)
+    uploadUserImages(user?.id, formData).then(() => {
+      Toast("Api Tip", {
+        description: '上传成功',
+        position: 'bottom-left',
+        duration:1000
+      });
+      uploadFileRef?.current?.clearFiles();
     })
   }
   return <div>
-    <FileUpload onChange={handleFileUpload} />
+    <FileUpload ref={uploadFileRef} onChange={handleFileUpload} />
     <Button className={'w-full'} onClick={submit}>上传</Button>
   </div>
 }
