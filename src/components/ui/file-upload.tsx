@@ -73,7 +73,7 @@ export const FileUpload = forwardRef((props: { onChange?: (files: File[]) => voi
       <motion.div
         onClick={handleClick}
         whileHover="animate"
-        className="p-10 group/file block rounded-lg cursor-pointer w-full relative overflow-hidden"
+        className="group/file block rounded-lg cursor-pointer w-[100%] mx-auto p-[5%] relative overflow-hidden"
       >
         <input
           ref={fileInputRef}

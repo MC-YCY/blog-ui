@@ -10,13 +10,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/shadcn
 import { FileUpload } from '@/components/ui/file-upload'
 import { Button } from '@/components/ui/button'
 
-import { uploadUserImages, getUserImages } from '@/api/image.api.ts'
+import { uploadUserImages, getUserImages, deleteUserImage } from '@/api/image.api.ts'
 import { useEffect, useRef, useState } from 'react'
 import useUserStore from '@/stores/userStore.ts'
 import { toast as Toast } from 'sonner'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip.tsx'
 import { SmartPagination } from '@/components/ui/pagination-controller'
 import { ScrollArea } from '@/components/ui/scroll-area.tsx'
+import { Cross1Icon, ExitFullScreenIcon, CopyIcon } from '@radix-ui/react-icons'
 
 const ImageList = () => {
   const [images, setImages] = useState<any[]>([])
@@ -24,6 +25,7 @@ const ImageList = () => {
   const [total, setTotal] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, _setPageSize] = useState(5)
+
   const getImages = () => {
     if (!user) return
     let params = {
@@ -35,12 +37,15 @@ const ImageList = () => {
       setTotal(res.total)
     })
   }
+
   useEffect(() => {
     getImages()
   }, [currentPage])
+
   const onChange = (p: number) => {
     setCurrentPage(p)
   }
+
   const clickImg = async (img: { path: string }) => {
     try {
       await navigator.clipboard.writeText(img.path)
@@ -50,34 +55,81 @@ const ImageList = () => {
         duration: 1000,
       })
     } catch (err) {
-
+      // 错误处理
     }
   }
-  return <>
-    <ScrollArea className={'h-[calc(100vh-264px)]'}>
-      {
-        images.map((img: { path: string, originalname: string }) => {
-          return <div key={img.path} onClick={() => clickImg(img)} className={'w-full bg-muted p-2 rounded-md mb-2'}>
-            <TooltipProvider delayDuration={100}>
-              <Tooltip>
-                <TooltipTrigger>
-                  <div className={'w-full overflow-hidden cursor-pointer'}>
-                    {img.originalname}
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{img.originalname}</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            <img src={img.path} className={'w-full h-[80px] object-cover rounded-md'} alt="" />
-          </div>
-        })
-      }
-    </ScrollArea>
-    <SmartPagination current={currentPage} total={total} pageSize={pageSize} onChange={onChange}></SmartPagination>
-  </>
+
+  // 示例删除函数，根据实际需求自行实现删除逻辑
+  const deleteImage = (img: { id: number }) => {
+    // 此处可调用接口删除图片，再更新 images 列表
+    if (!user) return
+    deleteUserImage(user.id, img.id).then(() => {
+      Toast('Tip', {
+        description: '删除成功',
+        position: 'bottom-left',
+        duration: 1000,
+      })
+      getImages()
+    })
+  }
+
+  const showImage = (img: { path: string }) => {
+    window.open(img.path,'_blank')
+  }
+
+  return (
+    <>
+      <ScrollArea className="h-[calc(100vh-264px)]">
+        {images.map((img: { path: string, originalname: string,id: number }) => {
+          return (
+            <div key={img.path} className="w-full bg-muted p-2 rounded-md mb-2">
+              <TooltipProvider delayDuration={100}>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <div className="w-full overflow-hidden cursor-pointer">
+                      {img.originalname}
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{img.originalname}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+              {/* 外层容器设为 relative 并添加 group 类 */}
+              <div className="relative group">
+                <img
+                  src={img.path}
+                  className="w-full h-[80px] object-cover rounded-md"
+                  alt={img.originalname}
+                />
+                {/* 遮罩层，初始透明，鼠标悬浮后显示 */}
+                <div
+                  className="absolute inset-0 bg-[rgba(0,0,0,.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center space-x-2">
+                  <Button onClick={() => clickImg(img)}>
+                    <CopyIcon></CopyIcon>
+                  </Button>
+                  <Button onClick={() => deleteImage(img)}>
+                    <Cross1Icon></Cross1Icon>
+                  </Button>
+                  <Button onClick={() => showImage(img)}>
+                    <ExitFullScreenIcon></ExitFullScreenIcon>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </ScrollArea>
+      <SmartPagination
+        current={currentPage}
+        total={total}
+        pageSize={pageSize}
+        onChange={onChange}
+      />
+    </>
+  )
 }
+
 
 const UploadContent = () => {
   const [selectFiles, setSelectFiles] = useState<File[]>([])
