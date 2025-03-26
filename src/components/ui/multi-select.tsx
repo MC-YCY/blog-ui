@@ -10,7 +10,7 @@ const MultiSelect = ({
                      }: any) => {
   const {
     field: { value = [], onChange },
-    fieldState: { error },
+    fieldState: { error:_error },
   } = useController({
     name,
     control,
