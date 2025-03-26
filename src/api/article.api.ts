@@ -32,21 +32,21 @@ interface UpdateArticleDto {
 }
 
 export const createUserArticle = (userId: string | number, data: CreateArticleDto) => {
-  return Post(`/blog/users/${userId}/articles`, data)
+  return Post(`/blog/articles/${userId}`, data)
 }
 
 export const userArticleList = (userId: string | number, data: PaginateArticleDto) => {
-  return Get(`/blog/users/${userId}/articles`, data)
+  return Get(`/blog/articles/user/${userId}`, data)
 }
 
 export const updateUserArticle = (userId: string | number, data: UpdateArticleDto) => {
-  return Put(`/blog/users/${userId}/articles`, data)
+  return Put(`/blog/articles/${userId}`, data)
 }
 
 export const allArticlesList = (data: PaginateArticleDto) => {
-  return Get(`/blog/users/all/articles`, data)
+  return Get(`/blog/articles/all`, data)
 }
 
 export const userDeleteArticle = (userId: string | number, data: { articleId: number }) => {
-  return Del(`/blog/users/${userId}/articles/`, data)
+  return Del(`/blog/articles/${userId}`, data)
 }

@@ -22,8 +22,8 @@ interface TabItem extends Tab {
 export default function PostsTabs() {
   // Tab 配置
   const tabs: TabItem[] = [
-    { title: '时轴', value: 'timeline' },
     { title: '推荐', value: 'recommend' },
+    { title: '时轴', value: 'timeline' },
   ]
 
   // 默认激活 Tab
@@ -37,8 +37,8 @@ export default function PostsTabs() {
   // 缓存 tab 内容
   const tabContentMap: Record<TabItem['value'], ReactNode> = useMemo(
     () => ({
-      timeline: <TimelineTab />,
       recommend: <RecommendTab />,
+      timeline: <TimelineTab />,
     }),
     [],
   )
