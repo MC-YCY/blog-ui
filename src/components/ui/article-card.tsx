@@ -13,6 +13,7 @@ interface ArticleCardProps {
   className?: string;
   readTime: string;
   views: string;
+  onClick: () => void;
 }
 
 const tagColors = {
@@ -30,7 +31,8 @@ export const ArticleCard = ({
                               imageUrl,
                               className,
                               readTime,
-                              views
+                              views,
+                              onClick,
                             }: ArticleCardProps) => {
   const getTagColor = (tag: string) => {
     const lowerTag = tag.toLowerCase()
@@ -42,6 +44,7 @@ export const ArticleCard = ({
 
   return (
     <motion.article
+      onClick={onClick}
       className={cn(
         'group relative overflow-hidden rounded-xl bg-white shadow-md border border-gray-200 transition-all backdrop-blur-sm',
         'dark:bg-gray-800 dark:border-gray-700 dark:shadow-md dark:hover:shadow-lg',
@@ -99,7 +102,7 @@ export const ArticleCard = ({
             </span>
             <span className="mx-2">•</span>
             <span className="flex items-center">
-              <EyeIcon  className="h-4 w-4 mr-1 " /> {/* 需要引入浏览图标 */}
+              <EyeIcon className="h-4 w-4 mr-1 " /> {/* 需要引入浏览图标 */}
               {views} 浏览
             </span>
           </div>

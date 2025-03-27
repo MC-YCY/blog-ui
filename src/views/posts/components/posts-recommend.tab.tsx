@@ -2,12 +2,25 @@ import { ArticleCard } from '@/components/ui/article-card.tsx'
 import { useEffect, useState } from 'react'
 import { allArticlesList, ArticleItem } from '@/api/article.api.ts'
 import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
+import { useNavigate } from 'react-router-dom'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select.tsx'
+import { ArticleTags } from '@/constant/article-tags.ts'
 
 export default function() {
   const [list, setList] = useState([])
   const [total, setTotal] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [pageSize, setPageSize] = useState<number>(10)
+  const [pageSize, _setPageSize] = useState<number>(10)
+  const [webType, setWebType] = useState<string>(' ')
+  const navigate = useNavigate()
   const onChange = (p: number) => {
     setCurrentPage(p)
   }
@@ -16,6 +29,7 @@ export default function() {
       page: currentPage,
       limit: pageSize,
       title: '',
+      tag: webType.trim(),
     }
     allArticlesList(params).then(res => {
       setList(res.items)
@@ -24,7 +38,12 @@ export default function() {
   }
   useEffect(() => {
     getList()
-  }, [currentPage])
+  }, [currentPage, webType])
+
+  const goArticle = (item: { id: number }) => {
+    navigate('/article?id=' + item.id)
+  }
+
   return <div>
     <div className={'fixed bottom-10 flex justify-center w-full left-0'}>
       <SmartPagination
@@ -33,6 +52,24 @@ export default function() {
         pageSize={pageSize}
         onChange={onChange}
       />
+    </div>
+    <div className={'flex justify-end'}>
+      <Select value={webType} defaultValue="All" onValueChange={(value) => setWebType(value)}>
+        <SelectTrigger className="w-[180px] bg-background text-foreground">
+          <SelectValue placeholder="技术类型" />
+        </SelectTrigger>
+        <SelectContent className="z-[1000000] bg-popover text-popover-foreground">
+          <SelectGroup>
+            <SelectLabel>options</SelectLabel>
+            <SelectItem value={' '}>All</SelectItem>
+            {
+              ArticleTags.map((item) => {
+                return <SelectItem value={item.value}>{item.label}</SelectItem>
+              })
+            }
+          </SelectGroup>
+        </SelectContent>
+      </Select>
     </div>
     {
       list.map((item: ArticleItem) => {
@@ -45,7 +82,10 @@ export default function() {
           imageUrl={item.banner}
           className="mb-6 mt-[30px]"
           readTime={'1分钟'}
-          views={'1.2k'}
+          views={'1k'}
+          onClick={() => {
+            goArticle(item)
+          }}
         />
       })
     }

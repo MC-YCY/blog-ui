@@ -15,6 +15,7 @@ const UserLike = lazy(() => import('@/views/user/like/index'))
 const UserCollect = lazy(() => import('@/views/user/collect/index'))
 const UserMessage = lazy(() => import('@/views/user/message/index.tsx'))
 const Create = lazy(() => import('@/views/create/index'))
+const Article = lazy(() => import('@/views/article/index'))
 
 export interface MetaRouteObject {
   meta?: {
@@ -101,6 +102,11 @@ export const Routers: MetaRouteObject[] = [
     path: 'create',
     meta: { title: '创作', auth: true },
     element: Create,
+  },
+  {
+    path: 'article',
+    meta: { title: 'Blog' },
+    element: Article,
   },
 ]
 

@@ -36,6 +36,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
+    "dayjs": "^1.11.13",
     "dotted-map": "^2.2.3",
     "framer-motion": "^12.5.0",
     "input-otp": "^1.4.2",

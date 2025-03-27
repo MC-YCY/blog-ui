@@ -61,3 +61,11 @@ export const allArticlesList = (data: PaginateArticleDto) => {
 export const userDeleteArticle = (userId: string | number, data: { articleId: number }) => {
   return Del(`/blog/articles/${userId}`, data)
 }
+
+export const getArticle = (articleId: number | string | null) => {
+  return Get(`/blog/articles/item/${articleId}`)
+}
+
+export const getTimelineArticles = () => {
+  return Get(`/blog/articles/timeline`)
+}
