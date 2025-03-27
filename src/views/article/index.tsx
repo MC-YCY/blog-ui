@@ -1,5 +1,5 @@
 import Container from '@/components/container.tsx'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { getArticle } from '@/api/article.api.ts'
 import { useEffect, useState } from 'react'
 import { toast as Toast } from 'sonner'
@@ -9,6 +9,7 @@ import { Separator } from '@/components/ui/separator.tsx'
 import useUserStore, { User } from '@/stores/userStore.ts'
 import remarkGfm from 'remark-gfm'
 import ReactMarkdown from 'react-markdown'
+import { ArticleStatusText } from '@/constant/article-status.enum.ts'
 
 export default function() {
   const [params] = useSearchParams() // 直接用
@@ -17,6 +18,8 @@ export default function() {
   const [title, setTitle] = useState('')
   const [tags, setTags] = useState<string[]>([])
   const [content, setContent] = useState('')
+  const [status, setStatus] = useState()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!params.get('id')) {
@@ -32,14 +35,21 @@ export default function() {
       setContent(data.content)
       setTags(data.tags)
       setTitle(data.title)
+      setStatus(data.status)
     })
   }, [params])
+
+  const goUserPage = () =>{
+    if(!user) return;
+    navigate('/user/posts?userId=' + user.id)
+  }
+
   return <Container>
     <div>
       <div className={'w-full pt-4'}>
         <div className="space-y-1">
           <div className={'flex align-center'}>
-            <Avatar className="w-14 h-14 object-cover cursor-pointer">
+            <Avatar className="w-14 h-14 object-cover cursor-pointer" onClick={goUserPage}>
               <AvatarImage src={user?.avatar ? user?.avatar : UserIcon} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
@@ -50,10 +60,9 @@ export default function() {
             <div className={'ml-auto my-auto pl-3'}>
               <div className="flex h-5 items-center space-x-4 text-sm">
                 <div className={'cursor-pointer whitespace-nowrap'}>粉丝</div>
-                <Separator orientation="vertical" />
                 {
                   user?.id === LoginUser?.id ? null
-                    : <div className={'cursor-pointer  whitespace-nowrap'}>关注</div>
+                    : <><Separator orientation="vertical" /><div className={'cursor-pointer  whitespace-nowrap'}>关注</div></>
                 }
               </div>
             </div>
@@ -77,6 +86,11 @@ export default function() {
             </span>
           ))}
         </div>
+        <span
+          className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-primary"
+        >
+              {status && ArticleStatusText[status]}
+            </span>
       </div>
       <ReactMarkdown remarkPlugins={[remarkGfm]}>
         {content}

@@ -49,9 +49,11 @@ export default function LoginForm() {
       captchaCode: '',
     },
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   // 提交处理
   const onSubmit = (formState: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true)
     loginApi({
       ...formState,
       captchaId: captcha.captchaId
@@ -62,6 +64,8 @@ export default function LoginForm() {
       })
       const redirect = new URLSearchParams(location.search).get('redirect')
       navigate(redirect || '/home', { replace: true })
+    }).finally(() => {
+      setIsSubmitting(false)
     })
   }
 
@@ -204,7 +208,7 @@ export default function LoginForm() {
 
         {/* 提交按钮 */}
         <div className="flex justify-center">
-          <Button type="submit" className="w-full">
+          <Button disabled={isSubmitting} type="submit" className="w-full">
             登录
           </Button>
         </div>

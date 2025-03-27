@@ -46,7 +46,7 @@ export const createUserArticle = (userId: string | number, data: CreateArticleDt
   return Post(`/blog/articles/${userId}`, data)
 }
 
-export const userArticleList = (userId: string | number, data: PaginateArticleDto) => {
+export const userArticleList = (userId: string | number | null, data: PaginateArticleDto) => {
   return Get(`/blog/articles/user/${userId}`, data)
 }
 

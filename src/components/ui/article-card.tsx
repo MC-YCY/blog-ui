@@ -14,6 +14,7 @@ interface ArticleCardProps {
   readTime: string;
   views: string;
   onClick: () => void;
+  status: string;
 }
 
 const tagColors = {
@@ -33,6 +34,7 @@ export const ArticleCard = ({
                               readTime,
                               views,
                               onClick,
+                              status
                             }: ArticleCardProps) => {
   const getTagColor = (tag: string) => {
     const lowerTag = tag.toLowerCase()
@@ -104,6 +106,10 @@ export const ArticleCard = ({
             <span className="flex items-center">
               <EyeIcon className="h-4 w-4 mr-1 " /> {/* 需要引入浏览图标 */}
               {views} 浏览
+            </span>
+            <span className="mx-2">•</span>
+            <span className="flex items-center">
+              {status}
             </span>
           </div>
         </div>

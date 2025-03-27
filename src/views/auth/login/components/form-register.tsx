@@ -71,14 +71,17 @@ export default function RegisterForm() {
     } else {
       params.avatar = undefined
     }
-    const info = await userRegisterApi({ ...params, captchaId: captcha.captchaId, roldId: 1, signature: '' });
-    userStore.login(info.user, {
-      accessToken: info.access_token,
-      refreshToken: info.refresh_token
-    })
-    const redirect = new URLSearchParams(location.search).get('redirect')
-    navigate(redirect || '/home', { replace: true })
-    setIsSubmitting(false)
+    try {
+      const info = await userRegisterApi({ ...params, captchaId: captcha.captchaId, roldId: 1, signature: '' });
+      userStore.login(info.user, {
+        accessToken: info.access_token,
+        refreshToken: info.refresh_token
+      })
+      const redirect = new URLSearchParams(location.search).get('redirect')
+      navigate(redirect || '/home', { replace: true })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   // 头像上传处理
