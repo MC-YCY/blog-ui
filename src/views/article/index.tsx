@@ -10,6 +10,7 @@ import useUserStore, { User } from '@/stores/userStore.ts'
 import remarkGfm from 'remark-gfm'
 import ReactMarkdown from 'react-markdown'
 import { ArticleStatusText } from '@/constant/article-status.enum.ts'
+import { TracingBeam } from '@/components/ui/tracing-beam'
 
 export default function() {
   const [params] = useSearchParams() // 直接用
@@ -20,6 +21,7 @@ export default function() {
   const [content, setContent] = useState('')
   const [status, setStatus] = useState()
   const navigate = useNavigate()
+  const [likeCount,setLikeCount] = useState<number>(0)
 
   useEffect(() => {
     if (!params.get('id')) {
@@ -36,11 +38,12 @@ export default function() {
       setTags(data.tags)
       setTitle(data.title)
       setStatus(data.status)
+      setLikeCount(data.likeCount)
     })
   }, [params])
 
-  const goUserPage = () =>{
-    if(!user) return;
+  const goUserPage = () => {
+    if (!user) return
     navigate('/user/posts?userId=' + user.id)
   }
 
@@ -62,7 +65,18 @@ export default function() {
                 <div className={'cursor-pointer whitespace-nowrap'}>粉丝</div>
                 {
                   user?.id === LoginUser?.id ? null
-                    : <><Separator orientation="vertical" /><div className={'cursor-pointer  whitespace-nowrap'}>关注</div></>
+                    : <><Separator orientation="vertical" />
+                      <div className={'cursor-pointer  whitespace-nowrap'}>关注</div>
+                    </>
+                }
+                {
+                  user ? <>
+                      <Separator orientation="vertical" />
+                      <div className={'cursor-pointer  whitespace-nowrap'}>{likeCount}点赞</div>
+                      <Separator orientation="vertical" />
+                      <div className={'cursor-pointer  whitespace-nowrap'}>收藏</div>
+                    </>
+                    : null
                 }
               </div>
             </div>
@@ -70,31 +84,36 @@ export default function() {
         </div>
         <Separator className="my-4" />
       </div>
-      <div className="flex gap-4 mb-8">
-        {/* 标题部分 */}
-        <h1 className="text-3xl font-bold tracking-tight lg:text-4xl text-primary">
-          {title}
-        </h1>
-        {/* 标签部分 */}
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 transition-colors hover:bg-primary/20"
-            >
+
+      <TracingBeam>
+        <div className="gap-4 mb-8">
+          {/* 标题部分 */}
+          <h1 className="text-3xl font-bold tracking-tight lg:text-4xl text-primary">
+            {title}
+          </h1>
+          <div className={'flex mt-2 cursor-pointer'}>
+            {/* 标签部分 */}
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex h-[30px] items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 transition-colors hover:bg-primary/20"
+                >
               #{tag}
             </span>
-          ))}
-        </div>
-        <span
-          className="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-primary"
-        >
+              ))}
+            </div>
+            <span
+              className="inline-flex h-[30px] items-center rounded-full px-3 py-1 text-sm font-medium text-primary"
+            >
               {status && ArticleStatusText[status]}
             </span>
-      </div>
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>
-        {content}
-      </ReactMarkdown>
+          </div>
+        </div>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {content}
+        </ReactMarkdown>
+      </TracingBeam>
     </div>
   </Container>
 }

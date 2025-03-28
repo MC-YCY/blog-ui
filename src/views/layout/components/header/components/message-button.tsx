@@ -12,21 +12,21 @@ export default function() {
     if (!userId) return
     navigate(`/user/message?userId=${userId}`)
   }
-  const ws = useRef<WebSocket>(null); // 使用 useRef 保存 WebSocket 实例
+  // const ws = useRef<WebSocket>(null); // 使用 useRef 保存 WebSocket 实例
 
   useEffect(() => {
-    ws.current = new WebSocket('ws://localhost:3000');
-
-    // 2. 监听连接打开
-    ws.current.onopen = () => {
-      console.log('WebSocket 连接已建立');
-    };
-
-    // 3. 监听接收消息
-    ws.current.onmessage = (event) => {
-      const newMessage = event.data;
-      console.log(newMessage)
-    };
+    // ws.current = new WebSocket('ws://localhost:3000');
+    //
+    // // 2. 监听连接打开
+    // ws.current.onopen = () => {
+    //   console.log('WebSocket 连接已建立');
+    // };
+    //
+    // // 3. 监听接收消息
+    // ws.current.onmessage = (event) => {
+    //   const newMessage = event.data;
+    //   console.log(newMessage)
+    // };
   })
 
 
