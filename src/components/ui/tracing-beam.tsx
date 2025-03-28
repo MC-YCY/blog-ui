@@ -38,6 +38,7 @@ export const TracingBeam = ({
 
     return () => {
       resizeObserver.disconnect();
+      contentRef.current = null;
     };
   }, []);
 
