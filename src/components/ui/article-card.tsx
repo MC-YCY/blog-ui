@@ -56,7 +56,7 @@ export const ArticleCard = ({
     >
       <div className="flex flex-col md:flex-row">
         {imageUrl && (
-          <div className="relative h-48 w-full overflow-hidden md:w-1/3">
+          <div className="relative h-48 w-full overflow-hidden md:w-1/3 min-w-1/3">
             <motion.img
               src={imageUrl}
               alt={title}
@@ -66,7 +66,7 @@ export const ArticleCard = ({
           </div>
         )}
 
-        <div className="flex-1 p-6">
+        <div className="flex-1 p-6 w-0">
           <div className="mb-2 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
             <time dateTime={date}>{new Date(date).toLocaleDateString()}</time>
             {tags.length > 0 && (
@@ -94,7 +94,7 @@ export const ArticleCard = ({
             {title}
           </h3>
 
-          <p className="text-gray-600 dark:text-gray-300">{excerpt}</p>
+          <p className="text-gray-600 dark:text-gray-300 overflow-hidden text-ellipsis whitespace-nowrap">{excerpt}</p>
 
           {/* 替换阅读更多为阅读时长 */}
           <div className="mt-4 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
