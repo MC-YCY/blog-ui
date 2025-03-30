@@ -43,3 +43,7 @@ export const getUserFollowers = (userId: string | number | null, data: {
 }) => {
   return Post(`/blog/users/followers/${userId}`, data)
 }
+
+export const getUserStats = (userId: string | number | null) => {
+  return Post(`/blog/users/user-stats/${userId}`)
+}

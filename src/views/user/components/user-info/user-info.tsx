@@ -1,6 +1,6 @@
 import useUserStore, { User } from '@/stores/userStore.ts'
 import { Separator } from '@/components/ui/separator'
-import { getUserInfo, updateUserInfo } from '@/api/user.api.ts'
+import { getUserInfo, getUserStats, updateUserInfo } from '@/api/user.api.ts'
 import { useEffect, useRef, useState } from 'react'
 import { localhostUpload } from '@/api/upload.api.ts'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar.tsx'
@@ -28,9 +28,29 @@ export default function() {
       const newUserInfo = await updateUserInfo(user?.id, {
         avatar,
       })
-      updateUser(newUserInfo);
+      updateUser(newUserInfo)
       setUser(newUserInfo)
     }
+  }
+
+
+
+  const [stats, setStats] = useState<{
+    articlesCount: number,
+    followersCount: number,
+    totalFavorites: number,
+    totalLikes: number
+  }>({
+    articlesCount: 0,
+    followersCount: 0,
+    totalFavorites: 0,
+    totalLikes: 0,
+  })
+
+  const getUserStatsFn = () => {
+    getUserStats(searchParams.get('userId')).then(res => {
+      setStats(res)
+    })
   }
 
   useEffect(() => {
@@ -38,6 +58,7 @@ export default function() {
     getUserInfo(userId).then(res => {
       setUser(res)
     })
+    getUserStatsFn()
   }, [searchParams])
 
   const editUserOk = (updateData: User | null) => {
@@ -64,11 +85,17 @@ export default function() {
         </div>
         <div className={'ml-auto my-auto pl-3'}>
           <div className="flex h-5 items-center space-x-4 text-sm">
-            <div className={'cursor-pointer whitespace-nowrap'}>粉丝</div>
+            <div className={'cursor-pointer whitespace-nowrap'}>粉丝{stats.followersCount}</div>
+            <Separator orientation="vertical" />
+            <div className={'cursor-pointer whitespace-nowrap'}>获赞{stats.totalLikes}</div>
+            <Separator orientation="vertical" />
+            <div className={'cursor-pointer whitespace-nowrap'}>被收藏{stats.totalFavorites}</div>
+            <Separator orientation="vertical" />
+            <div className={'cursor-pointer whitespace-nowrap'}>{stats.articlesCount}篇文章</div>
             <Separator orientation="vertical" />
             {
-              user?.id === LoginUser?.id ? <EditUserButton user={user} updateOk={editUserOk}></EditUserButton>
-                : <div className={'cursor-pointer  whitespace-nowrap'}>关注</div>
+              LoginUser && (user?.id === LoginUser?.id ? <EditUserButton user={user} updateOk={editUserOk}></EditUserButton>
+                : <div className={'cursor-pointer  whitespace-nowrap'}>关注</div>)
             }
           </div>
         </div>
