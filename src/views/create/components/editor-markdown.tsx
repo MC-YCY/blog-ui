@@ -22,7 +22,7 @@ export const EditorMarkdown = forwardRef((props: { defaultInfo?: ArticleItem }, 
     if (props && props.defaultInfo?.content) {
       setValue(props.defaultInfo.content)
     }
-  }, [props])
+  }, [props.defaultInfo])
   interface refMethods {
     getValue: () => string | undefined
   }
