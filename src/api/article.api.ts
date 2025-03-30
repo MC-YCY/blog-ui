@@ -14,6 +14,7 @@ export interface CreateArticleDto {
   tags: string[];
   readme: string;
   banner: string;
+  articleId?: number;
 }
 
 export class PaginateArticleDto {
@@ -22,13 +23,6 @@ export class PaginateArticleDto {
   status?: ArticleStatus // 增加状态过滤
   tag?: string
   title?: string
-}
-
-interface UpdateArticleDto {
-  title?: string;
-  content?: string;
-  articleId: number;
-  status?: ArticleStatus; // 允许创建时指定状态（默认DRAFT）
 }
 
 export interface ArticleItem {
@@ -50,7 +44,7 @@ export const userArticleList = (userId: string | number | null, data: PaginateAr
   return Get(`/blog/articles/user/${userId}`, data)
 }
 
-export const updateUserArticle = (userId: string | number, data: UpdateArticleDto) => {
+export const updateUserArticle = (userId: string | number, data: CreateArticleDto) => {
   return Put(`/blog/articles/${userId}`, data)
 }
 

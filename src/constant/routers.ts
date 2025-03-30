@@ -16,6 +16,7 @@ const UserCollect = lazy(() => import('@/views/user/collect/index'))
 const UserMessage = lazy(() => import('@/views/user/message/index.tsx'))
 const Create = lazy(() => import('@/views/create/index'))
 const Article = lazy(() => import('@/views/article/index'))
+const Update = lazy(() => import('@/views/update/index.tsx'))
 
 export interface MetaRouteObject {
   meta?: {
@@ -104,6 +105,11 @@ export const Routers: MetaRouteObject[] = [
     element: Create,
   },
   {
+    path: 'update',
+    meta: { title: '更新文章', auth: true },
+    element: Update,
+  },
+  {
     path: 'article',
     meta: { title: 'Blog' },
     element: Article,
@@ -124,43 +130,3 @@ export const joinPath = (...parts: string[]): string => {
     .join('/')
     .replace(/\/+/g, '/') // 确保不会出现 "//"
 }
-
-// 定义路由项的类型
-interface RouteMeta {
-  title: string;
-}
-
-interface RouteItem {
-  path: string;
-  meta?: RouteMeta;
-  element?: React.FC;
-  children?: RouteItem[];
-}
-
-/**
- * 递归处理路由，拼接完整路径，并存入 Map
- * @param routes 路由数组
- * @param parentPath 父级路径
- * @param routeMap 存储完整路径到 meta 的映射
- */
-export const generateRouteMap = (
-  routes: RouteItem[],
-  parentPath = '',
-  routeMap = new Map<string, RouteMeta>(),
-) => {
-  routes.forEach((route) => {
-    const fullPath = `/${joinPath(parentPath, route.path)}` // 确保路径以 `/` 开头
-
-    if (route.meta) {
-      routeMap.set(fullPath, route.meta)
-    }
-
-    if (route.children) {
-      generateRouteMap(route.children, fullPath, routeMap)
-    }
-  })
-
-  return routeMap
-}
-
-export const routeMap = generateRouteMap(Routers)

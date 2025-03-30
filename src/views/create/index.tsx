@@ -1,12 +1,12 @@
 import { EditorMarkdown } from './components/editor-markdown.tsx'
 import Header from './components/header'
 import { useRef } from 'react'
-import { createUserArticle } from '@/api/article.api.ts'
+import { ArticleItem, createUserArticle, updateUserArticle } from '@/api/article.api.ts'
 import useUserStore from '@/stores/userStore.ts'
 import { toast as Toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
 
-export default function() {
+export default function({ info }: { info?: ArticleItem } = { info: undefined }) {
   const mdEditorRef = useRef<{ getValue: () => string | undefined }>(null)
   const { user } = useUserStore()
   const navigate = useNavigate()
@@ -19,23 +19,37 @@ export default function() {
       })
       return
     }
+    // 如果存在info表示编辑修改
     if (mdEditorRef.current) {
       if (!user) return
-      createUserArticle(user.id, {
-        title: formState.title,
-        content: mdEditorRef.current.getValue() || '',
-        tags: formState.tags,
-        readme: formState.readme,
-        banner: formState.banner,
-      }).then(() => {
-        navigate('/posts')
-      })
+      if (info) {
+        updateUserArticle(user.id, {
+          title: formState.title,
+          content: mdEditorRef.current.getValue() || '',
+          tags: formState.tags,
+          readme: formState.readme,
+          banner: formState.banner,
+          articleId: info.id,
+        }).then(() => {
+          navigate(-1)
+        })
+      } else {
+        createUserArticle(user.id, {
+          title: formState.title,
+          content: mdEditorRef.current.getValue() || '',
+          tags: formState.tags,
+          readme: formState.readme,
+          banner: formState.banner,
+        }).then(() => {
+          navigate('/posts')
+        })
+      }
     }
   }
   return <div className={'w-screen h-screen'}>
-    <Header submit={onSubmit}></Header>
+    <Header defaultInfo={info} submit={onSubmit}></Header>
     <div className={'h-[calc(100vh-72px)]'}>
-      <EditorMarkdown ref={mdEditorRef}></EditorMarkdown>
+      <EditorMarkdown defaultInfo={info} ref={mdEditorRef}></EditorMarkdown>
     </div>
   </div>
 }
