@@ -11,6 +11,21 @@ import { ArticleStatusText } from '@/constant/article-status.enum.ts'
 import { TracingBeam } from '@/components/ui/tracing-beam'
 import MDEditor from '@uiw/react-md-editor'
 import useThemeStore from '@/stores/themeStore.ts'
+import {
+  HeartIcon,
+  HeartFilledIcon,
+  StarIcon,
+  StarFilledIcon,
+  EyeOpenIcon,
+  PlusIcon,
+  Cross2Icon,
+} from '@radix-ui/react-icons'
+import {
+  getArticlesUserInteraction,
+  toggleArticlesUserFavorite,
+  toggleArticlesUserFollow,
+  toggleArticlesUserLike,
+} from '@/api/article-user.api.ts'
 
 export default function() {
   const [params] = useSearchParams() // 直接用
@@ -23,6 +38,18 @@ export default function() {
   const [status, setStatus] = useState()
   const navigate = useNavigate()
   const [likeCount, setLikeCount] = useState<number>(0)
+  const [favoritesCount, setFavoritesCount] = useState<number>(0)
+  const [authorFollowersCount, setAuthorFollowersCount] = useState<number>(0)
+  const [viewsCount, setViewsCount] = useState<number>(0)
+  const [interaction, setInteraction] = useState<{
+    isFollowingAuthor: boolean;
+    isLiked: boolean;
+    isFavorited: boolean;
+  }>({
+    isFollowingAuthor: false,
+    isLiked: false,
+    isFavorited: false,
+  })
 
   useEffect(() => {
     if (!params.get('id')) {
@@ -40,6 +67,20 @@ export default function() {
       setTitle(data.title)
       setStatus(data.status)
       setLikeCount(data.likeCount)
+      setFavoritesCount(data.favoritesCount)
+      setAuthorFollowersCount(data.authorFollowersCount)
+      setViewsCount(data.viewCount)
+    })
+    if (!LoginUser) {
+      setInteraction({
+        isFollowingAuthor: false,
+        isLiked: false,
+        isFavorited: false,
+      })
+      return
+    }
+    getArticlesUserInteraction(params.get('id'), { userId: Number(LoginUser.id) }).then((data) => {
+      setInteraction(data)
     })
   }, [params])
 
@@ -47,10 +88,47 @@ export default function() {
     if (!user) return
     navigate('/user/posts?userId=' + user.id)
   }
+  const clickIsFollowingAuthor = async () => {
+    if (!LoginUser) return
+    if (!user) return
+    const result = await toggleArticlesUserFollow({
+      userId: LoginUser.id,
+      authorId: user.id,
+    })
+    setInteraction({
+      ...interaction,
+      isFollowingAuthor: result.result
+    })
+    setAuthorFollowersCount(authorFollowersCount + (result.result || -1));
+  }
+  const clickIsLiked = async () => {
+    if (!LoginUser) return
+    if (!params.get('id')) return
+    await toggleArticlesUserLike({
+      userId: LoginUser.id,
+      articleId: params.get('id'),
+    })
+    getArticlesUserInteraction(params.get('id'), { userId: Number(LoginUser.id) }).then((data) => {
+      setInteraction(data)
+    })
+  }
+
+  const clickIsFavorited = async () => {
+    if (!LoginUser) return
+    if (!params.get('id')) return
+    await toggleArticlesUserFavorite({
+      userId: LoginUser.id,
+      articleId: params.get('id'),
+    })
+    getArticlesUserInteraction(params.get('id'), { userId: Number(LoginUser.id) }).then((data) => {
+      setInteraction(data)
+    })
+  }
 
   return <Container>
     <div className={'relative'}>
-      <div className={'px-8 max-w-[88rem] w-full mx-auto pt-4 fixed bg-background left-[50%] z-999'} style={{'transform': 'translateX(-50%)'}}>
+      <div className={'px-8 max-w-[88rem] w-full mx-auto pt-4 fixed bg-background left-[50%] z-999'}
+           style={{ 'transform': 'translateX(-50%)' }}>
         <div className="space-y-1">
           <div className={'flex align-center'}>
             <Avatar className="w-14 h-14 object-cover cursor-pointer" onClick={goUserPage}>
@@ -63,22 +141,46 @@ export default function() {
             </div>
             <div className={'ml-auto my-auto pl-3'}>
               <div className="flex h-5 items-center space-x-4 text-sm">
-                <div className={'cursor-pointer whitespace-nowrap'}>粉丝</div>
                 {
-                  user?.id === LoginUser?.id ? null
-                    : <><Separator orientation="vertical" />
-                      <div className={'cursor-pointer  whitespace-nowrap'}>关注</div>
+                  user?.id === LoginUser?.id ?
+                    <div className={'cursor-pointer whitespace-nowrap'}>{authorFollowersCount}</div>
+                    : <>
+                      <div className={'cursor-pointer  whitespace-nowrap flex items-center'}
+                           onClick={clickIsFollowingAuthor}>
+                        <span className={'mr-1'}>{authorFollowersCount}</span>
+                        {
+                          interaction.isFollowingAuthor ? <Cross2Icon className={'text-primary'}></Cross2Icon> :
+                            <PlusIcon></PlusIcon>
+                        }
+                      </div>
                     </>
                 }
                 {
                   user ? <>
                       <Separator orientation="vertical" />
-                      <div className={'cursor-pointer  whitespace-nowrap'}>{likeCount}点赞</div>
+                      <div className={'cursor-pointer  whitespace-nowrap flex items-center'} onClick={clickIsLiked}>
+                        <span className={'mr-1'}>{likeCount}</span>
+                        {
+                          interaction.isLiked ? <HeartFilledIcon className={'text-primary'}></HeartFilledIcon> :
+                            <HeartIcon></HeartIcon>
+                        }
+                      </div>
                       <Separator orientation="vertical" />
-                      <div className={'cursor-pointer  whitespace-nowrap'}>收藏</div>
+                      <div className={'cursor-pointer  whitespace-nowrap flex items-center'} onClick={clickIsFavorited}>
+                        <span className={'mr-1'}>{favoritesCount}</span>
+                        {
+                          interaction.isFavorited ? <StarFilledIcon className={'text-primary'}></StarFilledIcon> :
+                            <StarIcon></StarIcon>
+                        }
+                      </div>
                     </>
                     : null
                 }
+                <Separator orientation="vertical" />
+                <div className={'cursor-pointer  whitespace-nowrap flex items-center'}>
+                  <span className={'mr-1'}>{viewsCount}</span>
+                  <EyeOpenIcon></EyeOpenIcon>
+                </div>
               </div>
             </div>
           </div>
