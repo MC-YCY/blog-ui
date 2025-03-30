@@ -60,7 +60,7 @@ export const Tabs = ({
             onClick={() => onActiveChange?.(tab)}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
-            className={cn("relative px-4 py-2 rounded-full", tabClassName)}
+            className={cn("relative px-4 py-2 rounded-full bg-background", tabClassName)}
             style={{ transformStyle: "preserve-3d" }}
           >
             {active.value === tab.value && (
