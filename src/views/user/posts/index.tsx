@@ -41,7 +41,7 @@ export default function() {
   const { user: LoginUser } = useUserStore()
   const onChange = (p: number) => {
     setCurrentPage(p)
-    getList(p)
+    getList(p, webType)
   }
   const isLoginUser = useMemo(() => {
     if (LoginUser && LoginUser.id) {
@@ -49,8 +49,8 @@ export default function() {
     } else {
       return false
     }
-  }, [])
-  const getList = (page: number) => {
+  }, [searchParams])
+  const getList = (page: number, tag: string) => {
     if (!searchParams.get('userId')) {
       toast('Tip', {
         description: '缺少用户id',
@@ -63,7 +63,7 @@ export default function() {
       page: page,
       limit: pageSize,
       title: '',
-      tag: webType.trim(),
+      tag: tag.trim(),
       isLoginUser: isLoginUser,
     }
     userArticleList(searchParams.get('userId'), params).then(res => {
@@ -72,8 +72,8 @@ export default function() {
     })
   }
   useEffect(() => {
-    getList(currentPage)
-  }, [webType, searchParams])
+    getList(currentPage, webType)
+  }, [searchParams])
   const goArticle = (item: { id: number }) => {
     navigate('/article?id=' + item.id)
   }
@@ -84,10 +84,15 @@ export default function() {
     if (!LoginUser) return
     await userDeleteArticle(LoginUser.id, { articleId: item.id })
     setCurrentPage(1)
-    getList(1)
+    getList(1, webType)
   }
   const viewItem = (item: { id: number }) => {
     navigate(`/article?id=${item.id}`)
+  }
+  const changeWebType = (value: string) => {
+    setWebType(value)
+    setCurrentPage(1)
+    getList(1, value)
   }
   return <div>
     <div className={'fixed bottom-10 flex justify-center w-full left-0 z-10'}>
@@ -99,7 +104,7 @@ export default function() {
       />
     </div>
     <div className={'flex justify-end'}>
-      <Select value={webType} defaultValue="All" onValueChange={(value) => setWebType(value)}>
+      <Select value={webType} defaultValue="All" onValueChange={(value) => changeWebType(value)}>
         <SelectTrigger className="w-[180px] bg-background text-foreground">
           <SelectValue placeholder="技术类型" />
         </SelectTrigger>
