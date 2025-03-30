@@ -49,7 +49,7 @@ export default function() {
   }
 
   return <div className={'pt-4'}>
-    <div className={'fixed bottom-10 flex justify-center w-full left-0 z-99'}>
+    <div className={'fixed bottom-10 flex justify-center w-full left-0 z-10'}>
       <SmartPagination
         current={currentPage}
         total={total}

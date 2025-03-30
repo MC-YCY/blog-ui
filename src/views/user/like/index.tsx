@@ -51,7 +51,7 @@ export default function() {
   }
 
   return <div>
-    <div className={'fixed bottom-10 flex justify-center w-full left-0 z-99'}>
+    <div className={'fixed bottom-10 flex justify-center w-full left-0 z-10'}>
       <SmartPagination
         current={currentPage}
         total={total}
@@ -64,7 +64,7 @@ export default function() {
         return <div className={'relative group'}>
           {
             LoginUser && <div
-              className="absolute inset-0 z-99 rounded-xl bg-[rgba(0,0,0,.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center space-x-2">
+              className="absolute inset-0 z-9 rounded-xl bg-[rgba(0,0,0,.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center space-x-2">
               <Button onClick={() => viewItem(item)}>
                 <EyeOpenIcon></EyeOpenIcon>
               </Button>

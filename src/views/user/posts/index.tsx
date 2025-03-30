@@ -41,6 +41,7 @@ export default function() {
   const { user: LoginUser } = useUserStore()
   const onChange = (p: number) => {
     setCurrentPage(p)
+    getList(p)
   }
   const isLoginUser = useMemo(() => {
     if (LoginUser && LoginUser.id) {
@@ -49,7 +50,7 @@ export default function() {
       return false
     }
   }, [])
-  const getList = () => {
+  const getList = (page: number) => {
     if (!searchParams.get('userId')) {
       toast('Tip', {
         description: '缺少用户id',
@@ -59,7 +60,7 @@ export default function() {
       return
     }
     let params: Record<string, any> = {
-      page: currentPage,
+      page: page,
       limit: pageSize,
       title: '',
       tag: webType.trim(),
@@ -71,8 +72,8 @@ export default function() {
     })
   }
   useEffect(() => {
-    getList()
-  }, [currentPage, webType, searchParams])
+    getList(currentPage)
+  }, [webType, searchParams])
   const goArticle = (item: { id: number }) => {
     navigate('/article?id=' + item.id)
   }
@@ -82,13 +83,14 @@ export default function() {
   const removeItem = async (item: { id: number }) => {
     if (!LoginUser) return
     await userDeleteArticle(LoginUser.id, { articleId: item.id })
-    getList()
+    setCurrentPage(1)
+    getList(1)
   }
   const viewItem = (item: { id: number }) => {
     navigate(`/article?id=${item.id}`)
   }
   return <div>
-    <div className={'fixed bottom-10 flex justify-center w-full left-0 z-99'}>
+    <div className={'fixed bottom-10 flex justify-center w-full left-0 z-10'}>
       <SmartPagination
         current={currentPage}
         total={total}
@@ -119,7 +121,7 @@ export default function() {
         return <div className={'relative group'}>
           {
             isLoginUser && <div
-              className="absolute inset-0 z-99 rounded-xl bg-[rgba(0,0,0,.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center space-x-2">
+              className="absolute inset-0 z-9 rounded-xl bg-[rgba(0,0,0,.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center space-x-2">
               <Button onClick={() => viewItem(item)}>
                 <EyeOpenIcon></EyeOpenIcon>
               </Button>

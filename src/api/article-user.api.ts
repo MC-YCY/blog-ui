@@ -15,3 +15,7 @@ export const toggleArticlesUserLike = (data: { userId: any, articleId: any }) =>
 export const toggleArticlesUserFavorite = (data: { userId: any, articleId: any }) => {
   return Post(`/blog/articles-user/favorite-article`, data)
 }
+//获取文章状态，作者粉丝，文章收藏数量，文章喜欢数量，文章浏览量
+export const getArticlesStats = (data: { articleId: any }) => {
+  return Post(`/blog/articles-user/stats-article`, data)
+}

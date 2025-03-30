@@ -21,6 +21,7 @@ import {
   Cross2Icon,
 } from '@radix-ui/react-icons'
 import {
+  getArticlesStats,
   getArticlesUserInteraction,
   toggleArticlesUserFavorite,
   toggleArticlesUserFollow,
@@ -51,6 +52,16 @@ export default function() {
     isFavorited: false,
   })
 
+  const getArticlesStatsFn = () => {
+    if (!params.get('id')) return
+    getArticlesStats({ articleId: params.get('id') }).then(data => {
+      setLikeCount(data.likesCount)
+      setFavoritesCount(data.favoritesCount)
+      setViewsCount(data.viewCount)
+      setAuthorFollowersCount(data.authorFollowers)
+    })
+  }
+
   useEffect(() => {
     if (!params.get('id')) {
       Toast('Tip', {
@@ -60,16 +71,13 @@ export default function() {
       })
       return
     }
+    getArticlesStatsFn();
     getArticle(params.get('id')).then((data) => {
       setUser(data.author)
       setContent(data.content)
       setTags(data.tags)
       setTitle(data.title)
       setStatus(data.status)
-      setLikeCount(data.likeCount)
-      setFavoritesCount(data.favoritesCount)
-      setAuthorFollowersCount(data.authorFollowersCount)
-      setViewsCount(data.viewCount)
     })
     if (!LoginUser) {
       setInteraction({
@@ -88,18 +96,28 @@ export default function() {
     if (!user) return
     navigate('/user/posts?userId=' + user.id)
   }
+  const updateStats = () =>{
+    if (!LoginUser) {
+      setInteraction({
+        isFollowingAuthor: false,
+        isLiked: false,
+        isFavorited: false,
+      })
+      return
+    }
+    getArticlesUserInteraction(params.get('id'), { userId: Number(LoginUser.id) }).then((data) => {
+      setInteraction(data)
+    })
+    getArticlesStatsFn();
+  }
   const clickIsFollowingAuthor = async () => {
     if (!LoginUser) return
     if (!user) return
-    const result = await toggleArticlesUserFollow({
+    await toggleArticlesUserFollow({
       userId: LoginUser.id,
       authorId: user.id,
     })
-    setInteraction({
-      ...interaction,
-      isFollowingAuthor: result.result
-    })
-    setAuthorFollowersCount(authorFollowersCount + (result.result || -1));
+    updateStats();
   }
   const clickIsLiked = async () => {
     if (!LoginUser) return
@@ -108,9 +126,7 @@ export default function() {
       userId: LoginUser.id,
       articleId: params.get('id'),
     })
-    getArticlesUserInteraction(params.get('id'), { userId: Number(LoginUser.id) }).then((data) => {
-      setInteraction(data)
-    })
+    updateStats();
   }
 
   const clickIsFavorited = async () => {
@@ -120,9 +136,7 @@ export default function() {
       userId: LoginUser.id,
       articleId: params.get('id'),
     })
-    getArticlesUserInteraction(params.get('id'), { userId: Number(LoginUser.id) }).then((data) => {
-      setInteraction(data)
-    })
+    updateStats();
   }
 
   return <Container>
@@ -143,11 +157,11 @@ export default function() {
               <div className="flex h-5 items-center space-x-4 text-sm">
                 {
                   user?.id === LoginUser?.id ?
-                    <div className={'cursor-pointer whitespace-nowrap'}>{authorFollowersCount}</div>
+                    <div className={'cursor-pointer whitespace-nowrap'}>粉丝{authorFollowersCount}</div>
                     : <>
                       <div className={'cursor-pointer  whitespace-nowrap flex items-center'}
                            onClick={clickIsFollowingAuthor}>
-                        <span className={'mr-1'}>{authorFollowersCount}</span>
+                        <span className={'mr-1'}>粉丝{authorFollowersCount}</span>
                         {
                           interaction.isFollowingAuthor ? <Cross2Icon className={'text-primary'}></Cross2Icon> :
                             <PlusIcon></PlusIcon>
@@ -179,7 +193,7 @@ export default function() {
                 <Separator orientation="vertical" />
                 <div className={'cursor-pointer  whitespace-nowrap flex items-center'}>
                   <span className={'mr-1'}>{viewsCount}</span>
-                  <EyeOpenIcon></EyeOpenIcon>
+                  <EyeOpenIcon className={'text-primary'}></EyeOpenIcon>
                 </div>
               </div>
             </div>
