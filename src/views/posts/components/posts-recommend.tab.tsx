@@ -23,13 +23,14 @@ export default function() {
   const navigate = useNavigate()
   const onChange = (p: number) => {
     setCurrentPage(p)
+    getList(p, webType)
   }
-  const getList = () => {
+  const getList = (page: number, tag: string) => {
     let params = {
-      page: currentPage,
+      page: page,
       limit: pageSize,
       title: '',
-      tag: webType.trim(),
+      tag: tag.trim(),
     }
     allArticlesList(params).then(res => {
       setList(res.items)
@@ -37,13 +38,17 @@ export default function() {
     })
   }
   useEffect(() => {
-    getList()
-  }, [currentPage, webType])
+    getList(currentPage, webType)
+  }, [])
 
   const goArticle = (item: { id: number }) => {
     navigate('/article?id=' + item.id)
   }
-
+  const changeSelect = (value: string) => {
+    setWebType(value)
+    setCurrentPage(1)
+    getList(1, value)
+  }
   return <div>
     <div className={'fixed bottom-10 flex justify-center w-full left-0 z-999'}>
       <SmartPagination
@@ -54,7 +59,7 @@ export default function() {
       />
     </div>
     <div className={'flex justify-end'}>
-      <Select value={webType} defaultValue="All" onValueChange={(value) => setWebType(value)}>
+      <Select value={webType} defaultValue="All" onValueChange={(value) => changeSelect(value)}>
         <SelectTrigger className="w-[180px] bg-background text-foreground">
           <SelectValue placeholder="技术类型" />
         </SelectTrigger>
