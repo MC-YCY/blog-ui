@@ -26,6 +26,10 @@ const docsMenu = [
         href:'/user/follow'
       },
       {
+        title:'粉丝',
+        href:'/user/follower'
+      },
+      {
         title:'消息',
         href:'/user/message'
       }

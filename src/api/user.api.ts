@@ -36,3 +36,10 @@ export const getUserFavorites = (userId: string | number | null, data: {
 }) => {
   return Post(`/blog/users/favorite/${userId}`, data)
 }
+
+export const getUserFollowers = (userId: string | number | null, data: {
+  page: number,
+  limit: number
+}) => {
+  return Post(`/blog/users/followers/${userId}`, data)
+}
