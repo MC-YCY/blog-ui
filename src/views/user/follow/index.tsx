@@ -4,7 +4,7 @@ import { Separator } from '@/components/ui/separator.tsx'
 import { useEffect, useState } from 'react'
 import { getUserFollows } from '@/api/user.api.ts'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { User } from '@/stores/userStore.ts'
+import useUserStore, { User } from '@/stores/userStore.ts'
 import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
 import { toggleArticlesUserFollow } from '@/api/article-user.api.ts'
 
@@ -12,6 +12,7 @@ export default function() {
   const [searchParams] = useSearchParams() // 直接用
   const [userList, setUserList] = useState<User[]>([])
   const navigate = useNavigate()
+  const { user: LoginUser } = useUserStore()
 
   const getList = (page: number) => {
     if (!searchParams.get('userId')) return
@@ -25,16 +26,16 @@ export default function() {
   }
 
   useEffect(() => {
-    getList(1);
+    getList(1)
   }, [searchParams])
 
-  const goUserPage = (user: User) =>{
+  const goUserPage = (user: User) => {
     navigate(`/user/posts?userId=${user.id}`)
   }
 
-  const clickQx = async (user: User) =>{
-    let param ={ userId: searchParams.get('userId'), authorId: user.id }
-    await toggleArticlesUserFollow(param);
+  const clickQx = async (user: User) => {
+    let param = { userId: searchParams.get('userId'), authorId: user.id }
+    await toggleArticlesUserFollow(param)
     setCurrentPage(1)
     getList(1)
   }
@@ -58,26 +59,29 @@ export default function() {
     </div>
     {
       userList.map((user) => {
-        return  <div key={user.id} className={'w-full'}>
-            <div className="space-y-1">
-              <div className={'flex align-center'}>
-                <Avatar className="w-14 h-14 object-cover cursor-pointer" onClick={()=>goUserPage(user)}>
-                  <AvatarImage src={user?.avatar ? user?.avatar : UserIcon} />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <div className={'my-auto mx-0 ml-4'}>
-                  <h4 className="text-sm leading-none font-bold">{user?.username}</h4>
-                  <p className="text-sm text-muted-foreground mt-1">{user?.signature || '知其然不知其所以然'}</p>
-                </div>
-                <div className={'ml-auto my-auto pl-3'}>
-                  <div className="flex h-5 items-center space-x-4 text-sm">
-                    <div className={'cursor-pointer  whitespace-nowrap'} onClick={()=>clickQx(user)}>取消关注</div>
-                  </div>
+        return <div key={user.id} className={'w-full'}>
+          <div className="space-y-1">
+            <div className={'flex align-center'}>
+              <Avatar className="w-14 h-14 object-cover cursor-pointer" onClick={() => goUserPage(user)}>
+                <AvatarImage src={user?.avatar ? user?.avatar : UserIcon} />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <div className={'my-auto mx-0 ml-4'}>
+                <h4 className="text-sm leading-none font-bold">{user?.username}</h4>
+                <p className="text-sm text-muted-foreground mt-1">{user?.signature || '知其然不知其所以然'}</p>
+              </div>
+              <div className={'ml-auto my-auto pl-3'}>
+                <div className="flex h-5 items-center space-x-4 text-sm">
+                  {
+                    LoginUser &&
+                    <div className={'cursor-pointer  whitespace-nowrap'} onClick={() => clickQx(user)}>取消关注</div>
+                  }
                 </div>
               </div>
             </div>
-            <Separator className="mt-1" />
           </div>
+          <Separator className="mt-1" />
+        </div>
       })
     }
   </div>
