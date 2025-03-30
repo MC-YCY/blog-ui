@@ -7,21 +7,22 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar.tsx'
 import UserIcon from '@/assets/images/user.png'
 import { Separator } from '@/components/ui/separator.tsx'
 import useUserStore, { User } from '@/stores/userStore.ts'
-import remarkGfm from 'remark-gfm'
-import ReactMarkdown from 'react-markdown'
 import { ArticleStatusText } from '@/constant/article-status.enum.ts'
 import { TracingBeam } from '@/components/ui/tracing-beam'
+import MDEditor from '@uiw/react-md-editor'
+import useThemeStore from '@/stores/themeStore.ts'
 
 export default function() {
   const [params] = useSearchParams() // 直接用
   const [user, setUser] = useState<User>()
   const { user: LoginUser } = useUserStore()
+  const { theme } = useThemeStore()
   const [title, setTitle] = useState('')
   const [tags, setTags] = useState<string[]>([])
   const [content, setContent] = useState('')
   const [status, setStatus] = useState()
   const navigate = useNavigate()
-  const [likeCount,setLikeCount] = useState<number>(0)
+  const [likeCount, setLikeCount] = useState<number>(0)
 
   useEffect(() => {
     if (!params.get('id')) {
@@ -48,8 +49,8 @@ export default function() {
   }
 
   return <Container>
-    <div>
-      <div className={'w-full pt-4'}>
+    <div className={'relative'}>
+      <div className={'px-8 max-w-[88rem] w-full mx-auto pt-4 fixed bg-background left-[50%] z-999'} style={{'transform': 'translateX(-50%)'}}>
         <div className="space-y-1">
           <div className={'flex align-center'}>
             <Avatar className="w-14 h-14 object-cover cursor-pointer" onClick={goUserPage}>
@@ -85,35 +86,37 @@ export default function() {
         <Separator className="my-4" />
       </div>
 
-      <TracingBeam>
-        <div className="gap-4 mb-8">
-          {/* 标题部分 */}
-          <h1 className="text-3xl font-bold tracking-tight lg:text-4xl text-primary">
-            {title}
-          </h1>
-          <div className={'flex mt-2 cursor-pointer'}>
-            {/* 标签部分 */}
-            <div className="flex flex-wrap gap-2">
-              {tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex h-[30px] items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 transition-colors hover:bg-primary/20"
-                >
+      <div className={'pt-[120px]'}>
+        <TracingBeam>
+          <div className="gap-4 mb-8">
+            {/* 标题部分 */}
+            <h1 className="text-3xl font-bold tracking-tight lg:text-4xl text-primary">
+              {title}
+            </h1>
+            <div className={'flex mt-2 cursor-pointer'}>
+              {/* 标签部分 */}
+              <div className="flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex h-[30px] items-center rounded-full bg-primary/10 px-3 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 transition-colors hover:bg-primary/20"
+                  >
               #{tag}
             </span>
-              ))}
-            </div>
-            <span
-              className="inline-flex h-[30px] items-center rounded-full px-3 py-1 text-sm font-medium text-primary"
-            >
+                ))}
+              </div>
+              <span
+                className="inline-flex h-[30px] items-center rounded-full px-3 py-1 text-sm font-medium text-primary"
+              >
               {status && ArticleStatusText[status]}
             </span>
+            </div>
           </div>
-        </div>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {content}
-        </ReactMarkdown>
-      </TracingBeam>
+          <MDEditor className={'md-editor-preview'} data-color-mode={theme as 'light' | 'dark'} value={content}
+                    preview={'preview'}
+                    hideToolbar={true} />
+        </TracingBeam>
+      </div>
     </div>
   </Container>
 }

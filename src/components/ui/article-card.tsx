@@ -48,9 +48,7 @@ export const ArticleCard = ({
     <motion.article
       onClick={onClick}
       className={cn(
-        'group relative overflow-hidden rounded-xl bg-white shadow-md border border-gray-200 transition-all backdrop-blur-sm',
-        'dark:bg-gray-800 dark:border-gray-700 dark:shadow-md dark:hover:shadow-lg',
-        'hover:shadow-lg hover:shadow-gray-700 hover:border-gray-400',
+        'group relative overflow-hidden rounded-xl bg-background shadow-md border transition-all backdrop-blur-sm',
         className,
       )}
     >
@@ -90,7 +88,7 @@ export const ArticleCard = ({
           </div>
 
           <h3
-            className="mb-3 text-xl font-bold text-gray-800 transition-colors dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400">
+            className="mb-3 text-xl font-bold  transition-colors text-primary">
             {title}
           </h3>
 

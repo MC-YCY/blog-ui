@@ -505,7 +505,7 @@
 }
 
 body{
-  position: relative;
+  /*position: relative;*/
 }
 .no-visible-scrollbar {
   scrollbar-width: none;
@@ -523,7 +523,24 @@ body{
   z-index: 0;
 }
 .root-routes{
-  position: absolute;
+  /*position: absolute;*/
   width: 100%;
   z-index: 40;
+}
+.md-editor-preview{
+  position: initial !important;
+  height: auto !important;
+  box-shadow: none !important;
+}
+.md-editor-preview .w-md-editor-content{
+  position: initial !important;
+  border: none !important;
+}
+.md-editor-preview .w-md-editor-preview{
+  position: initial !important;
+  padding: 0 !important;
+  border: none !important;
+}
+.md-editor-preview .w-md-editor-bar{
+  display: none !important;
 }
