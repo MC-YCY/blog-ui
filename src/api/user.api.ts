@@ -22,3 +22,17 @@ export const getUserFollows = (userId: string | number | null, data: {
 }) => {
   return Post(`/blog/users/following/${userId}`, data)
 }
+
+export const getUserLikes = (userId: string | number | null, data: {
+  page: number,
+  limit: number
+}) => {
+  return Post(`/blog/users/liked/${userId}`, data)
+}
+
+export const getUserFavorites = (userId: string | number | null, data: {
+  page: number,
+  limit: number
+}) => {
+  return Post(`/blog/users/favorite/${userId}`, data)
+}
