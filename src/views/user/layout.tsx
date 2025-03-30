@@ -22,6 +22,10 @@ const docsMenu = [
         href:'/user/collect'
       },
       {
+        title:'关注',
+        href:'/user/follow'
+      },
+      {
         title:'消息',
         href:'/user/message'
       }

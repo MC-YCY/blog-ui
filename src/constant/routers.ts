@@ -13,6 +13,7 @@ const UserLayout = lazy(() => import('@/views/user/layout'))
 const UserPosts = lazy(() => import('@/views/user/posts/index'))
 const UserLike = lazy(() => import('@/views/user/like/index'))
 const UserCollect = lazy(() => import('@/views/user/collect/index'))
+const UserFollow = lazy(() => import('@/views/user/follow/index'))
 const UserMessage = lazy(() => import('@/views/user/message/index.tsx'))
 const Create = lazy(() => import('@/views/create/index'))
 const Article = lazy(() => import('@/views/article/index'))
@@ -84,6 +85,11 @@ export const Routers: MetaRouteObject[] = [
             path: 'collect',
             meta: { title: '收藏' },
             element: UserCollect,
+          },
+          {
+            path: 'follow',
+            meta: { title: '关注' },
+            element: UserFollow,
           },
           {
             path: 'message',

@@ -35,7 +35,7 @@ export default function() {
   const [list, setList] = useState([])
   const [total, setTotal] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [pageSize, _setPageSize] = useState<number>(10)
+  const [pageSize, _setPageSize] = useState<number>(5)
   const [webType, setWebType] = useState<string>(' ')
   const navigate = useNavigate()
   const { user: LoginUser } = useUserStore()
@@ -88,7 +88,7 @@ export default function() {
     navigate(`/article?id=${item.id}`)
   }
   return <div>
-    <div className={'fixed bottom-10 flex justify-center w-full left-0'}>
+    <div className={'fixed bottom-10 flex justify-center w-full left-0 z-99'}>
       <SmartPagination
         current={currentPage}
         total={total}
