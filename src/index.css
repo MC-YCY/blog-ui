@@ -544,3 +544,6 @@ body{
 .md-editor-preview .w-md-editor-bar{
   display: none !important;
 }
+.xt-root{
+  overflow: hidden;
+}

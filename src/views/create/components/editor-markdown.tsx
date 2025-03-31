@@ -1,21 +1,16 @@
 import MDEditor from '@uiw/react-md-editor'
-import { forwardRef, useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import useThemeStore from '@/stores/themeStore.ts'
 import { ArticleItem } from '@/api/article.api.ts'
 
 export const EditorMarkdown = forwardRef((props: { defaultInfo?: ArticleItem }, ref) => {
   const { theme } = useThemeStore()
   const [value, setValue] = useState<string | undefined>('**Hello world!!!**')
-  const editorContainer = useRef<HTMLDivElement>(null)
-  const [editorHeight, setEditorHeight] = useState<number>(300)
-  useLayoutEffect(() => {
-    setEditorHeight(editorContainer.current && editorContainer.current.clientHeight || 300)
-    window.onresize = () => {
-      setEditorHeight(editorContainer.current && editorContainer.current.clientHeight || 300)
-    }
+  useEffect(() => {
+    document.documentElement.classList.add('xt-root')
     return () => {
-      window.onresize = () => {
-      }
+      document.documentElement.classList.remove('xt-root')
+      document.documentElement.style.height='auto'
     }
   }, [])
   useEffect(() => {
@@ -34,7 +29,7 @@ export const EditorMarkdown = forwardRef((props: { defaultInfo?: ArticleItem }, 
       },
     }
   })
-  return <div className={'h-full'} ref={editorContainer}>
-    <MDEditor height={editorHeight} data-color-mode={theme as 'light' | 'dark'} value={value} onChange={setValue} />
+  return <div className={'h-full'}>
+    <MDEditor height='100%' data-color-mode={theme as 'light' | 'dark'} value={value} onChange={setValue} />
   </div>
 })
