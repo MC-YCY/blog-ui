@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { io, Socket } from 'socket.io-client'
 import { BellIcon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
@@ -15,9 +15,8 @@ interface AppNotification {
 }
 
 export default function NotificationBell() {
-  const { user, setUserUnreadCount } = useUserStore()
+  const { user, setUserUnreadCount, unreadCount, addUserUnreadCount } = useUserStore()
   const navigate = useNavigate()
-  const [unreadCount, setUnreadCount] = useState(0)
   const socketRef = useRef<Socket | null>(null)
 
   const handleNavigate = () => {
@@ -29,8 +28,8 @@ export default function NotificationBell() {
     if (!user?.id) return
 
     // 初始化 Socket 连接
-    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-    const wsUrl = `${protocol}://${window.location.host}`;
+    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
+    const wsUrl = `${protocol}://${window.location.host}`
     socketRef.current = io(wsUrl, {
       path: '/ws', // 与后端 path 配置一致
       query: { userId: user.id.toString() }, // 必须字符串类型
@@ -46,21 +45,18 @@ export default function NotificationBell() {
       // 获取初始未读数量（需要后端实现对应接口）
       socketRef.current?.emit('get-unread-count')
       socketRef?.current?.on('unread-count', (count: number) => {
-        setUnreadCount(count)
         setUserUnreadCount(count)
       })
     })
 
     socketRef.current.on('updated-unread-count', (count: number) => {
-      setUnreadCount(count);
       setUserUnreadCount(count)
-    });
+    })
 
     // 接收新通知
     socketRef.current.on('new-notification', (notification: AppNotification) => {
       console.log(notification)
-      setUnreadCount(prev => prev + 1)
-      setUserUnreadCount(unreadCount + 1)
+      addUserUnreadCount()
     })
 
     // 连接错误处理

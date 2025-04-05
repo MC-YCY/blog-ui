@@ -61,6 +61,7 @@ export type UserState = {
   setButtons: (buttons: ButtonsType[]) => void
   setMenus: (menus: MenusType[]) => void
   setUserUnreadCount: (unreadCount: number) => void
+  addUserUnreadCount: () => void
 }
 
 // 初始状态
@@ -105,6 +106,10 @@ const useUserStore = create<UserState>()(
       setButtons: (buttons: ButtonsType[]) => set({ buttons }),
       setMenus: (menus: MenusType[]) => set({ menus }),
       setUserUnreadCount: ((unreadCount: number) => set({ unreadCount })),
+      addUserUnreadCount: (() => {
+        const currentState = get()
+        return set({ unreadCount: currentState.unreadCount+1 })
+      }),
     }),
     {
       name: 'user-storage',
