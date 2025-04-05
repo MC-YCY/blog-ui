@@ -1,5 +1,5 @@
 import { JSX } from 'react'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import UserInfo from './components/user-info/user-info.tsx'
 import Container from '@/components/container.tsx'
 import { TooltipContentItem } from '@/components/ui/tooltip.tsx'
@@ -40,6 +40,8 @@ const renderMenu = (): JSX.Element =>{
   const location = useLocation(); // 直接用
   const navigate = useNavigate();
   const {user} = useUserStore();
+  const [searchParams] = useSearchParams() // 直接用
+
   // ，不需要 useState
   const goRoute = (path: string) =>{
     navigate(path+location.search)
@@ -60,6 +62,9 @@ const renderMenu = (): JSX.Element =>{
                     }
                     if(item.href === '/user/message' && !user){
                       return null;
+                    }
+                    if(item.href === '/user/message' && user?.id != searchParams.get('userId')){
+                      return null
                     }
                     return <TooltipContentItem onClick={()=>goRoute(item.href)} key={item.href} className={activeClass}>{item.title}</TooltipContentItem>
                   })}

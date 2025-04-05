@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select.tsx'
 import { ArticleTags } from '@/constant/article-tags.ts'
+import { ReadTime } from '@/utils/read-time'
 
 export default function() {
   const [list, setList] = useState([])
@@ -86,8 +87,8 @@ export default function() {
           tags={item.tags}
           imageUrl={item.banner}
           className="mb-6 mt-[30px]"
-          readTime={'1分钟'}
-          views={'1k'}
+          readTime={ReadTime(item.content)}
+          views={item.viewCount+''}
           onClick={() => {
             goArticle(item)
           }}

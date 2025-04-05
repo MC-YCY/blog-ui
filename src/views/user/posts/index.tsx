@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { ArticleItem, userArticleList, userDeleteArticle } from '@/api/article.api.ts'
 import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { ArticleStatusText } from '@/constant/article-status.enum.ts'
+import { ArticleStatusText } from '@/types/enums/article-status.enum.ts'
 import {
   Select,
   SelectContent,
@@ -29,6 +29,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
+import { ReadTime } from '@/utils/read-time.ts'
 
 export default function() {
   const [searchParams] = useSearchParams() // 直接用
@@ -123,7 +124,7 @@ export default function() {
     </div>
     {
       list.map((item: ArticleItem) => {
-        return <div className={'relative group'}>
+        return <div key={item.id} className={'relative group'}>
           {
             isLoginUser && <div
               className="absolute inset-0 z-9 rounded-xl bg-[rgba(0,0,0,.3)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center space-x-2">
@@ -153,15 +154,14 @@ export default function() {
             </div>
           }
           <ArticleCard
-            key={item.id}
             title={item.title}
             excerpt={item.readme}
             date={item.createdAt}
             tags={item.tags}
             imageUrl={item.banner}
             className="mb-6 mt-[30px]"
-            readTime={'1分钟'}
-            views={'1k'}
+            readTime={ReadTime(item.content)}
+            views={item.viewCount+''}
             onClick={() => {
               goArticle(item)
             }}

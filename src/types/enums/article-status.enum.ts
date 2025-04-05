@@ -11,3 +11,15 @@ export enum ArticleStatusText {
   pending_review = '待审核',
   rejected = '已驳回',
 }
+
+export enum NotificationType {
+  FOLLOW = 'FOLLOW',
+  LIKE = 'LIKE',
+  FAVORITE = 'FAVORITE',
+}
+
+export enum NotificationTypeText {
+  FOLLOW = '关注',
+  LIKE = '喜欢',
+  FAVORITE = '收藏',
+}

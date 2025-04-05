@@ -1,11 +1,5 @@
 import { Get, Del, Post, Put } from '@/utils/request.ts'
-
-export enum ArticleStatus {
-  DRAFT = 'draft', // 草稿
-  PUBLISHED = 'published', // 已发布
-  PENDING_REVIEW = 'pending_review', // 待审核
-  REJECTED = 'rejected', // 已驳回
-}
+import { ArticleStatus } from '@/types/enums/article-status.enum.ts'
 
 export interface CreateArticleDto {
   readonly title: string;
@@ -34,6 +28,7 @@ export interface ArticleItem {
   banner: string;
   id: number;
   createdAt: string
+  viewCount:number
 }
 
 export const createUserArticle = (userId: string | number, data: CreateArticleDto) => {

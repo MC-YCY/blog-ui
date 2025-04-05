@@ -8,7 +8,8 @@ import { ArticleItem } from '@/api/article.api.ts'
 import { Button } from '@/components/ui/button.tsx'
 import { Cross1Icon, EyeOpenIcon } from '@radix-ui/react-icons'
 import { ArticleCard } from '@/components/ui/article-card.tsx'
-import { ArticleStatusText } from '@/constant/article-status.enum.ts'
+import { ArticleStatusText } from '@/types/enums/article-status.enum.ts'
+import { ReadTime } from '@/utils/read-time.ts'
 
 export default function() {
   const [searchParams] = useSearchParams() // 直接用
@@ -81,8 +82,8 @@ export default function() {
             tags={item.tags}
             imageUrl={item.banner}
             className="mb-6 mt-[30px]"
-            readTime={'1分钟'}
-            views={'1k'}
+            readTime={ReadTime(item.content)}
+            views={item.viewCount+''}
             onClick={() => {
               goArticle(item)
             }}

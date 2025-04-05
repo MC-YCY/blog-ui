@@ -49,6 +49,7 @@ export interface MenusType {
 
 export type UserState = {
   user: User | null
+  unreadCount: number,
   buttons: ButtonsType[]
   menus: MenusType[]
   tokens: AuthTokens | null
@@ -59,15 +60,17 @@ export type UserState = {
   updateTokens: (tokens: AuthTokens) => void
   setButtons: (buttons: ButtonsType[]) => void
   setMenus: (menus: MenusType[]) => void
+  setUserUnreadCount: (unreadCount: number) => void
 }
 
 // 初始状态
 const initialState = {
   user: null,
+  unreadCount: 0,
   tokens: null,
   isLoggedIn: false,
   menus: [],
-  buttons:[]
+  buttons: [],
 }
 
 const useUserStore = create<UserState>()(
@@ -78,11 +81,11 @@ const useUserStore = create<UserState>()(
       login: (user, tokens) => set({
         user,
         tokens,
-        isLoggedIn: true
+        isLoggedIn: true,
       }),
 
       logout: async () => {
-        const currentState = get();
+        const currentState = get()
         if (currentState.user?.id) {
           try {
             await logoutApi({ userId: currentState.user.id })
@@ -94,28 +97,29 @@ const useUserStore = create<UserState>()(
       },
 
       updateUser: (partialUser) => set((state) => ({
-        user: state.user ? { ...state.user, ...partialUser } : null
+        user: state.user ? { ...state.user, ...partialUser } : null,
       })),
 
       updateTokens: (tokens) => set({ tokens }),
 
       setButtons: (buttons: ButtonsType[]) => set({ buttons }),
       setMenus: (menus: MenusType[]) => set({ menus }),
+      setUserUnreadCount: ((unreadCount: number) => set({ unreadCount })),
     }),
     {
       name: 'user-storage',
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         user: state.user,
-        tokens: state.tokens
+        tokens: state.tokens,
       }),
       onRehydrateStorage: () => (state) => {
         if (state) {
           state.isLoggedIn = !!state.user && !!state.tokens
         }
-      }
-    }
-  )
+      },
+    },
+  ),
 )
 
 export default useUserStore
