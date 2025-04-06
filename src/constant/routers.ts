@@ -5,6 +5,7 @@ import RootLayout from '@/views/layout/index'
 const Home = lazy(() => import('@/views/home/index.tsx'))
 const Resume = lazy(() => import('@/views/resume/index.tsx'))
 const Posts = lazy(() => import('@/views/posts/index.tsx'))
+const CodeSegment = lazy(() => import('@/views/code-segment/index.tsx'))
 const Login = lazy(() => import('@/views/auth/login/index.tsx'))
 const DocsLayout = lazy(() => import('@/views/docs/layout.tsx'))
 const SaCalendarReact = lazy(() => import('@/views/docs/sa-calendar-react.tsx'))
@@ -46,6 +47,11 @@ export const Routers: MetaRouteObject[] = [
         path: 'posts',
         meta: { title: '文章', screen: true },
         element: Posts,
+      },
+      {
+        path: 'code-segment',
+        meta: { title: '代码段', screen: true },
+        element: CodeSegment,
       },
       {
         path: 'resume',
