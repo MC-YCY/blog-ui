@@ -46,7 +46,7 @@ export default function() {
         defaultValue="css"
         value={tabValue}
         onValueChange={setTabValue}
-        className={' z-[150] sticky top-[64px]'}
+        className={' z-[40] sticky top-[64px] py-1 px-1 bg-background'}
       >
         <TabsList className="grid grid-cols-4">
           {
