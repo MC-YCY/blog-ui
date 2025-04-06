@@ -4,12 +4,12 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import useUserStore from '@/stores/userStore.ts'
 import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
 import { toggleArticlesUserFavorite } from '@/api/article-user.api.ts'
-import { ArticleItem } from '@/api/article.api.ts'
 import { Button } from '@/components/ui/button.tsx'
 import { Cross1Icon, EyeOpenIcon } from '@radix-ui/react-icons'
 import { ArticleCard } from '@/components/ui/article-card.tsx'
 import { ArticleStatusText } from '@/types/enums/article-status.enum.ts'
 import { ReadTime } from '@/utils/read-time.ts'
+import { ArticleItem } from '@/types/article'
 
 export default function() {
   const [searchParams] = useSearchParams() // 直接用

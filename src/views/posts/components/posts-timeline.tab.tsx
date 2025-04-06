@@ -1,8 +1,9 @@
 import { Timeline } from '@/components/ui/timeline'
 import { useEffect, useState } from 'react'
-import { ArticleItem, getTimelineArticles } from '@/api/article.api.ts'
+import { getTimelineArticles } from '@/api/article.api.ts'
 import dayjs from 'dayjs'
 import { useNavigate } from 'react-router-dom'
+import { ArticleItem } from '@/types/article'
 
 export default function ResumeTimeline() {
   const [list, setList] = useState<{ date: string; posts: ArticleItem[] }[]>([])

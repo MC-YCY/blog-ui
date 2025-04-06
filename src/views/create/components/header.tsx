@@ -3,7 +3,7 @@ import ImageAssetsButton from './image-assets-modal.tsx'
 import ThemeButton from '@/views/layout/components/header/components/theme-button.tsx'
 import SubmitButton from './submit-button.tsx'
 import React, { useEffect, useState } from 'react'
-import { ArticleItem } from '@/api/article.api.ts'
+import { ArticleItem } from '@/types/article.ts'
 
 export default function({ submit, defaultInfo }: { submit: (formState: Record<string, any>) => void, defaultInfo?:ArticleItem }) {
   const [title,setTitle] = useState('');

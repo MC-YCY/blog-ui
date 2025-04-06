@@ -8,8 +8,8 @@ import { z } from 'zod'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/input.tsx'
-import { ArticleItem } from '@/api/article.api.ts'
 import { useEffect } from 'react'
+import { ArticleItem } from '@/types/article'
 
 export default function({ submit, defaultInfo }: {
   submit: (formState: Record<string, any>) => void,

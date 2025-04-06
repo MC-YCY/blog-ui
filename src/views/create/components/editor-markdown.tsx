@@ -1,7 +1,7 @@
 import MDEditor from '@uiw/react-md-editor'
 import { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import useThemeStore from '@/stores/themeStore.ts'
-import { ArticleItem } from '@/api/article.api.ts'
+import { ArticleItem } from '@/types/article'
 
 export const EditorMarkdown = forwardRef((props: { defaultInfo?: ArticleItem }, ref) => {
   const { theme } = useThemeStore()
