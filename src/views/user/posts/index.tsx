@@ -1,6 +1,6 @@
 import { ArticleCard } from '@/components/ui/article-card.tsx'
 import { useEffect, useMemo, useState } from 'react'
-import { ArticleItem, userArticleList, userDeleteArticle } from '@/api/article.api.ts'
+import { userArticleList, userDeleteArticle } from '@/api/article.api.ts'
 import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { ArticleStatusText } from '@/types/enums/article-status.enum.ts'
@@ -30,6 +30,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { ReadTime } from '@/utils/read-time.ts'
+import { ArticleItem } from '@/types/article.ts'
 
 export default function() {
   const [searchParams] = useSearchParams() // 直接用

@@ -1,35 +1,5 @@
 import { Get, Del, Post, Put } from '@/utils/request.ts'
-import { ArticleStatus } from '@/types/enums/article-status.enum.ts'
-
-export interface CreateArticleDto {
-  readonly title: string;
-  readonly content: string;
-  status?: ArticleStatus; // 允许创建时指定状态（默认DRAFT）
-  tags: string[];
-  readme: string;
-  banner: string;
-  articleId?: number;
-}
-
-export class PaginateArticleDto {
-  page?: number = 1
-  limit?: number = 10
-  status?: ArticleStatus // 增加状态过滤
-  tag?: string
-  title?: string
-}
-
-export interface ArticleItem {
-  title: string;
-  content: string;
-  status?: ArticleStatus; // 允许创建时指定状态（默认DRAFT）
-  tags: string[];
-  readme: string;
-  banner: string;
-  id: number;
-  createdAt: string
-  viewCount:number
-}
+import { CreateArticleDto, PaginateArticleDto } from '@/types/article.ts'
 
 export const createUserArticle = (userId: string | number, data: CreateArticleDto) => {
   return Post(`/blog/articles/${userId}`, data)

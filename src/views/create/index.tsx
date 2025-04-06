@@ -1,10 +1,11 @@
 import { EditorMarkdown } from './components/editor-markdown.tsx'
 import Header from './components/header'
 import { useRef } from 'react'
-import { ArticleItem, createUserArticle, updateUserArticle } from '@/api/article.api.ts'
+import { createUserArticle, updateUserArticle } from '@/api/article.api.ts'
 import useUserStore from '@/stores/userStore.ts'
 import { toast as Toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
+import { ArticleItem } from '@/types/article.ts'
 
 export default function({ info }: { info?: ArticleItem } = { info: undefined }) {
   const mdEditorRef = useRef<{ getValue: () => string | undefined }>(null)

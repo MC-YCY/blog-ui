@@ -1,6 +1,6 @@
 import { ArticleCard } from '@/components/ui/article-card.tsx'
 import { useEffect, useState } from 'react'
-import { allArticlesList, ArticleItem } from '@/api/article.api.ts'
+import { allArticlesList } from '@/api/article.api.ts'
 import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/select.tsx'
 import { ArticleTags } from '@/constant/article-tags.ts'
 import { ReadTime } from '@/utils/read-time'
+import { ArticleItem } from '@/types/article.ts'
 
 export default function() {
   const [list, setList] = useState([])

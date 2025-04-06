@@ -24,6 +24,7 @@ export interface MetaRouteObject {
   meta?: {
     title: string
     auth?: boolean
+    screen?: boolean
   }
   path: string
   element: React.LazyExoticComponent<() => JSX.Element> | (() => JSX.Element) // 支持两种类型
@@ -38,17 +39,17 @@ export const Routers: MetaRouteObject[] = [
     children: [
       {
         path: 'home',
-        meta: { title: '首页' },
+        meta: { title: '首页', screen: true },
         element: Home,
       },
       {
         path: 'posts',
-        meta: { title: '文章' },
+        meta: { title: '文章', screen: true },
         element: Posts,
       },
       {
         path: 'resume',
-        meta: { title: '简历' },
+        meta: { title: '简历', screen: true },
         element: Resume,
       },
       {
@@ -57,12 +58,12 @@ export const Routers: MetaRouteObject[] = [
         children: [
           {
             path: 'sa-calendar-react',
-            meta: { title: 'sa-calendar-react' },
+            meta: { title: 'sa-calendar-react', screen: true },
             element: SaCalendarReact,
           },
           {
             path: 'sa-calendar-vue3',
-            meta: { title: 'sa-calendar-vue3' },
+            meta: { title: 'sa-calendar-vue3', screen: true },
             element: SaCalendarVue3,
           },
         ],
@@ -108,12 +109,12 @@ export const Routers: MetaRouteObject[] = [
   },
   {
     path: '/login',
-    meta: { title: '登录' },
+    meta: { title: '登录', screen: true },
     element: Login,
   },
   {
     path: 'create',
-    meta: { title: '创作', auth: true },
+    meta: { title: '创作', auth: true, screen: true },
     element: Create,
   },
   {
@@ -123,7 +124,7 @@ export const Routers: MetaRouteObject[] = [
   },
   {
     path: 'article',
-    meta: { title: 'Blog' },
+    meta: { title: '查看' },
     element: Article,
   },
 ]
