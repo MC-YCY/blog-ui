@@ -10,7 +10,7 @@ import EditUserButton from './edit-user-button.tsx'
 
 export default function() {
   const [searchParams] = useSearchParams()
-  const { user: LoginUser, updateUser } = useUserStore()
+  const { user: LoginUser, updateUser, unreadCount } = useUserStore()
   const [user, setUser] = useState<User | null>(null)
 
   const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -32,7 +32,6 @@ export default function() {
       setUser(newUserInfo)
     }
   }
-
 
 
   const [stats, setStats] = useState<{
@@ -59,7 +58,7 @@ export default function() {
       setUser(res)
     })
     getUserStatsFn()
-  }, [searchParams])
+  }, [searchParams, unreadCount])
 
   const editUserOk = (updateData: User | null) => {
     if (!updateData) return
@@ -94,7 +93,8 @@ export default function() {
             <div className={'cursor-pointer whitespace-nowrap'}>{stats.articlesCount}篇文章</div>
             <Separator orientation="vertical" />
             {
-              LoginUser && (user?.id === LoginUser?.id ? <EditUserButton user={user} updateOk={editUserOk}></EditUserButton>
+              LoginUser && (user?.id === LoginUser?.id ?
+                <EditUserButton user={user} updateOk={editUserOk}></EditUserButton>
                 : <div className={'cursor-pointer  whitespace-nowrap'}>关注</div>)
             }
           </div>

@@ -12,6 +12,7 @@ import {
 import { Calendar, FileText, Home, User, LogIn } from 'lucide-react'
 import { MetaRouteObject, Routers } from '@/constant/routers'
 import { allArticlesList } from '@/api/article.api.ts'
+import useUserStore from '@/stores/userStore.ts'
 
 interface SearchableRoute {
   path: string
@@ -75,6 +76,7 @@ export default function SearchButton() {
   const [articles, setArticles] = useState<ArticleItem[]>([])
   const [defaultArticles, setDefaultArticles] = useState<ArticleItem[]>([])
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const {user} = useUserStore();
 
   // 获取默认文章
   useEffect(() => {
@@ -184,6 +186,9 @@ export default function SearchButton() {
   }, [])
 
   const handleNavigate = (path: string) => {
+    if(path === '/user/message'){
+      path+=`?userId=${user?.id}`
+    }
     navigate(path)
     setOpen(false)
     setSearchText('')

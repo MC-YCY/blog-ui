@@ -71,9 +71,10 @@ export default function() {
     })
   }
   useEffect(() => {
-    setWebType(' ')
-    setCurrentPage(1)
-    getList(1, ' ')
+    // setWebType(' ')
+    // setCurrentPage(1)
+    // getList(1, ' ')
+    getList(currentPage, webType)
   }, [unreadCount, searchParams])
   return (
     <div>

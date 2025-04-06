@@ -28,10 +28,8 @@ export default function NotificationBell() {
     if (!user?.id) return
 
     // 初始化 Socket 连接
-    const protocol = window.location.protocol === 'https:' ? 'wss' : 'ws'
-    const wsUrl = `${protocol}://${window.location.host}`
-    socketRef.current = io(wsUrl, {
-      path: '/ws', // 与后端 path 配置一致
+    socketRef.current = io(import.meta.env.VITE_APP_WS, {
+      path: import.meta.env.VITE_APP_WS_PATH, // 与后端 path 配置一致
       query: { userId: user.id.toString() }, // 必须字符串类型
       transports: ['websocket'],
       reconnection: true,
