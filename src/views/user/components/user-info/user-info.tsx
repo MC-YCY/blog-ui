@@ -10,7 +10,7 @@ import EditUserButton from './edit-user-button.tsx'
 
 export default function() {
   const [searchParams] = useSearchParams()
-  const { user: LoginUser, updateUser, unreadCount } = useUserStore()
+  const { user: LoginUser, updateUser, unreadCount, userLayoutUpdateTimer } = useUserStore()
   const [user, setUser] = useState<User | null>(null)
 
   const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -58,7 +58,7 @@ export default function() {
       setUser(res)
     })
     getUserStatsFn()
-  }, [searchParams, unreadCount])
+  }, [searchParams, unreadCount, userLayoutUpdateTimer])
 
   const editUserOk = (updateData: User | null) => {
     if (!updateData) return

@@ -40,7 +40,7 @@ export default function() {
   const [pageSize, _setPageSize] = useState<number>(5)
   const [webType, setWebType] = useState<string>(' ')
   const navigate = useNavigate()
-  const { user: LoginUser } = useUserStore()
+  const { user: LoginUser, setUserLayoutUpdateTimer } = useUserStore()
   const onChange = (p: number) => {
     setCurrentPage(p)
     getList(p, webType)
@@ -87,6 +87,7 @@ export default function() {
     await userDeleteArticle(LoginUser.id, { articleId: item.id })
     setCurrentPage(1)
     getList(1, webType)
+    setUserLayoutUpdateTimer();
   }
   const viewItem = (item: { id: number }) => {
     navigate(`/article?id=${item.id}`)

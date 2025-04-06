@@ -15,7 +15,7 @@ export default function() {
   const [searchParams] = useSearchParams() // 直接用
   const [articleList, setArticleList] = useState<ArticleItem[]>([])
   const navigate = useNavigate()
-  const { user: LoginUser } = useUserStore()
+  const { user: LoginUser, setUserLayoutUpdateTimer } = useUserStore()
   const getList = (page: number) => {
     if (!searchParams.get('userId')) return
     getUserLikes(searchParams.get('userId'), {
@@ -36,6 +36,7 @@ export default function() {
     await toggleArticlesUserLike(param)
     setCurrentPage(1)
     getList(1)
+    setUserLayoutUpdateTimer();
   }
   const viewItem = (item: { id: number }) => {
     navigate(`/article?id=${item.id}`)

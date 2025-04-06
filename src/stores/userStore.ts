@@ -50,6 +50,7 @@ export interface MenusType {
 export type UserState = {
   user: User | null
   unreadCount: number,
+  userLayoutUpdateTimer: number,
   buttons: ButtonsType[]
   menus: MenusType[]
   tokens: AuthTokens | null
@@ -62,12 +63,14 @@ export type UserState = {
   setMenus: (menus: MenusType[]) => void
   setUserUnreadCount: (unreadCount: number) => void
   addUserUnreadCount: () => void
+  setUserLayoutUpdateTimer: () => void
 }
 
 // 初始状态
 const initialState = {
   user: null,
   unreadCount: 0,
+  userLayoutUpdateTimer:0,
   tokens: null,
   isLoggedIn: false,
   menus: [],
@@ -110,6 +113,9 @@ const useUserStore = create<UserState>()(
         const currentState = get()
         return set({ unreadCount: currentState.unreadCount+1 })
       }),
+      setUserLayoutUpdateTimer:(()=>{
+        return set({ userLayoutUpdateTimer: new Date().getTime() })
+      })
     }),
     {
       name: 'user-storage',
