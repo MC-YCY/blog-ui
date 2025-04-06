@@ -71,13 +71,13 @@ export default function() {
       })
       return
     }
-    getArticlesStatsFn();
     getArticle(params.get('id')).then((data) => {
       setUser(data.author)
       setContent(data.content)
       setTags(data.tags)
       setTitle(data.title)
       setStatus(data.status)
+      getArticlesStatsFn();
     })
     if (!LoginUser) {
       setInteraction({
