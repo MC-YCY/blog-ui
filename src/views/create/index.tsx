@@ -47,7 +47,7 @@ export default function({ info }: { info?: ArticleItem } = { info: undefined }) 
       }
     }
   }
-  return <div className={'w-screen h-screen'}>
+  return <div className={'w-full h-screen'}>
     <Header defaultInfo={info} submit={onSubmit}></Header>
     <div className={'h-[calc(100vh-72px)] overflow-hidden'}>
       <EditorMarkdown defaultInfo={info} ref={mdEditorRef}></EditorMarkdown>
