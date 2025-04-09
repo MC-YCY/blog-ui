@@ -15,10 +15,10 @@ const Header = () => {
     if (headerRef.current) {
       if (scrollTop > 62) {
         headerRef.current.classList.remove('border-transparent')
-        headerRef.current.classList.add('border-b', 'border-border')
+        headerRef.current.classList.add('border-b', 'border-border','shadow-[0_4px_16px_rgba(0,0,0,0.3)]')
       } else {
         headerRef.current.classList.add('border-transparent')
-        headerRef.current.classList.remove('border-b', 'border-border')
+        headerRef.current.classList.remove('border-b', 'border-border','shadow-[0_4px_16px_rgba(0,0,0,0.3)]')
       }
     }
   }, [])
