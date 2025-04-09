@@ -34,7 +34,7 @@ export const ArticleCard = ({
                               readTime,
                               views,
                               onClick,
-                              status
+                              status,
                             }: ArticleCardProps) => {
   const getTagColor = (tag: string) => {
     const lowerTag = tag.toLowerCase()
@@ -64,7 +64,7 @@ export const ArticleCard = ({
           </div>
         )}
 
-        <div className="flex-1 p-6 w-0">
+        <div className="flex-1 p-6">
           <div className="mb-2 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
             <time dateTime={date}>{new Date(date).toLocaleDateString()}</time>
             {tags.length > 0 && (
@@ -88,7 +88,7 @@ export const ArticleCard = ({
           </div>
 
           <h3
-            className="mb-3 text-xl font-bold  transition-colors text-primary">
+            className="mb-3 text-xl font-bold  transition-colors text-primary  overflow-hidden text-ellipsis whitespace-nowrap">
             {title}
           </h3>
 
@@ -100,15 +100,19 @@ export const ArticleCard = ({
               <ClockIcon className="h-4 w-4 mr-1" /> {/* 需要引入时钟图标 */}
               {readTime} 阅读
             </span>
-            <span className="mx-2">•</span>
+            <span className="mx-1">•</span>
             <span className="flex items-center">
               <EyeIcon className="h-4 w-4 mr-1 " /> {/* 需要引入浏览图标 */}
               {views} 浏览
             </span>
-            <span className="mx-2">•</span>
-            <span className="flex items-center">
-              {status}
-            </span>
+            {
+              status && <>
+                <span className="mx-1">•</span>
+                <span className="flex items-center">
+                {status}
+                </span>
+              </>
+            }
           </div>
         </div>
       </div>
