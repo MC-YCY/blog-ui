@@ -61,7 +61,7 @@ const ImageList = () => {
 
   // 示例删除函数，根据实际需求自行实现删除逻辑
   const deleteImage = (img: { id: number }) => {
-    // 此处可调用接口删除图片，再更新 images 列表
+    // 此处可调用接口删除图片，再更新 swiper 列表
     if (!user) return
     deleteUserImage(user.id, img.id).then(() => {
       Toast('Tip', {

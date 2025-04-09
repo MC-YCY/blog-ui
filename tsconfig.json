@@ -8,6 +8,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["swiper"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
   }
 }

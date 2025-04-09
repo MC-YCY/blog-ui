@@ -27,12 +27,15 @@ const HeroText = (navigate: any) => {
   return <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 po z-9 pointer-events-none">
     <h1
       className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
-      # 欢迎来到 Bug 生产基地！
+      # Hi
     </h1>
+
+    <p className={'mt-4 text-lg md:text-xl text-gray-600 dark:text-gray-300'}>
+      使用了<span className={'text-primary font-bold'}>React、Tailwindcss、radix-ui</span>搭建的站点。
+    </p>
+
     <p className="mt-4 text-lg md:text-xl text-gray-600 dark:text-gray-300">
-      这里没有 KFC 全家桶，但有 <span className="text-blue-500">代码</span>、<span
-      className="text-purple-500">吐槽</span> 和 <span className="text-pink-500">脑洞</span>，
-      偶尔还能 debug 到怀疑人生
+      <span className={'text-destructive'}>背景墙</span>添加了前端常见框架，和我的一些个人主页<span className={'text-primary font-bold'}>点击它们</span>即可跳转
     </p>
     <div className="mt-6 flex space-x-4 pointer-events-auto cursor-pointer">
       <Button variant='destructive'  onClick={()=>navigate('/posts')}>

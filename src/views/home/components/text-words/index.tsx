@@ -54,9 +54,6 @@ const TextWords = () => {
   ]
   return (
     <div className="flex flex-col items-center justify-center">
-      <p className="text-neutral-600 dark:text-neutral-200 text-xs sm:text-base">
-        不要在讨论技术了
-      </p>
       <TypewriterEffectSmooth words={words1} delayIndex={0} />
       <TypewriterEffectSmooth words={words2} delayIndex={1} />
       <TypewriterEffectSmooth words={words3} delayIndex={2} />
