@@ -88,11 +88,17 @@ export const ArticleCard = ({
           </div>
 
           <h3
-            className="mb-3 text-xl font-bold  transition-colors text-primary  overflow-hidden text-ellipsis whitespace-nowrap">
-            {title}
+            className="mb-3 text-xl font-bold  transition-colors text-primary flex">
+            <span className={'flex-1 w-0   overflow-hidden text-ellipsis whitespace-nowrap '}>
+              {title}
+            </span>
           </h3>
 
-          <p className="text-gray-600 dark:text-gray-300 overflow-hidden text-ellipsis whitespace-nowrap">{excerpt}</p>
+          <p className="text-gray-600 dark:text-gray-300 flex">
+            <span className={'flex-1 w-0   overflow-hidden text-ellipsis whitespace-nowrap '}>
+              {excerpt}
+            </span>
+          </p>
 
           {/* 替换阅读更多为阅读时长 */}
           <div className="mt-4 flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
