@@ -4,13 +4,14 @@ import { Separator } from '@/components/ui/separator.tsx'
 import { useEffect, useState } from 'react'
 import { getUserFollowers } from '@/api/user.api.ts'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { User } from '@/stores/userStore.ts'
+import useUserStore, { User } from '@/stores/userStore.ts'
 import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
 
 export default function() {
   const [searchParams] = useSearchParams() // 直接用
   const [userList, setUserList] = useState<User[]>([])
   const navigate = useNavigate()
+  const { userLayoutUpdateTimer, unreadCount } = useUserStore()
 
   const getList = (page: number) => {
     if (!searchParams.get('userId')) return
@@ -24,8 +25,9 @@ export default function() {
   }
 
   useEffect(() => {
+    setCurrentPage(1)
     getList(1)
-  }, [searchParams])
+  }, [searchParams, userLayoutUpdateTimer, unreadCount])
 
   const goUserPage = (user: User) => {
     navigate(`/user/posts?userId=${user.id}`)

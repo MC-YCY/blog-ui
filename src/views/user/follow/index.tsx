@@ -12,7 +12,7 @@ export default function() {
   const [searchParams] = useSearchParams() // 直接用
   const [userList, setUserList] = useState<User[]>([])
   const navigate = useNavigate()
-  const { user: LoginUser } = useUserStore()
+  const { user: LoginUser, userLayoutUpdateTimer, unreadCount } = useUserStore()
 
   const getList = (page: number) => {
     if (!searchParams.get('userId')) return
@@ -26,8 +26,9 @@ export default function() {
   }
 
   useEffect(() => {
+    setCurrentPage(1)
     getList(1)
-  }, [searchParams])
+  }, [searchParams, userLayoutUpdateTimer, unreadCount])
 
   const goUserPage = (user: User) => {
     navigate(`/user/posts?userId=${user.id}`)

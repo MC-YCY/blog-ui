@@ -47,3 +47,7 @@ export const getUserFollowers = (userId: string | number | null, data: {
 export const getUserStats = (userId: string | number | null) => {
   return Post(`/blog/users/user-stats/${userId}`)
 }
+
+export const getIsFollower = (userId: string | number | null, targetUserId: string | number | null) => {
+  return Post(`/blog/users/is-follower`, { userId,targetUserId })
+}

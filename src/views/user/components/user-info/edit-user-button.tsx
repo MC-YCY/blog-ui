@@ -10,7 +10,7 @@ import { useRef } from 'react'
 import { updateUserInfo } from '@/api/user.api.ts'
 import { User } from '@/stores/userStore.ts'
 
-interface EditUserProps{
+interface EditUserProps {
   user: User | null
   updateOk: (user: User) => void
 }
@@ -47,7 +47,9 @@ export default function({ user, updateOk }: EditUserProps) {
   }
   return <Popover>
     <PopoverTrigger asChild>
-      <div className={'cursor-pointer  whitespace-nowrap'} ref={userEditEl} onClick={clickEditUserInfo}>编辑</div>
+      <div ref={userEditEl} onClick={clickEditUserInfo}>
+        <Button>编辑</Button>
+      </div>
     </PopoverTrigger>
     <PopoverContent className="w-80 z-1000000">
       <Form {...form}>
