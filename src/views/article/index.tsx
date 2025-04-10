@@ -141,59 +141,78 @@ export default function() {
 
   return <Container>
     <div className={'relative'}>
-      <div className={'px-8 max-w-[88rem] w-full mx-auto pt-4 fixed bg-background left-[50%] z-999'}
-           style={{ 'transform': 'translateX(-50%)' }}>
+      <div className="px-4 sm:px-8 max-w-[88rem] w-full mx-auto pt-4 fixed bg-background left-[50%] z-999"
+           style={{ transform: 'translateX(-50%)' }}>
         <div className="space-y-1">
-          <div className={'flex align-center'}>
-            <Avatar className="w-14 h-14 object-cover cursor-pointer" onClick={goUserPage}>
-              <AvatarImage src={user?.avatar ? user?.avatar : UserIcon} />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <div className={'my-auto mx-0 ml-4'}>
-              <h4 className="text-sm leading-none font-bold">{user?.username}</h4>
-              <p className="text-sm text-muted-foreground mt-1">{user?.signature || '知其然不知其所以然'}</p>
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-0">
+            {/* 头像和用户名部分 - 垂直/水平切换 */}
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+              <Avatar
+                className="w-12 h-12 sm:w-14 sm:h-14 object-cover cursor-pointer"
+                onClick={goUserPage}>
+                <AvatarImage src={user?.avatar || UserIcon} />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <div className="text-center sm:text-left">
+                <h4 className="text-sm sm:text-base font-bold">{user?.username}</h4>
+              </div>
             </div>
-            <div className={'ml-auto my-auto pl-3'}>
-              <div className="flex h-5 items-center space-x-4 text-sm">
-                {
-                  user?.id === LoginUser?.id ?
-                    <div className={'cursor-pointer whitespace-nowrap'}>粉丝{authorFollowersCount}</div>
-                    : <>
-                      <div className={'cursor-pointer  whitespace-nowrap flex items-center'}
-                           onClick={clickIsFollowingAuthor}>
-                        <span className={'mr-1'}>粉丝{authorFollowersCount}</span>
-                        {
-                          interaction.isFollowingAuthor ? <Cross2Icon className={'text-primary'}></Cross2Icon> :
-                            <PlusIcon></PlusIcon>
-                        }
-                      </div>
-                    </>
-                }
-                {
-                  user ? <>
-                      <Separator orientation="vertical" />
-                      <div className={'cursor-pointer  whitespace-nowrap flex items-center'} onClick={clickIsLiked}>
-                        <span className={'mr-1'}>{likeCount}</span>
-                        {
-                          interaction.isLiked ? <HeartFilledIcon className={'text-primary'}></HeartFilledIcon> :
-                            <HeartIcon></HeartIcon>
-                        }
-                      </div>
-                      <Separator orientation="vertical" />
-                      <div className={'cursor-pointer  whitespace-nowrap flex items-center'} onClick={clickIsFavorited}>
-                        <span className={'mr-1'}>{favoritesCount}</span>
-                        {
-                          interaction.isFavorited ? <StarFilledIcon className={'text-primary'}></StarFilledIcon> :
-                            <StarIcon></StarIcon>
-                        }
-                      </div>
-                    </>
-                    : null
-                }
-                <Separator orientation="vertical" />
-                <div className={'cursor-pointer  whitespace-nowrap flex items-center'}>
-                  <span className={'mr-1'}>{viewsCount}</span>
-                  <EyeOpenIcon className={'text-primary'}></EyeOpenIcon>
+
+            {/* 数据指标部分 - 自动换行 */}
+            <div className="w-full sm:w-auto sm:ml-auto">
+              <div className="flex flex-wrap justify-center sm:justify-start items-center gap-x-4 gap-y-2 text-sm">
+                {user?.id === LoginUser?.id ? (
+                  <div className="cursor-pointer whitespace-nowrap">
+                    粉丝{authorFollowersCount}
+                  </div>
+                ) : (
+                  <div
+                    className="cursor-pointer whitespace-nowrap flex items-center"
+                    onClick={clickIsFollowingAuthor}>
+                    <span className="mr-1">粉丝{authorFollowersCount}</span>
+                    {interaction.isFollowingAuthor ?
+                      <Cross2Icon className="text-primary" /> :
+                      <PlusIcon />}
+                  </div>
+                )}
+
+                {user && (
+                  <>
+                    <Separator
+                      orientation="vertical"
+                      className="h-4 hidden sm:inline-block"
+                    />
+                    <div
+                      className="cursor-pointer whitespace-nowrap flex items-center"
+                      onClick={clickIsLiked}>
+                      <span className="mr-1">{likeCount}</span>
+                      {interaction.isLiked ?
+                        <HeartFilledIcon className="text-primary" /> :
+                        <HeartIcon />}
+                    </div>
+
+                    <Separator
+                      orientation="vertical"
+                      className="h-4 hidden sm:inline-block"
+                    />
+                    <div
+                      className="cursor-pointer whitespace-nowrap flex items-center"
+                      onClick={clickIsFavorited}>
+                      <span className="mr-1">{favoritesCount}</span>
+                      {interaction.isFavorited ?
+                        <StarFilledIcon className="text-primary" /> :
+                        <StarIcon />}
+                    </div>
+                  </>
+                )}
+
+                <Separator
+                  orientation="vertical"
+                  className="h-4 hidden sm:inline-block"
+                />
+                <div className="cursor-pointer whitespace-nowrap flex items-center">
+                  <span className="mr-1">{viewsCount}</span>
+                  <EyeOpenIcon className="text-primary" />
                 </div>
               </div>
             </div>
@@ -201,8 +220,7 @@ export default function() {
         </div>
         <Separator className="my-4" />
       </div>
-
-      <div className={'pt-[120px]'}>
+      <div className={'pt-[165px] sm:pt-[120px]'}>
         <TracingBeam>
           <div className="gap-4 mb-8">
             {/* 标题部分 */}

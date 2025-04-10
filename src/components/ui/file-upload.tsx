@@ -106,7 +106,7 @@ export const FileUpload = forwardRef((props: { onChange?: (files: File[]) => voi
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       layout
-                      className="text-base color-card-foreground truncate max-w-xs"
+                      className="text-base color-card-foreground truncate max-w-xs flex-1 w-[0]"
                     >
                       {file.name}
                     </motion.p>
