@@ -74,13 +74,13 @@ const ImageList = () => {
   }
 
   const showImage = (img: { path: string }) => {
-    window.open(img.path,'_blank')
+    window.open(img.path, '_blank')
   }
 
   return (
     <>
       <ScrollArea className="h-[calc(100vh-264px)]">
-        {images.map((img: { path: string, originalname: string,id: number }) => {
+        {images.map((img: { path: string, originalname: string, id: number }) => {
           return (
             <div key={img.path} className="w-full bg-muted p-2 rounded-md mb-2">
               <TooltipProvider delayDuration={100}>
@@ -134,6 +134,7 @@ const ImageList = () => {
 const UploadContent = () => {
   const [selectFiles, setSelectFiles] = useState<File[]>([])
   const { user } = useUserStore()
+  const [loading, setLoading] = useState(false)
   const handleFileUpload = (files: File[]) => {
     setSelectFiles(files)
   }
@@ -152,6 +153,7 @@ const UploadContent = () => {
       formData.append('files', file)
     })
     if (!user) return
+    setLoading(true)
     uploadUserImages(user?.id, formData).then(() => {
       Toast('Api Tip', {
         description: '上传成功',
@@ -159,6 +161,8 @@ const UploadContent = () => {
         duration: 1000,
       })
       uploadFileRef?.current?.clearFiles()
+    }).finally(() => {
+      setLoading(false)
     })
   }
 
@@ -166,7 +170,7 @@ const UploadContent = () => {
     <ScrollArea className={'h-[calc(100vh-264px)]'}>
       <FileUpload ref={uploadFileRef} onChange={handleFileUpload} />
     </ScrollArea>
-    <Button className={'w-full'} onClick={submit}>上传</Button>
+    <Button className={'w-full ' + (loading && 'pointer-events-none opacity-50') || ''} onClick={submit}>上传</Button>
   </>
 }
 
