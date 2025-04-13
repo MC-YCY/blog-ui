@@ -21,6 +21,7 @@ export interface User {
   favorites: Favorite[];
   following: User[];
   followers: User[];
+  color?: string;
   followersCount?: number;
   followingCount?: number;
   totalArticles?: number;

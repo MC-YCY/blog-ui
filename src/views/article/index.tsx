@@ -27,6 +27,7 @@ import {
   toggleArticlesUserFollow,
   toggleArticlesUserLike,
 } from '@/api/article-user.api.ts'
+import CommentSection from '@/views/article/components/comment.tsx'
 
 export default function() {
   const [params] = useSearchParams() // 直接用
@@ -249,6 +250,9 @@ export default function() {
           <MDEditor className={'md-editor-preview'} data-color-mode={theme as 'light' | 'dark'} value={content}
                     preview={'preview'}
                     hideToolbar={true} />
+
+          <CommentSection></CommentSection>
+
         </TracingBeam>
       </div>
     </div>
