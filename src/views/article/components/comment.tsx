@@ -2,6 +2,7 @@ import { FC, useState, ChangeEvent } from 'react'
 import { BaseComment } from '@/types/comment'
 import { Article } from '@/types/article'
 import { User } from '@/types/user.ts'
+import {IconCaretRightFilled} from '@tabler/icons-react'
 
 // 扩展后的评论类型，包含额外字段
 export interface ExtendedComment extends BaseComment {
@@ -181,7 +182,7 @@ const ReplyItem: FC<ReplyItemProps> = ({ reply, onReply }) => {
 
   return (
     <div className="mb-2">
-      <div className="flex items-center">
+      <div className="flex">
         {/* 回复用户头像 */}
         <div
           className={`flex-shrink-0 w-6 h-6 ${reply.author.color} rounded-full flex items-center justify-center text-white text-xs mr-2`}
@@ -189,8 +190,8 @@ const ReplyItem: FC<ReplyItemProps> = ({ reply, onReply }) => {
           {reply.author.avatar}
         </div>
         <div>
-          <div className="text-sm text-gray-800">
-            {reply.author.username} → {reply?.targetUser?.username || '未知'}:
+          <div className="text-sm text-gray-800 flex items-center">
+            {reply.author.username}<IconCaretRightFilled  className='mx-1 w-[14px] h-[14px] text-[#999]' />{reply?.targetUser?.username || '未知'}:
           </div>
           <div className="text-sm text-gray-700 ml-1">{reply.content}</div>
         </div>
