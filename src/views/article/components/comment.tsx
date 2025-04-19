@@ -82,74 +82,63 @@ const Comment: FC<CommentProps> = ({ comment }) => {
   return (
     <div className="w-full mb-6">
       <div className="flex items-start gap-3">
-        {/* 顶级评论头像 */}
+        {/* 修改头像背景色 */}
         <div
-          className={`flex-shrink-0 w-8 h-8 ${comment.author.color} rounded-full flex items-center justify-center text-white text-sm`}
+          className={`flex-shrink-0 w-8 h-8 ${comment.author.color} rounded-full flex items-center justify-center text-primary-foreground text-sm`}
         >
           {comment.author.avatar}
         </div>
         <div className="flex-1">
-          {/* 用户信息及时间 */}
           <div className="flex items-center gap-2">
-            <span className="font-medium text-gray-800">{comment.author.username}</span>
-            <time className="text-xs text-gray-500">{comment.timestamp}</time>
+            <span className="font-medium text-foreground">{comment.author.username}</span>
+            <time className="text-xs text-muted-foreground">{comment.timestamp}</time>
           </div>
-          {/* 评论内容 */}
-          <p className="mt-1 text-gray-700 text-sm">{comment.content}</p>
-          {/* 操作按钮 */}
+          <p className="mt-1 text-foreground text-sm">{comment.content}</p>
           <div className="flex items-center gap-3 mt-1">
             <button
               onClick={handleLike}
-              className="flex items-center gap-1 text-gray-500 hover:text-blue-500 text-xs"
+              className="flex items-center gap-1 text-muted-foreground hover:text-primary text-xs"
             >
               <ThumbUpIcon className="w-3.5 h-3.5" />
               <span>{likes}</span>
             </button>
+            {/* 修改按钮颜色 */}
             <button
               onClick={() => setShowReplyInput(!showReplyInput)}
-              className="text-gray-500 hover:text-blue-500 text-xs"
+              className="text-muted-foreground hover:text-primary text-xs"
             >
               回复
             </button>
             {flatReplies.length > 0 && (
               <button
                 onClick={() => setShowReplies(!showReplies)}
-                className="text-gray-500 hover:text-blue-500 text-xs"
+                className="text-muted-foreground hover:text-primary text-xs"
               >
                 {showReplies ? '收起回复' : `展开回复 (${flatReplies.length})`}
               </button>
             )}
           </div>
-          {/* 顶级评论的回复输入框，添加 onBlur 事件处理失去焦点时关闭 */}
+          {/* 修改输入框样式 */}
           {showReplyInput && (
-            <div
-              className="mt-2 flex gap-2"
-              tabIndex={0}
-              onBlur={(e) => {
-                // 如果新的焦点不在此容器内，则关闭回复框
-                if (!e.currentTarget.contains(e.relatedTarget)) {
-                  setShowReplyInput(false)
-                }
-              }}
-            >
+            <div className="mt-2 flex gap-2" tabIndex={0}>
               <input
                 type="text"
                 value={replyText}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setReplyText(e.target.value)}
-                className="flex-1 px-2 py-1 text-sm border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="flex-1 px-2 py-1 text-sm border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-ring"
                 placeholder={`回复 @${comment.author.username}...`}
               />
               <button
                 onClick={handleTopLevelReplySubmit}
-                className="px-3 py-1 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                className="px-3 py-1 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
               >
                 发送
               </button>
             </div>
           )}
-          {/* 回复区域：扁平化展示所有回复 */}
+          {/* 修改回复区域背景 */}
           {showReplies && flatReplies.length > 0 && (
-            <div className="mt-2 bg-gray-100 rounded p-2">
+            <div className="mt-2 bg-secondary rounded p-2">
               {flatReplies.map((reply) => (
                 <ReplyItem key={reply.id} reply={reply} onReply={handleReplyToReply} />
               ))}
@@ -183,56 +172,47 @@ const ReplyItem: FC<ReplyItemProps> = ({ reply, onReply }) => {
   return (
     <div className="mb-2">
       <div className="flex">
-        {/* 回复用户头像 */}
         <div
-          className={`flex-shrink-0 w-6 h-6 ${reply.author.color} rounded-full flex items-center justify-center text-white text-xs mr-2`}
+          className={`flex-shrink-0 w-6 h-6 ${reply.author.color} rounded-full flex items-center justify-center text-primary-foreground text-xs mr-2`}
         >
           {reply.author.avatar}
         </div>
         <div>
-          <div className="text-sm text-gray-800 flex items-center">
-            {reply.author.username}<IconCaretRightFilled  className='mx-1 w-[14px] h-[14px] text-[#999]' />{reply?.targetUser?.username || '未知'}:
+          <div className="text-sm text-foreground flex items-center">
+            {reply.author.username}<IconCaretRightFilled className='mx-1 w-[14px] h-[14px] text-muted-foreground'/>{reply?.targetUser?.username || '未知'}:
           </div>
-          <div className="text-sm text-gray-700 ml-1">{reply.content}</div>
+          <div className="text-sm text-foreground ml-1">{reply.content}</div>
         </div>
       </div>
       <div className="flex items-center gap-2 mt-1 ml-8">
         <button
           onClick={handleLike}
-          className="flex items-center gap-1 text-gray-500 hover:text-blue-500 text-xs"
+          className="flex items-center gap-1 text-muted-foreground hover:text-primary text-xs"
         >
           <ThumbUpIcon className="w-3.5 h-3.5" />
           <span>{likes}</span>
         </button>
-        <time className="text-xs text-gray-500">{reply.timestamp}</time>
+        <time className="text-xs text-muted-foreground">{reply.timestamp}</time>
         <button
           onClick={() => setShowReplyInput(!showReplyInput)}
-          className="text-gray-500 hover:text-blue-500 text-xs"
+          className="text-muted-foreground hover:text-primary text-xs"
         >
           回复
         </button>
       </div>
-      {/* 回复某条回复的输入框 */}
+      {/* 修改回复输入框 */}
       {showReplyInput && (
-        <div
-          className="mt-1 ml-8 flex gap-2"
-          tabIndex={0}
-          onBlur={(e) => {
-            if (!e.currentTarget.contains(e.relatedTarget)) {
-              setShowReplyInput(false)
-            }
-          }}
-        >
+        <div className="mt-1 ml-8 flex gap-2" tabIndex={0}>
           <input
             type="text"
             value={replyText}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setReplyText(e.target.value)}
-            className="flex-1 px-2 py-1 text-sm border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="flex-1 px-2 py-1 text-sm border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-ring"
             placeholder={`回复 @${reply.author.username}...`}
           />
           <button
             onClick={handleSubmit}
-            className="px-3 py-1 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            className="px-3 py-1 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
           >
             发送
           </button>
@@ -313,19 +293,19 @@ const CommentSection: FC = () => {
   }
 
   return (
-    <div className="mx-auto p-4 bg-white rounded-lg">
-      {/* 新增一级评论输入框 */}
+    <div className="mx-auto p-4 bg-card rounded-lg">
+      {/* 修改输入框样式 */}
       <div className="mb-4 flex gap-2">
         <input
           type="text"
           value={newCommentText}
           onChange={(e) => setNewCommentText(e.target.value)}
-          className="flex-1 px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+          className="flex-1 px-3 py-2 border border-border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-ring"
           placeholder="写下你的评论..."
         />
         <button
           onClick={handleAddComment}
-          className="px-4 py-2 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600"
+          className="px-4 py-2 bg-primary text-primary-foreground text-sm rounded-md hover:bg-primary/90"
         >
           评论
         </button>

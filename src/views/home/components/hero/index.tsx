@@ -21,34 +21,36 @@ import IsqqwSelfBanner from '@/assets/images/hero/isqqw_self.png'
 
 import { Button } from '@/components/ui/button.tsx'
 
-import {useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const HeroText = (navigate: any) => {
-  return <div className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 po z-9 pointer-events-none">
+  return <div
+    className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full  left-0 top-0 po z-9 pointer-events-none">
     <h1
       className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500">
       # Hi
     </h1>
 
-    <p className={'mt-4 text-lg md:text-xl text-gray-600 dark:text-gray-300'}>
+    <p className={'mt-4 text-lg md:text-xl text-foreground'}>
       使用了<span className={'text-primary font-bold'}>React、Tailwindcss、radix-ui</span>搭建的站点。
     </p>
 
-    <p className="mt-4 text-lg md:text-xl text-gray-600 dark:text-gray-300">
-      <span className={'text-destructive'}>背景墙</span>添加了前端常见框架，和我的一些个人主页<span className={'text-primary font-bold'}>点击它们</span>即可跳转
+    <p className="mt-4 text-lg md:text-xl  text-foreground ">
+      <span className={'text-destructive'}>背景墙</span>添加了前端常见框架，和我的一些个人主页<span
+      className={'text-primary font-bold'}>点击它们</span>即可跳转
     </p>
     <div className="mt-6 flex space-x-4 pointer-events-auto cursor-pointer">
-      <Button variant='destructive'  onClick={()=>navigate('/posts')}>
+      <Button variant="destructive" onClick={() => navigate('/posts')}>
         🔥 文章
       </Button>
-      <Button onClick={()=>navigate('/resume')}>
+      <Button onClick={() => navigate('/resume')}>
         🤔 认识博主
       </Button>
     </div>
   </div>
 }
 
-const Hero = ({children}:{children:React.ReactElement}) => {
+const Hero = ({ children }: { children: React.ReactElement }) => {
   const navigate = useNavigate()
   return <HeroParallax products={products} children={HeroText(navigate)} content={children}>
   </HeroParallax>
