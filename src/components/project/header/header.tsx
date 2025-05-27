@@ -33,7 +33,7 @@ const HeaderNavigate = () => {
                 blogConfig.routes.map((route) => {
                     let className = '';
                     if (route.path === location.pathname) {
-                        className = cn('font-bold', style.active);
+                        className = cn('font-bold', style.active,'active');
                     }
                     return <div key={route.path} className={cn(className, 'w-[46px]')} onClick={() => goRoute(route)}>
                         <route.icon className={className}></route.icon>

@@ -4,9 +4,12 @@
 
 .active g,
 .active path {
-    stroke: url(#cyberGradient);
-    fill: url(#cyberGradient);
+    stroke: url(#HomeTextSvgIconCyberGradient);
+    fill: url(#HomeTextSvgIconCyberGradient);
     stroke-width: 6px;
+}
+.pictureTextSvgIcon.active{
+    background: red;
 }
 
 .header {

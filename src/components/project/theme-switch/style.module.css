@@ -1,17 +1,17 @@
 /* From Uiverse.io by Galahhad */
 .theme-switch {
-    --toggle-size: 24px;
+    --toggle-size: 16px;
     /* the size is adjusted using font-size,
        this is not transform scale,
        so you can choose any size */
-    --container-width: 60px;
-    --container-height: 24px;
+    --container-width: 46px;
+    --container-height: 20px;
     --container-radius: 6.25em;
     /* radius 0 - minecraft mode :) */
     --container-light-bg: #3D7EAE;
     --container-night-bg: #1D1F2C;
-    --circle-container-diameter: 24px;
-    --sun-moon-diameter: 24px;
+    --circle-container-diameter: 16px;
+    --sun-moon-diameter: 16px;
     --sun-bg: #ECCA2F;
     --moon-bg: #C4C9D1;
     --spot-color: #959DB1;

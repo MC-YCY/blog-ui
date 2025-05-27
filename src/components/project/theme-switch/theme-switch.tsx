@@ -4,8 +4,6 @@ import style from './style.module.css';
 import {useEffect, useState} from "react";
 import useThemeStore from '@/stores/themeStore.ts'
 
-console.log(style)
-
 export const ThemeSwitch = () => {
     const { theme, toggleTheme } = useThemeStore()
     const [mounted, setMounted] = useState(false)

@@ -5,20 +5,20 @@ import React from "react";
 import {cn} from "@/lib/utils";
 
 export const HomeTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGElement>) => {
-    return <svg  {...props} className={cn(style.homeTextSvgIcon, props?.className)} version="1.0"
+    return <svg  {...props} className={cn(style.homeTextSvgIcon,'homeTextSvgIcon', props?.className)} version="1.0"
                  xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 146 53" preserveAspectRatio="xMidYMid meet">
         <defs>
             {/* 炫光渐变 */}
             <linearGradient
-                id="cyberGradient"
+                id="HomeTextSvgIconCyberGradient"
                 x1="0%"
                 y1="0%"
                 x2="100%"
                 y2="100%"
                 gradientUnits="userSpaceOnUse"
             >
-                <stop offset="0%" stopColor="#4c9448"/>
+                <stop offset="0%" stopColor="#ff00ff"/>
                 <stop offset="50%" stopColor="#912714"/>
                 <stop offset="100%" stopColor="#8f993c"/>
             </linearGradient>
@@ -40,13 +40,13 @@ export const HomeTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGElement>
 }
 
 export const ArticleTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGElement>) => {
-    return <svg  {...props} className={cn(style.articleTextSvgIcon, props?.className)} version="1.0"
+    return <svg  {...props} className={cn(style.articleTextSvgIcon,'articleTextSvgIcon', props?.className)} version="1.0"
                  xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 161 54" preserveAspectRatio="xMidYMid meet">
         <defs>
             {/* 炫光渐变 */}
             <linearGradient
-                id="cyberGradient"
+                id="ArticleTextSvgIconCyberGradient"
                 x1="0%"
                 y1="0%"
                 x2="100%"
@@ -79,12 +79,12 @@ export const ArticleTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGEleme
 }
 
 export const DiaryTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGElement>) => {
-    return <svg  {...props} className={cn(style.diaryTextSvgIcon, props?.className)} version="1.0"
+    return <svg  {...props} className={cn(style.diaryTextSvgIcon,'diaryTextSvgIcon', props?.className)} version="1.0"
                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 77" preserveAspectRatio="xMidYMid meet">
         <defs>
             {/* 炫光渐变 */}
             <linearGradient
-                id="cyberGradient"
+                id="DiaryTextSvgIconCyberGradient"
                 x1="0%"
                 y1="0%"
                 x2="100%"
@@ -121,13 +121,13 @@ export const DiaryTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGElement
 }
 
 export const PictureTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGElement>) => {
-    return <svg  {...props} className={cn(style.pictureTextSvgIcon, props?.className)} version="1.0"
+    return <svg  {...props} className={cn(style.pictureTextSvgIcon,'pictureTextSvgIcon', props?.className)} version="1.0"
                  xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 167 53" preserveAspectRatio="xMidYMid meet">
         <defs>
             {/* 炫光渐变 */}
             <linearGradient
-                id="cyberGradient"
+                id="DiaryTextSvgIconCyberGradient"
                 x1="0%"
                 y1="0%"
                 x2="100%"
@@ -168,13 +168,13 @@ export const PictureTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGEleme
 }
 
 export const AboutTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGElement>) => {
-    return <svg  {...props} className={cn(style.aboutTextSvgIcon, props?.className)} version="1.0"
+    return <svg  {...props} className={cn(style.aboutTextSvgIcon,'pictureTextSvgIcon', props?.className)} version="1.0"
                  xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 150 54" preserveAspectRatio="xMidYMid meet">
         <defs>
             {/* 炫光渐变 */}
             <linearGradient
-                id="cyberGradient"
+                id="AboutTextSvgIconCyberGradient"
                 x1="0%"
                 y1="0%"
                 x2="100%"

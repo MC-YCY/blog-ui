@@ -53,8 +53,7 @@ export const SignatureGradation = ({className}:{className?:string}) => {
                 gradientUnits="userSpaceOnUse"
             >
                 <stop offset="0%" stopColor="#912714"/>
-                <stop offset="50%" stopColor="#385f00"/>
-                <stop offset="100%" stopColor="#366d6a"/>
+                <stop offset="100%" stopColor="#385f00"/>
             </linearGradient>
 
             {/* 流光特效 */}
