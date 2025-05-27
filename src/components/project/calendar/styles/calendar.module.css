@@ -1,0 +1,133 @@
+/* calendar.module.css */
+
+.calendar {
+    width: 100%;
+}
+
+.calendarRow {
+    width: 100%;
+    display: flex;
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.calendarRowCell {
+    width: calc(100% / 7);
+    cursor: pointer;
+    box-sizing: border-box;
+    text-align: center;
+    height: var(--cellHeight, 50px);
+    border-radius: 4px;
+    outline: 1px solid transparent;
+    outline-offset: -1px;
+}
+
+.calendarRowCell:hover {
+    outline-color: var(--foreground);
+    opacity: 0.7;
+}
+
+.calendarRowCellRect {
+    box-sizing: border-box;
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.calendarRowCellNoMonth {
+    color: #9999998a;
+}
+
+.calendarRowCellMonth {
+    color: var(--foreground);
+}
+
+
+.calendarRowCellToday {
+    color: #4FACFE;
+}
+
+.calendarWeek {
+    width: 100%;
+    display: flex;
+    cursor: default;
+}
+
+.calendarWeekItem {
+    width: calc(100% / 7);
+    text-align: center;
+}
+
+.calendarWeekItemCell {
+    box-sizing: border-box;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendarLayer {
+    --cellHeight: initial;
+    --tableHeight: initial;
+    --hideTableHeight: initial;
+    --height: var(--tableHeight, auto);
+    --top: 0;
+    --transition: all 0.2s ease-in-out;
+    width: 100%;
+    position: relative;
+    height: auto;
+    overflow: hidden;
+}
+
+.calendarTable {
+    width: 100%;
+}
+
+.open {
+    --top: 0 !important;
+    --height: var(--tableHeight) !important;
+    transition: var(--transition);
+}
+
+.close {
+    --tableHeight: var(--cellHeight) !important;
+    --top: var(--hideTableHeight) !important;
+    transition: var(--transition);
+}
+
+.toggle {
+    height: var(--height);
+}
+
+.toggle .calendarTable {
+    position: absolute;
+    top: var(--top);
+}
+
+.toggle .calendarRowOpen .calendarRowCellRect {
+    background: var(--background);
+}
+
+.open .calendarTable,
+.close .calendarTable {
+    transition: var(--transition);
+    top: var(--top);
+}
+
+.calendarRowOpen {
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    background: var(--background);
+}
+
+.calendarRowCellActive {
+    background: var(--foreground) !important;
+    color: var(--background);
+    border-radius: 4px;
+    font-weight: bold;
+}

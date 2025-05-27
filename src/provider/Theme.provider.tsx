@@ -33,7 +33,7 @@ const ThemeProvider = () => {
     html.style.colorScheme = `theme-${theme}`+`${themeSuffix && themeSuffix ? '-'+themeSuffix : ''}`
 
     // 同步到 body 作为备用选择器
-    document.body.className = `theme-${theme}`+`${themeSuffix && themeSuffix ? '-'+themeSuffix : ''}`
+    document.body.className = `${theme} theme-${theme}`+`${themeSuffix && themeSuffix ? '-'+themeSuffix : ''}`
 
   }, [theme,themeSuffix])
 

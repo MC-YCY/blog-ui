@@ -1,0 +1,116 @@
+.radio-inputs {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center;
+    align-items: center;
+    max-width: 100%; /* Ensure it doesn't overflow */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.radio-inputs > * {
+    margin: 4px 0; /* Add vertical spacing between options */
+}
+
+.radio-input:checked + .radio-tile {
+    border-color: #2260ff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    color: #2260ff;
+}
+
+.radio-input:checked + .radio-tile:before {
+    transform: scale(1);
+    opacity: 1;
+    background-color: #2260ff;
+    border-color: #2260ff;
+}
+
+.radio-input:checked + .radio-tile .radio-icon svg {
+    fill: #2260ff;
+}
+
+.radio-input:checked + .radio-tile .radio-label {
+    color: #2260ff;
+}
+
+.radio-input:focus + .radio-tile {
+    border-color: #2260ff;
+    box-shadow:
+            0 5px 10px rgba(0, 0, 0, 0.1),
+            0 0 0 4px #b5c9fc;
+}
+
+.radio-input:focus + .radio-tile:before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.radio-tile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 200px; /* Width of the pill */
+    min-height: 30px; /* Height of the pill */
+    border-radius: 25px; /* Full pill shape */
+    border: 2px solid #b5bfd9;
+    background-color: var(--background);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.15s ease;
+    cursor: pointer;
+    position: relative;
+    padding-left: 50px; /* Space for the indicator */
+}
+
+.radio-tile:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 14px; /* Size of the indicator */
+    height: 14px; /* Size of the indicator */
+    border: 2px solid #b5bfd9;
+    background-color: #fff;
+    border-radius: 50%; /* Circle shape for the indicator */
+    left: 15px; /* Position of the indicator */
+    transition: 0.25s ease;
+}
+
+.radio-tile:hover {
+    border-color: #2260ff;
+}
+
+.radio-tile:hover:before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.radio-icon {
+    margin-left: 10px; /* Space between the indicator and icon */
+}
+
+.radio-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: #494949;
+}
+
+.radio-label {
+    color: var(--foreground);
+    transition: 0.375s ease;
+    text-align: left; /* Align text to the left */
+    font-size: 13px;
+    margin-left: 10px; /* Space between the icon and label */
+}
+
+.radio-input {
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(100%);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}

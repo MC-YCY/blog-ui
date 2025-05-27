@@ -1,0 +1,53 @@
+@keyframes logo-anim {
+    0% {
+        stroke-dashoffset: 1px;
+        stroke-dasharray: 0 3000%;
+        opacity: .4;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    35% {
+        stroke-dasharray: 3000% 0;
+        fill: transparent;
+    }
+
+    /* Moving back */
+    50% {
+        stroke-dasharray: 3000% 0;
+        fill: url(#cyberGradient);
+    }
+
+    55% {
+        fill: transparent;
+    }
+
+    95%,
+    100% {
+        stroke-dasharray: 0 3000%;
+    }
+}
+
+.SignatureGradation g {
+    animation-delay: inherit;
+}
+
+.SignatureGradation,
+.SignatureGradation path {
+    fill: transparent;
+    transition: all .4s ease-in-out;
+    stroke-dashoffset: 1px;
+    stroke-dasharray: 3000% 0;
+    animation: logo-anim 6s ease forwards infinite;
+    transform-origin: center;
+    stroke: url(#cyberGradient);
+    animation-delay: inherit;
+}
+
+.signature,
+.signature path {
+    fill: var(--background);
+    stroke: var(--background);
+}

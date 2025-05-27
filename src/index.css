@@ -1,5 +1,11 @@
 @import "tailwindcss";
-
+@import 'swiper/css/grid';
+@import 'swiper/css';
+@import 'swiper/css/free-mode';
+@import 'swiper/css/scrollbar';
+@import "swiper/css/effect-cards";
+@import 'swiper/css/pagination';
+@import "tailwindcss";
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
@@ -554,4 +560,146 @@ html{
   position: fixed;
   left: 0;
   bottom: 0;
+}
+
+
+.custom-swiper-scrollbar,.custom-swiper-scrollbar-bottom {
+  position: relative;
+  margin-bottom: 4px;
+  background: transparent;
+}
+
+.custom-swiper-scrollbar:after,
+.custom-swiper-scrollbar-bottom:after{
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background: var(--foreground);
+  opacity: .06;
+}
+
+.custom-swiper-scrollbar .swiper-scrollbar-drag,
+.custom-swiper-scrollbar-bottom .swiper-scrollbar-drag {
+  background: var(--primary);
+  opacity: .5;
+}
+
+div[data-tip] {
+  position: relative;
+}
+
+div[data-tip]:hover:before {
+  opacity: 1;
+}
+
+div[data-tip]:before {
+  transition: all .15s linear;
+  content: attr(data-tip);
+  position: absolute;
+  font-size: 12px;
+  bottom: 100%;
+  left: 0;
+  height: 24px;
+  background: var(--foreground);
+  color: var(--background);
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  opacity: 0;
+  animation: showTip 3s linear;
+  transform: translateY(-6px);
+}
+
+@keyframes showTip {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+.home-dark-banner,
+.home-light-banner {
+  transition: all .1s linear;
+  opacity: 0;
+}
+
+.theme-dark .home-dark-banner {
+  opacity: 1;
+}
+
+.theme-light .home-light-banner {
+  opacity: 1;
+}
+
+
+.theme-light .theme-codeblock {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.theme-light .theme-codeblock span {
+  color: #4b944c;
+}
+
+.theme-light .theme-codeblock .token[style='color:#96CBFE'],
+.theme-light .theme-codeblock .token[style='color: rgb(150, 203, 254);'] {
+  color: #4b944c !important;
+}
+
+.theme-codeblock .token[style='color:#FFFFB6;text-decoration:underline'],
+.theme-codeblock .token[style='color: rgb(255, 255, 182); text-decoration: underline;']{
+  text-decoration: none !important;
+}
+
+.theme-light .theme-codeblock .token[style='color:#FFFFB6;text-decoration:underline'],
+.theme-light .theme-codeblock .token[style='color: rgb(255, 255, 182); text-decoration: underline;']{
+  color: #565e4c !important;
+}
+
+.theme-light .theme-codeblock .token[style='color:#A8FF60'],
+.theme-light .theme-codeblock .token[style='color: rgb(168, 255, 96);']{
+  color: #565e4c !important;
+}
+
+.theme-light .theme-codeblock .token[style='color:#DAD085'],
+.theme-light .theme-codeblock .token[style='color: rgb(218, 208, 133);']{
+  color: #a17771 !important;
+}
+
+.theme-light .theme-codeblock .token[style='color:#c5c8c6'],
+.theme-light .theme-codeblock .token[style='color: rgb(197, 200, 198);']{
+  color: #e26438 !important;
+}
+
+.theme-light .theme-codeblock .token[style='color:#EDEDED'],
+.theme-light .theme-codeblock .token[style='color: rgb(237, 237, 237);']{
+  color: #181c1b !important;
+}
+
+.theme-light .theme-codeblock .token[style='color:#FF73FD'],
+.theme-light .theme-codeblock .token[style='color: rgb(255, 115, 253);']{
+  color: #abbf52 !important;
+}
+
+.theme-light .theme-codeblock .property-access{
+  color: #88280f !important;
+}
+
+.theme-dark .theme-codeblock {
+  background: rgba(0, 0, 0, 0.7);
 }

@@ -1,25 +1,11 @@
 import React, { JSX } from 'react'
 import { lazy } from 'react'
-import RootLayout from '@/views/layout/index'
-// 使用 Vite 的动态导入语法进行代码分割
-const Home = lazy(() => import('@/views/home/index.tsx'))
-const Resume = lazy(() => import('@/views/resume/index.tsx'))
-const Posts = lazy(() => import('@/views/posts/index.tsx'))
-const CodeSegment = lazy(() => import('@/views/code-segment/index.tsx'))
-const Login = lazy(() => import('@/views/auth/login/index.tsx'))
-const DocsLayout = lazy(() => import('@/views/docs/layout.tsx'))
-const SaCalendarReact = lazy(() => import('@/views/docs/sa-calendar-react.tsx'))
-const SaCalendarVue3 = lazy(() => import('@/views/docs/sa-calendar-vue3.tsx'))
-const UserLayout = lazy(() => import('@/views/user/layout.tsx'))
-const UserPosts = lazy(() => import('@/views/user/posts/index.tsx'))
-const UserLike = lazy(() => import('@/views/user/like/index.tsx'))
-const UserCollect = lazy(() => import('@/views/user/collect/index.tsx'))
-const UserFollow = lazy(() => import('@/views/user/follow/index.tsx'))
-const UserFollower = lazy(() => import('@/views/user/follower/index.tsx'))
-const UserMessage = lazy(() => import('@/views/user/message/index.tsx'))
-const Create = lazy(() => import('@/views/create/index.tsx'))
-const Article = lazy(() => import('@/views/article/index.tsx'))
-const Update = lazy(() => import('@/views/update/index.tsx'))
+const RootLayout = lazy(() => import('@/views/layout.tsx'))
+const Home = lazy(() => import('@/views/home/page.tsx'))
+const Article = lazy(() => import('@/views/article/page.tsx'))
+const Diary = lazy(() => import('@/views/diary/page.tsx'))
+const Picture = lazy(() => import('@/views/picture/page.tsx'))
+const About = lazy(() => import('@/views/about/page.tsx'))
 
 export interface MetaRouteObject {
   meta?: {
@@ -39,99 +25,31 @@ export const Routers: MetaRouteObject[] = [
     element: RootLayout, // 根布局保持同步加载
     children: [
       {
-        path: 'home',
+        path: '/home',
         meta: { title: '首页', screen: true },
         element: Home,
       },
       {
-        path: 'posts',
+        path: 'article',
         meta: { title: '文章', screen: true },
-        element: Posts,
+        element: Article,
       },
       {
-        path: 'code-segment',
-        meta: { title: '代码段', screen: true },
-        element: CodeSegment,
+        path: 'diary',
+        meta: { title: '日记', screen: true },
+        element: Diary,
       },
       {
-        path: 'resume',
-        meta: { title: '简历', screen: true },
-        element: Resume,
+        path: 'picture',
+        meta: { title: '图集', screen: true },
+        element: Picture,
       },
       {
-        path: 'docs',
-        element: DocsLayout,
-        children: [
-          {
-            path: 'sa-calendar-react',
-            meta: { title: 'sa-calendar-react', screen: true },
-            element: SaCalendarReact,
-          },
-          {
-            path: 'sa-calendar-vue3',
-            meta: { title: 'sa-calendar-vue3', screen: true },
-            element: SaCalendarVue3,
-          },
-        ],
-      },
-      {
-        path: 'user',
-        meta: { title: '个人中心' },
-        element: UserLayout,
-        children: [
-          {
-            path: 'posts',
-            meta: { title: '文章' },
-            element: UserPosts,
-          },
-          {
-            path: 'like',
-            meta: { title: '喜欢' },
-            element: UserLike,
-          },
-          {
-            path: 'collect',
-            meta: { title: '收藏' },
-            element: UserCollect,
-          },
-          {
-            path: 'follow',
-            meta: { title: '关注' },
-            element: UserFollow,
-          },
-          {
-            path: 'follower',
-            meta: { title: '粉丝' },
-            element: UserFollower,
-          },
-          {
-            path: 'message',
-            meta: { title: '消息', auth: true },
-            element: UserMessage,
-          },
-        ],
+        path: 'about',
+        meta: { title: '关于', screen: true },
+        element: About,
       },
     ],
-  },
-  {
-    path: '/login',
-    meta: { title: '登录', screen: true },
-    element: Login,
-  },
-  {
-    path: 'create',
-    meta: { title: '创作', auth: true, screen: true },
-    element: Create,
-  },
-  {
-    path: 'update',
-    meta: { title: '更新文章', auth: true },
-    element: Update,
-  },
-  {
-    path: 'article',
-    meta: { title: '查看' },
-    element: Article,
   },
 ]
 

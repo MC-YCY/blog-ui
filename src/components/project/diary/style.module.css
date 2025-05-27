@@ -1,0 +1,24 @@
+.diary {
+    padding: 20px 22px;
+    box-sizing: border-box;
+}
+
+.background {
+    opacity: 1;
+}
+
+html[class='dark'] .background {
+    opacity: 1;
+}
+
+.content {
+    --background-image:'url()';
+    font-family: serif;
+    font-size: 16px;
+    line-height: 42px;
+    text-align: justify;
+    letter-spacing: 1px;
+    padding: 0 10px;
+    background-image: var(--background-image);
+    background-size: 12px 42px;
+}

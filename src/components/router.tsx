@@ -3,7 +3,7 @@ import { Routers } from '@/constant/routers.ts'
 import RouterLocationProvider from '@/provider/RouterLocation.provider.tsx'
 import useUserStore from '@/stores/userStore.ts'
 import React, { ReactElement, useEffect, Suspense } from 'react'
-import { LoadingPage } from '@/components/loading.tsx'
+import { Loading as LoadingPage } from '@/components/project/loading/loading.tsx'
 
 // 优化后的路由守卫组件
 const AuthGuard = ({ children, meta }: {
@@ -24,7 +24,9 @@ const AuthGuard = ({ children, meta }: {
   }
 
   return (
-    <Suspense fallback={<LoadingPage />}>
+    <Suspense fallback={<div className={'w-full h-screen flex justify-center items-center'}>
+      <LoadingPage />
+    </div>}>
       {children}
     </Suspense>
   )
