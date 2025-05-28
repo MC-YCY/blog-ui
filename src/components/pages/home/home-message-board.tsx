@@ -79,7 +79,7 @@ export const HomeMessageBoard = () => {
           onSubmit={onSubmit} date={new Date()} username={
           <input aria-label="输入签名" defaultValue={username}
                  onInput={(e) => setUsername((e.target as HTMLInputElement)?.value)} placeholder={'请输入你的签名'}
-                 className={'outline-none border-none text-[14px] w-[300px]'} />
+                 className={'outline-none border-none text-[14px] w-full'} />
         }>
           留言
         </DiaryWriteButton>}

@@ -31,10 +31,10 @@ export const Accountability = () => {
 }
 
 export const DiaryWriteButton = ({ date, username, onSubmit, children, onOpenChange }: {
-  date: Date,
+  date: Date | string,
   username?: string | ReactNode,
   onSubmit?: (arg0: string, fn: (arg0: boolean) => void) => void,
-  children: ReactNode,
+  children?: ReactNode,
   onOpenChange?: (arg0: boolean) => void,
 }) => {
   const [value, setValue] = useState('')
