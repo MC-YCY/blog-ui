@@ -2,6 +2,7 @@
 
 import {ArticleType} from "@/types/article";
 import {cn} from "@/lib/utils";
+import dayjs from 'dayjs'
 
 interface ArticleComponentType extends ArticleType {
     onClick?: (arg0: ArticleType) => void;
@@ -29,16 +30,16 @@ export const Article = (props: ArticleComponentType) => {
                                 {props.title}
                             </div>
                         </div>
-                        <div className={'mt-2 text-[14px] opacity-55'}>{props.date}</div>
+                        <div className={'mt-2 text-[14px] opacity-55'}>{dayjs(props.createdAt).format('YYYY/MM/DD')}</div>
                     </div>
                 </div>
             </div>
             <div
                 className={cn('mt-20 xl:mt-4 md:mt-4 text-[14px] leading-[22px] mb-4 relative text-[rgba(0,0,0,.7)] dark:text-[rgba(255,255,255,.7)] cursor-pointer text-left', props.preview ? 'h-auto' : 'line-clamp-2 h-[44px]')}>
-                {props.describe}
+                {props.readme}
             </div>
             <div className={'flex'}>
-                <span className={'text-[14px] text-foreground opacity-75 cursor-pointer'}>{props.tags}</span>
+                <span className={'h-[22px] text-[14px] text-foreground opacity-75 cursor-pointer'}>{props.tags.join('/')}</span>
             </div>
         </div>
     </div>

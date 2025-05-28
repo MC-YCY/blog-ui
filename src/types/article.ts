@@ -2,7 +2,6 @@ import { User } from "./user";
 import { ArticleStatus } from '@/types/enums/article-status.enum.ts'
 import {BaseComment} from './comment.ts'
 import { Favorite } from '@/types/favorite.ts'
-import {ReactNode} from "react";
 
 export interface Article {
   id: number;
@@ -50,10 +49,5 @@ export interface ArticleItem {
   viewCount:number
 }
 
-export interface ArticleType {
-  banner: string,
-  title: string,
-  date: string,
-  describe: string | ReactNode,
-  tags: string,
+export interface ArticleType extends Article{
 }
