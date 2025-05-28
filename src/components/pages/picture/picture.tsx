@@ -29,6 +29,7 @@ export interface PictureSwiperItemContentType extends PictureType {
   setStates: (arg0: PictureType) => void;
   activeIndex: number;
   slideIndex: number;
+  showOptions: boolean;
 }
 
 export const PicturePreview = (current: PictureType) => {
@@ -108,11 +109,13 @@ export const PictureSwiperItemContent = (props: PictureSwiperItemContentType) =>
         className="absolute inset-0 z-10 bg-[linear-gradient(-125deg,#FFFFFFCC,#FFFFFF4D,#FFFFFF00,#FFFFFF00)] dark:bg-[linear-gradient(-125deg,#000000CC,#0000004D,#00000000,#00000000)] flex flex-col-reverse xl:flex-row">
         <div className="flex-1 flex-col flex p-[40px]">
           <div className="w-full xl:w-[50%] mt-auto pointer-events-auto">
-            <PictureSwiperItemContentOptions
-              {...props}
-              active={current.url}
-              setStates={handleSelect}
-            />
+            {
+              props.showOptions && <PictureSwiperItemContentOptions
+                {...props}
+                active={current.url}
+                setStates={handleSelect}
+              />
+            }
           </div>
         </div>
         <div className="w-full xl:w-[470px] flex flex-col p-[40px] ml-auto">

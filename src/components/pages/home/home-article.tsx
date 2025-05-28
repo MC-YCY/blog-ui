@@ -1,88 +1,87 @@
 import { PartTitle } from '@/components/project/part-title/part-title'
-import {Container} from "@/components/project/container";
-import {Article} from "@/components/project/article/article";
+import { Container } from '@/components/project/container'
+import { Article } from '@/components/project/article/article'
 import { useEffect, useState } from 'react'
-import {ArticleType} from "@/types/article";
+import { ArticleType } from '@/types/article'
 import MDEditor from '@uiw/react-md-editor'
 import {
-    Drawer,
-    DrawerClose,
-    DrawerContent,
-    DrawerFooter,
-    DrawerHeader,
-    DrawerTitle,
-} from "@/components/ui/drawer";
-import {SpanButton} from "@/components/ui/button";
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer'
+import { SpanButton } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 import { allArticlesList } from '@/api/article.api.ts'
 import useThemeStore from '@/stores/themeStore.ts'
 
 export const HomeArticle = () => {
-    const navigate = useNavigate()
-    const [articleList, setArticleList] = useState<ArticleType[]>([])
-    const getList = () => {
-        allArticlesList({
-            page: 1,
-            limit: 6,
-            tag: '',
-            title: '',
-        }).then(res => {
-            setArticleList(res.items)
-        })
-    }
-    useEffect(() => {
-        getList()
-    }, [])
-    const onLoad = () => {
-        navigate('/article')
-    }
-    const [previewOpen, setPreviewOpen] = useState(false)
-    const [current, setCurrent] = useState<ArticleType>()
-    const clickItem = (state: ArticleType) => {
-        setCurrent(state)
-        setPreviewOpen(true)
-    }
-    const {theme} = useThemeStore();
-    return <div className={'pt-[64px] min-h-[calc(100vh-64px)]'}>
-        <Container>
-            <Drawer open={previewOpen} onClose={() => setPreviewOpen(false)}>
-                <DrawerContent>
-                    <DrawerHeader>
-                        <DrawerTitle></DrawerTitle>
-                        {
-                          current && <Article preview={true} {...current} readme={<>
-                              <MDEditor className={'md-editor-preview'} data-color-mode={theme as 'light' | 'dark'} value={current.content}
-                                        preview={'preview'}
-                                        hideToolbar={true} />
-                          </>}></Article>
-                        }
-                    </DrawerHeader>
-                    <DrawerFooter>
-                        <DrawerClose>
-                            <SpanButton onClick={() => setPreviewOpen(false)}>关闭</SpanButton>
-                        </DrawerClose>
-                    </DrawerFooter>
-                </DrawerContent>
-            </Drawer>
-            <PartTitle title={'一些"小作文"'}
-                       description={'天天看各种框架比较，看的是瑟瑟发抖...'}></PartTitle>
-            <div className={'mt-3 xl:mt-6'}>
-                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px_20px]">
-                    {
-                        articleList.map((article, index) => {
-                            return <div key={'home-article' + index}>
-                                <Article {...article} onClick={(state) => clickItem(state)}></Article>
-                            </div>
-                        })
-                    }
-                </div>
+  const navigate = useNavigate()
+  const [articleList, setArticleList] = useState<ArticleType[]>([])
+  const getList = () => {
+    allArticlesList({
+      page: 1,
+      limit: 6,
+      tag: '',
+      title: '',
+    }).then(res => {
+      setArticleList(res.items)
+    })
+  }
+  useEffect(() => {
+    getList()
+  }, [])
+  const onLoad = () => {
+    navigate('/article')
+  }
+  const [previewOpen, setPreviewOpen] = useState(false)
+  const [current, setCurrent] = useState<ArticleType>()
+  const clickItem = (state: ArticleType) => {
+    setCurrent(state)
+    setPreviewOpen(true)
+  }
+  const { theme } = useThemeStore()
+  return <Container>
+    <Drawer open={previewOpen} onClose={() => setPreviewOpen(false)}>
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerTitle></DrawerTitle>
+          {
+            current && <Article preview={true} {...current} readme={<>
+              <MDEditor className={'md-editor-preview'} data-color-mode={theme as 'light' | 'dark'}
+                        value={current.content}
+                        preview={'preview'}
+                        hideToolbar={true} />
+            </>}></Article>
+          }
+        </DrawerHeader>
+        <DrawerFooter>
+          <DrawerClose>
+            <SpanButton onClick={() => setPreviewOpen(false)}>关闭</SpanButton>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+    <PartTitle title={'一些"小作文"'}
+               description={'天天看各种框架比较，看的是瑟瑟发抖...'}></PartTitle>
+    <div className={'mt-3 xl:mt-6'}>
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px_20px]">
+        {
+          articleList.map((article, index) => {
+            return <div key={'home-article' + index}>
+              <Article {...article} onClick={(state) => clickItem(state)}></Article>
             </div>
-            <div className={'flex justify-center mt-[20px]'}>
-                <div onClick={onLoad}
-                     className={'cursor-pointer opacity-55 w-[120px] h-[36px] flex justify-center items-center text-foreground border-[1px] border-foreground rounded-[36px] text-[14px]'}>
-                    查看更多
-                </div>
-            </div>
-        </Container>
+          })
+        }
+      </div>
     </div>
+    <div className={'flex justify-center mt-[20px]'}>
+      <div onClick={onLoad}
+           className={'cursor-pointer opacity-55 w-[120px] h-[36px] flex justify-center items-center text-foreground border-[1px] border-foreground rounded-[36px] text-[14px]'}>
+        查看更多
+      </div>
+    </div>
+  </Container>
 }

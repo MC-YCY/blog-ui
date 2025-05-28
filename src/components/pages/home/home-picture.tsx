@@ -2,13 +2,16 @@
 
 import {PartTitle} from "@/components/project/part-title/part-title";
 import {Container} from "@/components/project/container";
-import {Swiper, SwiperSlide} from "swiper/react";
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import {Scrollbar} from "swiper/modules";
 import {PictureType} from "@/types/picture";
-import {useState} from 'react';
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import {PicturePreview, PictureSwiperItemContent} from "@/components/pages/picture/picture";
+import {
+    PictureSwiperItemContent,
+    PicturePreview,
+} from '@/components/pages/picture/picture'
 
 import LinQiTingA from '@/assets/images/演员/林琦婷/group-a-1.jpeg';
 import LinQiTingB from '@/assets/images/演员/林琦婷/group-a-2.jpeg';
@@ -174,6 +177,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                 list.map((item, index) => {
                     return <SwiperSlide key={item.url}>
                         <PictureSwiperItemContent activeIndex={activeIndex}
+                                                  showOptions={false}
                                                   slideIndex={index}
                                                   setStates={(state) => setStates(state)} {...item}></PictureSwiperItemContent>
                     </SwiperSlide>
