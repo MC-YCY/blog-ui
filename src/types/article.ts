@@ -2,13 +2,14 @@ import { User } from "./user";
 import { ArticleStatus } from '@/types/enums/article-status.enum.ts'
 import {BaseComment} from './comment.ts'
 import { Favorite } from '@/types/favorite.ts'
+import { ReactNode } from 'react'
 
 export interface Article {
   id: number;
   title: string;
   content: string;
   tags: Array<string>;
-  readme: string;
+  readme: string | ReactNode;
   banner: string;
   createdAt: Date;
   viewCount: number;

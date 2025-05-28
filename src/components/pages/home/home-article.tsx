@@ -3,6 +3,7 @@ import {Container} from "@/components/project/container";
 import {Article} from "@/components/project/article/article";
 import { useEffect, useState } from 'react'
 import {ArticleType} from "@/types/article";
+import MDEditor from '@uiw/react-md-editor'
 import {
     Drawer,
     DrawerClose,
@@ -14,6 +15,7 @@ import {
 import {SpanButton} from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom'
 import { allArticlesList } from '@/api/article.api.ts'
+import useThemeStore from '@/stores/themeStore.ts'
 
 export const HomeArticle = () => {
     const navigate = useNavigate()
@@ -40,6 +42,7 @@ export const HomeArticle = () => {
         setCurrent(state)
         setPreviewOpen(true)
     }
+    const {theme} = useThemeStore();
     return <div className={'pt-[64px] min-h-[calc(100vh-64px)]'}>
         <Container>
             <Drawer open={previewOpen} onClose={() => setPreviewOpen(false)}>
@@ -47,7 +50,11 @@ export const HomeArticle = () => {
                     <DrawerHeader>
                         <DrawerTitle></DrawerTitle>
                         {
-                          current && <Article preview={true} {...current} readme={current.content}></Article>
+                          current && <Article preview={true} {...current} readme={<>
+                              <MDEditor className={'md-editor-preview'} data-color-mode={theme as 'light' | 'dark'} value={current.content}
+                                        preview={'preview'}
+                                        hideToolbar={true} />
+                          </>}></Article>
                         }
                     </DrawerHeader>
                     <DrawerFooter>

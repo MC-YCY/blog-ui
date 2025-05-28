@@ -19,6 +19,8 @@ import {
   SelectValue,
 } from '@/components/ui/select.tsx'
 import { ArticleTags } from '@/constant/article-tags.ts'
+import MDEditor from '@uiw/react-md-editor'
+import useThemeStore from '@/stores/themeStore.ts'
 
 const ArticlePage = () => {
   const [articleList, setArticleList] = useState<ArticleType[]>([])
@@ -53,6 +55,7 @@ const ArticlePage = () => {
     setWebType(value)
     setPage(1)
   }
+  const {theme} = useThemeStore();
   return <div className={'pt-[64px] min-h-[calc(100vh-64px)]'}>
     <Container>
       <Drawer open={previewOpen} onClose={() => setPreviewOpen(false)}>
@@ -60,7 +63,11 @@ const ArticlePage = () => {
           <DrawerHeader>
             <DrawerTitle></DrawerTitle>
             {
-              current && <Article preview={true} {...current} readme={current.content}></Article>
+              current && <Article preview={true} {...current} readme={<>
+                <MDEditor className={'md-editor-preview'} data-color-mode={theme as 'light' | 'dark'} value={current.content}
+                          preview={'preview'}
+                          hideToolbar={true} />
+              </>}></Article>
             }
           </DrawerHeader>
           <DrawerFooter>
