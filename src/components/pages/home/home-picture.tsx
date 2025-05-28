@@ -15,8 +15,6 @@ import LinQiTingB from '@/assets/images/演员/林琦婷/group-a-2.jpeg';
 import LinQiTingC from '@/assets/images/演员/林琦婷/group-b-1.jpeg';
 
 import MaQiuYuanA from '@/assets/images/演员/马秋元/group-a-1.png'
-import MaQiuYuanB from '@/assets/images/演员/马秋元/group-a-2.png'
-import MaQiuYuanC from '@/assets/images/演员/马秋元/group-a-3.png'
 import MaQiuYuanD from '@/assets/images/演员/马秋元/group-b-1.png'
 import MaQiuYuanE from '@/assets/images/演员/马秋元/group-b-2.png'
 
@@ -24,19 +22,8 @@ import LiShengXuanA from '@/assets/images/演员/黎晟萱/group-a-3.jpg'
 import LiShengXuanB from '@/assets/images/演员/黎晟萱/group-a-2.jpg'
 import LiShengXuanC from '@/assets/images/演员/黎晟萱/group-a-1.jpg'
 
-import XingNuanA from '@/assets/images/演员/邢暖/mmexport1748234645314.jpeg'
-import XingNuanB from '@/assets/images/演员/邢暖/mmexport1748234645635.jpeg'
 import XingNuanC from '@/assets/images/演员/邢暖/mmexport1748234645762.jpeg'
-import XingNuanD from '@/assets/images/演员/邢暖/mmexport1748234646129.jpeg'
-import XingNuanE from '@/assets/images/演员/邢暖/mmexport1748234646387.jpeg'
-import XingNuanF from '@/assets/images/演员/邢暖/mmexport1748234646793.jpeg'
 import XingNuanG from '@/assets/images/演员/邢暖/mmexport1748234647097.jpeg'
-import XingNuanH from '@/assets/images/演员/邢暖/mmexport1748234647318.jpeg'
-import XingNuanI from '@/assets/images/演员/邢暖/mmexport1748234647439.jpeg'
-import XingNuanJ from '@/assets/images/演员/邢暖/mmexport1748234647807.jpeg'
-import XingNuanK from '@/assets/images/演员/邢暖/mmexport1748234647923.jpeg'
-import XingNuanL from '@/assets/images/演员/邢暖/mmexport1748234648063.jpeg'
-import XingNuanM from '@/assets/images/演员/邢暖/mmexport1748234648287.jpeg'
 import XingNuanN from '@/assets/images/演员/邢暖/mmexport1748234648802.jpeg'
 
 const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }) => {
@@ -101,20 +88,6 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                     tip: '是简简单单的欣赏',
                     describe: '2022年底，马秋元拍摄短剧《小魔女秋元》正式踏入娱乐圈。2023年3月份参演首部古装剧集《回到古代当太子》，随后陆续拍摄《洛泱公主》、《一不小心撩错人》、《重生后我成了皇叔的心尖宠》、《少帅天天求复合》、《白月光攻略手册》、《合约期间爱上她》、《落花时节又逢君》、《清宫辞》、《桃花马上请长缨》等多部影视作品。2024年9月搭档杨泽出演古装甜宠剧《春宵》。',
                     date: '2025/5/22',
-                    url: MaQiuYuanB,
-                },
-                {
-                    name: '马秋元',
-                    tip: '是简简单单的欣赏',
-                    describe: '2022年底，马秋元拍摄短剧《小魔女秋元》正式踏入娱乐圈。2023年3月份参演首部古装剧集《回到古代当太子》，随后陆续拍摄《洛泱公主》、《一不小心撩错人》、《重生后我成了皇叔的心尖宠》、《少帅天天求复合》、《白月光攻略手册》、《合约期间爱上她》、《落花时节又逢君》、《清宫辞》、《桃花马上请长缨》等多部影视作品。2024年9月搭档杨泽出演古装甜宠剧《春宵》。',
-                    date: '2025/5/22',
-                    url: MaQiuYuanC,
-                },
-                {
-                    name: '马秋元',
-                    tip: '是简简单单的欣赏',
-                    describe: '2022年底，马秋元拍摄短剧《小魔女秋元》正式踏入娱乐圈。2023年3月份参演首部古装剧集《回到古代当太子》，随后陆续拍摄《洛泱公主》、《一不小心撩错人》、《重生后我成了皇叔的心尖宠》、《少帅天天求复合》、《白月光攻略手册》、《合约期间爱上她》、《落花时节又逢君》、《清宫辞》、《桃花马上请长缨》等多部影视作品。2024年9月搭档杨泽出演古装甜宠剧《春宵》。',
-                    date: '2025/5/22',
                     url: MaQiuYuanD,
                 },
                 {
@@ -161,22 +134,8 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
             tip: '是简简单单的欣赏',
             describe: '',
             date: '2025/5/26',
-            url: XingNuanA,
+            url: XingNuanC,
             children: [
-                {
-                    name: '邢暖',
-                    tip: '是简简单单的欣赏',
-                    describe: '',
-                    date: '2025/5/26',
-                    url: XingNuanA,
-                },
-                {
-                    name: '邢暖',
-                    tip: '是简简单单的欣赏',
-                    describe: '',
-                    date: '2025/5/26',
-                    url: XingNuanB,
-                },
                 {
                     name: '邢暖',
                     tip: '是简简单单的欣赏',
@@ -189,70 +148,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                     tip: '是简简单单的欣赏',
                     describe: '',
                     date: '2025/5/26',
-                    url: XingNuanD,
-                },
-                {
-                    name: '邢暖',
-                    tip: '是简简单单的欣赏',
-                    describe: '',
-                    date: '2025/5/26',
-                    url: XingNuanE,
-                },
-                {
-                    name: '邢暖',
-                    tip: '是简简单单的欣赏',
-                    describe: '',
-                    date: '2025/5/26',
-                    url: XingNuanF,
-                },
-                {
-                    name: '邢暖',
-                    tip: '是简简单单的欣赏',
-                    describe: '',
-                    date: '2025/5/26',
                     url: XingNuanG,
-                },
-                {
-                    name: '邢暖',
-                    tip: '是简简单单的欣赏',
-                    describe: '',
-                    date: '2025/5/26',
-                    url: XingNuanH,
-                },
-                {
-                    name: '邢暖',
-                    tip: '是简简单单的欣赏',
-                    describe: '',
-                    date: '2025/5/26',
-                    url: XingNuanI,
-                },
-                {
-                    name: '邢暖',
-                    tip: '是简简单单的欣赏',
-                    describe: '',
-                    date: '2025/5/26',
-                    url: XingNuanJ,
-                },
-                {
-                    name: '邢暖',
-                    tip: '是简简单单的欣赏',
-                    describe: '',
-                    date: '2025/5/26',
-                    url: XingNuanK,
-                },
-                {
-                    name: '邢暖',
-                    tip: '是简简单单的欣赏',
-                    describe: '',
-                    date: '2025/5/26',
-                    url: XingNuanL,
-                },
-                {
-                    name: '邢暖',
-                    tip: '是简简单单的欣赏',
-                    describe: '',
-                    date: '2025/5/26',
-                    url: XingNuanM,
                 },
                 {
                     name: '邢暖',
@@ -276,7 +172,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
             modules={[Scrollbar]}>
             {
                 list.map((item, index) => {
-                    return <SwiperSlide key={index}>
+                    return <SwiperSlide key={item.url}>
                         <PictureSwiperItemContent activeIndex={activeIndex}
                                                   slideIndex={index}
                                                   setStates={(state) => setStates(state)} {...item}></PictureSwiperItemContent>
