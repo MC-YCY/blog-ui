@@ -2,10 +2,10 @@
 
 import {PartTitle} from "@/components/project/part-title/part-title";
 import {Container} from "@/components/project/container";
-import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import {Scrollbar} from "swiper/modules";
 import {PictureType} from "@/types/picture";
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
