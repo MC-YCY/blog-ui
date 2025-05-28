@@ -6,50 +6,68 @@ import { Container } from '@/components/project/container'
 import { Autoplay, Grid, Scrollbar } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { MessageBoard } from '@/types/message-board'
-import { DiaryWriteButton } from '@/components/pages/diary/diary-wrate-button.tsx'
+import { Accountability, DiaryWriteButton } from '@/components/pages/diary/diary-wrate-button.tsx'
 import { toast } from 'sonner'
 import { createMessage, getMessages } from '@/api/messages.api.ts'
 import dayjs from 'dayjs'
 
 export const HomeMessageBoard = () => {
-  const [list,setList] = useState<MessageBoard[]>([
+  const [list, setList] = useState<MessageBoard[]>([
     {
-      content:'内容',
-      username:'春秋半夏',
-      date:'2025/10/1',
-      id:0
-    }
+      content: '内容',
+      username: '春秋半夏',
+      date: '2025/10/1',
+      id: 0,
+    },
   ])
-  const [username,setUsername] = useState<string>('')
-  const getList = () =>{
+  const [username, setUsername] = useState<string>('')
+  const getList = () => {
     getMessages({
-      page:1,
-      limit:32
-    }).then(res=>{
-      setList(res.data);
+      page: 1,
+      limit: 32,
+    }).then(res => {
+      setList(res.data)
     })
   }
   useEffect(() => {
     getList()
-  },[])
-  const onSubmit = async (content: string,setOpen:(arg0:boolean)=>void) => {
-    if(!(content && content.trim()) || !(username && content.trim())) {
-      toast.error('tip',{
-        description:'请补充签名、内容',
+  }, [])
+  const onSubmit = async (content: string, setOpen: (arg0: boolean) => void) => {
+    if (!(content && content.trim()) || !(username && content.trim())) {
+      toast.error('tip', {
+        description: '请补充签名、内容',
         action: {
           label: '了解',
-          onClick:()=>{
+          onClick: () => {
 
-          }
+          },
         },
-        duration:2000
-      });
-      setOpen(true);
-      return;
+        duration: 2000,
+      })
+      setOpen(true)
+      return
     }
-    await createMessage({content:content,username:username});
-    setOpen(false);
-    getList();
+
+
+    toast('', {
+      className: 'max-w-[300px]! flex-wrap! custom-toast',
+      description: <Accountability></Accountability>,
+      action: {
+        label: '提交',
+        onClick: async () => {
+          await createMessage({ content: content, username: username })
+          setOpen(false)
+          getList()
+        },
+      },
+      cancel: {
+        label: '取消',
+        onClick: () => {
+          setOpen(false)
+        },
+      },
+      duration: 60000,
+    })
   }
   return (
     <Container>
@@ -57,9 +75,11 @@ export const HomeMessageBoard = () => {
         title={'一些"美妙的语言"'}
         description={'**星###星！@#￥%……&'}
         action={<DiaryWriteButton
-          onOpenChange={()=>setUsername('')}
+          onOpenChange={() => setUsername('')}
           onSubmit={onSubmit} date={new Date()} username={
-          <input aria-label="输入签名" defaultValue={username} onInput={(e)=>setUsername((e.target as HTMLInputElement)?.value)} placeholder={'请输入你的签名'} className={'outline-none border-none text-[14px]'} />
+          <input aria-label="输入签名" defaultValue={username}
+                 onInput={(e) => setUsername((e.target as HTMLInputElement)?.value)} placeholder={'请输入你的签名'}
+                 className={'outline-none border-none text-[14px] w-[300px]'} />
         }>
           留言
         </DiaryWriteButton>}
@@ -117,7 +137,7 @@ export const HomeMessageBoard = () => {
                                         </span>
                   </div>
                   <div className="text-[14px] text-foreground opacity-75 mt-2">
-                    {dayjs(item.date).format("YYYY/MM/DD HH:mm:ss")}
+                    {dayjs(item.date).format('YYYY/MM/DD HH:mm:ss')}
                   </div>
                 </div>
               </div>
