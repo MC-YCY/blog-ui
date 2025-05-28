@@ -7,6 +7,7 @@ import {cn} from "@/lib/utils";
 import IsqqwBanner from '@/assets/images/data-slide/isqqw-banner.png';
 import SaBlogBanner from '@/assets/images/data-slide/sa-blog-banner.jpg';
 import NextBlogBanner from '@/assets/images/data-slide/next-blog-banner.jpg';
+import { useVisitStore } from '@/stores/visitStore.ts'
 
 const list = [
     {
@@ -113,16 +114,18 @@ const HomeDataSwiper = () => {
     </div>
 }
 const HomeDataCardCount = () => {
+    const { total } = useVisitStore()
     return <div
         className={'h-full flex flex-col justify-center xl:py-[32px] xl:px-[40px] pl-4 pt-2 bg-[linear-gradient(121deg,rgba(196,255,255,0.4)_0%,rgba(190,83,69,0.4)_100%)] rounded-[14px] cursor-pointer  bg-background shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]'}>
-        <div className={'text-[24px] xl:text-[64px] h-[24px] xl:h-[64px] flex items-center text-foreground'}>6864</div>
+        <div className={'text-[24px] xl:text-[64px] h-[24px] xl:h-[64px] flex items-center text-foreground'}>{total}</div>
         <div className={'text-[16px] h-[16px] flex items-center my-[10px] text-foreground'}>总访问量</div>
     </div>
 }
 const HomeDataCardDate = () => {
+    const { today } = useVisitStore()
     return <div
         className={'h-full flex flex-col justify-center xl:py-[32px] xl:px-[40px] pl-4 pt-2 bg-[linear-gradient(121deg,rgba(239,184,174,0.4)_0%,rgba(127,156,76,0.4)_100%)] rounded-[14px] cursor-pointer  bg-background shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]'}>
-        <div className={'text-[24px] xl:text-[64px] h-[24px] xl:h-[64px] flex items-center text-foreground'}>679</div>
+        <div className={'text-[24px] xl:text-[64px] h-[24px] xl:h-[64px] flex items-center text-foreground'}>{today}</div>
         <div className={'text-[16px] h-[16px] flex items-center my-[10px] text-foreground'}>今日访问</div>
     </div>
 }
