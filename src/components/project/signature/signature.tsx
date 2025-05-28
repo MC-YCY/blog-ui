@@ -39,7 +39,7 @@ export const Signature = () => {
 }
 export const SignatureGradation = ({className}:{className?:string}) => {
     return <svg
-        className={cn(style.SignatureGradation,className)} strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"
+        className={cn(style.signatureGradation,className)} strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"
         version="1.0" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 749 100"
         preserveAspectRatio="xMidYMid meet">
         <defs>
