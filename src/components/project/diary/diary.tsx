@@ -4,7 +4,7 @@ import React, {ReactNode} from "react";
 import backgroundImage from '@/assets/images/diary-line-border.png'
 
 interface Props {
-    title: string;
+    title: string | ReactNode;
     date: string;
     weather: ReactNode;
     content: ReactNode;
