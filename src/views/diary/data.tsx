@@ -2,6 +2,7 @@ import { IconSunFilled } from '@tabler/icons-react'
 
 export const defaultData = [
   {
+    id:+new Date()+100,
     title: '春秋半夏',
     date: new Date(),
     weather: <IconSunFilled width={24} height={24} color={'#ecca2f'} />,
@@ -29,6 +30,7 @@ export const defaultData = [
     </div>,
   },
   {
+    id:+new Date()+200,
     title: '初识Next.js',
     date: new Date(),
     weather: <IconSunFilled width={24} height={24} color={'#ecca2f'} />,
