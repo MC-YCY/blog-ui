@@ -6,6 +6,7 @@
 @import "swiper/css/effect-cards";
 @import 'swiper/css/pagination';
 @import "tailwindcss";
+@import 'react-photo-view/dist/react-photo-view.css';
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));

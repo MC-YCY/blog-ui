@@ -1,22 +1,14 @@
 'use client'
 
 import { PictureType } from '@/types/picture'
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/drawer'
-import { SpanButton } from '@/components/ui/button'
 import { IconMaximize } from '@tabler/icons-react'
 import { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import { cn } from '@/lib/utils'
 import { AnimatePresence, motion } from 'framer-motion'
 import dayjs from 'dayjs'
+import { PhotoProvider, PhotoView } from 'react-photo-view'
+import { SpanButton } from '@/components/ui/button.tsx'
 
 export interface PictureSwiperItemContentOptionsType extends PictureType {
   setStates: (arg0: PictureType) => void;
@@ -33,35 +25,21 @@ export interface PictureSwiperItemContentType extends PictureType {
 }
 
 export const PicturePreview = (current: PictureType) => {
-  return <Drawer>
-    <DrawerTrigger>
-      <SpanButton tabIndex={-1} className={'w-[36px]! h-[36px] flex items-center justify-center'}>
-        <IconMaximize width={24} height={24}></IconMaximize>
-      </SpanButton>
-    </DrawerTrigger>
-    <DrawerContent>
-      <DrawerHeader>
-        <DrawerTitle>{current?.name}</DrawerTitle>
-        <div className={'h-[calc(100vh-200px)] overflow-y-auto relative'}>
-          {current?.url && <img
-            className={'object-[50%_30%] w-full h-full object-cover'}
-            src={current?.url}
-            alt={''} />}
-        </div>
-      </DrawerHeader>
-      <DrawerFooter>
-        <DrawerClose>
-          <SpanButton>关闭</SpanButton>
-        </DrawerClose>
-      </DrawerFooter>
-    </DrawerContent>
-  </Drawer>
+  return <>
+    <PhotoProvider>
+      <PhotoView key={current.url} src={current.url}>
+        <SpanButton tabIndex={-1} className={'w-[36px]! h-[36px] flex items-center justify-center'}>
+          <IconMaximize width={24} height={24}></IconMaximize>
+        </SpanButton>
+      </PhotoView>
+    </PhotoProvider>
+  </>
 }
 
 export const PictureSwiperItemContentOptions = (props: PictureSwiperItemContentOptionsType) => {
   const swiperRef = useRef<SwiperRef | null>(null)
   useEffect(() => {
-    requestAnimationFrame(()=>{
+    requestAnimationFrame(() => {
       if (!(props.activeIndex === props.slideIndex)) return
       if (props.children?.length) {
         props.setStates(props.children[0])
