@@ -19,7 +19,7 @@ export interface Diary {
 }
 
 export interface DiaryType{
-  id?:string,
+  id?:string | number,
   title:string,
   date:string | Date,
   weather:string | ReactNode,
