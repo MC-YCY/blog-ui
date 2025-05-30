@@ -4,5 +4,6 @@ export interface PictureType {
     describe: string;
     date: Date | string;
     url: string;
+    thumbnail?: string;
     children?: PictureType[];
 }

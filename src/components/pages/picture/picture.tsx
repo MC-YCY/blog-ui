@@ -85,7 +85,7 @@ export const PictureSwiperItemContentOptions = (props: PictureSwiperItemContentO
                onClick={() => props.setStates(item)}>
             <img
               className={cn(item.url === props.active ? 'opacity-100' : 'opacity-50', 'transition-[opacity_0.3s_linear] object-[50%_30%] w-full h-full object-cover')}
-              src={item.url} alt="" />
+              src={item.thumbnail ?? item.url} alt="" />
           </div>
         </SwiperSlide>
       })
@@ -98,9 +98,7 @@ export const PictureSwiperItemContent = (props: PictureSwiperItemContentType) =>
 
   const handleSelect = (next: PictureType) => {
     setCurrent(next)
-    if (props.url !== next.url) {
-      props.setStates(next)
-    }
+    props.setStates(next)
   }
 
   return (

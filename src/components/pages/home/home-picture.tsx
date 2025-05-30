@@ -16,18 +16,30 @@ import {
 import LinQiTingA from '@/assets/images/演员/林琦婷/group-a-1.jpeg';
 import LinQiTingB from '@/assets/images/演员/林琦婷/group-a-2.jpeg';
 import LinQiTingC from '@/assets/images/演员/林琦婷/group-b-1.jpeg';
+import LinQiTingAthumbnail from '@/assets/images/演员/林琦婷/thumbnail/group-a-1.jpeg';
+import LinQiTingBthumbnail from '@/assets/images/演员/林琦婷/thumbnail/group-a-2.jpeg';
+import LinQiTingCthumbnail from '@/assets/images/演员/林琦婷/thumbnail/group-a-3.jpeg';
 
 import MaQiuYuanA from '@/assets/images/演员/马秋元/group-a-1.png'
 import MaQiuYuanD from '@/assets/images/演员/马秋元/group-b-1.png'
 import MaQiuYuanE from '@/assets/images/演员/马秋元/group-b-2.png'
+import MaQiuYuanAthumbnail from '@/assets/images/演员/马秋元/thumbnail/group-a-1.png'
+import MaQiuYuanDthumbnail from '@/assets/images/演员/马秋元/thumbnail/group-b-1.png'
+import MaQiuYuanEthumbnail from '@/assets/images/演员/马秋元/thumbnail/group-b-2.png'
 
 import LiShengXuanA from '@/assets/images/演员/黎晟萱/group-a-3.jpg'
 import LiShengXuanB from '@/assets/images/演员/黎晟萱/group-a-2.jpg'
 import LiShengXuanC from '@/assets/images/演员/黎晟萱/group-a-1.jpg'
+import LiShengXuanAthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-3.jpg'
+import LiShengXuanBthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-2.jpg'
+import LiShengXuanCthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-1.jpg'
 
 import XingNuanC from '@/assets/images/演员/邢暖/mmexport1748234645762.jpeg'
 import XingNuanG from '@/assets/images/演员/邢暖/mmexport1748234647097.jpeg'
 import XingNuanN from '@/assets/images/演员/邢暖/mmexport1748234648802.jpeg'
+import XingNuanCthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234645762.jpeg'
+import XingNuanGthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234647097.jpeg'
+import XingNuanNthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234648802.jpeg'
 
 const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }) => {
     const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -53,6 +65,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
 新剧：《穿成女配后 公主她不伺候了》姜玥 《开局遇到高冷校花》叶弥月 《归期未有期》颜朝舞《我的电子女友咋修成剑仙》李清然 《学姐我的心被你偷啦》苏白粥《锦绣繁华》谢静姝《偷听有戏》林清寒《悔不当初》柳如烟《年下弟弟又野又凶》林夕 《我家宝匣通古今 女帝认我做老公》独孤月 《订婚被抛弃 我转身娶了京圈大小姐》凌若潇 《听见你的声音》程清禾 《步步沉沦》林知夏`,
                     date: '2025/5/22',
                     url: LinQiTingA,
+                    thumbnail:LinQiTingAthumbnail
                 },
                 {
                     name: '林琦婷（琦琦小霸王🧸）',
@@ -61,6 +74,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
 新剧：《穿成女配后 公主她不伺候了》姜玥 《开局遇到高冷校花》叶弥月 《归期未有期》颜朝舞《我的电子女友咋修成剑仙》李清然 《学姐我的心被你偷啦》苏白粥《锦绣繁华》谢静姝《偷听有戏》林清寒《悔不当初》柳如烟《年下弟弟又野又凶》林夕 《我家宝匣通古今 女帝认我做老公》独孤月 《订婚被抛弃 我转身娶了京圈大小姐》凌若潇 《听见你的声音》程清禾 《步步沉沦》林知夏`,
                     date: '2025/5/22',
                     url: LinQiTingB,
+                    thumbnail:LinQiTingBthumbnail
                 },
                 {
                     name: '林琦婷（琦琦小霸王🧸）',
@@ -69,6 +83,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
 新剧：《穿成女配后 公主她不伺候了》姜玥 《开局遇到高冷校花》叶弥月 《归期未有期》颜朝舞《我的电子女友咋修成剑仙》李清然 《学姐我的心被你偷啦》苏白粥《锦绣繁华》谢静姝《偷听有戏》林清寒《悔不当初》柳如烟《年下弟弟又野又凶》林夕 《我家宝匣通古今 女帝认我做老公》独孤月 《订婚被抛弃 我转身娶了京圈大小姐》凌若潇 《听见你的声音》程清禾 《步步沉沦》林知夏`,
                     date: '2025/5/22',
                     url: LinQiTingC,
+                    thumbnail:LinQiTingCthumbnail
                 },
             ]
         },
@@ -85,6 +100,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                     describe: '2022年底，马秋元拍摄短剧《小魔女秋元》正式踏入娱乐圈。2023年3月份参演首部古装剧集《回到古代当太子》，随后陆续拍摄《洛泱公主》、《一不小心撩错人》、《重生后我成了皇叔的心尖宠》、《少帅天天求复合》、《白月光攻略手册》、《合约期间爱上她》、《落花时节又逢君》、《清宫辞》、《桃花马上请长缨》等多部影视作品。2024年9月搭档杨泽出演古装甜宠剧《春宵》。',
                     date: '2025/5/22',
                     url: MaQiuYuanA,
+                    thumbnail: MaQiuYuanAthumbnail
                 },
                 {
                     name: '马秋元',
@@ -92,6 +108,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                     describe: '2022年底，马秋元拍摄短剧《小魔女秋元》正式踏入娱乐圈。2023年3月份参演首部古装剧集《回到古代当太子》，随后陆续拍摄《洛泱公主》、《一不小心撩错人》、《重生后我成了皇叔的心尖宠》、《少帅天天求复合》、《白月光攻略手册》、《合约期间爱上她》、《落花时节又逢君》、《清宫辞》、《桃花马上请长缨》等多部影视作品。2024年9月搭档杨泽出演古装甜宠剧《春宵》。',
                     date: '2025/5/22',
                     url: MaQiuYuanD,
+                    thumbnail: MaQiuYuanDthumbnail
                 },
                 {
                     name: '马秋元',
@@ -99,6 +116,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                     describe: '2022年底，马秋元拍摄短剧《小魔女秋元》正式踏入娱乐圈。2023年3月份参演首部古装剧集《回到古代当太子》，随后陆续拍摄《洛泱公主》、《一不小心撩错人》、《重生后我成了皇叔的心尖宠》、《少帅天天求复合》、《白月光攻略手册》、《合约期间爱上她》、《落花时节又逢君》、《清宫辞》、《桃花马上请长缨》等多部影视作品。2024年9月搭档杨泽出演古装甜宠剧《春宵》。',
                     date: '2025/5/22',
                     url: MaQiuYuanE,
+                    thumbnail: MaQiuYuanEthumbnail
                 },
             ]
         },
@@ -115,6 +133,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                     describe: '一个理科生（应该算正在努力当演员）的养成系演员！短剧《开局女帝盯上了我的彩礼》《练气3000层，开局收女帝为徒》《犹为离人照落花》《厉总，江秘书她离职了》《你竟然是我的前妻》《爱上你的心脏》《上岸吧人鱼殿下》《婚姻的温度》《肥妻逆袭，冷酷厂长追疯了》《原谅他99次》《沈总，你养的金丝雀变凤凰了》《丑妃倾天下：禁欲王爷宠疯了》',
                     date: '2025/5/22',
                     url: LiShengXuanA,
+                    thumbnail:LiShengXuanAthumbnail
                 },
                 {
                     name: '黎晟萱',
@@ -122,6 +141,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                     describe: '一个理科生（应该算正在努力当演员）的养成系演员！短剧《开局女帝盯上了我的彩礼》《练气3000层，开局收女帝为徒》《犹为离人照落花》《厉总，江秘书她离职了》《你竟然是我的前妻》《爱上你的心脏》《上岸吧人鱼殿下》《婚姻的温度》《肥妻逆袭，冷酷厂长追疯了》《原谅他99次》《沈总，你养的金丝雀变凤凰了》《丑妃倾天下：禁欲王爷宠疯了》',
                     date: '2025/5/22',
                     url: LiShengXuanB,
+                    thumbnail:LiShengXuanBthumbnail
                 },
                 {
                     name: '黎晟萱',
@@ -129,6 +149,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                     describe: '一个理科生（应该算正在努力当演员）的养成系演员！短剧《开局女帝盯上了我的彩礼》《练气3000层，开局收女帝为徒》《犹为离人照落花》《厉总，江秘书她离职了》《你竟然是我的前妻》《爱上你的心脏》《上岸吧人鱼殿下》《婚姻的温度》《肥妻逆袭，冷酷厂长追疯了》《原谅他99次》《沈总，你养的金丝雀变凤凰了》《丑妃倾天下：禁欲王爷宠疯了》',
                     date: '2025/5/22',
                     url: LiShengXuanC,
+                    thumbnail:LiShengXuanCthumbnail
                 },
             ]
         },
@@ -145,6 +166,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                     describe: '',
                     date: '2025/5/26',
                     url: XingNuanC,
+                    thumbnail: XingNuanCthumbnail
                 },
                 {
                     name: '邢暖',
@@ -152,6 +174,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                     describe: '',
                     date: '2025/5/26',
                     url: XingNuanG,
+                    thumbnail: XingNuanGthumbnail
                 },
                 {
                     name: '邢暖',
@@ -159,6 +182,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                     describe: '',
                     date: '2025/5/26',
                     url: XingNuanN,
+                    thumbnail: XingNuanNthumbnail
                 },
             ]
         }
@@ -177,7 +201,7 @@ const PictureSwiper = ({setPreview}: { setPreview: (arg0: PictureType) => void }
                 list.map((item, index) => {
                     return <SwiperSlide key={item.url}>
                         <PictureSwiperItemContent activeIndex={activeIndex}
-                                                  showOptions={false}
+                                                  showOptions={true}
                                                   slideIndex={index}
                                                   setStates={(state) => setStates(state)} {...item}></PictureSwiperItemContent>
                     </SwiperSlide>
