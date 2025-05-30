@@ -79,7 +79,7 @@ const SmartPagination = React.forwardRef<HTMLDivElement, SmartPaginationProps>(
 
     return (
       <Pagination ref={ref} className={className}>
-        <PaginationContent className={'bg-background'}>
+        <PaginationContent className={'bg-background shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]'}>
           <PaginationItem>
             <PaginationPrevious
               href="#"
