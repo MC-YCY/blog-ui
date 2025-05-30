@@ -67,7 +67,7 @@ export const HomeArticle = () => {
     <PartTitle title={'一些"小作文"'}
                description={'天天看各种框架比较，看的是瑟瑟发抖...'}></PartTitle>
     <div className={'mt-3 xl:mt-6'}>
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px_20px]">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px_32px]">
         {
           articleList.map((article, index) => {
             return <div key={'home-article' + index}>

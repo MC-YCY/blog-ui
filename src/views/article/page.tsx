@@ -25,7 +25,7 @@ import useThemeStore from '@/stores/themeStore.ts'
 const ArticlePage = () => {
   const [articleList, setArticleList] = useState<ArticleType[]>([])
   const [page, setPage] = useState(1)
-  const [pageSize] = useState(6)
+  const [pageSize] = useState(12)
   const [total, setTotal] = useState(0)
   const [webType,setWebType] = useState<string>(' ')
   const getList = () => {
@@ -99,7 +99,7 @@ const ArticlePage = () => {
         </div>
       }></PartTitle>
       <div className={'mt-3 xl:mt-6'}>
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px_20px]">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px_32px]">
           {
             articleList.map((article, index) => {
               return <div key={'home-article' + index}>
@@ -109,7 +109,7 @@ const ArticlePage = () => {
           }
         </div>
       </div>
-      <div className={'flex justify-center w-full mt-10'}>
+      <div className={'flex justify-center w-full mt-10 sticky bottom-10'}>
         <SmartPagination
           current={page}
           total={total}
