@@ -11,6 +11,7 @@ import {
 } from '@tabler/icons-react'
 import {Diary} from "@/components/project/diary/diary";
 import { useNavigate } from 'react-router-dom'
+import { getDiarys } from '@/api/diary.api.ts'
 
 export const HomeDiary = () => {
     const [open, setOpen] = useState(true);
@@ -36,8 +37,54 @@ export const HomeDiary = () => {
     const onToday = () => {
         setDate(new Date());
     }
+    const [current, setCurrent] = useState({
+        title:'',
+        date:date,
+        content:<>
+            <p>React
+                交互式日历组件解析：手势操作与高度可定制的日期选择器，这个React日历组件融合了传统日期选择与现代交互设计，主要提供以下功能：</p>
+            <p className={'font-bold'}>动态日期渲染:</p>
+            <div className={'ml-4'}>
+                <li>鼠标拖拽展开/收起日历</li>
+                <li>智能滑动阈值判定（5px容差值）</li>
+                <li>平滑过渡动画效果</li>
+            </div>
+            <p className={'font-bold'}>多维度定制化:</p>
+            <div className={'ml-4'}>
+                <li>自定义周标题（customWeek）</li>
+                <li>日期单元格渲染（customDay）</li>
+                <li>动态高度配置（cellHeight）</li>
+            </div>
+            <p className={'font-bold'}>事件反馈机制:</p>
+            <div className={'ml-4'}>
+                <li>日期选择回调（onClick）</li>
+                <li>数据变化通知（onChange）</li>
+                <li>展开状态切换（onToggle）</li>
+            </div>
+        </>
+    });
+    const getDiartsFn = () =>{
+        getDiarys({
+            page:1,
+            limit:1,
+            date:dayjs(date).format('YYYY-MM-DD HH:mm:ss'),
+        }).then(res=>{
+            if(res.data && res.data.length){
+                let item = res.data[0];
+                setCurrent({
+                    title:item.username,
+                    date:item.date,
+                    content:item.content,
+                });
+            }
+        })
+    }
+    useEffect(() => {
+        getDiartsFn()
+    }, [date])
     const clickCalendarItem = (d: { day: number, month: number, year: number }) => {
-        setDate(new Date(d.year, d.month, d.day));
+        let date = new Date(d.year, d.month, d.day);
+        setDate(date);
     }
     useEffect(() => {
         const handleResize = () => {
@@ -85,31 +132,10 @@ export const HomeDiary = () => {
                     className1={'min-h-[500px]'}
                     className2={'min-h-[500px]'}
                     className3={'min-h-[400px]'}
-                    title={'春秋半夏'}
-                    date={dayjs(date).format('YYYY年MM月DD日')}
+                    title={current.title}
+                    date={dayjs(current.date).format('YYYY年MM月DD日')}
                     weather={<IconSunFilled width={24} height={24} color={'#ecca2f'}/>}
-                    content={<>
-                        <p>React
-                            交互式日历组件解析：手势操作与高度可定制的日期选择器，这个React日历组件融合了传统日期选择与现代交互设计，主要提供以下功能：</p>
-                        <p className={'font-bold'}>动态日期渲染:</p>
-                        <div className={'ml-4'}>
-                            <li>鼠标拖拽展开/收起日历</li>
-                            <li>智能滑动阈值判定（5px容差值）</li>
-                            <li>平滑过渡动画效果</li>
-                        </div>
-                        <p className={'font-bold'}>多维度定制化:</p>
-                        <div className={'ml-4'}>
-                            <li>自定义周标题（customWeek）</li>
-                            <li>日期单元格渲染（customDay）</li>
-                            <li>动态高度配置（cellHeight）</li>
-                        </div>
-                        <p className={'font-bold'}>事件反馈机制:</p>
-                        <div className={'ml-4'}>
-                            <li>日期选择回调（onClick）</li>
-                            <li>数据变化通知（onChange）</li>
-                            <li>展开状态切换（onToggle）</li>
-                        </div>
-                    </>}></Diary>
+                    content={current.content}></Diary>
             </div>
         </div>
         <div className={'flex justify-center mt-[28px]'}>

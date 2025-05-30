@@ -36,7 +36,7 @@ export const Diary = ({
                 {weather}
             </div>
         </div>
-        <div style={{'--background-image':`url(${backgroundImage})`} as React.CSSProperties} className={cn(style.content, className3,'cursor-default dark:opacity-65')}>
+        <div style={{'--background-image':`url(${backgroundImage})`} as React.CSSProperties} className={cn(style.content, className3,'cursor-default dark:opacity-65 whitespace-pre-wrap')}>
             {content}
         </div>
     </div>
