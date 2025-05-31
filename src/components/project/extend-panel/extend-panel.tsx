@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react'
+import { MouseEvent, TransitionEvent, useState } from 'react'
 import style from './style.module.css'
 
 // 定义卡片数据类型
@@ -40,9 +40,17 @@ export const ExtendPanel = (props: ExtendPanelProps) => {
   const clickItem = (index: number) => {
     setActiveKey(index)
   }
+  const [isIngClassName, setIsIngClassName] = useState<boolean>(false)
   const clickItemClose = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation()
+    setIsIngClassName(true);
     setActiveKey(-1)
+  }
+  const onTransitionEnd = (event:TransitionEvent<HTMLDivElement>) =>{
+    const element = event.target as HTMLDivElement;
+    if (isIngClassName && element.dataset.ing === '1') {
+      setIsIngClassName(false)
+    }
   }
   const translate3dStyleVar = (index: number): Record<string, string | number> => {
     return {
@@ -50,7 +58,7 @@ export const ExtendPanel = (props: ExtendPanelProps) => {
     }
   }
 
-  return <div className={style.cards}>
+  return <div className={`${style.cards} ${isIngClassName ? style.ing : ''}`} >
     <div className={style.cardBox + ` ${(activeKey >= 0 ? style.start : '')}`}>
       {
         props.cards.map((card, index) => {
@@ -58,7 +66,7 @@ export const ExtendPanel = (props: ExtendPanelProps) => {
           if (index === activeKey) {
             className += ` ${style.cardBoxItemActive}`
           }
-          return <div className={className} style={translate3dStyleVar(index)} onClick={() => clickItem(index)}>
+          return <div className={className} onTransitionEnd={onTransitionEnd} style={translate3dStyleVar(index)} onClick={() => clickItem(index)} data-ing={1}>
             <ExtendPanelContent clickItemClose={clickItemClose} card={card}></ExtendPanelContent>
           </div>
         })

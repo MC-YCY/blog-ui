@@ -92,10 +92,16 @@
 .item-content-text-layer-content{
     padding: 0 20px 50px;
     transform: translateY(100%);
-    transition: all .3s 1s ease-out;
+    transition: all .3s ease-out;
     position: relative;
     width: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+}
+.ing .item-content-text-layer-content{
+    transition: all .3s 1s ease-out;
+}
+.ing .item-content-number-layer-value{
+    transition: all .3s 1s ease-out;
 }
 .start .item-content-text-layer-content{
     transition: all .3s ease-out;
@@ -127,7 +133,7 @@
     color: #0f9d58;
     opacity: 0;
     transform: translateY(100%);
-    transition: all .3s 1s ease-out;
+    transition: all .3s ease-out;
     width: 100%;
     display: flex;
     justify-content: center;
