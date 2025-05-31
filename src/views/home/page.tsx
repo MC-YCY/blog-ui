@@ -7,6 +7,7 @@ import {HomeDiary} from "@/components/pages/home/home-diary";
 import {HomeArticle} from "@/components/pages/home/home-article";
 import {HomePicture} from "@/components/pages/home/home-picture";
 import {HomeMessageBoard} from "@/components/pages/home/home-message-board";
+import { HomePanel } from '@/components/pages/home/home-panel.tsx'
 
 export default function Home() {
     return <div>
@@ -17,5 +18,6 @@ export default function Home() {
         <HomeArticle></HomeArticle>
         <HomePicture></HomePicture>
         <HomeMessageBoard></HomeMessageBoard>
+        <HomePanel></HomePanel>
     </div>
 }

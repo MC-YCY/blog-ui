@@ -1,0 +1,178 @@
+.cards {
+    width: 100%;
+    height: 100%;
+}
+
+.card-box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.card-box-item {
+    width: 24%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    transition: transform 0.6s 0.7s, width 0.7s, opacity 0.6s 0.7s, z-index 0s 1.3s;
+}
+
+.card-box-item {
+    --translate3d:translate3d(0%, 0, 0);
+    transform: var(--translate3d);
+}
+
+.start .card-box-item:not(.card-box-item-active) {
+    transform: var(--translate3d) scale(.8);
+    transition: transform 0.95s, opacity 0.95s;
+}
+
+.card-box-item-active{
+    width: 100% !important;
+    z-index: 2 !important;
+    transform: translate3d(0%, 0, 0) !important;
+    transition: transform 0.6s, width 0.7s 0.7s, z-index 0s !important;
+}
+
+.item-content{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.card-box:not(.start) .item-content:hover .item-content-image-layer img{
+    transform: scale(1.1);
+}
+.card-box:not(.start) .item-content:hover .item-content-text-layer .item-content-text-layer-content{
+    transition: all .3s ease-out;
+    transform: translateY(0);
+}
+.card-box:not(.start) .item-content:hover .item-content-number-layer .item-content-number-layer-value{
+    transition: all .3s ease-out;
+    opacity: 1;
+    transform: translateY(50%);
+}
+.item-content-image-layer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    user-select: none;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.item-content-image-layer img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    transition: all .3s ease-out;
+}
+.item-content-text-layer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 10px;
+    align-items: center;
+}
+.item-content-text-layer-content{
+    padding: 0 20px 50px;
+    transform: translateY(100%);
+    transition: all .3s 1s ease-out;
+    position: relative;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+}
+.start .item-content-text-layer-content{
+    transition: all .3s ease-out;
+}
+.item-content-text-layer-title{
+    font-size: 28px;
+    color: #fff;
+}
+.item-content-text-layer-description{
+    font-size: 16px;
+    color: #eee;
+    line-height: 20px;
+    min-height: 40px;
+}
+.item-content-number-layer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.item-content-number-layer-value{
+    font-size: 80px;
+    font-weight: bold;
+    color: #0f9d58;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all .3s 1s ease-out;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.start .item-content-number-layer-value{
+    transition: all .3s ease-out;
+}
+.item-content-number-layer-close{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s 1s linear;
+}
+.item-content-number-layer-close::before,
+.item-content-number-layer-close::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #ffd700;
+    border-radius: 2px;
+    transition: transform 0.3s;
+}
+
+.item-content-number-layer-close::before {
+    transform: rotate(45deg);
+}
+
+.item-content-number-layer-close::after {
+    transform: rotate(-45deg);
+}
+.card-box-item-active .item-content-number-layer-close{
+    pointer-events: auto;
+    opacity: 1;
+}
+.card-box-item-active .item-content-text-layer .item-content-text-layer-content{
+    transform: translateY(0);
+}
+.card-box-item-active .item-content-number-layer .item-content-number-layer-value{
+    opacity: 1;
+    transform: translateY(50%);
+}
