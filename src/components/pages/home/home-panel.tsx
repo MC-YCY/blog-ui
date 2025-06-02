@@ -5,7 +5,7 @@ import { ExtendPanel } from '@/components/project/extend-panel/extend-panel.tsx'
 export const HomePanel = () =>{
   return <>
     <Container>
-      <PartTitle title={'卡片描述组件'} description={'封面和内容'} />
+      <PartTitle title={'山水相逢'} description={'点击他们看看'} />
       <div className="w-full mt-3 xl:mt-6 h-[768px]">
         <ExtendPanel cards={[
           {

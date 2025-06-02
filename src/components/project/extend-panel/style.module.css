@@ -98,10 +98,10 @@
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
 }
 .ing .item-content-text-layer-content{
-    transition: all .3s 1s ease-out;
+    transition: all .3s 1.2s ease-out;
 }
 .ing .item-content-number-layer-value{
-    transition: all .3s 1s ease-out;
+    transition: all .3s 1.2s ease-out;
 }
 .start .item-content-text-layer-content{
     transition: all .3s ease-out;
@@ -149,7 +149,7 @@
     right: 8px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity .3s 1s linear;
+    transition: opacity .3s 1.2s linear;
 }
 .item-content-number-layer-close::before,
 .item-content-number-layer-close::after {
