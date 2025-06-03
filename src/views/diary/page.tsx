@@ -19,7 +19,6 @@ import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
 import { createDiary, getDiarys } from '@/api/diary.api.ts'
 import { toast } from 'sonner'
 import { defaultData } from '@/views/diary/data.tsx'
-import {} from 'motion'
 import { AnimatePresence, motion } from 'motion/react'
 
 const DiarySwiper = ({ setCurrent, list }: { setCurrent: (current: DiaryType) => void, list: DiaryType[] }) => {
@@ -218,14 +217,14 @@ const DiaryPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
           >
             <Diary
               className1="min-h-[500px]"
               className2="min-h-[500px]"
               className3="min-h-[400px]"
               title={current.title}
-              date={dayjs(current.date).format("YYYY年MM月DD日 HH:mm:ss")}
+              date={dayjs(current.date).format('YYYY年MM月DD日 HH:mm:ss')}
               weather={current.weather}
               content={current.content}
             />

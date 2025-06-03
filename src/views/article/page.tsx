@@ -27,7 +27,7 @@ const ArticlePage = () => {
   const [page, setPage] = useState(1)
   const [pageSize] = useState(12)
   const [total, setTotal] = useState(0)
-  const [webType,setWebType] = useState<string>(' ')
+  const [webType, setWebType] = useState<string>(' ')
   const getList = () => {
     allArticlesList({
       page: page,
@@ -41,21 +41,21 @@ const ArticlePage = () => {
   }
   useEffect(() => {
     getList()
-  }, [page,webType])
+  }, [page, webType])
   const [previewOpen, setPreviewOpen] = useState(false)
   const [current, setCurrent] = useState<ArticleType>()
   const clickItem = (state: ArticleType) => {
     setCurrent(state)
     setPreviewOpen(true)
   }
-  const onChange = (p:number) =>{
+  const onChange = (p: number) => {
     setPage(p)
   }
-  const changeSelect = (value:string) =>{
+  const changeSelect = (value: string) => {
     setWebType(value)
     setPage(1)
   }
-  const {theme} = useThemeStore();
+  const { theme } = useThemeStore()
   return <div className={'pt-[64px] min-h-[calc(100vh-64px)]'}>
     <Container>
       <Drawer open={previewOpen} onClose={() => setPreviewOpen(false)}>
@@ -64,7 +64,8 @@ const ArticlePage = () => {
             <DrawerTitle></DrawerTitle>
             {
               current && <Article preview={true} {...current} readme={<>
-                <MDEditor className={'md-editor-preview'} data-color-mode={theme as 'light' | 'dark'} value={current.content}
+                <MDEditor className={'md-editor-preview'} data-color-mode={theme as 'light' | 'dark'}
+                          value={current.content}
                           preview={'preview'}
                           hideToolbar={true} />
               </>}></Article>

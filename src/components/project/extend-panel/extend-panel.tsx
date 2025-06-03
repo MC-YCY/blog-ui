@@ -43,11 +43,11 @@ export const ExtendPanel = (props: ExtendPanelProps) => {
   const [isIngClassName, setIsIngClassName] = useState<boolean>(false)
   const clickItemClose = (event: MouseEvent<HTMLElement>) => {
     event.stopPropagation()
-    setIsIngClassName(true);
+    setIsIngClassName(true)
     setActiveKey(-1)
   }
-  const onTransitionEnd = (event:TransitionEvent<HTMLDivElement>) =>{
-    const element = event.target as HTMLDivElement;
+  const onTransitionEnd = (event: TransitionEvent<HTMLDivElement>) => {
+    const element = event.target as HTMLDivElement
     if (isIngClassName && element.dataset.ing === '1') {
       setIsIngClassName(false)
     }
@@ -58,15 +58,16 @@ export const ExtendPanel = (props: ExtendPanelProps) => {
     }
   }
 
-  return <div className={`${style.cards} ${isIngClassName ? style.ing : ''}`} >
+  return <div className={`${style.cards} ${isIngClassName ? style.ing : ''}`}>
     <div className={style.cardBox + ` ${(activeKey >= 0 ? style.start : '')}`}>
       {
         props.cards.map((card, index) => {
-          let className = style.cardBoxItem;
+          let className = style.cardBoxItem
           if (index === activeKey) {
             className += ` ${style.cardBoxItemActive}`
           }
-          return <div className={className} onTransitionEnd={onTransitionEnd} style={translate3dStyleVar(index)} onClick={() => clickItem(index)} data-ing={1}>
+          return <div className={className} onTransitionEnd={onTransitionEnd} style={translate3dStyleVar(index)}
+                      onClick={() => clickItem(index)} data-ing={1}>
             <ExtendPanelContent clickItemClose={clickItemClose} card={card}></ExtendPanelContent>
           </div>
         })

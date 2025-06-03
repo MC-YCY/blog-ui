@@ -8,7 +8,8 @@
     fill: url(#HomeTextSvgIconCyberGradient);
     stroke-width: 6px;
 }
-.pictureTextSvgIcon.active{
+
+.pictureTextSvgIcon.active {
     background: red;
 }
 

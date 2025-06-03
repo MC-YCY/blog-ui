@@ -23,7 +23,7 @@
 }
 
 .card-box-item {
-    --translate3d:translate3d(0%, 0, 0);
+    --translate3d: translate3d(0%, 0, 0);
     transform: var(--translate3d);
 }
 
@@ -32,31 +32,35 @@
     transition: transform 0.95s, opacity 0.95s;
 }
 
-.card-box-item-active{
+.card-box-item-active {
     width: 100% !important;
     z-index: 2 !important;
     transform: translate3d(0%, 0, 0) !important;
     transition: transform 0.6s, width 0.7s 0.7s, z-index 0s !important;
 }
 
-.item-content{
+.item-content {
     width: 100%;
     height: 100%;
     position: relative;
 }
-.card-box:not(.start) .item-content:hover .item-content-image-layer img{
+
+.card-box:not(.start) .item-content:hover .item-content-image-layer img {
     transform: scale(1.1);
 }
-.card-box:not(.start) .item-content:hover .item-content-text-layer .item-content-text-layer-content{
+
+.card-box:not(.start) .item-content:hover .item-content-text-layer .item-content-text-layer-content {
     transition: all .3s ease-out;
     transform: translateY(0);
 }
-.card-box:not(.start) .item-content:hover .item-content-number-layer .item-content-number-layer-value{
+
+.card-box:not(.start) .item-content:hover .item-content-number-layer .item-content-number-layer-value {
     transition: all .3s ease-out;
     opacity: 1;
     transform: translateY(50%);
 }
-.item-content-image-layer{
+
+.item-content-image-layer {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -67,7 +71,8 @@
     overflow: hidden;
     border-radius: 10px;
 }
-.item-content-image-layer img{
+
+.item-content-image-layer img {
     display: block;
     width: 100%;
     height: 100%;
@@ -75,7 +80,8 @@
     user-select: none;
     transition: all .3s ease-out;
 }
-.item-content-text-layer{
+
+.item-content-text-layer {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -89,7 +95,8 @@
     border-radius: 10px;
     align-items: center;
 }
-.item-content-text-layer-content{
+
+.item-content-text-layer-content {
     padding: 0 20px 50px;
     transform: translateY(100%);
     transition: all .3s ease-out;
@@ -97,26 +104,32 @@
     width: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
 }
-.ing .item-content-text-layer-content{
+
+.ing .item-content-text-layer-content {
     transition: all .3s 1.2s ease-out;
 }
-.ing .item-content-number-layer-value{
+
+.ing .item-content-number-layer-value {
     transition: all .3s 1.2s ease-out;
 }
-.start .item-content-text-layer-content{
+
+.start .item-content-text-layer-content {
     transition: all .3s ease-out;
 }
-.item-content-text-layer-title{
+
+.item-content-text-layer-title {
     font-size: 28px;
     color: #fff;
 }
-.item-content-text-layer-description{
+
+.item-content-text-layer-description {
     font-size: 16px;
     color: #eee;
     line-height: 20px;
     min-height: 40px;
 }
-.item-content-number-layer{
+
+.item-content-number-layer {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -127,7 +140,8 @@
     flex-direction: column;
     justify-content: flex-end;
 }
-.item-content-number-layer-value{
+
+.item-content-number-layer-value {
     font-size: 80px;
     font-weight: bold;
     color: #0f9d58;
@@ -138,10 +152,12 @@
     display: flex;
     justify-content: center;
 }
-.start .item-content-number-layer-value{
+
+.start .item-content-number-layer-value {
     transition: all .3s ease-out;
 }
-.item-content-number-layer-close{
+
+.item-content-number-layer-close {
     width: 30px;
     height: 30px;
     position: absolute;
@@ -151,6 +167,7 @@
     pointer-events: none;
     transition: opacity .3s 1.2s linear;
 }
+
 .item-content-number-layer-close::before,
 .item-content-number-layer-close::after {
     content: '';
@@ -171,14 +188,17 @@
 .item-content-number-layer-close::after {
     transform: rotate(-45deg);
 }
-.card-box-item-active .item-content-number-layer-close{
+
+.card-box-item-active .item-content-number-layer-close {
     pointer-events: auto;
     opacity: 1;
 }
-.card-box-item-active .item-content-text-layer .item-content-text-layer-content{
+
+.card-box-item-active .item-content-text-layer .item-content-text-layer-content {
     transform: translateY(0);
 }
-.card-box-item-active .item-content-number-layer .item-content-number-layer-value{
+
+.card-box-item-active .item-content-number-layer .item-content-number-layer-value {
     opacity: 1;
     transform: translateY(50%);
 }

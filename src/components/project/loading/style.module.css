@@ -79,12 +79,15 @@
 .animation-effect-light {
     animation: effect 0.2s 0.1s infinite linear;
 }
+
 .animation-effect-light-d {
     animation: effect 0.3s 0.2s infinite linear;
 }
+
 .animation-effect-rot {
     animation: rot 0.8s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
 }
+
 .animation-effect-scale {
     animation: scale 0.8s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
 }
