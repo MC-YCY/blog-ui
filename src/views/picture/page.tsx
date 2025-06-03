@@ -4,75 +4,72 @@ import {PartTitle} from "@/components/project/part-title/part-title";
 import {PicturePreview, PictureSwiperItemContent} from "@/components/pages/picture/picture";
 import {useState} from "react";
 import {PictureType} from "@/types/picture";
-import LinQiTingA from '@/assets/images/演员/林琦婷/group-a-1.jpeg'
-import LinQiTingB from '@/assets/images/演员/林琦婷/group-a-2.jpeg'
-import LinQiTingC from '@/assets/images/演员/林琦婷/group-b-1.jpeg'
-import LinQiTingAthumbnail from '@/assets/images/演员/林琦婷/thumbnail/group-a-1.jpeg'
-import LinQiTingBthumbnail from '@/assets/images/演员/林琦婷/thumbnail/group-a-2.jpeg'
-import LinQiTingCthumbnail from '@/assets/images/演员/林琦婷/thumbnail/group-a-3.jpeg'
-
-import MaQiuYuanA from '@/assets/images/演员/马秋元/group-a-1.png'
-import MaQiuYuanB from '@/assets/images/演员/马秋元/group-a-2.png'
-import MaQiuYuanC from '@/assets/images/演员/马秋元/group-a-3.png'
-import MaQiuYuanD from '@/assets/images/演员/马秋元/group-b-1.png'
-import MaQiuYuanE from '@/assets/images/演员/马秋元/group-b-2.png'
-import MaQiuYuanAthumbnail from '@/assets/images/演员/马秋元/thumbnail/group-a-1.png'
-import MaQiuYuanBthumbnail from '@/assets/images/演员/马秋元/thumbnail/group-a-2.png'
-import MaQiuYuanCthumbnail from '@/assets/images/演员/马秋元/thumbnail/group-a-3.png'
-import MaQiuYuanDthumbnail from '@/assets/images/演员/马秋元/thumbnail/group-b-1.png'
-import MaQiuYuanEthumbnail from '@/assets/images/演员/马秋元/thumbnail/group-b-2.png'
-
-import LiShengXuanA from '@/assets/images/演员/黎晟萱/group-a-3.jpg'
-import LiShengXuanB from '@/assets/images/演员/黎晟萱/group-a-2.jpg'
-import LiShengXuanC from '@/assets/images/演员/黎晟萱/group-a-1.jpg'
-import LiShengXuanAthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-3.jpg'
-import LiShengXuanBthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-2.jpg'
-import LiShengXuanCthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-1.jpg'
-
-import XingNuanA from '@/assets/images/演员/邢暖/mmexport1748234645314.jpeg'
-import XingNuanB from '@/assets/images/演员/邢暖/mmexport1748234645635.jpeg'
-import XingNuanC from '@/assets/images/演员/邢暖/mmexport1748234645762.jpeg'
-import XingNuanD from '@/assets/images/演员/邢暖/mmexport1748234646129.jpeg'
-import XingNuanE from '@/assets/images/演员/邢暖/mmexport1748234646387.jpeg'
-import XingNuanF from '@/assets/images/演员/邢暖/mmexport1748234646793.jpeg'
-import XingNuanG from '@/assets/images/演员/邢暖/mmexport1748234647097.jpeg'
-import XingNuanH from '@/assets/images/演员/邢暖/mmexport1748234647318.jpeg'
-import XingNuanI from '@/assets/images/演员/邢暖/mmexport1748234647439.jpeg'
-import XingNuanJ from '@/assets/images/演员/邢暖/mmexport1748234647807.jpeg'
-import XingNuanK from '@/assets/images/演员/邢暖/mmexport1748234647923.jpeg'
-import XingNuanL from '@/assets/images/演员/邢暖/mmexport1748234648063.jpeg'
-import XingNuanM from '@/assets/images/演员/邢暖/mmexport1748234648287.jpeg'
-import XingNuanN from '@/assets/images/演员/邢暖/mmexport1748234648802.jpeg'
-import XingNuanAthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234645314.jpeg'
-import XingNuanBthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234645635.jpeg'
-import XingNuanCthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234645762.jpeg'
-import XingNuanDthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234646129.jpeg'
-import XingNuanEthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234646387.jpeg'
-import XingNuanFthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234646793.jpeg'
-import XingNuanGthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234647097.jpeg'
-import XingNuanHthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234647318.jpeg'
-import XingNuanIthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234647439.jpeg'
-import XingNuanJthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234647807.jpeg'
-import XingNuanKthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234647923.jpeg'
-import XingNuanLthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234648063.jpeg'
-import XingNuanMthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234648287.jpeg'
-import XingNuanNthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234648802.jpeg'
-
-import HaiQinYanA from '@/assets/images/鬼刀公主/海琴烟01.jpg';
-import HaiQinYanB from '@/assets/images/鬼刀公主/海琴烟02.jpg';
-import HaiQinYanC from '@/assets/images/鬼刀公主/海琴烟03.png';
-import HaiQinYanAthumbnail from '@/assets/images/鬼刀公主/thumbnail/海琴烟01.jpg';
-import HaiQinYanBthumbnail from '@/assets/images/鬼刀公主/thumbnail/海琴烟02.jpg';
-import HaiQinYanCthumbnail from '@/assets/images/鬼刀公主/thumbnail/海琴烟03.png';
-
-import BiZhiA from '@/assets/images/壁纸/【雨天】2024-09-23 13_49_10.png';
-import BiZhiB from '@/assets/images/壁纸/【哲风壁纸】壁纸-晕染.png';
-import BiZhiC from '@/assets/images/壁纸/【哲风壁纸】浪漫-清新-背景图.png';
-import BiZhiD from '@/assets/images/壁纸/8624.png';
-import BiZhiAthumbnail from '@/assets/images/壁纸/thumbnail/【雨天】2024-09-23 13_49_10.png';
-import BiZhiBthumbnail from '@/assets/images/壁纸/thumbnail/【哲风壁纸】壁纸-晕染.png';
-import BiZhiCthumbnail from '@/assets/images/壁纸/thumbnail/【哲风壁纸】浪漫-清新-背景图.png';
-import BiZhiDthumbnail from '@/assets/images/壁纸/thumbnail/8624.png';
+import {
+    LinQiTingA,
+    LinQiTingB,
+    LinQiTingC,
+    LinQiTingAthumbnail,
+    LinQiTingBthumbnail,
+    LinQiTingCthumbnail,
+    MaQiuYuanA,
+    MaQiuYuanB,
+    MaQiuYuanC,
+    MaQiuYuanD,
+    MaQiuYuanE,
+    MaQiuYuanAthumbnail,
+    MaQiuYuanBthumbnail,
+    MaQiuYuanCthumbnail,
+    MaQiuYuanDthumbnail,
+    MaQiuYuanEthumbnail,
+    LiShengXuanA,
+    LiShengXuanB,
+    LiShengXuanC,
+    LiShengXuanAthumbnail,
+    LiShengXuanBthumbnail,
+    LiShengXuanCthumbnail,
+    XingNuanA,
+    XingNuanB,
+    XingNuanC,
+    XingNuanD,
+    XingNuanE,
+    XingNuanF,
+    XingNuanG,
+    XingNuanH,
+    XingNuanI,
+    XingNuanJ,
+    XingNuanK,
+    XingNuanL,
+    XingNuanM,
+    XingNuanN,
+    XingNuanAthumbnail,
+    XingNuanBthumbnail,
+    XingNuanCthumbnail,
+    XingNuanDthumbnail,
+    XingNuanEthumbnail,
+    XingNuanFthumbnail,
+    XingNuanGthumbnail,
+    XingNuanHthumbnail,
+    XingNuanIthumbnail,
+    XingNuanJthumbnail,
+    XingNuanKthumbnail,
+    XingNuanLthumbnail,
+    XingNuanMthumbnail,
+    XingNuanNthumbnail,
+    HaiQinYanA,
+    HaiQinYanB,
+    HaiQinYanC,
+    HaiQinYanAthumbnail,
+    HaiQinYanBthumbnail,
+    HaiQinYanCthumbnail,
+    BiZhiA,
+    BiZhiB,
+    BiZhiC,
+    BiZhiD,
+    BiZhiAthumbnail,
+    BiZhiBthumbnail,
+    BiZhiCthumbnail,
+    BiZhiDthumbnail
+} from '@/constant/picture.url.ts'
 
 const PicturePageItem = ({item, index}: { item: PictureType, index: number }) => {
     const [previewState, setPreviewState] = useState<PictureType>({

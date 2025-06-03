@@ -12,34 +12,32 @@ import {
   PictureSwiperItemContent,
   PicturePreview,
 } from '@/components/pages/picture/picture'
-
-import LinQiTingA from '@/assets/images/演员/林琦婷/group-a-1.jpeg'
-import LinQiTingB from '@/assets/images/演员/林琦婷/group-a-2.jpeg'
-import LinQiTingC from '@/assets/images/演员/林琦婷/group-b-1.jpeg'
-import LinQiTingAthumbnail from '@/assets/images/演员/林琦婷/thumbnail/group-a-1.jpeg'
-import LinQiTingBthumbnail from '@/assets/images/演员/林琦婷/thumbnail/group-a-2.jpeg'
-import LinQiTingCthumbnail from '@/assets/images/演员/林琦婷/thumbnail/group-a-3.jpeg'
-
-import MaQiuYuanA from '@/assets/images/演员/马秋元/group-a-1.png'
-import MaQiuYuanD from '@/assets/images/演员/马秋元/group-b-1.png'
-import MaQiuYuanE from '@/assets/images/演员/马秋元/group-b-2.png'
-import MaQiuYuanAthumbnail from '@/assets/images/演员/马秋元/thumbnail/group-a-1.png'
-import MaQiuYuanDthumbnail from '@/assets/images/演员/马秋元/thumbnail/group-b-1.png'
-import MaQiuYuanEthumbnail from '@/assets/images/演员/马秋元/thumbnail/group-b-2.png'
-
-import LiShengXuanA from '@/assets/images/演员/黎晟萱/group-a-3.jpg'
-import LiShengXuanB from '@/assets/images/演员/黎晟萱/group-a-2.jpg'
-import LiShengXuanC from '@/assets/images/演员/黎晟萱/group-a-1.jpg'
-import LiShengXuanAthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-3.jpg'
-import LiShengXuanBthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-2.jpg'
-import LiShengXuanCthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-1.jpg'
-
-import XingNuanC from '@/assets/images/演员/邢暖/mmexport1748234645762.jpeg'
-import XingNuanG from '@/assets/images/演员/邢暖/mmexport1748234647097.jpeg'
-import XingNuanN from '@/assets/images/演员/邢暖/mmexport1748234648802.jpeg'
-import XingNuanCthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234645762.jpeg'
-import XingNuanGthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234647097.jpeg'
-import XingNuanNthumbnail from '@/assets/images/演员/邢暖/thumbnail/mmexport1748234648802.jpeg'
+import {
+  LinQiTingA,
+  LinQiTingB,
+  LinQiTingC,
+  LinQiTingAthumbnail,
+  LinQiTingBthumbnail,
+  LinQiTingCthumbnail,
+  MaQiuYuanA,
+  MaQiuYuanD,
+  MaQiuYuanE,
+  MaQiuYuanAthumbnail,
+  MaQiuYuanDthumbnail,
+  MaQiuYuanEthumbnail,
+  LiShengXuanA,
+  LiShengXuanB,
+  LiShengXuanC,
+  LiShengXuanAthumbnail,
+  LiShengXuanBthumbnail,
+  LiShengXuanCthumbnail,
+  XingNuanC,
+  XingNuanG,
+  XingNuanN,
+  XingNuanCthumbnail,
+  XingNuanGthumbnail,
+  XingNuanNthumbnail,
+} from '@/constant/picture.url.ts'
 
 const PictureSwiper = ({ setPreview }: { setPreview: (arg0: PictureType) => void }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
