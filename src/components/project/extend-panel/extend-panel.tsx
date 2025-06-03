@@ -1,12 +1,12 @@
-import { MouseEvent, TransitionEvent, useState } from 'react'
+import { MouseEvent, ReactNode, TransitionEvent, useState } from 'react'
 import style from './style.module.css'
 
 // 定义卡片数据类型
 interface Card {
   background: string;
-  title: string;
-  description: string;
-  count: string;
+  title: string | ReactNode;
+  description: string | ReactNode;
+  count: string | ReactNode;
 }
 
 // 组件属性类型
