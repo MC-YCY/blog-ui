@@ -38,6 +38,8 @@ import {
   XingNuanGthumbnail,
   XingNuanNthumbnail,
 } from '@/constant/picture.url.ts'
+import { LazyContent } from '@/components/inview-lazy-content.tsx'
+import { cn } from '@/lib/utils.ts'
 
 const PictureSwiper = ({ setPreview }: { setPreview: (arg0: PictureType) => void }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
@@ -186,7 +188,7 @@ const PictureSwiper = ({ setPreview }: { setPreview: (arg0: PictureType) => void
     },
   ])
   return <div
-    className={'w-full h-full'}>
+    className={cn('w-full h-full home-picture')}>
     <Swiper
       onSlideChange={(swiper) => onSlideChange(swiper)}
       className={'w-full h-full'}
@@ -197,11 +199,13 @@ const PictureSwiper = ({ setPreview }: { setPreview: (arg0: PictureType) => void
       modules={[Scrollbar]}>
       {
         list.map((item, index) => {
-          return <SwiperSlide key={item.url}>
-            <PictureSwiperItemContent activeIndex={activeIndex}
-                                      showOptions={true}
-                                      slideIndex={index}
-                                      setStates={(state) => setStates(state)} {...item}></PictureSwiperItemContent>
+          return <SwiperSlide key={item.url} className={'home-picture-swiper-slide'}>
+            <LazyContent>
+              <PictureSwiperItemContent activeIndex={activeIndex}
+                                        showOptions={true}
+                                        slideIndex={index}
+                                        setStates={(state) => setStates(state)} {...item}></PictureSwiperItemContent>
+            </LazyContent>
           </SwiperSlide>
         })
       }
