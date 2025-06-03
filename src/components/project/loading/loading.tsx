@@ -1,8 +1,8 @@
 import style from './style.module.css'
 import { cn } from '@/lib/utils'
 
-export const Loading = () => {
-  return <div className={style.loading}>
+export const Loading = ({ className }: { className?: string }) => {
+  return <div className={cn(style.loading, className)}>
     <div className={style.loadingWide}>
       <div className={cn(style.l1, style.color)}></div>
       <div className={cn(style.l2, style.color)}></div>

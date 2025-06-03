@@ -1,9 +1,6 @@
 import { useInView } from 'react-intersection-observer'
 import { Suspense, useEffect, useState } from 'react'
-
-export const LoadingPlaceholder = () => (
-  <div className="h-[200px] animate-pulse bg-muted/50 rounded-lg" >loading...</div>
-)
+import { Loading } from '@/components/project/loading/loading.tsx'
 // 当可视时加载
 export const LazyContent = ({ children }: { children: React.ReactNode }) => {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 })
@@ -18,11 +15,11 @@ export const LazyContent = ({ children }: { children: React.ReactNode }) => {
   return (
     <div ref={ref}>
       {isLoaded ? (
-        <Suspense fallback={<LoadingPlaceholder />}>
+        <Suspense fallback={<Loading className={'py-20'}/>}>
           {children}
         </Suspense>
       ) : (
-        <LoadingPlaceholder />
+        <Loading className={'py-20'}/>
       )}
     </div>
   )
