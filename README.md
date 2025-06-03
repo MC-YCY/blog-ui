@@ -1,3 +1,8 @@
+next-blog迁移版本，主要样式挺好看，加上master分支的接口联调一下
+
+preview:http://47.93.248.11:3100/
+
+![](./src/assets/readme-1.png)
 - react
 - vite
 - typescript
@@ -20,17 +25,6 @@
   |- /stores        # 全局状态store
   |- /types         # 存放ts类型（后端DTO）
   |- /views         # 页面文件夹
-  │  ├── /article       # 查看文章
-  │  ├── /auth          # 登录
-  │  ├── /code-segment  # 代码块
-  │  ├── /create        # 新增文章
-  │  ├── /docs          # Component文档
-  │  ├── /home          # 首页
-  │  ├── /layout        # layout
-  │  ├── /posts         # 文章
-  │  ├── /resume        # 简历
-  │  ├── /update        # 更新文章
-  │  ├── /user          # 个人中心
   |- App.tsx        # app入口
   |- index.css      # css主题色
   |- main.tsx       # 应用文件
@@ -38,3 +32,9 @@
 .env.development    # 开发环境变量
 .env.production     # 生产环境变量
 ```
+
+**next.js版本：**
+
+https://sa-next-blog.netlify.app/
+
+https://github.com/MC-YCY/next-blog
