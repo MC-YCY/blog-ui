@@ -10,7 +10,6 @@
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
-
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -701,4 +700,20 @@ div[data-tip]:before {
 #root .custom-toast button{
   margin-left: 0;
   pointer-events: all !important;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb {
+  background:var(--primary);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
