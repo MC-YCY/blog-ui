@@ -62,6 +62,7 @@ export const PictureSwiperItemContentOptions = (props: PictureSwiperItemContentO
           <div className={cn('h-[100px] relative bg-[rgba(0,0,0,.65)] transition-[all_0.3s_linear]')}
                onClick={() => props.setStates(item)}>
             <img
+              decoding="async"
               className={cn(item.url === props.active ? 'opacity-100' : 'opacity-50', 'transition-[opacity_0.3s_linear] object-[50%_30%] w-full h-full object-cover')}
               src={item.thumbnail ?? item.url} alt="" />
           </div>
@@ -115,7 +116,6 @@ export const PictureSwiperItemContent = (props: PictureSwiperItemContentType) =>
           transition={{ duration: 0.3 }}
         >
           <img
-            loading="lazy"
             decoding="async"
             className={'object-[50%_30%] w-full h-full object-cover'}
             onLoad={(e) => e.currentTarget.classList.add('opacity-100')}

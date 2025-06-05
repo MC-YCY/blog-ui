@@ -95,9 +95,11 @@ const me = new Developer();`}
 export const HomeHero = () => {
   return <div className="w-full h-screen relative overflow-hidden">
     <img
+      decoding={'async'}
       className={'home-dark-banner w-full h-full object-cover absolute left-0 top-0'}
       src={HuaDark} alt=""></img>
     <img
+      decoding={'async'}
       className={'home-light-banner w-full h-full object-cover absolute left-0 top-0'}
       src={HuaLight} alt=""></img>
     <HomeHeroContent></HomeHeroContent>

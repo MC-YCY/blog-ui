@@ -2,6 +2,8 @@
 
 import { IconCode } from '@tabler/icons-react'
 import React from 'react'
+import LazyImage from '@/components/project/lazy-image.tsx'
+import { Loading } from '@/components/project/loading/loading.tsx'
 
 interface ProjectCardProps extends React.ButtonHTMLAttributes<HTMLDivElement> {
   project: string;
@@ -17,10 +19,15 @@ export const ProjectCard = (props: ProjectCardProps) => {
     className="rounded-[10px] bg-background shadow-[inset_0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[inset_0_0_8px_rgba(255,255,255,.3)] lg:mt-0"
     {...props}>
     <div className={'p-[16px]'}>
-      <div className={'relative w-full h-[246px]'}>
-        <img
+      <div className={'relative w-full h-[246px] rounded-[10px]'}>
+        <LazyImage
+          src={props.banner}
+          alt="Product"
+          width={'100%'}
+          height={'100%'}
+          loadingIndicator={<Loading className={'w-full h-full'} />}
           className={'rounded-[10px] w-full h-full object-cover'}
-          src={props.banner} alt="" />
+        />
       </div>
       <div className={'p-[16px] h-[180px] flex flex-col justify-between box-content'}>
         <div className={'pt-[8px] font-bold text-foreground text-[20px]'}>{props.project}</div>
