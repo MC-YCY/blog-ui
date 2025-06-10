@@ -84,7 +84,7 @@ export const HomeMessageBoard = () => {
           留言
         </DiaryWriteButton>}
       />
-      <div className="w-full h-[500px] mt-3 xl:mt-6 select-none">
+      <div className="w-full  h-[370px] xl:h-[500px]  lg:h-[500px]  md:h-[500px]  mt-3 xl:mt-6 select-none">
         <Swiper
           breakpoints={{
             640: {
@@ -122,7 +122,7 @@ export const HomeMessageBoard = () => {
               className="bg-background border rounded-2xl px-4 py-4 box-border shadow-[inset_0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_8px_rgba(255,255,255,.1)]"
             >
               <div className="w-full h-full flex flex-col">
-                <div className="text-foreground line-clamp-5 opacity-85">
+                <div className="text-foreground line-clamp-10 xl:line-clamp-5 lg:line-clamp-5 md:line-clamp-5 opacity-85">
                   {item.content}
                 </div>
                 <div className="mt-auto">

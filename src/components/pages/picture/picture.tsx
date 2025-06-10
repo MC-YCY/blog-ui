@@ -95,7 +95,7 @@ export const PictureSwiperItemContent = (props: PictureSwiperItemContentType) =>
             }
           </div>
         </div>
-        <div className="w-full xl:w-[470px] flex flex-col p-[40px] ml-auto">
+        <div className="w-full xl:w-[470px] flex flex-col p-[40px] pb-0 ml-auto">
           <h2 className="text-[32px] leading-[1.34]">{current.name}</h2>
           <p
             className="text-[16px] leading-[1.5] pt-[16px] line-clamp-2">{dayjs(current.date).format('YYYY/MM/DD')}-{current.tip}</p>
