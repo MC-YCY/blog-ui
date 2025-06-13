@@ -62,6 +62,7 @@ const AboutCardSkill = () => {
     let option: echarts.EChartsOption = {
       baseOption: {
         timeline: {
+          bottom: 0,
           axisType: 'category',
           autoPlay: true,
           playInterval: 1000,
@@ -93,12 +94,15 @@ const AboutCardSkill = () => {
         },
         yAxis: {
           type: 'value',
+          splitNumber: 2,
+          min: 0,
+          max: 100,
         },
         grid: {
           top: 10,
           left: 15,
           right: 15,
-          bottom: 10,
+          bottom: 50,
           containLabel: true,
         },
       },
@@ -106,7 +110,7 @@ const AboutCardSkill = () => {
         {
           series: [
             {
-              type: 'bar',
+              type: 'line',
               data: [10, 10, 20, 30, 40, 50, 60, 40],
             },
           ],
@@ -114,7 +118,7 @@ const AboutCardSkill = () => {
         {
           series: [
             {
-              type: 'bar',
+              type: 'line',
               data: [10, 10, 20, 30, 40, 50, 60, 40],
             },
           ],
@@ -122,7 +126,7 @@ const AboutCardSkill = () => {
         {
           series: [
             {
-              type: 'bar',
+              type: 'line',
               data: [10, 10, 20, 30, 40, 50, 60, 40],
             },
           ],
@@ -130,7 +134,7 @@ const AboutCardSkill = () => {
         {
           series: [
             {
-              type: 'bar',
+              type: 'line',
               data: [10, 10, 20, 30, 40, 50, 60, 40],
             },
           ],
@@ -138,7 +142,7 @@ const AboutCardSkill = () => {
         {
           series: [
             {
-              type: 'bar',
+              type: 'line',
               data: [10, 10, 20, 30, 40, 50, 60, 40],
             },
           ],
@@ -188,13 +192,13 @@ const AboutCardSkill = () => {
       </div>
     </div>
     <div
-      className={cn('mt-[26px] md:mt-0 flex-[1_1_0%] py-[20px]  min-h-[200px] rounded-2xl', cardStyleClassName)}>
+      className={cn('mt-[26px] md:mt-0 flex-[1_1_0%] pt-[20px]  min-h-[200px] rounded-2xl', cardStyleClassName)}>
       <div className={'px-[40px]'}>
         <div className={'text-[14px] text-[#888]'}>生涯</div>
         <div className={'text-[24px] text-foreground font-bold'}>无线进步</div>
       </div>
       <div className={'mt-[10px]'}>
-        <div className={'w-full h-[120px]'} ref={chartRef}></div>
+        <div className={'w-full h-[140px]'} ref={chartRef}></div>
       </div>
     </div>
   </div>
