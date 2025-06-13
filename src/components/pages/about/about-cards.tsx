@@ -1,16 +1,10 @@
 import { cn } from '@/lib/utils.ts'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
-import {
-  IconBrandCss3,
-  IconBrandHtml5, IconBrandJavascript,
-  IconBrandNextjs,
-  IconBrandNuxt,
-  IconBrandReact,
-  IconBrandTailwind,
-  IconBrandVue,
-} from '@tabler/icons-react'
 import style from './style.module.css'
+import { useEffect, useRef } from 'react'
+import * as echarts from 'echarts'
+import { skills } from '@/components/pages/about/const.tsx'
 
 const bgClassName = `bg-[linear-gradient(121deg,rgba(196,255,255,0.15)_0%,rgba(190,83,69,0.2)_100%)] bg-background`
 const bgrClassName = `bg-[linear-gradient(121deg,rgba(239,184,174,0.15)_0%,rgba(127,156,76,0.15)_100%)] bg-background`
@@ -62,54 +56,108 @@ const AboutCardIntroduce = () => {
   </div>
 }
 
-const skills = [
-  {
-    color: '#42b8831a',
-    icon: <IconBrandVue width={70} height={70} color={'#42b883'}></IconBrandVue>,
-    text: 'Vue',
-  },
-  {
-    color: '#087ea41a',
-    icon: <IconBrandReact width={70} height={70} color={'#087ea4'}></IconBrandReact>,
-    text: 'React',
-  },
-  {
-    color: '#63d0ff1a',
-    icon: <IconBrandTailwind width={70} height={70} color={'#00bcff'}></IconBrandTailwind>,
-    text: 'Tailwind',
-  },
-  {
-    color: '#3131311a',
-    icon: <IconBrandNextjs width={70} height={70} color={'#313131'}></IconBrandNextjs>,
-    text: 'Next.js',
-  },
-  {
-    color: '#00dc821a',
-    icon: <IconBrandNuxt width={70} height={70} color={'#00dc82'}></IconBrandNuxt>,
-    text: 'Nuxt.js',
-  },
-  {
-    color: '#d038131a',
-    icon: <IconBrandHtml5 width={70} height={70} color={'#d03813'}></IconBrandHtml5>,
-    text: 'Html5',
-  },
-  {
-    color: '#244bdf1a',
-    icon: <IconBrandCss3 width={70} height={70} color={'#244bdf'}></IconBrandCss3>,
-    text: 'Css3',
-  },
-  {
-    color: '#efd81d1a',
-    icon: <IconBrandJavascript width={70} height={70} color={'#efd81d'}></IconBrandJavascript>,
-    text: 'JavaScript',
-  },
-]
 const AboutCardSkill = () => {
+  const chartRef = useRef(null)
+  useEffect(() => {
+    let option: echarts.EChartsOption = {
+      baseOption: {
+        timeline: {
+          axisType: 'category',
+          autoPlay: true,
+          playInterval: 1000,
+          data: [
+            '2021',
+            '2022',
+            '2023',
+            '2024',
+            '2025',
+          ],
+          label: {
+            formatter: function(s): string {
+              return new Date(s).getFullYear() + ''
+            },
+          },
+        },
+        xAxis: {
+          type: 'category',
+          data: [
+            'Vue',
+            'React',
+            'Angular',
+            'NextJs',
+            'NestJs',
+            'HTML',
+            'CSS',
+            'JS',
+          ],
+        },
+        yAxis: {
+          type: 'value',
+        },
+        grid: {
+          top: 10,
+          left: 15,
+          right: 15,
+          bottom: 10,
+          containLabel: true,
+        },
+      },
+      options: [
+        {
+          series: [
+            {
+              type: 'bar',
+              data: [10, 10, 20, 30, 40, 50, 60, 40],
+            },
+          ],
+        },
+        {
+          series: [
+            {
+              type: 'bar',
+              data: [10, 10, 20, 30, 40, 50, 60, 40],
+            },
+          ],
+        },
+        {
+          series: [
+            {
+              type: 'bar',
+              data: [10, 10, 20, 30, 40, 50, 60, 40],
+            },
+          ],
+        },
+        {
+          series: [
+            {
+              type: 'bar',
+              data: [10, 10, 20, 30, 40, 50, 60, 40],
+            },
+          ],
+        },
+        {
+          series: [
+            {
+              type: 'bar',
+              data: [10, 10, 20, 30, 40, 50, 60, 40],
+            },
+          ],
+        },
+      ],
+    }
+    const el = chartRef.current
+    if (!el) return
+    const myChart = echarts.init(el)
+    myChart.setOption(option)
+  }, [chartRef])
   return <div className={'mt-[26px] block md:flex gap-[26px]'}>
     <div
-      className={cn('flex-[1_1_0%] py-[20px] px-[40px] min-h-[200px] rounded-2xl overflow-hidden', cardStyleClassName)}>
-      <div className={'text-[14px] text-[#888]'}>技能</div>
-      <div className={'text-[24px] text-foreground font-bold'}>开启创造力</div>
+      className={cn('flex-[1_1_0%] py-[20px] min-h-[200px] rounded-2xl overflow-hidden', cardStyleClassName)}>
+      <div className={'px-[40px]'}>
+        <div className={'text-[14px] text-[#888]'}>技能</div>
+        <div className={'text-[24px] text-foreground font-bold'}>开启创造力</div>
+      </div>
+
       <div className={'w-full mt-[10px] relative'}>
         <div
           className={'absolute bg-[linear-gradient(90deg,var(--background),rgba(0,0,0,0))] left-0 top-0 h-full w-[5%] z-10'}></div>
@@ -128,7 +176,8 @@ const AboutCardSkill = () => {
             })}
             {skills.map((skill, index) => {
               return (
-                <div key={index} className={cn(`w-[120px] rounded-3xl h-[120px] flex justify-center items-center ml-[10px]`)}
+                <div key={index}
+                     className={cn(`w-[120px] rounded-3xl h-[120px] flex justify-center items-center ml-[10px]`)}
                      style={{ backgroundColor: skill.color }}>
                   {skill.icon}
                 </div>
@@ -139,10 +188,13 @@ const AboutCardSkill = () => {
       </div>
     </div>
     <div
-      className={cn('mt-[26px] md:mt-0 flex-[1_1_0%] py-[20px] px-[40px] min-h-[200px] rounded-2xl', cardStyleClassName)}>
-      <div className={'text-[14px] text-[#888]'}>生涯</div>
-      <div className={'text-[24px] text-foreground font-bold'}>无线进步</div>
+      className={cn('mt-[26px] md:mt-0 flex-[1_1_0%] py-[20px]  min-h-[200px] rounded-2xl', cardStyleClassName)}>
+      <div className={'px-[40px]'}>
+        <div className={'text-[14px] text-[#888]'}>生涯</div>
+        <div className={'text-[24px] text-foreground font-bold'}>无线进步</div>
+      </div>
       <div className={'mt-[10px]'}>
+        <div className={'w-full h-[120px]'} ref={chartRef}></div>
       </div>
     </div>
   </div>
