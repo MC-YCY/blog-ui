@@ -1,0 +1,28 @@
+@keyframes floating {
+    0% {
+        transform: translate(0px, -4px);
+    }
+    50% {
+        transform: translate(0px, 4px);
+    }
+    100% {
+        transform: translate(0px, -4px);
+    }
+}
+
+@keyframes rowleft {
+    0%{
+        transform: translateX(0px);
+    }
+    100%{
+        transform: translateX(-50%);
+    }
+}
+
+.ani {
+    animation: 6s ease-in-out 0s infinite normal none running floating;
+}
+
+.ani-row-left {
+    animation: 30s linear 0s infinite normal none running rowleft;
+}
