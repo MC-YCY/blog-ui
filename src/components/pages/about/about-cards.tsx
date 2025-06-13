@@ -59,13 +59,75 @@ const AboutCardIntroduce = () => {
 const AboutCardSkill = () => {
   const chartRef = useRef(null)
   useEffect(() => {
+    const data = [
+      {
+        year: 2021,
+        data: [20, 20, 30, 30, 30, 30, 20, 30],
+      },
+      {
+        year: 2022,
+        data: [30, 30, 30, 30, 30, 30, 20, 30],
+      },
+      {
+        year: 2023,
+        data: [50, 20, 30, 30, 50, 30, 20, 70],
+      },
+      {
+        year: 2024,
+        data: [50, 20, 30, 30, 50, 30, 60, 70],
+      },
+      {
+        year: 2025,
+        data: [50, 50, 50, 30, 50, 30, 60, 70],
+      },
+    ]
+    const options = data.map((item) => {
+      return {
+        series: [
+          {
+            type: 'line',
+            symbolSize:2,
+            smooth: true,
+            lineStyle:{
+              width:1,
+            },
+            label:{
+              show:true,
+              fontSize:10,
+              offset:0,
+              distance:2,
+              color:'rgba(127,156,76,1)'
+            },
+            areaStyle:{
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [{
+                  offset: 0, color: 'rgba(127,156,76,.5)',
+                }, {
+                  offset: 1, color: 'rgba(196,255,255,.5)',
+                }],
+                global: false,
+              },
+            },
+            data: item.data as number[],
+          },
+        ],
+      }
+    })
     let option: echarts.EChartsOption = {
       baseOption: {
+        color: [
+          'rgba(127,156,76,1)',
+        ],
         timeline: {
-          bottom: 0,
+          bottom: -12,
           axisType: 'category',
           autoPlay: true,
-          playInterval: 1000,
+          playInterval: 3000,
           data: [
             '2021',
             '2022',
@@ -73,14 +135,51 @@ const AboutCardSkill = () => {
             '2024',
             '2025',
           ],
+          symbol: 'circle',
           label: {
+            position: 10,
+            interval: 0,
             formatter: function(s): string {
               return new Date(s).getFullYear() + ''
+            },
+            color: '#9eb25a9a',
+          },
+          lineStyle: {
+            color: '#9eb25a9a',
+            width: 0.6,
+          },
+          itemStyle: {
+            color: '#9eb25a9a',
+          },
+          checkpointStyle: {
+            symbolSize: 10,
+            color: '#9eb25a',
+            borderColor: '#fffedf',
+          },
+          controlStyle: {
+            show: false,
+          },
+          progress: {
+            lineStyle: {
+              color: '#9eb25a',
+            },
+            itemStyle: {
+              color: '#9eb25a',
+            },
+            label: {
+              color: '#7c984b',
+            },
+          },
+          symbolSize: 8,
+          emphasis: {
+            itemStyle: {
+              color: '#79673a',
             },
           },
         },
         xAxis: {
           type: 'category',
+          boundaryGap: false,
           data: [
             'Vue',
             'React',
@@ -91,63 +190,48 @@ const AboutCardSkill = () => {
             'CSS',
             'JS',
           ],
+          axisLine: {
+            lineStyle: {
+              width:0.5,
+              color: 'rgba(127,156,76,1)'
+            }
+          },
+          axisTick: {
+            show: true,
+            length:3,
+            lineStyle:{
+              color:'rgba(127,156,76,1)',
+              width:0.5,
+            }
+          },
+          axisLabel: {
+            fontSize: 12,
+            color:'rgba(127,156,76,1)'
+          },
         },
         yAxis: {
           type: 'value',
           splitNumber: 2,
-          min: 0,
-          max: 100,
+          axisLabel:{
+            show:false
+          },
+          splitLine:{
+            show:true,
+            lineStyle:{
+              color:'#4d776d1a',
+              width:0.5
+            }
+          }
         },
         grid: {
           top: 10,
-          left: 15,
-          right: 15,
-          bottom: 50,
+          left: 40,
+          right: 40,
+          bottom: 44,
           containLabel: true,
         },
       },
-      options: [
-        {
-          series: [
-            {
-              type: 'line',
-              data: [10, 10, 20, 30, 40, 50, 60, 40],
-            },
-          ],
-        },
-        {
-          series: [
-            {
-              type: 'line',
-              data: [10, 10, 20, 30, 40, 50, 60, 40],
-            },
-          ],
-        },
-        {
-          series: [
-            {
-              type: 'line',
-              data: [10, 10, 20, 30, 40, 50, 60, 40],
-            },
-          ],
-        },
-        {
-          series: [
-            {
-              type: 'line',
-              data: [10, 10, 20, 30, 40, 50, 60, 40],
-            },
-          ],
-        },
-        {
-          series: [
-            {
-              type: 'line',
-              data: [10, 10, 20, 30, 40, 50, 60, 40],
-            },
-          ],
-        },
-      ],
+      options: options as echarts.EChartsOption['options'],
     }
     const el = chartRef.current
     if (!el) return
@@ -197,9 +281,7 @@ const AboutCardSkill = () => {
         <div className={'text-[14px] text-[#888]'}>生涯</div>
         <div className={'text-[24px] text-foreground font-bold'}>无线进步</div>
       </div>
-      <div className={'mt-[10px]'}>
-        <div className={'w-full h-[140px]'} ref={chartRef}></div>
-      </div>
+      <div className={'w-full h-[150px]'} ref={chartRef}></div>
     </div>
   </div>
 }
