@@ -269,15 +269,16 @@ const AboutCardSkill = () => {
 
       <div className={'w-full mt-[10px] relative'}>
         <div
-          className={'absolute bg-[linear-gradient(90deg,var(--background),rgba(0,0,0,0))] left-0 top-0 h-full w-[5%] z-10'}></div>
+          className={'absolute bg-[linear-gradient(90deg,var(--background),rgba(0,0,0,0))] left-0 top-0 h-full w-[10%] z-10'}></div>
         <div
-          className={'absolute bg-[linear-gradient(-90deg,var(--background),rgba(0,0,0,0))] right-0 top-0 h-full w-[5%] z-10'}></div>
+          className={'absolute bg-[linear-gradient(-90deg,var(--background),rgba(0,0,0,0))] right-0 top-0 h-full w-[10%] z-10'}></div>
         <div className={'w-full overflow-x-hidden'}>
           <div className={cn('inline-flex', style.aniRowLeft)}>
             {skills.map((skill, index) => {
               let ml = index > 0 ? 'ml-[10px]' : ''
               return (
-                <div key={index} className={cn(`w-[120px] rounded-3xl h-[120px] flex justify-center items-center`, ml)}
+                <div key={'skills-' + index}
+                     className={cn(`w-[120px] rounded-3xl h-[120px] flex justify-center items-center`, ml)}
                      style={{ backgroundColor: skill.color }}>
                   {skill.icon}
                 </div>
@@ -285,7 +286,7 @@ const AboutCardSkill = () => {
             })}
             {skills.map((skill, index) => {
               return (
-                <div key={index}
+                <div key={'skills-s-' + index}
                      className={cn(`w-[120px] rounded-3xl h-[120px] flex justify-center items-center ml-[10px]`)}
                      style={{ backgroundColor: skill.color }}>
                   {skill.icon}
@@ -299,7 +300,8 @@ const AboutCardSkill = () => {
             {skillsTools.map((skill, index) => {
               let ml = index > 0 ? 'ml-[10px]' : ''
               return (
-                <div key={index} className={cn(`w-[120px] rounded-3xl h-[120px] flex justify-center items-center`, ml)}
+                <div key={'skillsTools' + index}
+                     className={cn(`w-[120px] rounded-3xl h-[120px] flex justify-center items-center`, ml)}
                      style={{ backgroundColor: skill.color }}>
                   {skill.icon}
                 </div>
@@ -307,7 +309,7 @@ const AboutCardSkill = () => {
             })}
             {skillsTools.map((skill, index) => {
               return (
-                <div key={index}
+                <div key={'skillsTools-s-' + index}
                      className={cn(`w-[120px] rounded-3xl h-[120px] flex justify-center items-center ml-[10px]`)}
                      style={{ backgroundColor: skill.color }}>
                   {skill.icon}
