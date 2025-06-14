@@ -4,7 +4,8 @@ import { Autoplay } from 'swiper/modules'
 import style from './style.module.css'
 import { useEffect, useRef } from 'react'
 import * as echarts from 'echarts'
-import { skills } from '@/components/pages/about/const.tsx'
+import { AboutCardSkillTimeline, skills, skillsTools } from '@/components/pages/about/const.tsx'
+import { installChartResize } from '@/lib/resize-chart.ts'
 
 const bgClassName = `bg-[linear-gradient(121deg,rgba(196,255,255,0.15)_0%,rgba(190,83,69,0.2)_100%)] bg-background`
 const bgrClassName = `bg-[linear-gradient(121deg,rgba(239,184,174,0.15)_0%,rgba(127,156,76,0.15)_100%)] bg-background`
@@ -12,13 +13,13 @@ const cardStyleClassName = 'border-[#e3e8f7] dark:border-[#3d3d3f] border-solid 
 const AboutCardIntroduce = () => {
   return <div className={'block md:flex gap-[26px]'}>
     <div
-      className={cn('flex-[4_1_0%] min-h-[200px] rounded-2xl py-[20px] px-[40px] flex flex-col justify-center', bgClassName, cardStyleClassName)}>
+      className={cn('flex-[4_1_0%] rounded-2xl py-[20px] px-[20px] md:px-[40px] flex flex-col justify-center', bgClassName, cardStyleClassName)}>
       <div className={'text-[14px] text-foreground'}>你好,很高兴认识你👏</div>
       <div className={'text-[32px] text-foreground my-[10px] font-bold'}>我是 春秋半夏</div>
       <div className={'text-[14px] text-foreground'}>是一名 前端开发者、地球online玩家</div>
     </div>
     <div
-      className={cn('mt-[26px] md:mt-0 flex-[3_1_0%] bg-background border rounded-2xl py-[20px] px-[40px] flex flex-col justify-center', bgrClassName, cardStyleClassName)}>
+      className={cn('mt-[26px] md:mt-0 flex-[3_1_0%] bg-background border rounded-2xl py-[20px] px-[20px] md:px-[40px] flex flex-col justify-center', bgrClassName, cardStyleClassName)}>
       <div className={'text-[14px] text-[#888]'}>深度</div>
       <div className={'text-[24px] text-foreground font-bold'}>在于</div>
       <div className={'text-[24px] text-foreground font-bold'}>知其然
@@ -59,46 +60,27 @@ const AboutCardIntroduce = () => {
 const AboutCardSkill = () => {
   const chartRef = useRef(null)
   useEffect(() => {
-    const data = [
-      {
-        year: 2021,
-        data: [20, 20, 30, 30, 30, 30, 20, 30],
-      },
-      {
-        year: 2022,
-        data: [30, 30, 30, 30, 30, 30, 20, 30],
-      },
-      {
-        year: 2023,
-        data: [50, 20, 30, 30, 50, 30, 20, 70],
-      },
-      {
-        year: 2024,
-        data: [50, 20, 30, 30, 50, 30, 60, 70],
-      },
-      {
-        year: 2025,
-        data: [50, 50, 50, 30, 50, 30, 60, 70],
-      },
-    ]
-    const options = data.map((item) => {
+    const options = AboutCardSkillTimeline.map((item) => {
       return {
         series: [
           {
             type: 'line',
-            symbolSize:2,
+            symbolSize: 2,
             smooth: true,
-            lineStyle:{
-              width:1,
+            lineStyle: {
+              width: 1,
             },
-            label:{
-              show:true,
-              fontSize:10,
-              offset:0,
-              distance:2,
-              color:'rgba(127,156,76,1)'
+            label: {
+              show: true,
+              fontSize: 10,
+              offset: 0,
+              distance: 0,
+              color: 'rgba(127,156,76,1)',
             },
-            areaStyle:{
+            emphasis: {
+              scale: false,
+            },
+            areaStyle: {
               color: {
                 type: 'linear',
                 x: 0,
@@ -113,7 +95,7 @@ const AboutCardSkill = () => {
                 global: false,
               },
             },
-            data: item.data as number[],
+            data: item.data,
           },
         ],
       }
@@ -123,12 +105,38 @@ const AboutCardSkill = () => {
         color: [
           'rgba(127,156,76,1)',
         ],
+        tooltip: {
+          trigger: 'axis',
+          padding: [2, 5],
+          backgroundColor: '#effdfc',
+          textStyle: {
+            color: '#9eb25a',
+            fontSize: 12,
+          },
+          borderColor: '#9eb25a',
+          axisPointer: {
+            z: 111,
+            lineStyle: {
+              color: '#9eb25a9a',
+            },
+          },
+          formatter: (param) => {
+            if (param instanceof Array) {
+              let find = param[0]
+              let data = find.data as { tooltip: string }
+              return data?.tooltip
+            }
+            return ''
+          },
+        },
         timeline: {
-          bottom: -12,
+          top: 228,
           axisType: 'category',
           autoPlay: true,
           playInterval: 3000,
           data: [
+            '2019',
+            '2020',
             '2021',
             '2022',
             '2023',
@@ -157,7 +165,12 @@ const AboutCardSkill = () => {
             borderColor: '#fffedf',
           },
           controlStyle: {
-            show: false,
+            itemSize: 14,
+            itemGap: 30,
+            showPrevBtn: false,
+            showNextBtn: false,
+            color: '#9eb25a',
+            borderColor: '#9eb25a',
           },
           progress: {
             lineStyle: {
@@ -174,6 +187,10 @@ const AboutCardSkill = () => {
           emphasis: {
             itemStyle: {
               color: '#79673a',
+            },
+            controlStyle: {
+              color: '#9eb25a9a',
+              borderColor: '#9eb25a9a',
             },
           },
         },
@@ -192,42 +209,43 @@ const AboutCardSkill = () => {
           ],
           axisLine: {
             lineStyle: {
-              width:0.5,
-              color: 'rgba(127,156,76,1)'
-            }
+              width: 0.5,
+              color: 'rgba(127,156,76,1)',
+            },
           },
           axisTick: {
             show: true,
-            length:3,
-            lineStyle:{
-              color:'rgba(127,156,76,1)',
-              width:0.5,
-            }
+            length: 3,
+            lineStyle: {
+              color: 'rgba(127,156,76,1)',
+              width: 0.5,
+            },
           },
           axisLabel: {
             fontSize: 12,
-            color:'rgba(127,156,76,1)'
+            color: 'rgba(127,156,76,1)',
           },
         },
         yAxis: {
           type: 'value',
-          splitNumber: 2,
-          axisLabel:{
-            show:false
+          splitNumber: 5,
+          axisLabel: {
+            show: false,
           },
-          splitLine:{
-            show:true,
-            lineStyle:{
-              color:'#4d776d1a',
-              width:0.5
-            }
-          }
+          max: 100,
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: 'rgba(127,156,76,.25)',
+              width: 0.5,
+            },
+          },
         },
         grid: {
-          top: 10,
+          top: 14,
           left: 40,
           right: 40,
-          bottom: 44,
+          bottom: 35,
           containLabel: true,
         },
       },
@@ -235,13 +253,16 @@ const AboutCardSkill = () => {
     }
     const el = chartRef.current
     if (!el) return
-    const myChart = echarts.init(el)
-    myChart.setOption(option)
+    requestAnimationFrame(() => {
+      const myChart = echarts.init(el)
+      myChart.setOption(option)
+      installChartResize(el, myChart)
+    })
   }, [chartRef])
   return <div className={'mt-[26px] block md:flex gap-[26px]'}>
     <div
       className={cn('flex-[1_1_0%] py-[20px] min-h-[200px] rounded-2xl overflow-hidden', cardStyleClassName)}>
-      <div className={'px-[40px]'}>
+      <div className={'px-[20px] md:px-[40px]'}>
         <div className={'text-[14px] text-[#888]'}>技能</div>
         <div className={'text-[24px] text-foreground font-bold'}>开启创造力</div>
       </div>
@@ -273,15 +294,37 @@ const AboutCardSkill = () => {
             })}
           </div>
         </div>
+        <div className={'w-full overflow-x-hidden mt-[10px]'}>
+          <div className={cn('inline-flex', style.aniRowLeft)} style={{ animationDelay: '-2s' }}>
+            {skillsTools.map((skill, index) => {
+              let ml = index > 0 ? 'ml-[10px]' : ''
+              return (
+                <div key={index} className={cn(`w-[120px] rounded-3xl h-[120px] flex justify-center items-center`, ml)}
+                     style={{ backgroundColor: skill.color }}>
+                  {skill.icon}
+                </div>
+              )
+            })}
+            {skillsTools.map((skill, index) => {
+              return (
+                <div key={index}
+                     className={cn(`w-[120px] rounded-3xl h-[120px] flex justify-center items-center ml-[10px]`)}
+                     style={{ backgroundColor: skill.color }}>
+                  {skill.icon}
+                </div>
+              )
+            })}
+          </div>
+        </div>
       </div>
     </div>
     <div
-      className={cn('mt-[26px] md:mt-0 flex-[1_1_0%] pt-[20px]  min-h-[200px] rounded-2xl', cardStyleClassName)}>
-      <div className={'px-[40px]'}>
-        <div className={'text-[14px] text-[#888]'}>生涯</div>
+      className={cn('mt-[26px] md:mt-0 flex-[1_1_0%] py-[20px] min-h-[200px] rounded-2xl', cardStyleClassName)}>
+      <div className={'px-[20px] md:px-[40px]'}>
+        <div className={'text-[14px] text-[#888]'}>技能曲线</div>
         <div className={'text-[24px] text-foreground font-bold'}>无线进步</div>
       </div>
-      <div className={'w-full h-[150px]'} ref={chartRef}></div>
+      <div className={'w-full h-[260px]'} ref={chartRef}></div>
     </div>
   </div>
 }
