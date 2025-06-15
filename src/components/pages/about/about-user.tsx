@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils.ts'
 
 const styleClassName = 'px-3 py-0.5 bg-background border rounded-2xl shadow-sm cursor-default'
 export const AboutUser = () => {
-  return <div className={'w-full flex justify-center pb-[20px]'}>
+  return <div className={'w-full flex justify-center pb-[40px] pt-[20px]'}>
     <div className={'hidden md:flex flex-col justify-around py-[10px] text-[14px]'}>
       <div className={cn('ml-[16px] ', styleClassName, style.ani)}>
         🤖️ 数码科技爱好者
