@@ -363,3 +363,14 @@ export const AboutCardSkillTimeline = [
     ],
   },
 ]
+
+export const AboutCardSkillColorMap = {
+  Vue: `rgba(66, 184, 131, 1)`,
+  React: `rgba(92, 198, 222, 1)`,
+  Angular: `rgba(229, 67, 165, 1)`,
+  NextJs: `rgba(45, 45, 45, 1)`,
+  NestJs: `rgba(234, 40, 73, 1)`,
+  HTML: `rgba(233, 98, 40, 1)`,
+  CSS: `rgba(40, 98, 233, 1)`,
+  JS: `rgba(239, 216, 29, 1)`,
+}
