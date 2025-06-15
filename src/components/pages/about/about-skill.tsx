@@ -6,7 +6,7 @@ import * as echarts from 'echarts'
 import { AboutCardSkillColorMap, AboutCardSkillTimeline, skills, skillsTools } from '@/constant/about-const.tsx'
 import { installChartResize } from '@/lib/resize-chart.ts'
 
-const cardStyleClassName = 'border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050]'
+const cardStyleClassName = 'border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl'
 
 export const AboutSkill = () => {
   const chartRef = useRef(null)
@@ -198,7 +198,7 @@ export const AboutSkill = () => {
   }, [chartRef])
   return <div className={'mt-[26px] block md:flex gap-[26px]'}>
     <div
-      className={cn('flex-[1_1_0%] py-[20px] min-h-[200px] rounded-2xl overflow-hidden', cardStyleClassName)}>
+      className={cn('flex-[1_1_0%] py-[20px] min-h-[200px] overflow-hidden', cardStyleClassName)}>
       <div className={'px-[20px] md:px-[40px]'}>
         <div className={'text-[14px] text-[#888]'}>技能</div>
         <div className={'text-[24px] text-foreground font-bold'}>开启创造力</div>

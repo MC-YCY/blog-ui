@@ -1,4 +1,4 @@
-import UserImg from '@/assets/images/user.jpg'
+import UserImg from '@/assets/images/me/user.jpg'
 import style from './style.module.css'
 import { cn } from '@/lib/utils.ts'
 

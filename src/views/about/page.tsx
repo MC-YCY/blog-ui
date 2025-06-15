@@ -3,6 +3,7 @@ import { Container } from '@/components/project/container'
 import { AboutUser } from '@/components/pages/about/about-user.tsx'
 import { AboutSkill } from '@/components/pages/about/about-skill.tsx'
 import { AboutIntroduce } from '@/components/pages/about/about-introduce.tsx'
+import { AboutPersonality } from '@/components/pages/about/about-personality.tsx'
 
 const AboutPage = () => {
   return <div className={'pt-[64px]'}>
@@ -11,6 +12,7 @@ const AboutPage = () => {
       <div className={'text-[28px] text-center mt-[20px] mb-[40px] font-bold'}>关于本站</div>
       <AboutIntroduce></AboutIntroduce>
       <AboutSkill></AboutSkill>
+      <AboutPersonality></AboutPersonality>
     </Container>
   </div>
 }
