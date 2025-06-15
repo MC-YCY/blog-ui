@@ -131,6 +131,8 @@ const AboutCardSkill = () => {
         },
         timeline: {
           top: 228,
+          left: 20,
+          right: 20 + 44,
           axisType: 'category',
           autoPlay: true,
           playInterval: 3000,
@@ -243,8 +245,8 @@ const AboutCardSkill = () => {
         },
         grid: {
           top: 14,
-          left: 40,
-          right: 40,
+          left: 20,
+          right: 20,
           bottom: 35,
           containLabel: true,
         },
@@ -326,7 +328,9 @@ const AboutCardSkill = () => {
         <div className={'text-[14px] text-[#888]'}>技能曲线</div>
         <div className={'text-[24px] text-foreground font-bold'}>无线进步</div>
       </div>
-      <div className={'w-full h-[260px]'} ref={chartRef}></div>
+      <div className={'px-0 md:px-[20px]'}>
+        <div className={'w-full h-[260px]'} ref={chartRef}></div>
+      </div>
     </div>
   </div>
 }
