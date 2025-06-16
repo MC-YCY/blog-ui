@@ -90,7 +90,7 @@ export const AboutGames = () => {
           <div className={'flex flex-row items-center justify-center'}>
             <AnimatedTooltip items={people} />
           </div>
-          <div className={'flex flex-row items-center justify-center'}>
+          <div className={'flex flex-row items-center justify-center mr-4'}>
             <AnimatedTooltip items={people2} />
           </div>
         </div>

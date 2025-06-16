@@ -66,7 +66,7 @@ export const AboutSkill = () => {
           },
         },
         timeline: {
-          top: 228,
+          top: 226,
           left: 20,
           right: 20 + 44,
           axisType: 'category',
@@ -182,7 +182,7 @@ export const AboutSkill = () => {
           top: 14,
           left: 0,
           right: 0,
-          bottom: 35,
+          bottom: 38,
           containLabel: true,
         },
       },
@@ -266,9 +266,9 @@ export const AboutSkill = () => {
       <div className={'px-0 md:px-[20px] relative'}>
         <div className={'w-full h-[260px]'} ref={chartRef}></div>
         <div
-          className={'absolute bg-[linear-gradient(90deg,var(--background),rgba(0,0,0,0))] left-0 top-0 h-full w-[10%] z-10'}></div>
+          className={'absolute bg-[linear-gradient(90deg,var(--background),rgba(0,0,0,0))] left-0 top-0 h-full w-[10%] z-10 pointer-events-none'}></div>
         <div
-          className={'absolute bg-[linear-gradient(-90deg,var(--background),rgba(0,0,0,0))] right-0 top-0 h-full w-[10%] z-10'}></div>
+          className={'absolute bg-[linear-gradient(-90deg,var(--background),rgba(0,0,0,0))] right-0 top-0 h-full w-[10%] z-10 pointer-events-none'}></div>
       </div>
     </div>
   </div>
