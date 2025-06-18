@@ -30,6 +30,7 @@ export const AboutPersonality = () => {
       <div className={'w-[42px] h-[42px] border rounded-[50%] overflow-hidden absolute right-[10px] bottom-[10px]'}>
         <img src={UserImg} className={'w-full h-full object-cover'} alt="" />
       </div>
+      <div className={'absolute inset-0 dark:bg-[rgba(0,0,0,0.3)]'}></div>
     </div>
   </div>
 }
