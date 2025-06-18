@@ -6,6 +6,7 @@ import { AboutIntroduce } from '@/components/pages/about/about-introduce.tsx'
 import { AboutPersonality } from '@/components/pages/about/about-personality.tsx'
 import { AboutGames } from '@/components/pages/about/about-games.tsx'
 import { AboutMessage } from '@/components/pages/about/about-message.tsx'
+import {AboutComment} from '@/components/pages/about/about-comment/about-comment.tsx'
 
 const AboutPage = () => {
   return <div className={'pt-[64px]'}>
@@ -16,6 +17,7 @@ const AboutPage = () => {
       <AboutPersonality></AboutPersonality>
       <AboutGames></AboutGames>
       <AboutMessage></AboutMessage>
+      <AboutComment></AboutComment>
     </Container>
   </div>
 }

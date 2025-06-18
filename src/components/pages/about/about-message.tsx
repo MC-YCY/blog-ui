@@ -14,8 +14,8 @@ export const AboutMessage = () => {
     <div className={'text-[24px] text-foreground font-bold cursor-default h-[36px] mt-[10px]'}>为什么建站？</div>
     <div className={'text-foreground text-[14px] leading-[32px] indent-[2em]'}>
       {
-        texts.map((text) => {
-          return <p className={'mt-[18px]'}>{text}</p>
+        texts.map((text, index) => {
+          return <p className={'mt-[18px]'} key={'AboutMessage-key' + index}>{text}</p>
         })
       }
     </div>
