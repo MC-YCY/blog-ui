@@ -9,7 +9,7 @@ import Banner4 from '@/assets/images/人民万岁/照射.jpg'
 export const HomePanel = () =>{
   return <>
     <Container>
-      <PartTitle title={'山水相逢'} description={'点击他们看看'} />
+      <PartTitle title={'一个有趣的组件'} description={'试着点击它们'} />
       <div className="w-full mt-3 xl:mt-6 h-[76vh] max-h-[680px]">
         <ExtendPanel cards={[
           {

@@ -105,7 +105,7 @@ export const HomeDiary = () => {
     navigate('/diary')
   }
   return <Container>
-    <PartTitle title={'灵光一现一些想法'} description={'落魄前端，加班前的幻想...'}></PartTitle>
+    <PartTitle title={'随记'} description={'记录一点灵感、想法、故事...'}></PartTitle>
     <div className={'w-full mt-3 xl:mt-6 block xl:flex'}>
       <div className={'w-full xl:w-[450px]'}>
         <div

@@ -12,14 +12,7 @@ import { createMessage, getMessages } from '@/api/messages.api.ts'
 import dayjs from 'dayjs'
 
 export const HomeMessageBoard = () => {
-  const [list, setList] = useState<MessageBoard[]>([
-    {
-      content: '内容',
-      username: '春秋半夏',
-      date: '2025/10/1',
-      id: 0,
-    },
-  ])
+  const [list, setList] = useState<MessageBoard[]>([])
   const [username, setUsername] = useState<string>('')
   const getList = () => {
     getMessages({
@@ -72,8 +65,8 @@ export const HomeMessageBoard = () => {
   return (
     <Container>
       <PartTitle
-        title={'一些"美妙的语言"'}
-        description={'**星###星！@#￥%……&'}
+        title={'一些"留言"'}
+        description={'可以留下建议,我会尝试修改'}
         action={<DiaryWriteButton
           onOpenChange={() => setUsername('')}
           onSubmit={onSubmit} date={new Date()} username={

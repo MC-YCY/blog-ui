@@ -226,7 +226,7 @@ export const HomePicture = () => {
     url: '',
   })
   return <Container>
-    <PartTitle title={'一些"小藏品"'} description={'信我都是在群里收藏的，我想你们知道我是个收藏仔...'} action={
+    <PartTitle title={'图库'} description={'信我都是在群里收藏的，我想你们知道我是个收藏仔...'} action={
       <div className={'w-[36px]'}>
         <PicturePreview {...previewState}></PicturePreview>
       </div>
