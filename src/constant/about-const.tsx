@@ -128,15 +128,36 @@ export const AboutCardSkillTimeline = [
       },
       {
         value: ['HTML', 80],
-        tooltip: '这一年老师带领做了小飞机、贪吃蛇、轮播图、放大镜等等',
+        tooltip: `
+          <b>老师传授:</b>
+          <ul>
+            <li>小飞机</li>
+            <li>贪吃蛇</li>
+            <li>放大镜</li>
+          </ul>
+        `,
       },
       {
         value: ['CSS', 90],
-        tooltip: '开启了疯狂仿照网站到flex、grid、animation、var、calc...',
+        tooltip: `
+          <b>无尽静态页:</b>
+          <ul>
+            <li>京东</li>
+            <li>掘金</li>
+            <li>西铁城</li>
+          </ul>
+        `,
       },
       {
         value: ['JS', 50],
-        tooltip: '一年中做的效果围绕着js、jq、class尝试',
+        tooltip: `
+          <b>围绕着:</b>
+          <ul>
+            <li>javaScript</li>
+            <li>JQuery</li>
+            <li>ES6</li>
+          </ul>
+        `,
       },
     ],
   },
@@ -145,7 +166,13 @@ export const AboutCardSkillTimeline = [
     data: [
       {
         value: ['Vue', 30],
-        tooltip: '起初没有用脚手架、用的cdn，new Vue形式的进入命令式的开端',
+        tooltip: `
+          <b>天塌了:</b>
+          <ul>
+            <li>管理系统</li>
+            <li>小程序</li>
+          </ul>
+        `,
       },
       {
         value: ['React', 0],
@@ -165,15 +192,21 @@ export const AboutCardSkillTimeline = [
       },
       {
         value: ['HTML', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['CSS', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['JS', 50],
-        tooltip: '什么是回调啊、递归好深奥、数组对象结构怎么看呢',
+        tooltip: `
+          <b>天塌了:</b>
+          <ul>
+            <li>什么是回调</li>
+            <li>什么是递归</li>
+          </ul>
+        `,
       },
     ],
   },
@@ -182,7 +215,14 @@ export const AboutCardSkillTimeline = [
     data: [
       {
         value: ['Vue', 60],
-        tooltip: `进入最终阶段了,脚手架、router、vuex全家桶就开启了项目实战<br/>10月进入了公司,上传文件都不知道怎么搞`,
+        tooltip: `
+          <b>天塌了:</b>
+          <ul>
+            <li>jenkins</li>
+            <li>webpack</li>
+            <li>node.js</li>
+          </ul>
+        `,
       },
       {
         value: ['React', 0],
@@ -202,15 +242,15 @@ export const AboutCardSkillTimeline = [
       },
       {
         value: ['HTML', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['CSS', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['JS', 60],
-        tooltip: '在某一刻真的可以相通一个点呢',
+        tooltip: '温故知新',
       },
     ],
   },
@@ -219,11 +259,18 @@ export const AboutCardSkillTimeline = [
     data: [
       {
         value: ['Vue', 70],
-        tooltip: `对各类ui库用的倒是得心应手,时常在想这种库是怎么做的<br/>封装上传了自己的一个组件sa-calendar-vue2`,
+        tooltip: `
+          <b>天塌了:</b>
+          <ul>
+            <li>对各类ui库用的倒是得心应手</li>
+            <li>时常在想这种库是怎么做的</li>
+            <li>封装上传了sa-calendar-vue2</li>
+          </ul>
+        `,
       },
       {
         value: ['React', 0],
-        tooltip: '文章中天天拿来和vue作比较，看的瑟瑟发抖',
+        tooltip: `闻所未闻`,
       },
       {
         value: ['Angular', 0],
@@ -239,15 +286,15 @@ export const AboutCardSkillTimeline = [
       },
       {
         value: ['HTML', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['CSS', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['JS', 70],
-        tooltip: '写的多了，知其然不知其所以然',
+        tooltip: '知其然不知其所以然',
       },
     ],
   },
@@ -256,11 +303,24 @@ export const AboutCardSkillTimeline = [
     data: [
       {
         value: ['Vue', 75],
-        tooltip: `开启了第一个vue3项目、使用并学习着ts<br/>参加了组件比赛得了4k嘿嘿`,
+        tooltip: `
+          <b>天塌了:</b>
+          <ul>
+            <li>开启了第一个vue3项目</li>
+            <li>使用并学习着ts</li>
+            <li>参加了组件比赛得了4k</li>
+          </ul>`,
       },
       {
         value: ['React', 40],
-        tooltip: 'Vite的支持,看了两周文档开启了第一个react-h5项目',
+        tooltip: `
+          <b>天塌了:</b>
+          <ul>
+            <li>时常看到vue/react文章</li>
+            <li>吓得瑟瑟发抖</li>
+            <li>我直接vite创建</li>
+            <li>开始了h5项目</li>
+          </ul>`,
       },
       {
         value: ['Angular', 0],
@@ -276,15 +336,15 @@ export const AboutCardSkillTimeline = [
       },
       {
         value: ['HTML', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['CSS', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['JS', 70],
-        tooltip: 'vue3的到来使用了组合式,对函数的使用得心应手',
+        tooltip: '温故知新',
       },
     ],
   },
@@ -293,15 +353,15 @@ export const AboutCardSkillTimeline = [
     data: [
       {
         value: ['Vue', 75],
-        tooltip: `抖音度一博主的效果,没事就做一做`,
+        tooltip: `温故知新`,
       },
       {
         value: ['React', 40],
-        tooltip: '这一年没怎么用React了',
+        tooltip: '温故知新',
       },
       {
         value: ['Angular', 30],
-        tooltip: '在某一天,有兄弟问了个angular的问题...',
+        tooltip: '在某一天,问了个angular的问题...',
       },
       {
         value: ['NextJs', 0],
@@ -309,15 +369,15 @@ export const AboutCardSkillTimeline = [
       },
       {
         value: ['NestJs', 50],
-        tooltip: '一直以来都想自己做个小项目玩一玩,新同事的介绍下...',
+        tooltip: '一直以来都想自己做个小项目玩一玩...',
       },
       {
         value: ['HTML', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['CSS', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['JS', 70],
@@ -330,11 +390,16 @@ export const AboutCardSkillTimeline = [
     data: [
       {
         value: ['Vue', 75],
-        tooltip: `裁员了、问的好多问题和性能有关`,
+        tooltip: `裁员了,问的好多问题和性能有关`,
       },
       {
         value: ['React', 50],
-        tooltip: '做了sa-blog、next-sa-blog',
+        tooltip: `
+          <b>天塌了:</b>
+          <ul>
+            <li>sa-blog</li>
+            <li>next-sa-blog</li>
+          </ul>`,
       },
       {
         value: ['Angular', 30],
@@ -350,11 +415,11 @@ export const AboutCardSkillTimeline = [
       },
       {
         value: ['HTML', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['CSS', 90],
-        tooltip: '温故知新，开始思考实现的方式和布局方式',
+        tooltip: '温故知新',
       },
       {
         value: ['JS', 70],

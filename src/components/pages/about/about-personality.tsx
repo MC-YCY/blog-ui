@@ -8,10 +8,10 @@ import UserImg from '@/assets/images/me/user.jpg'
 const cardStyleClassName = 'border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl'
 export const AboutPersonality = () => {
   return <div className={'block md:flex gap-[26px] mt-[26px]'}>
-    <div className={cn('w-full md:w-[60%] hover:bg-[#88619a] dark:hover:bg-[#44314d] transition', cardStyleClassName)}>
+    <div className={cn('w-full md:w-[60%] bg-[rgba(224,214,228,0.1)]', cardStyleClassName)}>
       <div className={cn('relative h-[180px]')}>
         <div
-          className={'pl-[20px] w-[50%] rounded-2xl md:pl-[40px] py-[20px] flex flex-col bg-[linear-gradient(90deg,rgba(255,255,255,0.5),rgba(0,0,0,0))] dark:bg-[linear-gradient(90deg,rgba(0,0,0,0.5),rgba(0,0,0,0))] h-full absolute left-0 top-0 z-[2]'}>
+          className={'pl-[20px] w-full rounded-2xl md:pl-[40px] py-[20px] flex flex-col bg-[linear-gradient(90deg,rgba(255,255,255,0.5),rgba(0,0,0,0))] dark:bg-[linear-gradient(90deg,rgba(0,0,0,0.5),rgba(0,0,0,0))] h-full absolute left-0 top-0 z-[2]'}>
           <div className={'text-[14px] text-[#888] cursor-default h-[21]'}>性格</div>
           <div className={'text-[24px] text-foreground font-bold cursor-default h-[36px]'}>架构师</div>
           <div className={'text-[24px] text-[#88619a] font-bold cursor-default h-[36px]'}>INTJ-T</div>
@@ -26,7 +26,7 @@ export const AboutPersonality = () => {
       </div>
     </div>
     <div className={'flex-1 mt-[26px] md:mt-0 h-[180px] relative'}>
-      <img src={MeBanner} className={cn(cardStyleClassName,'px-0! py-0! w-full h-full object-cover')} alt="" />
+      <img src={MeBanner} className={cn(cardStyleClassName, 'px-0! py-0! w-full h-full object-cover')} alt="" />
       <div className={'w-[42px] h-[42px] border rounded-[50%] overflow-hidden absolute right-[10px] bottom-[10px]'}>
         <img src={UserImg} className={'w-full h-full object-cover'} alt="" />
       </div>

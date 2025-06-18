@@ -66,7 +66,7 @@ export const AboutSkill = () => {
           },
         },
         timeline: {
-          top: 226,
+          top: 225,
           left: 20,
           right: 20 + 44,
           axisType: 'category',

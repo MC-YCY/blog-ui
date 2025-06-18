@@ -3,8 +3,8 @@ import { cn } from '@/lib/utils.ts'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 
-const bgClassName = `bg-[linear-gradient(121deg,rgba(196,255,255,0.15)_0%,rgba(190,83,69,0.2)_100%)] bg-background`
-const bgrClassName = `bg-[linear-gradient(121deg,rgba(239,184,174,0.15)_0%,rgba(127,156,76,0.15)_100%)] bg-background`
+const bgClassName = `bg-[linear-gradient(121deg,rgba(196,255,255,0.15)_0%,rgba(190,83,69,0.1)_100%)] bg-background`
+const bgrClassName = `bg-[linear-gradient(121deg,rgba(239,184,174,0.15)_0%,rgba(127,156,76,0.1)_100%)] bg-background`
 const cardStyleClassName = 'border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050]'
 export const AboutIntroduce = () => {
   return <div className={'block md:flex gap-[26px]'}>

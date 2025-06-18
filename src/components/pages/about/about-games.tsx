@@ -84,8 +84,8 @@ export const AboutGames = () => {
     <div className={cn('flex-1 h-[350px] relative', cardStyleClassName)}>
       <img className={'w-full h-full object-cover rounded-2xl'} src={SjzBanner} alt="" />
       <div className={'absolute w-full left-0 top-0 z-2 px-[20px] md:px-[40px] py-[20px] h-full flex flex-col'}>
-        <div className={'text-[14px] text-background cursor-default h-[21]'}>爱好游戏</div>
-        <div className={'text-[24px] text-background font-bold cursor-default h-[36px]'}>三角洲行动</div>
+        <div className={'text-[14px] text-white cursor-default h-[21]'}>爱好游戏</div>
+        <div className={'text-[24px] text-white font-bold cursor-default h-[36px]'}>三角洲行动</div>
         <div className={'flex w-full justify-between mt-auto'}>
           <div className={'flex flex-row items-center justify-center'}>
             <AnimatedTooltip items={people} />
@@ -99,8 +99,8 @@ export const AboutGames = () => {
     <div className={cn('flex-1 mt-[26px] md:mt-0 h-[350px] relative',cardStyleClassName)}>
       <img className={'w-full h-full object-cover rounded-2xl'} src={Cod20} alt="" />
       <div className={'absolute w-full left-0 top-0 z-2 px-[20px] md:px-[40px] py-[20px] h-full flex flex-col'}>
-        <div className={'text-[14px] text-background cursor-default h-[21]'}>爱好游戏</div>
-        <div className={'text-[24px] text-background font-bold cursor-default h-[36px]'}>使命召唤</div>
+        <div className={'text-[14px] text-white cursor-default h-[21]'}>爱好游戏</div>
+        <div className={'text-[24px] text-white font-bold cursor-default h-[36px]'}>使命召唤</div>
         <div className={'flex w-full justify-between mt-auto'}>
           <div className={'flex flex-row items-center justify-center'}>
             <AnimatedTooltip items={people3} />
