@@ -1,16 +1,19 @@
 import dayjs from 'dayjs'
 import { cn } from '@/lib/utils.ts'
 import React, { useEffect, useRef, useState } from 'react'
+import { IconSend } from '@tabler/icons-react'
+import { PartTitle } from '@/components/project/part-title/part-title.tsx'
+import { toast as Toast } from 'sonner'
 
 interface Comment {
   username: string,
-  qq: string | number,
+  qq?: string | number,
   avatar: string,
   date: Date | string | number,
   content: string,
-  id: number | string,
-  links?: { qq: string | number, date: Date | string | number }[],
-  comments?: Comment[]
+  id?: number | string,
+  comments?: Comment[],
+  className?: string
 }
 
 const CommentIcon = ({ state, onClick }: { state?: boolean, onClick?: () => void }) => {
@@ -30,29 +33,83 @@ const CommentIcon = ({ state, onClick }: { state?: boolean, onClick?: () => void
   </div>
 }
 
-const CommentInput = (comment: Comment) => {
-  const [value, setValue] = useState('');
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const MAX_LENGTH = 500;
+const CommentInput = ({ qq, id }: Comment) => {
+  const [value, setValue] = useState('')
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const MAX_LENGTH = 500
+  const [QQNumber, setQQNumber] = useState('')
+  const [email, setEmail] = useState('')
+  const [websiteURL, setWebsiteURL] = useState('')
+  const QQ_REGEX = /^[1-9][0-9]{4,11}$/
+  const URL_REGEX = /^https?:\/\/[\w.-]+\.[a-z]{2,}(\/.*)?$/i
+  const onQQInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const qq = e.target.value.trim()
+    setQQNumber(qq)
+    if (QQ_REGEX.test(qq)) {
+      setEmail(`${qq}@qq.com`)
+    } else {
+      setEmail('')
+    }
+  }
+  const onURLInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const url = e.target.value.trim()
+    setWebsiteURL(url)
+  }
+  const submitComment = () => {
+    let message = ''
+    if (!(value && value.trim().length)) {
+      message = '请输入内容'
+    }
+    if (!QQ_REGEX.test(QQNumber) && !message) {
+      message = '请输入正确的 QQ 号'
+    }
+    if (websiteURL && !URL_REGEX.test(websiteURL) && !message) {
+      message = '请输入合法的网址（需包含 http:// 或 https://）'
+    }
+    if (message) {
+      Toast('', {
+        description: message,
+        action: {
+          label: 'OK',
+          onClick: () => {
+          },
+        },
+      })
+      return
+    }
+
+    let params = {
+      qq: QQNumber,
+      email: email,
+      url: websiteURL,
+      content: value,
+    }
+    // 如果存在，说明他人的评论下评论（或回复）
+    if (qq && id) {
+
+    }
+    const avatar = `https://q1.qlogo.cn/g?b=qq&nk=${QQNumber}&s=100`
+    const username = `QQ用户-${QQNumber}`
+    console.log(params, avatar, username)
+  }
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(comment)
-    const newValue = e.target.value;
-    setValue(newValue);
-    autoResize();
-  };
+    const newValue = e.target.value
+    setValue(newValue)
+    autoResize()
+  }
 
   const autoResize = () => {
-    const textarea = textareaRef.current;
+    const textarea = textareaRef.current
     if (textarea) {
-      textarea.style.height = 'auto';
-      textarea.style.height = `${textarea.scrollHeight}px`;
+      textarea.style.height = 'auto'
+      textarea.style.height = `${textarea.scrollHeight}px`
     }
-  };
+  }
 
   // 初始自动调整高度
   useEffect(() => {
-    autoResize();
-  }, []);
+    autoResize()
+  }, [])
 
   return (
     <div>
@@ -63,60 +120,225 @@ const CommentInput = (comment: Comment) => {
           onChange={handleInput}
           className={cn(
             'bg-background shadow-[0_8px_16px_-4px_#2c2d300c] transition-all duration-300 px-[16px] py-[16px] pb-[40px] block w-full outline-none rounded-[10px]',
-            'border border-[#e3e8f7] focus:border-[#425aef]',
-            'resize-none overflow-hidden min-h-[120px]'
+            'border border-[#e3e8f7] dark:border-[#3d3d3f] focus:border-[#425aef]',
+            'resize-none overflow-hidden min-h-[120px]',
           )}
           maxLength={MAX_LENGTH}
           placeholder="文明发言，友善交流~"
           autoComplete="off"
         />
-        <div className="pointer-events-none absolute right-[16px] h-[40px] bottom-0 flex items-center text-[#999] text-xs">
+        <div
+          className="pointer-events-none absolute right-[16px] h-[40px] bottom-0 flex items-center text-[#999] text-xs">
           {value.length}/{MAX_LENGTH}
         </div>
       </div>
+      <div className={'flex my-[8px]'}>
+        <div
+          className={'flex-1 h-[32px] mr-[10px] bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
+          <label>
+            <span className={'absolute left-0 top-0 h-[32px] flex items-center px-[20px] font-bold'}>QQ</span>
+            <input
+              value={QQNumber}
+              onInput={onQQInput}
+              type="text" placeholder={'输入QQ账号获取昵称&头像'}
+              className={'placeholder:text-[#c0c4cc] pl-[70px] rounded-[6px] transition-all duration-300 w-full h-full outline-none border border-[#e3e8f7] dark:border-[#3d3d3f] focus:border-[#425aef]'} />
+          </label>
+        </div>
+        <div
+          className={'flex-1 h-[32px] mr-[10px] bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
+          <label>
+            <span className={'absolute left-0 top-0 h-[32px] flex items-center px-[20px] font-bold'}>邮箱</span>
+            <input
+              value={email}
+              disabled={true} type="text" placeholder={'QQ账号邮箱'}
+              className={'placeholder:text-[#c0c4cc] pl-[70px] rounded-[6px] transition-all duration-300 w-full h-full outline-none border border-[#e3e8f7] dark:border-[#3d3d3f] focus:border-[#425aef]'} />
+          </label>
+        </div>
+        <div
+          className={'flex-1 h-[32px] mr-[10px] bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
+          <label>
+            <span className={'absolute left-0 top-0 h-[32px] flex items-center px-[20px] font-bold'}>网址</span>
+            <input
+              value={websiteURL}
+              onInput={onURLInput}
+              type="text" placeholder={'网站地址,评论后点击名称传送'}
+              className={'placeholder:text-[#c0c4cc] pl-[70px] rounded-[6px] transition-all duration-300 w-full h-full outline-none border border-[#e3e8f7] dark:border-[#3d3d3f] focus:border-[#425aef]'} />
+          </label>
+        </div>
+        <div
+          onClick={submitComment}
+          className={'h-[32px] bg-[#425aef] rounded-[10px] text-[white] shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px] flex items-center w-[100px] min-w-[100px] justify-center cursor-pointer'}>
+          <IconSend width={20} height={20}></IconSend>
+        </div>
+      </div>
     </div>
-  );
-};
+  )
+}
 
-const CommentContent = (comment: Comment) => {
-  const [isCommentInput, setIsCommentInput] = useState<boolean>(false)
-  const [isInit, setIsInit] = useState<boolean>(true)
+interface CommentContentProps extends Comment {
+  activeCommentId: string | number | null
+  onCommentClick: (commentId: string | number | null) => void
+}
+
+const CommentContent = (props: CommentContentProps) => {
+  const { activeCommentId, onCommentClick, ...comment } = props
+  const isCommentInputActive = activeCommentId === comment.id
+
   const clickCommentIcon = () => {
-    setIsCommentInput(!isCommentInput)
-    setIsInit(false)
+    // 如果当前评论的输入框已经打开，则关闭它；否则打开当前评论的输入框
+    onCommentClick(isCommentInputActive ? null : comment.id!)
   }
+
   return <div
-    className={'p-[20px] border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl'}>
-    <div className={'flex h-[32px] items-center'}>
+    className={cn('p-[20px] border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl', comment?.className)}>
+    <div className={'flex'}>
       <div className={'w-[32px] h-[32px] rounded-[50%] cursor-pointer'}>
         <img src={comment.avatar} className={'w-full h-full object-cover block text-0 rounded-[50%]'} alt="" />
       </div>
-      <a className={'ml-[10px] text-[20px] cursor-pointer font-bold'}>{comment.username}</a>
-      <span
-        className={'ml-[10px] cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD')}</span>
-      <div className={'ml-auto'}>
-        <CommentIcon state={isCommentInput} onClick={clickCommentIcon}></CommentIcon>
+      <div className={'flex-1'}>
+        <div className={'flex h-[32px] items-center'}>
+          <a className={'ml-[10px] text-[20px] cursor-pointer font-bold'}>{comment.username}</a>
+          <span
+            className={'ml-[10px] cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD')}</span>
+          <div className={'ml-auto'}>
+            <CommentIcon state={isCommentInputActive} onClick={clickCommentIcon}></CommentIcon>
+          </div>
+        </div>
+        <div className={'text-[16px] text-foreground mt-[10px] cursor-default whitespace-pre-line'}>
+          {comment.content}
+        </div>
+        {
+          comment.comments && comment.comments.length > 0 ? comment.comments.map((commentInfo: Comment, index) => {
+            return <CommentContent
+              key={index}
+              {...commentInfo}
+              activeCommentId={activeCommentId}
+              onCommentClick={onCommentClick}
+              className={cn('p-0! pt-[20px]! bg-transparent border-none rounded-none shadow-none')}
+            />
+          }) : null
+        }
+        <div className={cn('mt-[16px] hidden', isCommentInputActive && 'block')}>
+          <CommentInput {...comment}></CommentInput>
+        </div>
       </div>
     </div>
-    <div className={'text-[16px] text-foreground mt-[10px] pl-[42px] cursor-default whitespace-pre-line'}>
-      {comment.content}
-    </div>
-    {!isInit && <div className={cn('mt-[16px] pl-[42px] hidden', isCommentInput && 'block')}>
-      <CommentInput {...comment}></CommentInput>
-    </div>}
   </div>
 }
 
 export const AboutComment = () => {
-  const comment = {
+  // 添加状态来管理当前激活的评论输入框
+  const [activeCommentId, setActiveCommentId] = useState<string | number | null>(null)
+
+  const handleCommentClick = (commentId: string | number | null) => {
+    setActiveCommentId(commentId)
+  }
+
+  const comments = [{
     username: '测试',
     qq: '2646403766',
     date: '2025-6-18',
     content: '内容内容',
     avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
     id: 1,
-  }
+    comments: [
+      {
+        username: '测试2',
+        qq: '2646403766',
+        date: '2025-6-18',
+        content: '内容内容',
+        avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
+        id: 2,
+        comments: [
+          {
+            username: '测试2',
+            qq: '2646403766',
+            date: '2025-6-18',
+            content: '内容内容',
+            avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
+            id: 21,
+          },
+          {
+            username: '测试3',
+            qq: '2646403766',
+            date: '2025-6-18',
+            content: '内容内容',
+            avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
+            id: 22,
+          },
+        ],
+      },
+      {
+        username: '测试3',
+        qq: '2646403766',
+        date: '2025-6-18',
+        content: '内容内容',
+        avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
+        id: 3,
+      },
+    ],
+  },
+    {
+      username: '测试',
+      qq: '2646403766',
+      date: '2025-6-18',
+      content: '内容内容',
+      avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
+      id: 4,
+      comments: [
+        {
+          username: '测试2',
+          qq: '2646403766',
+          date: '2025-6-18',
+          content: '内容内容',
+          avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
+          id: 5,
+          comments: [
+            {
+              username: '测试2',
+              qq: '2646403766',
+              date: '2025-6-18',
+              content: '内容内容',
+              avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
+              id: 51,
+            },
+            {
+              username: '测试3',
+              qq: '2646403766',
+              date: '2025-6-18',
+              content: '内容内容',
+              avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
+              id: 52,
+            },
+          ],
+        },
+        {
+          username: '测试3',
+          qq: '2646403766',
+          date: '2025-6-18',
+          content: '内容内容',
+          avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
+          id: 6,
+        },
+      ],
+    }]
   return <div className={'mt-[26px]'}>
-    <CommentContent {...comment}></CommentContent>
+    <PartTitle title={'评论'} description={'可以留下建议,我会尝试修改'}></PartTitle>
+    <div className={'w-full mt-3 xl:mt-6'}>
+      <CommentInput username={''} qq={''} avatar={''} date={''} content={''} id={''}></CommentInput>
+    </div>
+    <div className={'w-full mt-3 xl:mt-6'}>
+      {
+        comments.map((comment: Comment, index) => {
+          return <CommentContent
+            key={index}
+            {...comment}
+            activeCommentId={activeCommentId}
+            onCommentClick={handleCommentClick}
+            className={'mb-[10px]'}
+          />
+        })
+      }
+    </div>
   </div>
 }
