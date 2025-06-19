@@ -195,9 +195,9 @@ const CommentContent = (props: CommentContentProps) => {
       <div className={'w-[32px] h-[32px] rounded-[50%] cursor-pointer'}>
         <img src={comment.avatar} className={'w-full h-full object-cover block text-0 rounded-[50%]'} alt="" />
       </div>
-      <div className={'flex-1'}>
+      <div className={'flex-1 pl-[10px]'}>
         <div className={'flex h-[32px] items-center'}>
-          <a className={'ml-[10px] text-[20px] cursor-pointer font-bold'}>{comment.username}</a>
+          <a className={'text-[20px] cursor-pointer font-bold'}>{comment.username}</a>
           <span
             className={'ml-[10px] cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD')}</span>
           <div className={'ml-auto'}>
