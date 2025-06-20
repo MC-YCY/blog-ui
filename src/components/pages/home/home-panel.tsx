@@ -1,10 +1,10 @@
 import { PartTitle } from '@/components/project/part-title/part-title.tsx'
 import { Container } from '@/components/project/container'
 import { ExtendPanel } from '@/components/project/extend-panel/extend-panel.tsx'
-import Banner1 from '@/assets/images/人民万岁/国徽1.jpg'
-import Banner2 from '@/assets/images/人民万岁/国徽2.jpg'
-import Banner3 from '@/assets/images/人民万岁/会堂.jpg'
-import Banner4 from '@/assets/images/人民万岁/照射.jpg'
+import BannerA from '@/assets/images/panel/wallhaven-mlpwdk.jpg';
+import BannerB from '@/assets/images/panel/25673.png';
+import BannerC from '@/assets/images/panel/wallhaven-v9rr2p.jpg';
+import BannerD from '@/assets/images/panel/wallhaven-3l828y.jpg';
 
 export const HomePanel = () =>{
   return <>
@@ -13,27 +13,27 @@ export const HomePanel = () =>{
       <div className="w-full mt-3 xl:mt-6 h-[76vh] max-h-[680px]">
         <ExtendPanel cards={[
           {
-            background: Banner1,
-            title: '国徽下的律动',
-            description: '在庄严肃穆的建筑之上，国徽闪耀着金色的光芒，五颗五角星熠熠生辉，映照着祖国的荣耀与辉煌。猎猎飘扬的五星红旗，似在诉说着岁月的豪迈。点点飞絮，如灵动的诗行，为这庄重之景添上一抹轻盈。',
+            background: BannerA,
+            title: '未来之城：天地之锚',
+            description: '云雾缭绕间，岛屿之上，螺旋建筑如天地锚点。直耸天际的线条，串联起现实与遐想，是科技与自然共织的未来剪影，每一圈回旋，都在诉说对人居新形态的探索，于山海环抱中，勾勒城市进化的梦幻轮廓 。',
             count: '01'
           },
           {
-            background: Banner2,
-            title: '金辉下的庄严与传承',
-            description: '在暖金色阳光的轻抚下，古建筑的琉璃瓦闪烁着温润的光泽。檐下的精美纹饰，诉说着岁月沉淀的匠心。庄严的国徽高悬，红底与金星交相辉映，尽显肃穆与神圣。光影交织间，历史的厚重与当下的辉煌完美融合，每一处细节都似在低吟着过往的故事，又展望着未来的华章。',
+            background: BannerB,
+            title: '赛博苍穹下的都市霓虹',
+            description: '夜幕垂落，赛博都市在迷雾与霓虹中苏醒。林立的摩天楼如钢铁巨兽，流转的光影似血管搏动，每束刺破黑暗的光，都在书写科技与未来交织的狂想，这是属于赛博时代的城市肖像，藏着人类对未知的野心与向往 。',
             count: '02'
           },
           {
-            background: Banner3,
-            title: '穹顶红星下的殿堂回响',
-            description: '步入这方神圣之境，仰头望去，穹顶似浩瀚宇宙般壮阔。层层叠叠的设计，线条流畅而富有韵律，似在诉说着宏伟的篇章。中央那枚红星，光芒夺目，于简洁与大气之中，尽显庄严与肃穆。环绕的座椅整齐排列，仿佛在静静等待，等待着重要时刻的到来，承载起无数的声音与梦想，在这殿堂之中交织出时代的旋律。',
+            background: BannerC,
+            title: '寻迹未来',
+            description: '踏入云雾弥漫的绿野，眼前是科技与自然共生的奇迹都市。藤蔓爬上摩天楼，瀑布从建筑间倾泻，人类不再是自然的征服者，而是共生的探索者。在这片觉醒的土地上，每一寸绿意、每一缕科技之光，都在诉说未来人居的诗意答案，引我们寻迹生态与文明交融的远方 。',
             count: '03'
           },
           {
-            background: Banner4,
-            title: '阳光下广场的动静之美',
-            description: '在澄澈蓝天的映衬下，宏伟建筑矗立远方，庄重而肃穆。宽阔广场上车流有序穿梭，行人往来悠然，洋溢着蓬勃生机。暖金色阳光倾洒，给一切都镶上了柔和的金边，古老与现代在此交融，岁月的沉稳与生活的活力相互交织，绘就出一幅动人的城市图景。',
+            background: BannerD,
+            title: '落日与霓虹的狂想',
+            description: '当落日余晖漫过星际都市，霓虹与霞光共舞。摩天楼刺破云层，飞船穿梭天际，河流串起璀璨灯火，远方行星悬于苍穹，这是人类将科幻梦照进现实的舞台，每束光、每座建筑，都在书写宇宙时代的浪漫序章 。',
             count: '04'
           }
         ]}></ExtendPanel>
