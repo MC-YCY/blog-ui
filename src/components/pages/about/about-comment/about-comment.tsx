@@ -4,16 +4,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IconSend } from '@tabler/icons-react'
 import { PartTitle } from '@/components/project/part-title/part-title.tsx'
 import { toast as Toast } from 'sonner'
+import { CommentWeb, CreateCommentWebDto } from '@/types/comment-web.ts'
+import { createCommentsWebApi, getCommentsWebApi } from '@/api/comment-web.api.ts'
 
-interface Comment {
-  username: string,
-  qq?: string | number,
-  avatar: string,
-  date: Date | string | number,
-  content: string,
-  id?: number | string,
-  comments?: Comment[],
-  className?: string
+interface Comment extends CommentWeb {
+  className?: string;
+  onSubmit?: (info: CreateCommentWebDto) => void
 }
 
 const CommentIcon = ({ state, onClick }: { state?: boolean, onClick?: () => void }) => {
@@ -33,7 +29,7 @@ const CommentIcon = ({ state, onClick }: { state?: boolean, onClick?: () => void
   </div>
 }
 
-const CommentInput = ({ qq, id }: Comment) => {
+const CommentInput = ({ id, onSubmit, username }: Comment) => {
   const [value, setValue] = useState('')
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const MAX_LENGTH = 500
@@ -41,7 +37,7 @@ const CommentInput = ({ qq, id }: Comment) => {
   const [email, setEmail] = useState('')
   const [websiteURL, setWebsiteURL] = useState('')
   const QQ_REGEX = /^[1-9][0-9]{4,11}$/
-  const URL_REGEX = /^https?:\/\/[\w.-]+\.[a-z]{2,}(\/.*)?$/i
+  const URL_REGEX = /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(:\d+)?(\/[\w-./?%&=]*)?$/i
   const onQQInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const qq = e.target.value.trim()
     setQQNumber(qq)
@@ -78,19 +74,21 @@ const CommentInput = ({ qq, id }: Comment) => {
       return
     }
 
-    let params = {
+    let params: CreateCommentWebDto = {
       qq: QQNumber,
       email: email,
       url: websiteURL,
       content: value,
+      avatar: `https://q1.qlogo.cn/g?b=qq&nk=${QQNumber}&s=100`,
+      username: `QQ用户-${QQNumber}`,
+      parentId: id || null,
+      replyTo: username,
     }
-    // 如果存在，说明他人的评论下评论（或回复）
-    if (qq && id) {
-
+    if (onSubmit) {
+      console.log(params)
+      onSubmit(params)
+      setValue('')
     }
-    const avatar = `https://q1.qlogo.cn/g?b=qq&nk=${QQNumber}&s=100`
-    const username = `QQ用户-${QQNumber}`
-    console.log(params, avatar, username)
   }
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value
@@ -132,9 +130,9 @@ const CommentInput = ({ qq, id }: Comment) => {
           {value.length}/{MAX_LENGTH}
         </div>
       </div>
-      <div className={'flex my-[8px]'}>
+      <div className={'block md:flex my-[8px]'}>
         <div
-          className={'flex-1 h-[32px] mr-[10px] bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
+          className={'flex-1 h-[32px] mr-0 md:mr-[10px] mt-[10px] md:mt-0 bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
           <label>
             <span className={'absolute left-0 top-0 h-[32px] flex items-center px-[20px] font-bold'}>QQ</span>
             <input
@@ -145,7 +143,7 @@ const CommentInput = ({ qq, id }: Comment) => {
           </label>
         </div>
         <div
-          className={'flex-1 h-[32px] mr-[10px] bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
+          className={'flex-1 h-[32px] mr-0 md:mr-[10px] mt-[10px] md:mt-0 bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
           <label>
             <span className={'absolute left-0 top-0 h-[32px] flex items-center px-[20px] font-bold'}>邮箱</span>
             <input
@@ -155,7 +153,7 @@ const CommentInput = ({ qq, id }: Comment) => {
           </label>
         </div>
         <div
-          className={'flex-1 h-[32px] mr-[10px] bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
+          className={'flex-1 h-[32px] mr-0 md:mr-[10px] mt-[10px] md:mt-0 bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
           <label>
             <span className={'absolute left-0 top-0 h-[32px] flex items-center px-[20px] font-bold'}>网址</span>
             <input
@@ -167,7 +165,7 @@ const CommentInput = ({ qq, id }: Comment) => {
         </div>
         <div
           onClick={submitComment}
-          className={'h-[32px] bg-[#425aef] rounded-[10px] text-[white] shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px] flex items-center w-[100px] min-w-[100px] justify-center cursor-pointer'}>
+          className={'h-[32px] mt-[10px] md:mt-0 w-full bg-[#425aef] rounded-[10px] text-[white] shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px] flex items-center md:w-[100px] min-w-[100px] justify-center cursor-pointer'}>
           <IconSend width={20} height={20}></IconSend>
         </div>
       </div>
@@ -178,10 +176,11 @@ const CommentInput = ({ qq, id }: Comment) => {
 interface CommentContentProps extends Comment {
   activeCommentId: string | number | null
   onCommentClick: (commentId: string | number | null) => void
+  onSubmit?: (info: CreateCommentWebDto) => void
 }
 
 const CommentContent = (props: CommentContentProps) => {
-  const { activeCommentId, onCommentClick, ...comment } = props
+  const { activeCommentId, onCommentClick, onSubmit, ...comment } = props
   const isCommentInputActive = activeCommentId === comment.id
 
   const clickCommentIcon = () => {
@@ -199,27 +198,33 @@ const CommentContent = (props: CommentContentProps) => {
         <div className={'flex h-[32px] items-center'}>
           <a className={'text-[20px] cursor-pointer font-bold'}>{comment.username}</a>
           <span
-            className={'ml-[10px] cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD')}</span>
+            className={'hidden md:block ml-[10px] cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}</span>
           <div className={'ml-auto'}>
             <CommentIcon state={isCommentInputActive} onClick={clickCommentIcon}></CommentIcon>
           </div>
         </div>
+        <span
+          className={'block md:hidden cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}</span>
+        {comment.replyTo && <div className={'h-[14px] text-[rgba(60,60,67,0.8)] text-[12px] cursor-pointer flex items-center mt-[10px]'}>
+          回复@{comment.replyTo}
+        </div>}
         <div className={'text-[16px] text-foreground mt-[10px] cursor-default whitespace-pre-line'}>
           {comment.content}
         </div>
         {
-          comment.comments && comment.comments.length > 0 ? comment.comments.map((commentInfo: Comment, index) => {
+          comment.children && comment.children.length > 0 ? comment.children.map((commentInfo: Comment, index) => {
             return <CommentContent
               key={index}
               {...commentInfo}
               activeCommentId={activeCommentId}
               onCommentClick={onCommentClick}
+              onSubmit={onSubmit}
               className={cn('p-0! pt-[20px]! bg-transparent border-none rounded-none shadow-none')}
             />
           }) : null
         }
         <div className={cn('mt-[16px] hidden', isCommentInputActive && 'block')}>
-          <CommentInput {...comment}></CommentInput>
+          <CommentInput {...comment} onSubmit={onSubmit}></CommentInput>
         </div>
       </div>
     </div>
@@ -234,98 +239,25 @@ export const AboutComment = () => {
     setActiveCommentId(commentId)
   }
 
-  const comments = [{
-    username: '测试',
-    qq: '2646403766',
-    date: '2025-6-18',
-    content: '内容内容',
-    avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
-    id: 1,
-    comments: [
-      {
-        username: '测试2',
-        qq: '2646403766',
-        date: '2025-6-18',
-        content: '内容内容',
-        avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
-        id: 2,
-        comments: [
-          {
-            username: '测试2',
-            qq: '2646403766',
-            date: '2025-6-18',
-            content: '内容内容',
-            avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
-            id: 21,
-          },
-          {
-            username: '测试3',
-            qq: '2646403766',
-            date: '2025-6-18',
-            content: '内容内容',
-            avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
-            id: 22,
-          },
-        ],
-      },
-      {
-        username: '测试3',
-        qq: '2646403766',
-        date: '2025-6-18',
-        content: '内容内容',
-        avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
-        id: 3,
-      },
-    ],
-  },
-    {
-      username: '测试',
-      qq: '2646403766',
-      date: '2025-6-18',
-      content: '内容内容',
-      avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
-      id: 4,
-      comments: [
-        {
-          username: '测试2',
-          qq: '2646403766',
-          date: '2025-6-18',
-          content: '内容内容',
-          avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
-          id: 5,
-          comments: [
-            {
-              username: '测试2',
-              qq: '2646403766',
-              date: '2025-6-18',
-              content: '内容内容',
-              avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
-              id: 51,
-            },
-            {
-              username: '测试3',
-              qq: '2646403766',
-              date: '2025-6-18',
-              content: '内容内容',
-              avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
-              id: 52,
-            },
-          ],
-        },
-        {
-          username: '测试3',
-          qq: '2646403766',
-          date: '2025-6-18',
-          content: '内容内容',
-          avatar: 'http://47.93.248.11:3100/assets/user-DAGcPm8j.jpg',
-          id: 6,
-        },
-      ],
-    }]
+  const [comments, setComments] = useState<Comment[]>([])
+  const onSubmit = async (info: CreateCommentWebDto) => {
+    await createCommentsWebApi(info)
+    getComments()
+    setActiveCommentId(null)
+  }
+  const getComments = () => {
+    getCommentsWebApi({ page: 1, limit: 20 }).then((res) => {
+      setComments(res.data)
+    })
+  }
+  useEffect(() => {
+    getComments()
+  }, [])
   return <div className={'mt-[26px]'}>
     <PartTitle title={'评论'} description={'可以留下建议,我会尝试修改'}></PartTitle>
     <div className={'w-full mt-3 xl:mt-6'}>
-      <CommentInput username={''} qq={''} avatar={''} date={''} content={''} id={''}></CommentInput>
+      <CommentInput username={''} qq={''} avatar={''} id={0} content={''} date={'2025-1-1'}
+                    onSubmit={onSubmit}></CommentInput>
     </div>
     <div className={'w-full mt-3 xl:mt-6'}>
       {
@@ -335,6 +267,7 @@ export const AboutComment = () => {
             {...comment}
             activeCommentId={activeCommentId}
             onCommentClick={handleCommentClick}
+            onSubmit={onSubmit}
             className={'mb-[10px]'}
           />
         })
