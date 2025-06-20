@@ -14,12 +14,12 @@ import {
 import { ListSelect } from '@/components/project/list-select/list-select'
 import { useState } from 'react'
 import { blogConfig } from '@/blog.config'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export const HeaderMobileMenu = () => {
-  // const pathname = usePathname()
   const navigate = useNavigate()
-  const [val, setVal] = useState('/home')
+  const location = useLocation()
+  const [val, setVal] = useState(location.pathname)
   return <div className={'flex lg:hidden pl-[14px] justify-center items-center'}>
     <Drawer>
       <DrawerTrigger>
