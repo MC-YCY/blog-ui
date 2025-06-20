@@ -12,6 +12,23 @@ interface Comment extends CommentWeb {
   onSubmit?: (info: CreateCommentWebDto) => void
 }
 
+function flattenNestedComments(comments: CommentWeb[], level = 1): CommentWeb[] {
+  return comments.reduce<CommentWeb[]>((acc, comment) => {
+    const newComment = { ...comment };
+
+    if (level >= 3 && newComment.children) {
+      const flattenedChildren = flattenNestedComments(newComment.children, level + 1);
+      newComment.children = [];
+      return [...acc, newComment, ...flattenedChildren];
+    } else if (newComment.children) {
+      newComment.children = flattenNestedComments(newComment.children, level + 1);
+      return [...acc, newComment];
+    } else {
+      return [...acc, newComment];
+    }
+  }, []);
+}
+
 const CommentIcon = ({ state, onClick }: { state?: boolean, onClick?: () => void }) => {
   return <div className={'w-[16px] h-[16px] relative'} onClick={onClick}>
     <svg
@@ -247,7 +264,8 @@ export const AboutComment = () => {
   }
   const getComments = () => {
     getCommentsWebApi({ page: 1, limit: 20 }).then((res) => {
-      setComments(res.data)
+      const flattenedComments = flattenNestedComments(res.data);
+      setComments(flattenedComments);
     })
   }
   useEffect(() => {
