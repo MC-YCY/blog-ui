@@ -14,6 +14,7 @@ import HeroBannerFc from '@/assets/images/panel/25673_fc.png'
 import { cn } from '@/lib/utils.ts'
 import { ReactNode, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
+import { TextGenerateEffect } from '@/components/ui/text-generate-effect.tsx'
 
 export const HomeHeroContent = () => {
   return <div className="absolute h-screen flex w-full left-0 z-[10] justify-center items-center pointer-events-none">
@@ -116,6 +117,7 @@ const FlowerHero = () => {
 }
 
 const CityHero = () => {
+  const [isText,setIsText] = useState<boolean>(false)
   return <>
     <div className={'w-full h-full absolute left-0 top-0'}>
       <div className={'w-full h-full relative'}>
@@ -123,14 +125,18 @@ const CityHero = () => {
         <motion.img
           src={HeroBannerFc}
           alt=""
-          className="w-[15vw] absolute"
+          className="w-[15vw] absolute min-w-[200px]"
           initial={{ x: '100vw', y: '-100vh', opacity: 0 }}
           animate={{ x: '16vw', y: '30vh', opacity: 1 }}
           transition={{
-            duration: 2,
+            duration: 1.5,
             ease: 'easeOut',
           }}
+          onAnimationComplete={()=>setIsText(true)}
         />
+        <div className={'left-[32vw] top-[35vh] absolute w-[50vw]'}>
+          {isText && <TextGenerateEffect spanClassName={'text-[#e1fdfb]! dark:text-[#e1fdfb9a]! leading-loose font-[500]'} words={`夜幕垂落 ，赛博都市在迷雾与霓虹中苏醒。 林立的摩天楼如钢铁巨兽， 流转的光影似血管搏动， 每束刺破黑暗的光， 都在书写科技与未来交织的狂想， 这是属于赛博时代的城市肖像， 藏着人类对未知的野心与向往 。`} />}
+        </div>
         <img
           decoding={'async'}
           className={'w-full h-full object-cover '}
@@ -141,12 +147,12 @@ const CityHero = () => {
 }
 const options: { element: ReactNode, banner: string }[] = [
   {
-    element: <CityHero></CityHero>,
-    banner: HeroBannerThumbnail,
-  },
-  {
     element: <FlowerHero></FlowerHero>,
     banner: HuaLightThumbnail,
+  },
+  {
+    element: <CityHero></CityHero>,
+    banner: HeroBannerThumbnail,
   },
 ]
 export const HomeHero = () => {
