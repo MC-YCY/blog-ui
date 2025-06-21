@@ -7,6 +7,13 @@ import { BlogSvgIcon, GiteeSvgIcon, GithubSvgIcon, IsqqwSvgIcon } from '@/compon
 import { CodeBlock } from '@/components/ui/code-block'
 import HuaDark from '@/assets/images/article-banner/hua_dark.png'
 import HuaLight from '@/assets/images/article-banner/hua.png'
+import HuaLightThumbnail from '@/assets/images/article-banner/hua_thumbnail.png'
+import HeroBanner from '@/assets/images/panel/25673.png'
+import HeroBannerThumbnail from '@/assets/images/panel/25673_thumbnail.png'
+import HeroBannerFc from '@/assets/images/panel/25673_fc.png'
+import { cn } from '@/lib/utils.ts'
+import { ReactNode, useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 
 export const HomeHeroContent = () => {
   return <div className="absolute h-screen flex w-full left-0 z-[10] justify-center items-center pointer-events-none">
@@ -94,8 +101,8 @@ export const HomeHeroContent = () => {
   </div>
 }
 
-export const HomeHero = () => {
-  return <div className="w-full h-screen relative overflow-hidden">
+const FlowerHero = () => {
+  return <>
     <img
       decoding={'async'}
       className={'home-dark-banner w-full h-full object-cover absolute left-0 top-0'}
@@ -105,5 +112,91 @@ export const HomeHero = () => {
       className={'home-light-banner w-full h-full object-cover absolute left-0 top-0'}
       src={HuaLight} alt=""></img>
     <HomeHeroContent></HomeHeroContent>
+  </>
+}
+
+const CityHero = () => {
+  return <>
+    <div className={'w-full h-full absolute left-0 top-0'}>
+      <div className={'w-full h-full relative'}>
+        <div className={'w-full h-full absolute left-0 top-0 dark:bg-[rgba(0,0,0,0.25)]'}></div>
+        <motion.img
+          src={HeroBannerFc}
+          alt=""
+          className="w-[15vw] absolute"
+          initial={{ x: '100vw', y: '-100vh', opacity: 0 }}
+          animate={{ x: '16vw', y: '30vh', opacity: 1 }}
+          transition={{
+            duration: 2,
+            ease: 'easeOut',
+          }}
+        />
+        <img
+          decoding={'async'}
+          className={'w-full h-full object-cover '}
+          src={HeroBanner} alt=""></img>
+      </div>
+    </div>
+  </>
+}
+const options: { element: ReactNode, banner: string }[] = [
+  {
+    element: <CityHero></CityHero>,
+    banner: HeroBannerThumbnail,
+  },
+  {
+    element: <FlowerHero></FlowerHero>,
+    banner: HuaLightThumbnail,
+  },
+]
+export const HomeHero = () => {
+  const [selected, setSelected] = useState<{ element: ReactNode, banner: string }>(options[0])
+  const [prevKey, setPrevKey] = useState<string | null>(null)
+  const handleChange = (item: { element: ReactNode, banner: string }) => {
+    if (item.banner !== selected.banner) {
+      setPrevKey(selected.banner) // 记录旧的 key，用于叠加显示
+      setSelected(item)
+    }
+  }
+  return <div className={'w-full h-screen relative overflow-hidden'}>
+    <div className={'w-[46px] absolute right-[12px] bottom-[12px] z-11'}>
+      {
+        options.map((item, index) => {
+          let mt = index ? 'mt-[6px]' : ''
+          return <div key={item.banner} onClick={() => handleChange(item)}
+                      className={cn('w-[46px] h-[46px] cursor-pointer bg-[#000] rounded-[50%]', mt)}>
+            <img src={item.banner}
+                 className={cn('w-full h-full rounded-[50%] opacity-50 object-cover', selected?.banner === item.banner ? 'opacity-100' : '')}
+                 alt="" />
+          </div>
+        })
+      }
+    </div>
+    {/* 新组件 */}
+    <motion.div
+      key={selected.banner}
+      initial={{ opacity: 0, scale: 1.05 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      className="absolute inset-0 z-10"
+    >
+      {selected.element}
+    </motion.div>
+
+    {/* 旧组件退出动画 */}
+    <AnimatePresence>
+      {prevKey && (
+        <motion.div
+          key={prevKey}
+          initial={false}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0 z-0"
+          onAnimationComplete={() => setPrevKey(null)}
+        >
+          {options.find(o => o.banner === prevKey)?.element}
+        </motion.div>
+      )}
+    </AnimatePresence>
   </div>
 }
