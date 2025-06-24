@@ -11,6 +11,8 @@ import HuaLightThumbnail from '@/assets/images/article-banner/hua_thumbnail.png'
 import HeroBanner from '@/assets/images/panel/25673.png'
 import HeroBannerThumbnail from '@/assets/images/panel/25673_thumbnail.png'
 import HeroBannerFc from '@/assets/images/panel/25673_fc.png'
+import CityHeroFutureThumbnail from '@/assets/images/panel/wallhaven-3l828y_thumbnail.jpg'
+import CityHeroFutureBanner from '@/assets/images/panel/wallhaven-3l828y.jpg'
 import { cn } from '@/lib/utils.ts'
 import { ReactNode, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
@@ -117,7 +119,7 @@ const FlowerHero = () => {
 }
 
 const CityHero = () => {
-  const [isText,setIsText] = useState<boolean>(false)
+  const [isText, setIsText] = useState<boolean>(false)
   return <>
     <div className={'w-full h-full absolute left-0 top-0'}>
       <div className={'w-full h-full relative'}>
@@ -132,15 +134,48 @@ const CityHero = () => {
             duration: 1.5,
             ease: 'easeOut',
           }}
-          onAnimationComplete={()=>setIsText(true)}
+          onAnimationComplete={() => setIsText(true)}
         />
         <div className={'left-[32vw] top-[35vh] absolute w-[50vw]'}>
-          {isText && <TextGenerateEffect spanClassName={'text-[#e1fdfb]! dark:text-[#e1fdfb9a]! leading-loose font-[500]'} words={`夜幕垂落 ，赛博都市在迷雾与霓虹中苏醒。 林立的摩天楼如钢铁巨兽， 流转的光影似血管搏动， 每束刺破黑暗的光， 都在书写科技与未来交织的狂想， 这是属于赛博时代的城市肖像， 藏着人类对未知的野心与向往 。`} />}
+          {isText &&
+            <TextGenerateEffect spanClassName={'text-[#e1fdfb]! dark:text-[#e1fdfb9a]! leading-loose font-[500]'}
+                                words={`夜幕垂落 ，赛博都市在迷雾与霓虹中苏醒。 林立的摩天楼如钢铁巨兽， 流转的光影似血管搏动， 每束刺破黑暗的光， 都在书写科技与未来交织的狂想， 这是属于赛博时代的城市肖像， 藏着人类对未知的野心与向往 。`} />}
         </div>
         <img
           decoding={'async'}
           className={'w-full h-full object-cover '}
           src={HeroBanner} alt=""></img>
+      </div>
+    </div>
+  </>
+}
+const CityHeroFuture = () => {
+  const [isText, setIsText] = useState<boolean>(false)
+  return <>
+    <div className={'w-full h-full absolute left-0 top-0'}>
+      <div className={'w-full h-full relative'}>
+        <div className={'w-full h-full absolute left-0 top-0 dark:bg-[rgba(0,0,0,0.25)]'}></div>
+        <motion.img
+          src={HeroBannerFc}
+          alt=""
+          className="w-[15vw] absolute min-w-[200px]"
+          initial={{ x: '100vw', y: '-100vh', opacity: 0 }}
+          animate={{ x: '16vw', y: '30vh', opacity: 1 }}
+          transition={{
+            duration: 1.5,
+            ease: 'easeOut',
+          }}
+          onAnimationComplete={() => setIsText(true)}
+        />
+        <div className={'left-[32vw] top-[35vh] absolute w-[50vw]'}>
+          {isText &&
+            <TextGenerateEffect spanClassName={'text-[#e1fdfb]! dark:text-[#e1fdfb9a]! leading-loose font-[500]'}
+                                words={`当落日余晖漫过星际都市， 霓虹与霞光共舞。 摩天楼刺破云层， 飞船穿梭天际， 河流串起璀璨灯火， 远方行星悬于苍穹， 这是人类将科幻梦照进现实的舞台， 每束光、 每座建筑， 都在书写宇宙时代的浪漫序章 。`} />}
+        </div>
+        <img
+          decoding={'async'}
+          className={'w-full h-full object-cover '}
+          src={CityHeroFutureBanner} alt=""></img>
       </div>
     </div>
   </>
@@ -153,6 +188,10 @@ const options: { element: ReactNode, banner: string }[] = [
   {
     element: <CityHero></CityHero>,
     banner: HeroBannerThumbnail,
+  },
+  {
+    element: <CityHeroFuture></CityHeroFuture>,
+    banner: CityHeroFutureThumbnail,
   },
 ]
 export const HomeHero = () => {
