@@ -98,7 +98,8 @@ export const Header = () => {
     const clickMockBeforeHashChange = () => {
       // a 标签动态创建的，放到scroll事件中去异步获取
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        const a = anchor as HTMLAnchorElement
+        const a = anchor as HTMLAnchorElement;
+        if(!a) return;
         a.onclick = () => {
           handleHashChange()
         }

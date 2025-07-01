@@ -18,7 +18,7 @@ function flattenNestedComments(comments: CommentWeb[], level = 1): CommentWeb[] 
   return comments.reduce<CommentWeb[]>((acc, comment) => {
     const newComment = { ...comment }
 
-    if (level >= 3 && newComment.children) {
+    if (level >= 2 && newComment.children) {
       const flattenedChildren = flattenNestedComments(newComment.children, level + 1)
       newComment.children = []
       return [...acc, newComment, ...flattenedChildren]
@@ -92,14 +92,13 @@ const CommentInput = ({ id, onSubmit, username }: Comment) => {
       })
       return
     }
-
     let params: CreateCommentWebDto = {
       qq: QQNumber,
       email: email,
       url: websiteURL,
       content: value,
       avatar: `https://q1.qlogo.cn/g?b=qq&nk=${QQNumber}&s=100`,
-      username: `QQ用户-${QQNumber}`,
+      username: `#[1]-${QQNumber}`,
       parentId: id || null,
       replyTo: username,
       replyToId: id || null,
