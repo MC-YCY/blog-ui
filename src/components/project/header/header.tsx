@@ -54,11 +54,16 @@ export const Header = () => {
   const [opacityClassName, setOpacityClassName] = useState('opacity-10')
   const [translateYClassName, setTranslateYClassName] = useState('translate-y-[0%]')
   const lastScrollY = useRef(0)  // 新增 ref 存储上次滚动位置
-
+  const isScroll = useRef(true)
   useEffect(() => {
     const handleScroll = throttle(() => {
-      const currentScrollY = document.documentElement.scrollTop
+      clickMockBeforeHashChange()
 
+      if (!isScroll.current) {
+        isScroll.current = true
+        return
+      }
+      const currentScrollY = document.documentElement.scrollTop
       // 判断滚动方向
       const isScrollingDown = currentScrollY > lastScrollY.current
       lastScrollY.current = currentScrollY
@@ -75,11 +80,38 @@ export const Header = () => {
       }
       setOpacityClassName(shouldOpaque ? 'opacity-86' : 'opacity-10')
     }, 100) // 100ms 节流间隔
-
+    const handleScrollEnd = () => {
+      window.addEventListener('scroll', handleScroll)
+      console.log('end')
+      window.removeEventListener('scrollend', handleScrollEnd)
+    }
+    const handleHashChange = () => {
+      isScroll.current = false
+      setOpacityClassName('opacity-10')
+      setTranslateYClassName('translate-y-[-100%]')
+      window.removeEventListener('scroll', handleScroll)
+      window.addEventListener('scrollend', handleScrollEnd)
+    }
     window.addEventListener('scroll', handleScroll)
-
+    // window.addEventListener('hashchange', handleHashChange);
+    // 在锚点滚动后触发事件，也就是锚点hash更新后触发这时候已经滚动了，在scroll事件前因此删除scroll事件无效
+    const clickMockBeforeHashChange = () => {
+      // a 标签动态创建的，放到scroll事件中去异步获取
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        const a = anchor as HTMLAnchorElement
+        a.onclick = () => {
+          handleHashChange()
+        }
+      })
+    }
+    // 如果第一次进入，含有hash则触发一次beforeHash
+    if(location.hash){
+      handleHashChange()
+    }
     // 清理函数
     return () => {
+      // window.removeEventListener('hashchange', handleHashChange)
+      window.removeEventListener('scrollend', handleScrollEnd)
       window.removeEventListener('scroll', handleScroll)
       handleScroll.cancel() // 重要！取消 lodash 的 throttle
     }

@@ -6,6 +6,8 @@ import { PartTitle } from '@/components/project/part-title/part-title.tsx'
 import { toast as Toast } from 'sonner'
 import { CommentWeb, CreateCommentWebDto } from '@/types/comment-web.ts'
 import { createCommentsWebApi, getCommentsWebApi } from '@/api/comment-web.api.ts'
+import { useLocation } from 'react-router-dom'
+import style from './style.module.css'
 
 interface Comment extends CommentWeb {
   className?: string;
@@ -14,19 +16,19 @@ interface Comment extends CommentWeb {
 
 function flattenNestedComments(comments: CommentWeb[], level = 1): CommentWeb[] {
   return comments.reduce<CommentWeb[]>((acc, comment) => {
-    const newComment = { ...comment };
+    const newComment = { ...comment }
 
     if (level >= 3 && newComment.children) {
-      const flattenedChildren = flattenNestedComments(newComment.children, level + 1);
-      newComment.children = [];
-      return [...acc, newComment, ...flattenedChildren];
+      const flattenedChildren = flattenNestedComments(newComment.children, level + 1)
+      newComment.children = []
+      return [...acc, newComment, ...flattenedChildren]
     } else if (newComment.children) {
-      newComment.children = flattenNestedComments(newComment.children, level + 1);
-      return [...acc, newComment];
+      newComment.children = flattenNestedComments(newComment.children, level + 1)
+      return [...acc, newComment]
     } else {
-      return [...acc, newComment];
+      return [...acc, newComment]
     }
-  }, []);
+  }, [])
 }
 
 const CommentIcon = ({ state, onClick }: { state?: boolean, onClick?: () => void }) => {
@@ -100,9 +102,9 @@ const CommentInput = ({ id, onSubmit, username }: Comment) => {
       username: `QQ用户-${QQNumber}`,
       parentId: id || null,
       replyTo: username,
+      replyToId: id || null,
     }
     if (onSubmit) {
-      console.log(params)
       onSubmit(params)
       setValue('')
     }
@@ -194,26 +196,34 @@ interface CommentContentProps extends Comment {
   activeCommentId: string | number | null
   onCommentClick: (commentId: string | number | null) => void
   onSubmit?: (info: CreateCommentWebDto) => void
+  hashScrollElement?: () => void
 }
 
 const CommentContent = (props: CommentContentProps) => {
   const { activeCommentId, onCommentClick, onSubmit, ...comment } = props
   const isCommentInputActive = activeCommentId === comment.id
+  const location = useLocation()
 
   const clickCommentIcon = () => {
     // 如果当前评论的输入框已经打开，则关闭它；否则打开当前评论的输入框
     onCommentClick(isCommentInputActive ? null : comment.id!)
   }
-
+  useEffect(() => {
+    if (props.hashScrollElement) {
+      props.hashScrollElement()
+    }
+  }, [])
   return <div
-    className={cn('p-[20px] border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl', comment?.className)}>
+    id={'comment-' + comment.id}
+    className={cn('p-[20px] border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl relative', comment?.className)}>
     <div className={'flex'}>
       <div className={'w-[32px] h-[32px] rounded-[50%] cursor-pointer'}>
         <img src={comment.avatar} className={'w-full h-full object-cover block text-0 rounded-[50%]'} alt="" />
       </div>
       <div className={'flex-1 pl-[10px]'}>
-        <div className={'flex h-[32px] items-center'}>
-          <a className={'text-[20px] cursor-pointer font-bold'}>{comment.username}</a>
+        <div className={cn('flex h-[32px] items-center')}>
+          <a
+            className={cn('text-[20px] cursor-pointer font-bold', location.hash === ('#comment-' + comment.id) ? style.selectedUsername : '')}>{comment.username}</a>
           <span
             className={'hidden md:block ml-[10px] cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}</span>
           <div className={'ml-auto'}>
@@ -222,15 +232,17 @@ const CommentContent = (props: CommentContentProps) => {
         </div>
         <span
           className={'block md:hidden cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}</span>
-        {comment.replyTo && <div className={'h-[14px] text-[rgba(60,60,67,0.8)] text-[12px] cursor-pointer flex items-center mt-[10px]'}>
+        {comment.replyTo && <a href={'#comment-' + comment.replyToId}
+                               className={'h-[14px] text-foreground opacity-75 text-[12px] cursor-pointer flex items-center mt-[10px]'}>
           回复@{comment.replyTo}
-        </div>}
+        </a>}
         <div className={'text-[16px] text-foreground mt-[10px] cursor-default whitespace-pre-line'}>
           {comment.content}
         </div>
         {
           comment.children && comment.children.length > 0 ? comment.children.map((commentInfo: Comment, index) => {
             return <CommentContent
+              {...props}
               key={index}
               {...commentInfo}
               activeCommentId={activeCommentId}
@@ -249,6 +261,7 @@ const CommentContent = (props: CommentContentProps) => {
 }
 
 export const AboutComment = () => {
+  const isInit = useRef(true)
   // 添加状态来管理当前激活的评论输入框
   const [activeCommentId, setActiveCommentId] = useState<string | number | null>(null)
 
@@ -264,9 +277,19 @@ export const AboutComment = () => {
   }
   const getComments = () => {
     getCommentsWebApi({ page: 1, limit: 20 }).then((res) => {
-      const flattenedComments = flattenNestedComments(res.data);
-      setComments(flattenedComments);
+      const flattenedComments = flattenNestedComments(res.data)
+      setComments(flattenedComments)
     })
+  }
+  const hashScrollElement = () => {
+    // 只有在初始化（第一此进入页面执行此操作）
+    if (location.hash && isInit.current) {
+      isInit.current = false
+      requestAnimationFrame(() => {
+        const target = document.querySelector(location.hash)
+        if (target) target.scrollIntoView({ behavior: 'instant' })
+      })
+    }
   }
   useEffect(() => {
     getComments()
@@ -274,14 +297,15 @@ export const AboutComment = () => {
   return <div className={'mt-[26px]'}>
     <PartTitle title={'评论'} description={'可以留下建议,我会尝试修改'}></PartTitle>
     <div className={'w-full mt-3 xl:mt-6'}>
-      <CommentInput username={''} qq={''} avatar={''} id={0} content={''} date={'2025-1-1'}
-                    onSubmit={onSubmit}></CommentInput>
+      <CommentInput username={''} qq={''} avatar={''} id={0} content={''} date={''}
+                    onSubmit={onSubmit} replyToId={null}></CommentInput>
     </div>
     <div className={'w-full mt-3 xl:mt-6'}>
       {
-        comments.map((comment: Comment, index) => {
+        comments.map((comment: Comment) => {
           return <CommentContent
-            key={index}
+            hashScrollElement={hashScrollElement}
+            key={comment.id}
             {...comment}
             activeCommentId={activeCommentId}
             onCommentClick={handleCommentClick}

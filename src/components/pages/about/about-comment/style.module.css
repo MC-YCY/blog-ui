@@ -1,0 +1,26 @@
+.selected-username{
+    animation-name: flipInX;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    backface-visibility: visible !important;
+}
+@keyframes flipInX {
+    0% {
+        transform: perspective(400px) rotateX(90deg);
+        opacity: 0;
+    }
+
+    40% {
+        transform: perspective(400px) rotateX(-10deg);
+    }
+
+    70% {
+        transform: perspective(400px) rotateX(10deg);
+    }
+
+    100% {
+        transform: perspective(400px) rotateX(0deg);
+        opacity: 1;
+    }
+}
+

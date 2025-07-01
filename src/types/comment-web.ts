@@ -11,6 +11,7 @@ export interface CommentWeb {
   parentId?: number | null;
   children?: CommentWeb[];
   replyTo?: string | null;
+  replyToId: string | null | number;
 }
 
 export interface CreateCommentWebDto {
@@ -22,4 +23,5 @@ export interface CreateCommentWebDto {
   content: string;
   parentId?: number | null;
   replyTo?: string | null;
+  replyToId: string | null | number;
 }
