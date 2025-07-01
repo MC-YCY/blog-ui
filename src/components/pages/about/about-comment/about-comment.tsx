@@ -98,7 +98,7 @@ const CommentInput = ({ id, onSubmit, username }: Comment) => {
       url: websiteURL,
       content: value,
       avatar: `https://q1.qlogo.cn/g?b=qq&nk=${QQNumber}&s=100`,
-      username: `#[1]-${QQNumber}`,
+      username: id ? `#${id}-${QQNumber}` : QQNumber,
       parentId: id || null,
       replyTo: username,
       replyToId: id || null,
