@@ -11,6 +11,7 @@ import style from './style.module.css'
 
 interface Comment extends CommentWeb {
   className?: string;
+  InnerClassName?: string;
   onSubmit?: (info: CreateCommentWebDto) => void
 }
 
@@ -98,7 +99,7 @@ const CommentInput = ({ id, onSubmit, username }: Comment) => {
       url: websiteURL,
       content: value,
       avatar: `https://q1.qlogo.cn/g?b=qq&nk=${QQNumber}&s=100`,
-      username: id ? `#${id}-${QQNumber}` : QQNumber,
+      username: QQNumber,
       parentId: id || null,
       replyTo: username,
       replyToId: id || null,
@@ -214,17 +215,26 @@ const CommentContent = (props: CommentContentProps) => {
   }, [])
   return <div
     id={'comment-' + comment.id}
-    className={cn('p-[20px] border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl relative', comment?.className)}>
-    <div className={'flex'}>
+    className={cn('p-[20px] border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl', comment?.className)}>
+    <div className={cn('flex border-b border-[#e3e8f7] dark:border-[#3d3d3f] pb-[10px]', props.InnerClassName)}>
       <div className={'w-[32px] h-[32px] rounded-[50%] cursor-pointer'}>
         <img src={comment.avatar} className={'w-full h-full object-cover block text-0 rounded-[50%]'} alt="" />
       </div>
       <div className={'flex-1 pl-[10px]'}>
         <div className={cn('flex h-[32px] items-center')}>
-          <a
-            className={cn('text-[20px] cursor-pointer font-bold', location.hash === ('#comment-' + comment.id) ? style.selectedUsername : '')}>{comment.username}</a>
+          {
+            comment.url ?
+              <a
+                href={comment.url}
+                target={'_blank'}
+                className={cn('text-[20px] cursor-pointer font-bold', location.hash === ('#comment-' + comment.id) ? style.selectedUsername : '')}>#{comment.id}-{comment.username}</a>
+              :
+              <a
+                target={'_blank'}
+                className={cn('text-[20px] cursor-pointer font-bold', location.hash === ('#comment-' + comment.id) ? style.selectedUsername : '')}>#{comment.id}-{comment.username}</a>
+          }
           <span
-            className={'hidden md:block ml-[10px] cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}</span>
+            className={'hidden md:block ml-[10px] cursor-pointer text-[12px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}</span>
           <div className={'ml-auto'}>
             <CommentIcon state={isCommentInputActive} onClick={clickCommentIcon}></CommentIcon>
           </div>
@@ -233,7 +243,7 @@ const CommentContent = (props: CommentContentProps) => {
           className={'block md:hidden cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}</span>
         {comment.replyTo && <a href={'#comment-' + comment.replyToId}
                                className={'h-[14px] text-foreground opacity-75 text-[12px] cursor-pointer flex items-center mt-[10px]'}>
-          回复@{comment.replyTo}
+          回复@#{comment.replyToId}-{comment.replyTo}
         </a>}
         <div className={'text-[16px] text-foreground mt-[10px] cursor-default whitespace-pre-line'}>
           {comment.content}
@@ -242,6 +252,7 @@ const CommentContent = (props: CommentContentProps) => {
           comment.children && comment.children.length > 0 ? comment.children.map((commentInfo: Comment, index) => {
             return <CommentContent
               {...props}
+              InnerClassName={''}
               key={index}
               {...commentInfo}
               activeCommentId={activeCommentId}
@@ -303,6 +314,7 @@ export const AboutComment = () => {
       {
         comments.map((comment: Comment) => {
           return <CommentContent
+            InnerClassName={'border-none!'}
             hashScrollElement={hashScrollElement}
             key={comment.id}
             {...comment}
