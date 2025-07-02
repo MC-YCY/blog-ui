@@ -82,7 +82,6 @@ const SmartPagination = React.forwardRef<HTMLDivElement, SmartPaginationProps>(
         <PaginationContent className={'bg-background shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]'}>
           <PaginationItem>
             <PaginationPrevious
-              href="#"
               onClick={(e) => {
                 e.preventDefault()
                 handlePageChange(current - 1)
@@ -97,7 +96,6 @@ const SmartPagination = React.forwardRef<HTMLDivElement, SmartPaginationProps>(
                 <PaginationEllipsis />
               ) : (
                 <PaginationLink
-                  href="#"
                   isActive={page === current}
                   onClick={(e) => {
                     e.preventDefault()
@@ -112,7 +110,6 @@ const SmartPagination = React.forwardRef<HTMLDivElement, SmartPaginationProps>(
 
           <PaginationItem>
             <PaginationNext
-              href="#"
               onClick={(e) => {
                 e.preventDefault()
                 handlePageChange(current + 1)
