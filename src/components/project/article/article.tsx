@@ -3,6 +3,8 @@
 import { ArticleType } from '@/types/article'
 import { cn } from '@/lib/utils'
 import dayjs from 'dayjs'
+import { Loading } from '@/components/project/loading/loading.tsx'
+import LazyImage from '@/components/project/lazy-image.tsx'
 
 interface ArticleComponentType extends ArticleType {
   onClick?: (arg0: ArticleType) => void;
@@ -18,9 +20,14 @@ export const Article = (props: ArticleComponentType) => {
         <div className={'h-[120px] absolute bottom-0 w-full block md:flex xl:flex'}>
           <div
             className={'w-full xl:w-[160px] md:w-[160px] min-w-[160px] h-[120px] relative rounded-[6px] overflow-hidden shadow-[0_0_2px_rgba(0,0,0,0.5)] dark:shadow-[0_0_2px_rgba(255,255,255,.5)]'}>
-            <img
+            <LazyImage
+              src={props.banner}
+              alt="Product"
+              width={'100%'}
+              height={'100%'}
+              loadingIndicator={<Loading className={'w-full h-full'} />}
               className={'w-full h-full object-cover block'}
-              src={props.banner} alt=""></img>
+            />
           </div>
           <div
             className={'ml-0 md:ml-4 xl:ml-4 flex flex-col justify-center pt-[26px] cursor-pointer flex-1 text-left'}>
