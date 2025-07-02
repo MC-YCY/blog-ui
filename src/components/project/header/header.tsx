@@ -121,7 +121,7 @@ export const Header = () => {
 
   return <>
     <motion.div
-      className="fixed inset-x-0 top-0 z-50 h-[1px] origin-left bg-[#c800de]"
+      className="fixed inset-x-0 top-0 z-50 h-[1px] origin-left bg-[linear-gradient(121deg,rgba(196,255,255,1)_0%,rgba(127,156,76,1)_100%)]"
       style={{
         scaleX: scrollYProgress,
       }}
