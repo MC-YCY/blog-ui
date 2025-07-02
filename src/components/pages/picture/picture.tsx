@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import dayjs from 'dayjs'
 import { PhotoProvider, PhotoView } from 'react-photo-view'
 import { SpanButton } from '@/components/ui/button.tsx'
+import { Navigation } from 'swiper/modules'
 
 export interface PictureSwiperItemContentOptionsType extends PictureType {
   setStates: (arg0: PictureType) => void;
@@ -50,9 +51,12 @@ export const PictureSwiperItemContentOptions = (props: PictureSwiperItemContentO
     })
   }, [props.activeIndex])
   return <Swiper
+    className={'picture-option'}
     ref={swiperRef}
     slidesPerView={'auto'}
     spaceBetween={20}
+    navigation={true}
+    modules={[Navigation]}
     pagination={{
       clickable: true,
     }}>

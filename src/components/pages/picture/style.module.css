@@ -1,0 +1,7 @@
+.picture-option {
+    --swiper-navigation-size: 16px;
+    --swiper-navigation-color: #fff;
+}
+.picture-option .swiper-button-next{
+    display: none !important;
+}

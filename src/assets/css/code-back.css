@@ -1,0 +1,57 @@
+
+
+.light .theme-codeblock {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.light .theme-codeblock span {
+    color: #4b944c;
+}
+
+.light .theme-codeblock .token[style='color:#96CBFE'],
+.light .theme-codeblock .token[style='color: rgb(150, 203, 254);'] {
+    color: #4b944c !important;
+}
+
+.theme-codeblock .token[style='color:#FFFFB6;text-decoration:underline'],
+.theme-codeblock .token[style='color: rgb(255, 255, 182); text-decoration: underline;'] {
+    text-decoration: none !important;
+}
+
+.light .theme-codeblock .token[style='color:#FFFFB6;text-decoration:underline'],
+.light .theme-codeblock .token[style='color: rgb(255, 255, 182); text-decoration: underline;'] {
+    color: #565e4c !important;
+}
+
+.light .theme-codeblock .token[style='color:#A8FF60'],
+.light .theme-codeblock .token[style='color: rgb(168, 255, 96);'] {
+    color: #565e4c !important;
+}
+
+.light .theme-codeblock .token[style='color:#DAD085'],
+.light .theme-codeblock .token[style='color: rgb(218, 208, 133);'] {
+    color: #a17771 !important;
+}
+
+.light .theme-codeblock .token[style='color:#c5c8c6'],
+.light .theme-codeblock .token[style='color: rgb(197, 200, 198);'] {
+    color: #e26438 !important;
+}
+
+.light .theme-codeblock .token[style='color:#EDEDED'],
+.light .theme-codeblock .token[style='color: rgb(237, 237, 237);'] {
+    color: #181c1b !important;
+}
+
+.light .theme-codeblock .token[style='color:#FF73FD'],
+.light .theme-codeblock .token[style='color: rgb(255, 115, 253);'] {
+    color: #abbf52 !important;
+}
+
+.light .theme-codeblock .property-access {
+    color: #88280f !important;
+}
+
+.dark .theme-codeblock {
+    background: rgba(0, 0, 0, 0.7);
+}

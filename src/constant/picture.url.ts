@@ -68,6 +68,15 @@ import importBiZhiBthumbnail from '@/assets/images/壁纸/thumbnail/【哲风壁
 import importBiZhiCthumbnail from '@/assets/images/壁纸/thumbnail/【哲风壁纸】浪漫-清新-背景图.png';
 import importBiZhiDthumbnail from '@/assets/images/壁纸/thumbnail/8624.png';
 
+import importCityA from '@/assets/images/panel/25673.png';
+import importCityB from '@/assets/images/panel/wallhaven-3l828y.jpg';
+import importCityC from '@/assets/images/panel/wallhaven-mlpwdk.jpg';
+import importCityD from '@/assets/images/panel/wallhaven-v9rr2p.jpg';
+import importCityAthumbnail from '@/assets/images/panel/25673_thumbnail.png';
+import importCityBthumbnail from '@/assets/images/panel/wallhaven-3l828y_thumbnail.jpg';
+import importCityCthumbnail from '@/assets/images/panel/wallhaven-mlpwdk_thumbnail.jpg';
+import importCityDthumbnail from '@/assets/images/panel/wallhaven-v9rr2p_thumbnail.jpg';
+
 export const LinQiTingA  = importLinQiTingA
 export const LinQiTingB  = importLinQiTingB
 export const LinQiTingC  = importLinQiTingC
@@ -137,3 +146,12 @@ export const BiZhiAthumbnail  = importBiZhiAthumbnail;
 export const BiZhiBthumbnail  = importBiZhiBthumbnail;
 export const BiZhiCthumbnail  = importBiZhiCthumbnail;
 export const BiZhiDthumbnail  = importBiZhiDthumbnail;
+
+export const CityA  = importCityA;
+export const CityB  = importCityB;
+export const CityC  = importCityC;
+export const CityD  = importCityD;
+export const CityAthumbnail  = importCityAthumbnail;
+export const CityBthumbnail  = importCityBthumbnail;
+export const CityCthumbnail  = importCityCthumbnail;
+export const CityDthumbnail  = importCityDthumbnail;

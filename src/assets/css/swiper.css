@@ -1,0 +1,53 @@
+@import 'swiper/css/grid';
+@import 'swiper/css';
+@import 'swiper/css/free-mode';
+@import 'swiper/css/scrollbar';
+@import "swiper/css/effect-cards";
+@import 'swiper/css/pagination';
+@import 'swiper/css/navigation';
+
+.picture-option {
+    --swiper-navigation-size: 16px;
+    --swiper-navigation-color: #fff;
+}
+
+.picture-option .swiper-button-next,
+.picture-option .swiper-button-prev {
+    opacity: 0;
+    transition: opacity .15s linear;
+}
+
+.picture-option:hover .swiper-button-next,
+.picture-option:hover .swiper-button-prev {
+    opacity: 1;
+}
+
+.picture-option:hover .swiper-button-disabled {
+    opacity: .7;
+}
+
+.custom-swiper-scrollbar, .custom-swiper-scrollbar-bottom {
+    position: relative;
+    margin-bottom: 4px;
+    background: transparent;
+}
+
+.custom-swiper-scrollbar:after,
+.custom-swiper-scrollbar-bottom:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: var(--foreground);
+    opacity: .06;
+}
+
+.custom-swiper-scrollbar .swiper-scrollbar-drag,
+.custom-swiper-scrollbar-bottom .swiper-scrollbar-drag {
+    background: var(--primary);
+    opacity: .25;
+}

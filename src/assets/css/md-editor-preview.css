@@ -1,0 +1,31 @@
+
+.md-editor-preview {
+    position: initial !important;
+    height: auto !important;
+    box-shadow: none !important;
+}
+
+.md-editor-preview .w-md-editor-content {
+    position: initial !important;
+    border: none !important;
+}
+
+.md-editor-preview .w-md-editor-preview {
+    position: initial !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+.md-editor-preview .w-md-editor-bar {
+    display: none !important;
+}
+
+.xt-root {
+    overflow: hidden;
+}
+
+#trancy-button {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
