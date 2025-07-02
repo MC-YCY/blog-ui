@@ -599,7 +599,7 @@ html {
 .custom-swiper-scrollbar .swiper-scrollbar-drag,
 .custom-swiper-scrollbar-bottom .swiper-scrollbar-drag {
     background: var(--primary);
-    opacity: .5;
+    opacity: .25;
 }
 
 div[data-tip] {

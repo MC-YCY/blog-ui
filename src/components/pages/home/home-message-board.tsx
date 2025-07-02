@@ -11,6 +11,20 @@ import { toast } from 'sonner'
 import { createMessage, getMessages } from '@/api/messages.api.ts'
 import dayjs from 'dayjs'
 
+const getCardColor = (opacityStart: number = 0.08, opacityEnd: number = 0.08) => {
+  const CardColors = [
+    `linear-gradient(121deg,rgba(196,255,255,${opacityStart}) 0%,rgba(190,83,69,${opacityEnd}) 100%)`,
+    `linear-gradient(121deg,rgba(239,184,174,${opacityStart}) 0%,rgba(127,156,76,${opacityEnd}) 100%)`,
+    `linear-gradient(121deg,rgba(252,175,162,${opacityStart}) 0%,rgba(127,156,76,${opacityEnd}) 100%)`,
+    `linear-gradient(121deg,rgba(202,167,247,${opacityStart}) 0%,rgba(196,255,255,${opacityEnd}) 100%)`,
+    `linear-gradient(121deg,rgba(202,167,247,${opacityStart}) 0%,rgba(127,156,76,${opacityEnd}) 100%)`,
+    `linear-gradient(121deg,rgba(202,167,247,${opacityStart}) 0%,rgba(252,175,162,${opacityEnd}) 100%)`,
+    `linear-gradient(121deg,rgba(202,167,247,${opacityStart}) 0%,rgba(146,230,245,${opacityEnd}) 100%)`,
+  ]
+  const randomIndex = Math.floor(Math.random() * CardColors.length)
+  return CardColors[randomIndex]
+}
+
 export const HomeMessageBoard = () => {
   const [list, setList] = useState<MessageBoard[]>([])
   const [username, setUsername] = useState<string>('')
@@ -77,8 +91,10 @@ export const HomeMessageBoard = () => {
           留言
         </DiaryWriteButton>}
       />
-      <div className="w-full  h-[370px] xl:h-[500px]  lg:h-[500px]  md:h-[500px]  mt-3 xl:mt-6 select-none">
+      <div
+        className="h-[370px] xl:h-[500px]  lg:h-[500px]  md:h-[500px]  mt-3 select-none mt-[2px]] xl:mt-[14px] px-[6px] mx-[-16px]">
         <Swiper
+          style={{ padding: '10px 10px' }}
           breakpoints={{
             640: {
               slidesPerView: 2,
@@ -109,33 +125,42 @@ export const HomeMessageBoard = () => {
           modules={[Grid, Scrollbar, Autoplay]}
           className="w-full h-full ml-auto mr-auto pb-5!"
         >
-          {list.map((item, idx) => (
-            <SwiperSlide
-              key={`msg-${idx}`}
-              className="bg-background border rounded-2xl px-4 py-4 box-border shadow-[inset_0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_8px_rgba(255,255,255,.1)]"
-            >
-              <div className="w-full h-full flex flex-col">
-                <div className="text-foreground line-clamp-10 xl:line-clamp-5 lg:line-clamp-5 md:line-clamp-5 opacity-85">
-                  {item.content}
-                </div>
-                <div className="mt-auto">
-                  <div className="flex items-center">
+          {
+            list.map((item, idx) => {
+              return (
+                <SwiperSlide
+                  key={`msg-${idx}`}
+                  style={{
+                    backgroundImage: getCardColor(),
+                  }}
+                  className={`transition-[all_0.3s_linear] bg-background py-[10px] border rounded-2xl px-4 box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]`}
+                >
+                  <div className="w-full h-full flex flex-col">
                     <div
-                      className="rounded-full w-[32px] h-[32px] bg-primary text-background justify-center flex items-center text-[14px]"
-                    >
-                      {item.username[0]}
+                      className="text-foreground line-clamp-10 xl:line-clamp-5 lg:line-clamp-5 md:line-clamp-5 opacity-85">
+                      {item.content}
                     </div>
-                    <span className="ml-2 font-bold text-[14px]">
-                                          {item.username}
-                                        </span>
+                    <div className="mt-auto">
+                      <div className="flex items-center">
+                        <div
+                          style={{ backgroundImage: getCardColor(0.3, 0.4) }}
+                          className="rounded-full w-[32px] h-[32px] bg-[rgba(0,0,0,.15)] dark:bg-[rgba(255,255,255,.15)]  shadow-[inset_0_0_8px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_6px_rgba(255,255,255,.1)] text-background justify-center flex items-center text-[14px]"
+                        >
+                          {item.username[0]}
+                        </div>
+                        <span className="ml-2 font-bold text-[14px]">
+                                              {item.username}
+                                            </span>
+                      </div>
+                      <div className="text-[12px] text-foreground opacity-75 mt-2">
+                        {dayjs(item.date).format('YYYY/MM/DD HH:mm:ss')}
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-[14px] text-foreground opacity-75 mt-2">
-                    {dayjs(item.date).format('YYYY/MM/DD HH:mm:ss')}
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
+                </SwiperSlide>
+              )
+            })
+          }
         </Swiper>
       </div>
     </Container>
