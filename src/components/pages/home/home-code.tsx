@@ -8,6 +8,7 @@ import CodeBannerA from '@/assets/images/code-banner/white.jpg'
 import CodeBannerB from '@/assets/images/code-banner/blue.jpg'
 import CodeBannerC from '@/assets/images/code-banner/pink.png'
 import CodeBannerD from '@/assets/images/code-banner/black.jpg'
+import { cn } from '@/lib/utils.ts'
 
 const list = [
   {
@@ -58,10 +59,11 @@ export const HomeCode = () => {
         <PartTitleAction tabs={tabs}></PartTitleAction>
       </div>
     }></PartTitle>
-    <div className={'mt-3 xl:mt-6'}>
+    <div className={'mt-[2px]] xl:mt-[14px] px-[6px] mx-[-16px]'}>
       <Swiper
+        style={{ padding: '0 10px' }}
         slidesPerView={'auto'}
-        spaceBetween={20}
+        spaceBetween={32}
         pagination={{
           clickable: true,
         }}
@@ -69,7 +71,7 @@ export const HomeCode = () => {
         {
           list.map((item, index) => {
             return <SwiperSlide key={item.banner + index}
-                                className={'w-[100%]! md:!w-[calc(50%-10px)] xl:!w-[calc(33.33%-14px)]'}>
+                                className={cn('w-[100%]! md:!w-[calc(50%-16px)] xl:!w-[calc(33.33%-21.33px)] py-[10px]')}>
               <ProjectCard project={item.name} date={item.date} tip={item.tip}
                            banner={item.banner} code={item.git} url={item.preview}></ProjectCard>
             </SwiperSlide>

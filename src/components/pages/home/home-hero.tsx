@@ -1,6 +1,5 @@
 'use client'
 
-import { SignatureGroup } from '@/components/project/signature/signature'
 import { Diary } from '@/components/project/diary/diary'
 import { IconSunFilled } from '@tabler/icons-react'
 import { BlogSvgIcon, GiteeSvgIcon, GithubSvgIcon, IsqqwSvgIcon } from '@/components/project/svg-icons/website'
@@ -23,20 +22,19 @@ export const HomeHeroContent = () => {
     <div className="container flex flex-col md:flex-row justify-around items-center pointer-events-auto">
       <div className="flex flex-col items-center md:items-start space-y-4 aos-init aos-animate px-2">
         <div>
-          <div className="w-[30vw] min-w-[300px]">
-            <SignatureGroup s2Class={'delay-3000!'}></SignatureGroup>
-          </div>
 
           <div className="mt-[24px] cursor-default pl-[8px]">
             <Diary
-              className1={'bg-[rgba(255,255,255,.65)] dark:bg-[rgba(0,0,0,.6)]'}
-              className2={'bg-[rgba(255,255,255,.65)] dark:bg-[rgba(0,0,0,.6)]'}
+              className1={'bg-[rgba(255,255,255,.8)] dark:bg-[rgba(0,0,0,.8)]'}
+              className2={'bg-[rgba(255,255,255,.8)] dark:bg-[rgba(0,0,0,.8)]'}
               title={'春秋半夏'}
               date={'2025/5/15'}
               weather={<IconSunFilled width={24} height={24} color={'#ecca2f'} />}
               content={<>
                 <p>
-                  一名 <del className="text-[#f56c6c] font-bold">吹牛</del> 开发工程师，什么都不会，这也不学那也不学。
+                  一名
+                  <del className="text-[#f56c6c] font-bold">吹牛</del>
+                  开发工程师什么都不会，这也不学那也不学。
                 </p>
                 <p>时间轮回, 一年又一年,你还在想着新技术出来了,</p>
                 <p>
@@ -51,10 +49,10 @@ export const HomeHeroContent = () => {
                      href="https://nestjs.com/">NestJs</a>
                   ......
                 </p>
-                <p>而你身边的人, 在考虑啥时候买第二套房子,什么时候生二胎,</p>
+                <p>而你身边的人, 在考虑啥时候买第二套房子、什么时候生二胎</p>
                 <p>你还在捣鼓你的破代码.</p>
-              </>}></Diary>
-            <div className="mt-[16px] flex">
+            </>}></Diary>
+            <div className="flex h-[42px] mt-[6px]">
               <a className={'w-[50px] cursor-pointer'} href="https://github.com/MC-YCY" target="_blank">
                 <GithubSvgIcon></GithubSvgIcon>
               </a>

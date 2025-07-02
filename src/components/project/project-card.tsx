@@ -16,7 +16,7 @@ interface ProjectCardProps extends React.ButtonHTMLAttributes<HTMLDivElement> {
 
 export const ProjectCard = (props: ProjectCardProps) => {
   return <div
-    className="rounded-[10px] bg-background shadow-[inset_0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[inset_0_0_8px_rgba(255,255,255,.3)] lg:mt-0"
+    className="rounded-[10px] bg-background shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,.3)] lg:mt-0"
     {...props}>
     <div className={'p-[16px]'}>
       <div className={'relative w-full h-[246px] rounded-[10px]'}>
@@ -49,7 +49,7 @@ export const ProjectCard = (props: ProjectCardProps) => {
               target="_blank"
               href={props.url}
               className={'cursor-pointer flex-1 ml-[16px] h-[48px] bg-foreground text-background rounded-[12px] flex items-center justify-center text-base hover:opacity-80 transition'}>
-              Look one Look
+              掘金
             </a>
           }
         </div>
