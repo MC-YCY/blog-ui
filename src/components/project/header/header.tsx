@@ -97,7 +97,7 @@ export const Header = () => {
     // 在锚点滚动后触发事件，也就是锚点hash更新后触发这时候已经滚动了，在scroll事件前因此删除scroll事件无效
     const clickMockBeforeHashChange = () => {
       // a 标签动态创建的，放到scroll事件中去异步获取
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      document.querySelectorAll('a[href^="#comment"]').forEach((anchor) => {
         const a = anchor as HTMLAnchorElement;
         if(!a) return;
         a.onclick = () => {

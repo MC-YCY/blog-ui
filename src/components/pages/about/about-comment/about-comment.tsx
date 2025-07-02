@@ -217,21 +217,24 @@ const CommentContent = (props: CommentContentProps) => {
     id={'comment-' + comment.id}
     className={cn('p-[20px] border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl', comment?.className)}>
     <div className={cn('flex border-b border-[#e3e8f7] dark:border-[#3d3d3f] pb-[10px]', props.InnerClassName)}>
-      <div className={'w-[32px] h-[32px] rounded-[50%] cursor-pointer'}>
+      <div className={'w-[32px] h-[32px] rounded-[50%] cursor-pointer hover:rotate-360 transition'}>
         <img src={comment.avatar} className={'w-full h-full object-cover block text-0 rounded-[50%]'} alt="" />
       </div>
       <div className={'flex-1 pl-[10px]'}>
         <div className={cn('flex h-[32px] items-center')}>
           {
             comment.url ?
-              <a
-                href={comment.url}
-                target={'_blank'}
-                className={cn('text-[20px] cursor-pointer font-bold', location.hash === ('#comment-' + comment.id) ? style.selectedUsername : '')}>#{comment.id}-{comment.username}</a>
+              <span
+                className={cn('text-[20px] cursor-pointer font-bold', location.hash === ('#comment-' + comment.id) ? style.selectedUsername : '')}>
+                <a className={'hover:opacity-55 transition'} href={'#comment-' + comment.id}>#{comment.id}-</a>
+                <a href={comment.url} target={'_blank'}>{comment.username}</a>
+              </span>
               :
-              <a
-                target={'_blank'}
-                className={cn('text-[20px] cursor-pointer font-bold', location.hash === ('#comment-' + comment.id) ? style.selectedUsername : '')}>#{comment.id}-{comment.username}</a>
+              <span
+                className={cn('text-[20px] cursor-pointer font-bold', location.hash === ('#comment-' + comment.id) ? style.selectedUsername : '')}>
+                <a className={'hover:opacity-55 transition'} href={'#comment-' + comment.id}>#{comment.id}-</a>
+                <a target={'_blank'}>{comment.username}</a>
+              </span>
           }
           <span
             className={'hidden md:block ml-[10px] cursor-pointer text-[12px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}</span>
@@ -242,7 +245,7 @@ const CommentContent = (props: CommentContentProps) => {
         <span
           className={'block md:hidden cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}</span>
         {comment.replyTo && <a href={'#comment-' + comment.replyToId}
-                               className={'h-[14px] text-foreground opacity-75 text-[12px] cursor-pointer flex items-center mt-[10px]'}>
+                               className={'h-[14px] text-foreground opacity-75 text-[12px] cursor-pointer items-center mt-[10px]'}>
           回复@#{comment.replyToId}-{comment.replyTo}
         </a>}
         <div className={'text-[16px] text-foreground mt-[10px] cursor-default whitespace-pre-line'}>
