@@ -38,7 +38,6 @@
 }
 
 .navbar div {
-    text-shadow: 0 0 10px var(--background);
     font-size: 16px;
     position: relative;
 }

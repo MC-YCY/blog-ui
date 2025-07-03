@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils.ts'
 import { ReactNode, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { TextGenerateEffect } from '@/components/ui/text-generate-effect.tsx'
+// import useThemeStore from '@/stores/themeStore.ts'
 
 export const HomeHeroContent = () => {
   return <div className="absolute h-screen flex w-full left-0 z-[10] justify-center items-center pointer-events-none">
@@ -178,27 +179,32 @@ const CityHeroFuture = () => {
     </div>
   </>
 }
-const options: { element: ReactNode, banner: string }[] = [
+const options: { element: ReactNode, banner: string, theme: string }[] = [
   {
     element: <FlowerHero></FlowerHero>,
     banner: HuaLightThumbnail,
+    theme: '',
   },
   {
     element: <CityHero></CityHero>,
     banner: HeroBannerThumbnail,
+    theme: 'spring',
   },
   {
     element: <CityHeroFuture></CityHeroFuture>,
     banner: CityHeroFutureThumbnail,
+    theme: 'summer',
   },
 ]
 export const HomeHero = () => {
   const [selected, setSelected] = useState<{ element: ReactNode, banner: string }>(options[0])
   const [prevKey, setPrevKey] = useState<string | null>(null)
-  const handleChange = (item: { element: ReactNode, banner: string }) => {
+  // const { setThemeSuffix } = useThemeStore()
+  const handleChange = (item: { element: ReactNode, banner: string, theme: string }) => {
     if (item.banner !== selected.banner) {
       setPrevKey(selected.banner) // 记录旧的 key，用于叠加显示
       setSelected(item)
+      // setThemeSuffix(item.theme)
     }
   }
   return <div className={'w-full h-screen relative overflow-hidden'}>
