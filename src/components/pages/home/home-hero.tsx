@@ -74,9 +74,9 @@ export const HomeHeroContent = () => {
       </div>
       <div className="rounded-md mt-8 md:mt-0 aos-init aos-animate max-w-[100%] hidden lg:block">
         <CodeBlock
-          className="theme-codeblock shadow-2xl pt-0 pl-1 pb-2"
+          className="theme-codeblock shadow-2xl pl-4 py-2"
           language="ts"
-          filename="Developer.ts"
+          filename=""
           code={`class Developer {
     name: string;
     signature: string;

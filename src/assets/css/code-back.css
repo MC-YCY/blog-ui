@@ -55,3 +55,6 @@
 .dark .theme-codeblock {
     background: rgba(0, 0, 0, 0.7);
 }
+.theme-codeblock .linenumber{
+    display: none !important;
+}
