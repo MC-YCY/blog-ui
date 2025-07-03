@@ -86,6 +86,9 @@ export const HomeDiary = () => {
     let date = new Date(d.year, d.month, d.day)
     setDate(date)
   }
+  const onToggle = (flat: boolean) => {
+    setOpen(flat)
+  }
   useEffect(() => {
     const handleResize = () => {
       setOpen(window.innerWidth > 1280)
@@ -119,7 +122,7 @@ export const HomeDiary = () => {
                                                  className={'cursor-pointer'}></IconSquareRoundedChevronRightFilled>
           </div>
           <Calendar openEvent={true} cellHeight={58} open={open} date={date} firstDayOfWeek={1}
-                    onClick={clickCalendarItem}></Calendar>
+                    onClick={clickCalendarItem} onToggle={onToggle}></Calendar>
         </div>
         <div className={'text-[14px] opacity-80 px-3 pt-4'}>
           <a href="https://gitee.com/yin-chunyang/react-calendar" className={'underline'} target={'_blank'}>

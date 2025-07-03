@@ -104,18 +104,20 @@ export const Calendar = forwardRef<refMethods, CalendarProps>((props, ref) => {
             if (!calendarTable.current) return;
             if (!calendarLayer.current) return;
             const dif = mouseEvent.startY - mouseEvent.endY;
+            let flat = false;
             if (dif > props.cellHeight) {
-                setOpen(false);
+                flat = false;
                 calendarLayer.current.style.setProperty('--top', 'var(--hideTableHeight)');
                 calendarLayer.current.style.setProperty('--height', 'var(--cellHeight)');
             } else {
-                setOpen(true);
+                flat = true;
                 calendarLayer.current.style.setProperty('--top', '0');
                 calendarLayer.current.style.setProperty('--height', 'var(--tableHeight)');
             }
+            setOpen(flat);
             if (open != null) {
                 // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                props.onToggle && props.onToggle(open);
+                props.onToggle && props.onToggle(flat);
             }
         }
         setClearTransition(false);
