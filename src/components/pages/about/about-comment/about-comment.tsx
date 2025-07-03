@@ -9,6 +9,7 @@ import { createCommentsWebApi, getCommentsWebApi } from '@/api/comment-web.api.t
 import { useLocation } from 'react-router-dom'
 import style from './style.module.css'
 import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 interface Comment extends CommentWeb {
   className?: string;
@@ -198,10 +199,11 @@ interface CommentContentProps extends Comment {
   onCommentClick: (commentId: string | number | null) => void
   onSubmit?: (info: CreateCommentWebDto) => void
   hashScrollElement?: () => void
+  clickAnchor: () => void
 }
 
 const CommentContent = (props: CommentContentProps) => {
-  const { activeCommentId, onCommentClick, onSubmit, ...comment } = props
+  const { activeCommentId, onCommentClick, onSubmit, clickAnchor, ...comment } = props
   const isCommentInputActive = activeCommentId === comment.id
   const location = useLocation()
 
@@ -226,7 +228,7 @@ const CommentContent = (props: CommentContentProps) => {
 
   return (
     <div
-      id={'comment-' + comment.id}
+      id={`comment-${comment.id}`}
       className={cn(
         'p-[20px] border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl',
         comment?.className,
@@ -245,7 +247,7 @@ const CommentContent = (props: CommentContentProps) => {
                   location.hash === '#comment-' + comment.id ? style.selectedUsername : '',
                 )}
               >
-                <a className={'hover:opacity-55 transition'} href={'#comment-' + comment.id}>
+                <a onClick={clickAnchor} className={'hover:opacity-55 transition'} href={'#comment-' + comment.id}>
                   #{comment.id}-
                 </a>
                 <a href={comment.url} target={'_blank'} rel="noreferrer">
@@ -259,7 +261,7 @@ const CommentContent = (props: CommentContentProps) => {
                   location.hash === '#comment-' + comment.id ? style.selectedUsername : '',
                 )}
               >
-                <a className={'hover:opacity-55 transition'} href={'#comment-' + comment.id}>
+                <a onClick={clickAnchor} className={'hover:opacity-55 transition'} href={'#comment-' + comment.id}>
                   #{comment.id}-
                 </a>
                 <a target={'_blank'} rel="noreferrer">
@@ -279,6 +281,7 @@ const CommentContent = (props: CommentContentProps) => {
           </span>
           {comment.replyTo && (
             <a
+              onClick={clickAnchor}
               href={'#comment-' + comment.replyToId}
               className={'h-[14px] text-foreground opacity-75 text-[12px] cursor-pointer items-center mt-[10px]'}
             >
@@ -326,8 +329,9 @@ const CommentContent = (props: CommentContentProps) => {
 export const AboutComment = () => {
   const isInit = useRef(true)
   const [page, setPage] = useState(1)
-  const [pageSize] = useState(6)
+  const [pageSize, setPageSize] = useState(6)
   const [total, setTotal] = useState(0)
+  const [searchParams, setSearchParams] = useSearchParams()
   // 添加状态来管理当前激活的评论输入框
   const [activeCommentId, setActiveCommentId] = useState<string | number | null>(null)
 
@@ -338,11 +342,12 @@ export const AboutComment = () => {
   const [comments, setComments] = useState<Comment[]>([])
   const onSubmit = async (info: CreateCommentWebDto) => {
     await createCommentsWebApi(info)
-    getComments()
+    setPage(1)
+    getComments(1, pageSize)
     setActiveCommentId(null)
   }
-  const getComments = () => {
-    getCommentsWebApi({ page: page, limit: pageSize }).then((res) => {
+  const getComments = (p: number, size: number) => {
+    getCommentsWebApi({ page: p, limit: size }).then((res) => {
       const flattenedComments = flattenNestedComments(res.data)
       setComments(flattenedComments)
       setTotal(res.total)
@@ -360,10 +365,23 @@ export const AboutComment = () => {
   }
   const onChange = (p: number) => {
     setPage(p)
+    updateParams(p, pageSize)
+    getComments(p, pageSize)
   }
   useEffect(() => {
-    getComments()
-  }, [page])
+    let paramsPage = Number(searchParams.get('page') || 1)
+    let paramsPageSize = Number(searchParams.get('pageSize') || 6)
+    if (paramsPage < 1) paramsPage = 1
+    if (paramsPageSize < 6) paramsPageSize = 6
+    setPage(paramsPage)
+    setPageSize(paramsPageSize)
+    getComments(paramsPage, paramsPageSize)
+  }, [])
+  const updateParams = (p?: number, s?: number) => {
+    searchParams.set('page', String(p || page))
+    searchParams.set('pageSize', String(s || pageSize))
+    setSearchParams(searchParams)
+  }
   return <div className={'mt-[26px]'}>
     <PartTitle title={'评论'} description={'可以留下建议,我会尝试修改'}></PartTitle>
     <div className={'w-full mt-3 xl:mt-6'}>
@@ -374,6 +392,7 @@ export const AboutComment = () => {
       {
         comments.map((comment: Comment) => {
           return <CommentContent
+            clickAnchor={() => updateParams}
             InnerClassName={'border-none!'}
             hashScrollElement={hashScrollElement}
             key={comment.id}
@@ -387,8 +406,8 @@ export const AboutComment = () => {
       }
       <div className={'flex justify-center w-full mt-10 sticky bottom-10'}>
         <SmartPagination
-          current={page}
           total={total}
+          current={page}
           pageSize={pageSize}
           onChange={onChange}
         />

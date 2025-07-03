@@ -82,7 +82,6 @@ export const Header = () => {
     }, 100) // 100ms 节流间隔
     const handleScrollEnd = () => {
       window.addEventListener('scroll', handleScroll)
-      console.log('end')
       window.removeEventListener('scrollend', handleScrollEnd)
     }
     const handleHashChange = () => {
