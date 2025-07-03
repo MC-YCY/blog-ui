@@ -18,9 +18,8 @@ export const HomeTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGElement>
         y2="100%"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0%" stopColor="#ff00ff" />
-        <stop offset="50%" stopColor="#912714" />
-        <stop offset="100%" stopColor="#8f993c" />
+        <stop offset="0%" stopColor="#43CBFF" />
+        <stop offset="100%" stopColor="#9708CC" />
       </linearGradient>
 
       {/* 流光特效 */}
@@ -53,9 +52,8 @@ export const ArticleTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGEleme
         y2="100%"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0%" stopColor="#4c9448" />
-        <stop offset="50%" stopColor="#912714" />
-        <stop offset="100%" stopColor="#8f993c" />
+        <stop offset="0%" stopColor="#43CBFF" />
+        <stop offset="100%" stopColor="#9708CC" />
       </linearGradient>
 
       {/* 流光特效 */}
@@ -91,9 +89,8 @@ export const DiaryTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGElement
         y2="100%"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0%" stopColor="#4c9448" />
-        <stop offset="50%" stopColor="#912714" />
-        <stop offset="100%" stopColor="#8f993c" />
+        <stop offset="0%" stopColor="#43CBFF" />
+        <stop offset="100%" stopColor="#9708CC" />
       </linearGradient>
 
       {/* 流光特效 */}
@@ -134,9 +131,8 @@ export const PictureTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGEleme
         y2="100%"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0%" stopColor="#4c9448" />
-        <stop offset="50%" stopColor="#912714" />
-        <stop offset="100%" stopColor="#8f993c" />
+        <stop offset="0%" stopColor="#43CBFF" />
+        <stop offset="100%" stopColor="#9708CC" />
       </linearGradient>
 
       {/* 流光特效 */}
@@ -181,9 +177,8 @@ export const AboutTextSvgIcon = (props: React.ButtonHTMLAttributes<SVGSVGElement
         y2="100%"
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset="0%" stopColor="#4c9448" />
-        <stop offset="50%" stopColor="#912714" />
-        <stop offset="100%" stopColor="#8f993c" />
+        <stop offset="0%" stopColor="#43CBFF" />
+        <stop offset="100%" stopColor="#9708CC" />
       </linearGradient>
 
       {/* 流光特效 */}
