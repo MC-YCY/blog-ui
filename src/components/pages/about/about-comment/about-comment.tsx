@@ -360,10 +360,14 @@ export const AboutComment = () => {
   }
 
   const [comments, setComments] = useState<Comment[]>([])
-  const onSubmit = async (info: CreateCommentWebDto) => {
+  const onSubmit = async (info: CreateCommentWebDto, flat?: boolean) => {
     await createCommentsWebApi(info)
-    setPage(1)
-    getComments(1, pageSize)
+    let nPage = 1
+    if (flat) {
+      nPage = page;
+    }
+    setPage(nPage)
+    getComments(nPage, pageSize)
     setActiveCommentId(null)
   }
   const getComments = (p: number, size: number) => {
@@ -419,7 +423,7 @@ export const AboutComment = () => {
             {...comment}
             activeCommentId={activeCommentId}
             onCommentClick={handleCommentClick}
-            onSubmit={onSubmit}
+            onSubmit={(info) => onSubmit(info, true)}
             className={'mb-[10px]'}
           />
         })
