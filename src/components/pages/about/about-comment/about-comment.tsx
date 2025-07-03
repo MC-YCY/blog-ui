@@ -8,6 +8,7 @@ import { CommentWeb, CreateCommentWebDto } from '@/types/comment-web.ts'
 import { createCommentsWebApi, getCommentsWebApi } from '@/api/comment-web.api.ts'
 import { useLocation } from 'react-router-dom'
 import style from './style.module.css'
+import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
 
 interface Comment extends CommentWeb {
   className?: string;
@@ -204,56 +205,93 @@ const CommentContent = (props: CommentContentProps) => {
   const isCommentInputActive = activeCommentId === comment.id
   const location = useLocation()
 
+  const [visibleChildrenCount, setVisibleChildrenCount] = useState(6)
+
   const clickCommentIcon = () => {
-    // 如果当前评论的输入框已经打开，则关闭它；否则打开当前评论的输入框
     onCommentClick(isCommentInputActive ? null : comment.id!)
   }
+
   useEffect(() => {
     if (props.hashScrollElement) {
       props.hashScrollElement()
     }
   }, [])
-  return <div
-    id={'comment-' + comment.id}
-    className={cn('p-[20px] border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl', comment?.className)}>
-    <div className={cn('flex border-b border-[#e3e8f7] dark:border-[#3d3d3f] pb-[10px]', props.InnerClassName)}>
-      <div className={'w-[32px] h-[32px] rounded-[50%] cursor-pointer hover:rotate-360 transition'}>
-        <img src={comment.avatar} className={'w-full h-full object-cover block text-0 rounded-[50%]'} alt="" />
-      </div>
-      <div className={'flex-1 pl-[10px]'}>
-        <div className={cn('flex h-[32px] items-center')}>
-          {
-            comment.url ?
+
+  const loadMoreChildren = () => {
+    setVisibleChildrenCount((prev) => prev + 6)
+  }
+
+  const visibleChildren = comment.children?.slice(0, visibleChildrenCount) || []
+  const hasMoreChildren = (comment.children?.length || 0) > visibleChildrenCount
+
+  return (
+    <div
+      id={'comment-' + comment.id}
+      className={cn(
+        'p-[20px] border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050] rounded-2xl',
+        comment?.className,
+      )}
+    >
+      <div className={cn('flex border-b border-[#e3e8f7] dark:border-[#3d3d3f] pb-[10px]', props.InnerClassName)}>
+        <div className={'w-[32px] h-[32px] rounded-[50%] cursor-pointer hover:rotate-360 transition'}>
+          <img src={comment.avatar} className={'w-full h-full object-cover block text-0 rounded-[50%]'} alt="" />
+        </div>
+        <div className={'flex-1 pl-[10px]'}>
+          <div className={cn('flex h-[32px] items-center')}>
+            {comment.url ? (
               <span
-                className={cn('text-[20px] cursor-pointer font-bold', location.hash === ('#comment-' + comment.id) ? style.selectedUsername : '')}>
-                <a className={'hover:opacity-55 transition'} href={'#comment-' + comment.id}>#{comment.id}-</a>
-                <a href={comment.url} target={'_blank'}>{comment.username}</a>
+                className={cn(
+                  'text-[20px] cursor-pointer font-bold',
+                  location.hash === '#comment-' + comment.id ? style.selectedUsername : '',
+                )}
+              >
+                <a className={'hover:opacity-55 transition'} href={'#comment-' + comment.id}>
+                  #{comment.id}-
+                </a>
+                <a href={comment.url} target={'_blank'} rel="noreferrer">
+                  {comment.username}
+                </a>
               </span>
-              :
+            ) : (
               <span
-                className={cn('text-[20px] cursor-pointer font-bold', location.hash === ('#comment-' + comment.id) ? style.selectedUsername : '')}>
-                <a className={'hover:opacity-55 transition'} href={'#comment-' + comment.id}>#{comment.id}-</a>
-                <a target={'_blank'}>{comment.username}</a>
+                className={cn(
+                  'text-[20px] cursor-pointer font-bold',
+                  location.hash === '#comment-' + comment.id ? style.selectedUsername : '',
+                )}
+              >
+                <a className={'hover:opacity-55 transition'} href={'#comment-' + comment.id}>
+                  #{comment.id}-
+                </a>
+                <a target={'_blank'} rel="noreferrer">
+                  {comment.username}
+                </a>
               </span>
-          }
-          <span
-            className={'hidden md:block ml-[10px] cursor-pointer text-[12px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}</span>
-          <div className={'ml-auto'}>
-            <CommentIcon state={isCommentInputActive} onClick={clickCommentIcon}></CommentIcon>
+            )}
+            <span className={'hidden md:block ml-[10px] cursor-pointer text-[12px] opacity-75'}>
+              {dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}
+            </span>
+            <div className={'ml-auto'}>
+              <CommentIcon state={isCommentInputActive} onClick={clickCommentIcon}></CommentIcon>
+            </div>
           </div>
-        </div>
-        <span
-          className={'block md:hidden cursor-pointer text-[14px] opacity-75'}>{dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}</span>
-        {comment.replyTo && <a href={'#comment-' + comment.replyToId}
-                               className={'h-[14px] text-foreground opacity-75 text-[12px] cursor-pointer items-center mt-[10px]'}>
-          回复@#{comment.replyToId}-{comment.replyTo}
-        </a>}
-        <div className={'text-[16px] text-foreground mt-[10px] cursor-default whitespace-pre-line'}>
-          {comment.content}
-        </div>
-        {
-          comment.children && comment.children.length > 0 ? comment.children.map((commentInfo: Comment, index) => {
-            return <CommentContent
+          <span className={'block md:hidden cursor-pointer text-[14px] opacity-75'}>
+            {dayjs(comment.date).format('YYYY/MM/DD HH:mm:ss')}
+          </span>
+          {comment.replyTo && (
+            <a
+              href={'#comment-' + comment.replyToId}
+              className={'h-[14px] text-foreground opacity-75 text-[12px] cursor-pointer items-center mt-[10px]'}
+            >
+              回复@#{comment.replyToId}-{comment.replyTo}
+            </a>
+          )}
+          <div className={'text-[16px] text-foreground mt-[10px] cursor-default whitespace-pre-line'}>
+            {comment.content}
+          </div>
+
+          {/* 子评论列表 */}
+          {visibleChildren.map((commentInfo: Comment, index) => (
+            <CommentContent
               {...props}
               InnerClassName={''}
               key={index}
@@ -263,18 +301,33 @@ const CommentContent = (props: CommentContentProps) => {
               onSubmit={onSubmit}
               className={cn('p-0! pt-[20px]! bg-transparent border-none rounded-none shadow-none')}
             />
-          }) : null
-        }
-        <div className={cn('mt-[16px] hidden', isCommentInputActive && 'block')}>
-          <CommentInput {...comment} onSubmit={onSubmit}></CommentInput>
+          ))}
+
+          {/* 加载更多按钮 */}
+          {hasMoreChildren && (
+            <div className="flex justify-center mt-[18px]">
+              <div
+                onClick={loadMoreChildren}
+                className="cursor-pointer transition hover:opacity-80 opacity-55 w-[120px] h-[28px] flex justify-center items-center text-[#425aef] border-[1px] border-[#425aef] rounded-[36px] text-[12px]">查看更多
+              </div>
+            </div>
+          )}
+
+          {/* 回复输入框 */}
+          <div className={cn('mt-[16px] hidden', isCommentInputActive && 'block')}>
+            <CommentInput {...comment} onSubmit={onSubmit}></CommentInput>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  )
 }
 
 export const AboutComment = () => {
   const isInit = useRef(true)
+  const [page, setPage] = useState(1)
+  const [pageSize] = useState(6)
+  const [total, setTotal] = useState(0)
   // 添加状态来管理当前激活的评论输入框
   const [activeCommentId, setActiveCommentId] = useState<string | number | null>(null)
 
@@ -289,9 +342,10 @@ export const AboutComment = () => {
     setActiveCommentId(null)
   }
   const getComments = () => {
-    getCommentsWebApi({ page: 1, limit: 20 }).then((res) => {
+    getCommentsWebApi({ page: page, limit: pageSize }).then((res) => {
       const flattenedComments = flattenNestedComments(res.data)
       setComments(flattenedComments)
+      setTotal(res.total)
     })
   }
   const hashScrollElement = () => {
@@ -304,9 +358,12 @@ export const AboutComment = () => {
       })
     }
   }
+  const onChange = (p: number) => {
+    setPage(p)
+  }
   useEffect(() => {
     getComments()
-  }, [])
+  }, [page])
   return <div className={'mt-[26px]'}>
     <PartTitle title={'评论'} description={'可以留下建议,我会尝试修改'}></PartTitle>
     <div className={'w-full mt-3 xl:mt-6'}>
@@ -328,6 +385,14 @@ export const AboutComment = () => {
           />
         })
       }
+      <div className={'flex justify-center w-full mt-10 sticky bottom-10'}>
+        <SmartPagination
+          current={page}
+          total={total}
+          pageSize={pageSize}
+          onChange={onChange}
+        />
+      </div>
     </div>
   </div>
 }
