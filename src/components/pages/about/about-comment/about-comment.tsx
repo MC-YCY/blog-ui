@@ -226,6 +226,26 @@ const CommentContent = (props: CommentContentProps) => {
   const visibleChildren = comment.children?.slice(0, visibleChildrenCount) || []
   const hasMoreChildren = (comment.children?.length || 0) > visibleChildrenCount
 
+  const [needScrollToHash, setNeedScrollToHash] = useState(false)
+  useEffect(() => {
+    if (!comment.children?.length) return
+    const findIndex = comment.children.findIndex((item) => {
+      return '#comment-' + item.id === location.hash
+    })
+    if (findIndex >= 0) {
+      const targetCount = findIndex + 1
+      setVisibleChildrenCount((prev) => Math.max(prev, targetCount))
+      setNeedScrollToHash(true) // 设置一个标记，等下个 useEffect 滚动
+    }
+  }, [location.hash, comment.children])
+  useEffect(() => {
+    if (!needScrollToHash) return
+    const target = document.querySelector(location.hash)
+    if (target) {
+      target.scrollIntoView({ behavior: 'instant' })
+      setNeedScrollToHash(false) // 只滚动一次
+    }
+  }, [visibleChildrenCount, needScrollToHash])
   return (
     <div
       id={`comment-${comment.id}`}
