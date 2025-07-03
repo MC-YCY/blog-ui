@@ -22,11 +22,10 @@ export const HomeHeroContent = () => {
     <div className="container flex flex-col md:flex-row justify-around items-center pointer-events-auto">
       <div className="flex flex-col items-center md:items-start space-y-4 aos-init aos-animate px-2">
         <div>
-
           <div className="mt-[24px] cursor-default pl-[8px]">
             <Diary
-              className1={'bg-[rgba(255,255,255,.8)] dark:bg-[rgba(0,0,0,.8)]'}
-              className2={'bg-[rgba(255,255,255,.8)] dark:bg-[rgba(0,0,0,.8)]'}
+              className1={'bg-[linear-gradient(121deg,rgba(196,255,255,0.1)_0%,rgba(190,83,69,0.1)_100%)] bg-[rgba(255,255,255,.9)] dark:bg-[rgba(0,0,0,1)]'}
+              className2={' bg-[linear-gradient(121deg,rgba(239,184,174,0.1)_0%,rgba(127,156,76,0.1)_100%)] bg-[rgba(255,255,255,.9)] dark:bg-[rgba(0,0,0,1)]'}
               title={'春秋半夏'}
               date={'2025/5/15'}
               weather={<IconSunFilled width={24} height={24} color={'#ecca2f'} />}
@@ -51,7 +50,8 @@ export const HomeHeroContent = () => {
                 </p>
                 <p>而你身边的人, 在考虑啥时候买第二套房子、什么时候生二胎</p>
                 <p>你还在捣鼓你的破代码.</p>
-            </>}></Diary>
+              </>}>
+            </Diary>
             <div className="flex h-[42px] mt-[6px]">
               <a className={'w-[50px] cursor-pointer'} href="https://github.com/MC-YCY" target="_blank">
                 <GithubSvgIcon></GithubSvgIcon>
