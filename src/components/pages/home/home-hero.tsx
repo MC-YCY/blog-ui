@@ -20,6 +20,32 @@ import { TextGenerateEffect } from '@/components/ui/text-generate-effect.tsx'
 export const HomeHeroContent = () => {
   return <div className="absolute h-screen flex w-full left-0 z-[10] justify-center items-center pointer-events-none">
     <div className="container flex flex-col md:flex-row justify-around items-center pointer-events-auto">
+      <div className="rounded-md mt-8 md:mt-0 aos-init aos-animate max-w-[100%] hidden lg:block">
+        <CodeBlock
+          className="theme-codeblock shadow-2xl pl-4 py-2"
+          language="ts"
+          filename=""
+          code={`class Developer {
+    name: string;
+    signature: string;
+    skills: string[];
+    workExperience: number;
+    constructor() {
+        this.name = '春秋半夏';
+        this.signature = '知其然不知其所以然.'         
+        this.skills = [
+            'Vue',
+            'React'
+            'Angular',
+            'NestJs',
+            'NextJs'
+        ];
+        const tYear = new Date().getFullYear();
+        this.workExperience = tYear - 2021;
+    }
+}`}
+        />
+      </div>
       <div className="flex flex-col items-center md:items-start space-y-4 aos-init aos-animate px-2">
         <div>
           <div className="mt-[24px] cursor-default pl-[8px]">
@@ -71,32 +97,6 @@ export const HomeHeroContent = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="rounded-md mt-8 md:mt-0 aos-init aos-animate max-w-[100%] hidden lg:block">
-        <CodeBlock
-          className="theme-codeblock shadow-2xl pl-4 py-2"
-          language="ts"
-          filename=""
-          code={`class Developer {
-    name: string;
-    signature: string;
-    skills: string[];
-    workExperience: number;
-    constructor() {
-        this.name = '春秋半夏';
-        this.signature = '知其然不知其所以然.'         
-        this.skills = [
-            'Vue',
-            'React'
-            'Angular',
-            'NestJs',
-            'NextJs'
-        ];
-        const tYear = new Date().getFullYear();
-        this.workExperience = tYear - 2021;
-    }
-}`}
-        />
       </div>
     </div>
   </div>
