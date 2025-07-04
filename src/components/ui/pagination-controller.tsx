@@ -30,7 +30,7 @@ const SmartPagination = React.forwardRef<HTMLDivElement, SmartPaginationProps>(
     },
     ref
   ) => {
-    const totalPages = Math.ceil(total / pageSize)
+    const totalPages = Math.ceil(total / pageSize)  
     const halfVisible = Math.floor(visiblePageCount / 2)
 
     const generatePageNumbers = () => {
