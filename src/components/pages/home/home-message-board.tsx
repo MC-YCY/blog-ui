@@ -80,7 +80,7 @@ export const HomeMessageBoard = () => {
     })
   }
   return (
-    <Container>
+    <Container className={'overflow-x-hidden'}>
       <PartTitle
         title={'一些"留言"'}
         description={'可以留下建议,我会尝试修改'}
@@ -95,7 +95,7 @@ export const HomeMessageBoard = () => {
         </DiaryWriteButton>}
       />
       <div
-        className="h-[370px] xl:h-[500px]  lg:h-[500px]  md:h-[500px]  mt-3 select-none mt-[2px]] xl:mt-[14px] px-[6px] mx-[-16px]">
+        className="h-[370px] xl:h-[500px] lg:h-[500px] md:h-[500px] mt-3 select-none mt-[2px]] xl:mt-[14px] px-[6px] mx-[-16px]">
         <Swiper
           style={{ padding: '10px 10px' }}
           breakpoints={{
