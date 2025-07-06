@@ -20,7 +20,21 @@
 }
 
 .ani {
+    transform: translate(0,-4px);
     animation: 6s ease-in-out 0s infinite normal none running floating;
+}
+
+.ani:nth-child(1){
+    animation-delay:0s;
+}
+.ani:nth-child(2){
+    animation-delay:.6s;
+}
+.ani:nth-child(3){
+    animation-delay:1.2s;
+}
+.ani:nth-child(4){
+    animation-delay:1.8s;
 }
 
 .ani-row-left {
