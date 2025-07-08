@@ -12,9 +12,10 @@ import { motion, useScroll } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const HeaderLogo = () => {
+  const navigate = useNavigate()
   return <>
     <div className="w-[300px]">
-      <div className="w-[150px]">
+      <div className="w-[150px] cursor-pointer" onClick={()=>navigate('/home')}>
         <SignatureGroup></SignatureGroup>
       </div>
     </div>
