@@ -181,7 +181,7 @@ export const AboutGames = () => {
       </div>
     </div>
     <div className={'block md:flex gap-[26px] mt-[26px]'}>
-      <div className={cn('flex-1 w-0 h-[350px] relative', cardStyleClassName)}>
+      <div className={cn('flex-1 md:w-0 h-[350px] relative', cardStyleClassName)}>
         <Swiper
           className={'w-full h-full rounded-2xl'}
           scrollbar={{
@@ -210,7 +210,7 @@ export const AboutGames = () => {
           </div>
         </div>
       </div>
-      <div className={cn('flex-1 w-0 mt-[26px] md:mt-0 h-[350px] relative', cardStyleClassName)}>
+      <div className={cn('flex-1 md:w-0 mt-[26px] md:mt-0 h-[350px] relative', cardStyleClassName)}>
         <Swiper
           className={'w-full h-full rounded-2xl'}
           scrollbar={{
