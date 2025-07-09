@@ -1,11 +1,16 @@
 'use client'
 
 import { IconBrandGithub, IconBrandReact, IconBrandTailwind } from '@tabler/icons-react'
+import gaIcon from '@/assets/images/ga.png'
 
 export const Footer = () => {
   return <div className={'bg-[#000] mt-20'}>
-    <div className={'max-w-[100rem] mx-auto py-10 px-2 md:px-8'}>
-      <div className={'flex gap-10 flex-wrap'}>
+    <div className={'max-w-[100rem] mx-auto py-10 px-2 md:px-8 flex flex-wrap'}>
+      <div className={'text-background text-[14px] flex items-center cursor-default'}>
+        <img src={gaIcon} className={'h-[20px]'} alt="" />
+        <span className={'ml-[4px]'}>京ICP备2025133833号</span>
+      </div>
+      <div className={'flex gap-[4vw] flex-wrap ml-auto'}>
         <a className={'text-[#fff] cursor-pointer'} target={'_blank'} href={'https://react.dev/'}>
           <IconBrandReact></IconBrandReact>
         </a>
