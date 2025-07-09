@@ -113,7 +113,7 @@
     z-index: 4;
 }
 
-.music-controller:hover .music-controller-actions {
+.play .music-controller:hover .music-controller-actions {
     opacity: 1;
 }
 
