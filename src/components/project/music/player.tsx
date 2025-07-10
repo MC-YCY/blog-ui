@@ -181,7 +181,8 @@ export const MusicPlayer = ({ className }: Props) => {
             <div className={style.musicBanner}>
               <img src={currentMusic.banner} alt="" />
             </div>
-            <span className={style.musicName}>
+            <span className={style.musicName}
+                  style={{ 'width': (currentMusic.name.length + currentMusic.singer.length + 1) + 'em' }}>
               {currentMusic.name} - {currentMusic.singer}
             </span>
           </div>

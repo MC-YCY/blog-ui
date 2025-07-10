@@ -93,6 +93,7 @@
     padding-right: 14px;
     height: 13px;
     display: flex;
+    box-sizing: content-box;
     align-items: center;
 }
 
