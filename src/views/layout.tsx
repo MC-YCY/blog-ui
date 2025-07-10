@@ -7,10 +7,10 @@ const Layout = () => {
   return (
     <>
       <Header></Header>
-      <MusicPlayer className={'fixed left-[30px] bottom-[30px] z-[50]'}></MusicPlayer>
       <div className={'min-h-[calc(100vh-64px)] max-w-screen'}>
         <Outlet></Outlet>
       </div>
+      <MusicPlayer className={'sticky left-[20px] bottom-[20px] z-[50] border-[#e3e8f7] dark:border-[#3d3d3f] border-solid border shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050]'}></MusicPlayer>
       <Footer></Footer>
     </>
   )
