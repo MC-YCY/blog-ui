@@ -3,6 +3,7 @@
     --play-progress-color: rgba(0, 0, 153, .25);
     --play-progress-value: 0%;
     --transition-duration: .3s;
+    --transition-cubic-bezier:cubic-bezier(0.34, 1.56, 0.64, 1);
     border-radius: 40px;
     width: auto;
     display: inline-flex;
@@ -40,7 +41,7 @@
     left center;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity var(--transition-duration) linear, background-size var(--transition-duration) linear;
+    transition: opacity var(--transition-duration) var(--transition-cubic-bezier), background-size var(--transition-duration) var(--transition-cubic-bezier);
     z-index: -1;
     pointer-events: none;
 }
@@ -55,7 +56,7 @@
     background-size: 18px 18px, 100% 100%;
     background-position: center center, center center;
     opacity: 0;
-    transition: opacity var(--transition-duration) linear;
+    transition: opacity var(--transition-duration) var(--transition-cubic-bezier);
     pointer-events: none;
 }
 
@@ -75,7 +76,7 @@
     font-size: 0;
     border-radius: 50%;
     min-width: 28px;
-    transition: box-shadow var(--transition-duration) linear;
+    transition: box-shadow var(--transition-duration) var(--transition-cubic-bezier);
     animation: playRotate 8s infinite linear;
     animation-fill-mode: forwards;
     animation-play-state: paused;
@@ -89,7 +90,7 @@
     overflow: hidden;
     text-wrap: nowrap;
     color: var(--foreground, #333);
-    transition: all var(--transition-duration) linear;
+    transition: all var(--transition-duration) var(--transition-cubic-bezier);
     padding-right: 14px;
     height: 13px;
     display: flex;
@@ -101,7 +102,7 @@
     display: inline-flex;
     width: 0;
     height: 100%;
-    transition: width var(--transition-duration) linear;
+    transition: width var(--transition-duration) var(--transition-cubic-bezier);
     position: relative;
     overflow: hidden;
 }
@@ -123,7 +124,7 @@
 }
 
 .play .music-controller-actions {
-    transition: opacity var(--transition-duration) linear;
+    transition: opacity var(--transition-duration) var(--transition-cubic-bezier);
 }
 
 .play .music-controller:hover .music-controller-actions {
