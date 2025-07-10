@@ -75,16 +75,18 @@
 }
 
 .music-name {
-    font-size: 14px;
-    max-width: 100px;
+    font-size: 13px;
+    max-width: 120px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     text-wrap: nowrap;
     color: var(--foreground, #333);
-    padding-right: 7px;
-    padding-left: 7px;
-    transition: color var(--transition-duration) linear;
+    transition: all var(--transition-duration) linear;
+    padding-right: 14px;
+    height: 13px;
+    display: flex;
+    align-items: center;
 }
 
 .music-controller {
@@ -101,7 +103,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding-right: 14px;
+    padding-right: 7px;
     padding-left: 14px;
     background-image: linear-gradient(to right, transparent, var(--play-color), var(--play-color), var(--play-color));
     opacity: 0;
@@ -123,20 +125,11 @@
 .music-controller-word {
     position: absolute;
     width: 100%;
-    padding: 2px 14px 2px 0;
+    padding-right: 24px;
+    padding-left: 7px;
     left: 0;
     top: 0;
     z-index: 3;
-}
-
-.music-controller-word-item {
-    height: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    font-size: 12px;
-    text-wrap: nowrap;
 }
 
 .music-controller-actions span + span {
@@ -153,70 +146,10 @@
 
 .play .music-name {
     color: #fff;
+    padding-left: 7px;
+    padding-right: 7px;
 }
 
 .player.play .music:after {
     opacity: 0;
-}
-
-
-/* ai */
-.musicControllerWord {
-    position: absolute;
-    width: 100%;
-    padding: 2px 14px 2px 0;
-    left: 0;
-    top: 0;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.musicControllerWordItem {
-    height: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    overflow: hidden;
-    width: 100%;
-}
-
-.currentLyric {
-    color: #fff;
-    opacity: 1;
-    font-weight: bold;
-    filter: blur(0);
-}
-
-.nextLyric {
-    color: #fff;
-    opacity: 0.5;
-    filter: blur(1px);
-}
-
-.lyricScroll {
-    display: inline-block;
-    white-space: nowrap;
-    transform: translateX(0%);
-}
-
-.scrollActive {
-    animation: scrollLeft 10s linear infinite;
-}
-
-@keyframes scrollLeft {
-    0% {
-        transform: translateX(0%);
-    }
-    10% {
-        transform: translateX(0%);
-    }
-    90% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
 }

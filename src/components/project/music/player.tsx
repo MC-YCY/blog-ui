@@ -1,6 +1,6 @@
 import style from './music.module.css'
 import { cn } from '@/lib/utils.ts'
-import { HTMLProps, useState, useRef, useEffect, MouseEvent } from 'react'
+import { HTMLProps, useState, useRef, MouseEvent, useEffect } from 'react'
 import TDLLBanner from '@/assets/music/天地龙鳞.png'
 import TDLLMp3 from '@/assets/music/天地龙鳞.mp3'
 import {
@@ -8,13 +8,9 @@ import {
   IconChevronRightPipe,
   IconPlayerPause,
 } from '@tabler/icons-react'
+import { PlayerLyrics } from '@/components/project/music/player-lyrics.tsx'
 
 interface Props extends HTMLProps<HTMLDivElement> {
-}
-
-type LyricLine = {
-  time: number // 秒
-  text: string
 }
 
 // 你后续可替换这里的歌词内容
@@ -112,82 +108,23 @@ const rawLyrics = `
 [03:00.136]游天地寻龙鳞 龙的血脉蔚然成林
 `
 
-function parseLrc(lrc: string): LyricLine[] {
-  return lrc
-    .split('\n')
-    .map((line) => {
-      const match = line.match(/\[(\d+):(\d+\.\d+)](.*)/)
-      if (!match) return null
-      const [, min, sec, text] = match
-      return {
-        time: parseInt(min) * 60 + parseFloat(sec),
-        text: text.trim(),
-      }
-    })
-    .filter((item): item is LyricLine => !!item)
-}
-
 export const MusicPlayer = ({ className }: Props) => {
   const audio = useRef<HTMLAudioElement | null>(null)
   const [play, setPlay] = useState(false)
-  const [lyrics, setLyrics] = useState<LyricLine[]>([])
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  const currentLyricRef = useRef<HTMLSpanElement | null>(null)
-  const nextLyricRef = useRef<HTMLSpanElement | null>(null)
-  const [scrollCurrent, setScrollCurrent] = useState(false)
-  const [scrollNext, setScrollNext] = useState(false)
 
   const clickPlayer = () => {
     setPlay((prev) => !prev)
   }
 
-  const clickPrev = (e: MouseEvent) => e.stopPropagation()
-  const clickNext = (e: MouseEvent) => e.stopPropagation()
-
-  useEffect(() => {
-    setLyrics(parseLrc(rawLyrics))
-  }, [])
-
   useEffect(() => {
     if (!audio.current) return
-    if (play) {
-      audio.current.play().catch((e) => {
-        console.error('播放失败', e)
-      })
-    } else {
-      audio.current.pause()
-    }
+    play
+      ? audio.current.play().catch(console.error)
+      : audio.current.pause()
   }, [play])
 
-  useEffect(() => {
-    const el = audio.current
-    if (!el) return
-    const timer = setInterval(() => {
-      const currentTime = el.currentTime
-      const i = lyrics.findIndex(
-        (line, idx) =>
-          currentTime >= line.time &&
-          (idx === lyrics.length - 1 || currentTime < lyrics[idx + 1].time),
-      )
-      if (i !== -1 && i !== currentIndex) {
-        setCurrentIndex(i)
-      }
-    }, 200)
-    return () => clearInterval(timer)
-  }, [lyrics, currentIndex])
-
-  useEffect(() => {
-    const checkScroll = () => {
-      if (currentLyricRef.current && nextLyricRef.current) {
-        const containerWidth =
-          currentLyricRef.current.parentElement?.offsetWidth || 0
-        setScrollCurrent(currentLyricRef.current.scrollWidth > containerWidth)
-        setScrollNext(nextLyricRef.current.scrollWidth > containerWidth)
-      }
-    }
-    checkScroll()
-  }, [currentIndex])
+  const clickPrev = (e: MouseEvent) => e.stopPropagation()
+  const clickNext = (e: MouseEvent) => e.stopPropagation()
 
   return (
     <>
@@ -213,42 +150,7 @@ export const MusicPlayer = ({ className }: Props) => {
               </span>
             </div>
             <div className={style.musicControllerWord}>
-              {lyrics.length > 0 && (
-                <>
-                  <div
-                    className={cn(
-                      style.musicControllerWordItem,
-                      style.currentLyric,
-                    )}
-                  >
-                    <span
-                      ref={currentLyricRef}
-                      className={cn(
-                        style.lyricScroll,
-                        scrollCurrent && style.scrollActive,
-                      )}
-                    >
-                      {lyrics[currentIndex]?.text || ''}
-                    </span>
-                  </div>
-                  <div
-                    className={cn(
-                      style.musicControllerWordItem,
-                      style.nextLyric,
-                    )}
-                  >
-                    <span
-                      ref={nextLyricRef}
-                      className={cn(
-                        style.lyricScroll,
-                        scrollNext && style.scrollActive,
-                      )}
-                    >
-                      {lyrics[currentIndex + 1]?.text || ''}
-                    </span>
-                  </div>
-                </>
-              )}
+              <PlayerLyrics lyrics={rawLyrics} audio={audio.current}></PlayerLyrics>
             </div>
           </div>
         </div>
