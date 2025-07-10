@@ -130,9 +130,9 @@ export const PlayerLyrics = ({ lyrics, audio }: { lyrics: string; audio: HTMLAud
             <motion.div
               key={`${line.time}-${line.position}`}
               className={`${style.lyricLine} ${isCurrentLine ? style.currentLine : style.nextLine}`}
-              style={{ top: line.position * 21 }}
+              style={{ top: line.position * 18 }}
               initial={{
-                y: skipAnimation ? 0 : (isCurrentLine ? 21 : -21),
+                y: skipAnimation ? 0 : (isCurrentLine ? 18 : -18),
                 opacity: skipAnimation ? 1 : 0,
                 filter: skipAnimation ? (isCurrentLine ? 'blur(0px)' : 'blur(2px)') : 'blur(4px)'
               }}
@@ -142,7 +142,7 @@ export const PlayerLyrics = ({ lyrics, audio }: { lyrics: string; audio: HTMLAud
                 filter: isCurrentLine ? 'blur(0px)' : 'blur(2px)'
               }}
               exit={{
-                y: skipAnimation ? 0 : -21,
+                y: skipAnimation ? 0 : -18,
                 opacity: skipAnimation ? 0 : 0,
               }}
               transition={{
