@@ -6,7 +6,7 @@
     width: auto;
     display: inline-flex;
     background-color: var(--background, #fff);
-    box-shadow: 0 0 10px #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     cursor: pointer;
 }
 
@@ -72,6 +72,10 @@
     font-size: 0;
     border-radius: 50%;
     min-width: 28px;
+    transition: box-shadow var(--transition-duration) linear;
+    animation: playRotate 8s infinite linear;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
 }
 
 .music-name {
@@ -152,4 +156,18 @@
 
 .player.play .music:after {
     opacity: 0;
+}
+
+@keyframes playRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.player.play .music-banner img {
+    box-shadow: 0 0 6px #fff;
+    animation-play-state: running;
 }

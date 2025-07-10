@@ -128,7 +128,7 @@ export const MusicPlayer = ({ className }: Props) => {
 
   return (
     <>
-      <audio src={TDLLMp3} ref={audio}></audio>
+      <audio src={TDLLMp3} ref={audio} loop={true}></audio>
       <div className={cn(style.player, className, play ? style.play : '')}>
         <div className={style.music}>
           <div className={style.musicInfo} onClick={clickPlayer}>
