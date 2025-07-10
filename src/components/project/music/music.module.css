@@ -1,6 +1,7 @@
 .player {
-    --play-color: #3c508f;
-    --play-banner-color: #707fad;
+    --play-color: rgba(66, 90, 239, 1);
+    --play-progress-color: rgba(0, 0, 153, .25);
+    --play-progress-value: 0%;
     --transition-duration: .3s;
     border-radius: 40px;
     width: auto;
@@ -31,13 +32,15 @@
     display: block;
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(to right, var(--play-banner-color), var(--play-banner-color)),
+    background-image: linear-gradient(to right, var(--play-progress-color), var(--play-progress-color)),
     linear-gradient(to right, var(--play-color), var(--play-color));
-    background-size: 42px 42px, 100% 42px;
-    background-position: left center, 41px center;
+    background-size: var(--play-progress-value) 100%,
+    100% 100%;
+    background-position: left top,
+    left center;
     background-repeat: no-repeat;
     opacity: 0;
-    transition: opacity var(--transition-duration) linear;
+    transition: opacity var(--transition-duration) linear, background-size var(--transition-duration) linear;
     z-index: -1;
     pointer-events: none;
 }
@@ -150,7 +153,6 @@
 
 .play .music-name {
     color: #fff;
-    padding-left: 7px;
     padding-right: 7px;
 }
 

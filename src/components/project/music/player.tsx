@@ -9,7 +9,7 @@ import {
   IconChevronLeftPipe,
   IconChevronRightPipe,
   IconPlayerPause,
-  IconPlayerPlay
+  IconPlayerPlay,
 } from '@tabler/icons-react'
 import { PlayerLyrics } from '@/components/project/music/player-lyrics.tsx'
 
@@ -102,20 +102,19 @@ const musicList = [
     music: TDLLMp3,
   },
 ]
-
 export const MusicPlayer = ({ className }: Props) => {
   const audio = useRef<HTMLAudioElement | null>(null)
   const [play, setPlay] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [progress, setProgress] = useState('0%')
 
   const currentMusic = musicList[currentIndex]
 
-  // 切换播放状态
   const clickPlayer = () => {
     setPlay((prev) => !prev)
   }
 
-  // 播放状态改变时，播放或暂停
+  // 播放 / 暂停控制
   useEffect(() => {
     if (!audio.current) return
     play
@@ -123,7 +122,7 @@ export const MusicPlayer = ({ className }: Props) => {
       : audio.current.pause()
   }, [play])
 
-  // 每次切换音乐时重设 audio.src 和播放状态
+  // 切歌时更新音频
   useEffect(() => {
     if (!audio.current) return
     audio.current.src = currentMusic.music
@@ -133,7 +132,24 @@ export const MusicPlayer = ({ className }: Props) => {
     }
   }, [currentIndex])
 
-  // 播放完自动播放下一首
+  // 更新播放进度
+  useEffect(() => {
+    const el = audio.current
+    if (!el) return
+
+    const handleTimeUpdate = () => {
+      const percent = el.duration
+        ? `${(el.currentTime / el.duration) * 100}%`
+        : '0%'
+      setProgress(percent)
+    }
+
+    el.addEventListener('timeupdate', handleTimeUpdate)
+    return () => {
+      el.removeEventListener('timeupdate', handleTimeUpdate)
+    }
+  }, [currentIndex])
+
   const handleEnded = () => {
     setCurrentIndex((prev) => (prev + 1) % musicList.length)
   }
@@ -156,7 +172,10 @@ export const MusicPlayer = ({ className }: Props) => {
         loop={false}
         preload="auto"
       />
-      <div className={cn(style.player, className, play ? style.play : '')}>
+      <div
+        className={cn(style.player, className, play ? style.play : '')}
+        style={{ '--play-progress-value': progress } as React.CSSProperties}
+      >
         <div className={style.music}>
           <div className={style.musicInfo} onClick={clickPlayer}>
             <div className={style.musicBanner}>
