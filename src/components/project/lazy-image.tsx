@@ -22,6 +22,8 @@ interface LazyImageProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'
   containerStyle?: CSSProperties;
   imageStyle?: CSSProperties;
   indicatorStyle?: CSSProperties;
+  /** 是否去除图片地址中的IP和端口 */
+  removeIpPort?: boolean;
 }
 
 const LazyImage = forwardRef<HTMLDivElement, LazyImageProps>(({
@@ -36,12 +38,29 @@ const LazyImage = forwardRef<HTMLDivElement, LazyImageProps>(({
                                                                 containerStyle = {},
                                                                 imageStyle = {},
                                                                 indicatorStyle = {},
+                                                                removeIpPort = true, // 默认去掉
                                                                 ...imgProps
                                                               }, ref) => {
   const imgRef = useRef<HTMLDivElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const [isInView, setIsInView] = useState(false)
   const [hasError, setHasError] = useState(false)
+
+  // 处理图片地址：移除IP和端口
+  const processImageUrl = (url: string) => {
+    if (!removeIpPort) return url;
+
+    try {
+      const parsedUrl = new URL(url);
+      // 提取路径、查询参数和哈希部分
+      return parsedUrl.pathname + parsedUrl.search + parsedUrl.hash;
+    } catch (e) {
+      // 如果URL解析失败（如相对路径），返回原始URL
+      return url;
+    }
+  };
+
+  const processedSrc = processImageUrl(src);
 
   // 合并样式
   const containerStyles: CSSProperties = {
@@ -105,7 +124,7 @@ const LazyImage = forwardRef<HTMLDivElement, LazyImageProps>(({
     if (!isInView) return
 
     const img = new Image()
-    img.src = src
+    img.src = processedSrc
     img.decoding = 'async'
 
     img.onload = () => {
@@ -114,10 +133,10 @@ const LazyImage = forwardRef<HTMLDivElement, LazyImageProps>(({
     }
 
     img.onerror = () => {
-      console.error(`Failed to load image: ${src}`)
+      console.error(`Failed to load image: ${processedSrc}`)
       setHasError(true)
     }
-  }, [src, isInView])
+  }, [processedSrc, isInView])
 
   // 渲染指示器（加载中或错误状态）
   const renderIndicator = () => {
@@ -205,7 +224,7 @@ const LazyImage = forwardRef<HTMLDivElement, LazyImageProps>(({
       {/* 真实图片 */}
       {isInView && (
         <img
-          src={src}
+          src={processedSrc}
           alt={alt}
           decoding="async"
           loading="lazy"

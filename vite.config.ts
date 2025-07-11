@@ -53,6 +53,14 @@ export default defineConfig(({ mode }) => {
             return path;
           },
         },
+        [env.VITE_APP_API_ASSETS_PREFIX]: {
+          target: env.VITE_APP_API_ASSETS_API,
+          changeOrigin: true,
+          rewrite: (path) => {
+            console.log('VITE_APP_API_ASSETS_API:', path);
+            return path.replace(/^\/uploads/, '');
+          },
+        },
       },
     },
   };
