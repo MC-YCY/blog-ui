@@ -138,6 +138,7 @@
     z-index: 3;
     display: flex;
     flex-direction: column;
+    pointer-events: none;
     justify-content: flex-end;
 }
 
