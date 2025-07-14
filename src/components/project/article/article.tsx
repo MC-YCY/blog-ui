@@ -32,7 +32,7 @@ export const Article = (props: ArticleComponentType) => {
           <div
             className={'ml-0 md:ml-4 xl:ml-4 flex flex-col justify-center pt-[26px] cursor-pointer flex-1 text-left'}>
             <div
-              className={'font-bold text-[20px] text-foreground flex-1 max-h-[20px] flex leading-[20px]'}>
+              className={'font-bold text-[20px] text-foreground flex-1 max-h-[24px] flex leading-[20px]'}>
               <div className={'flex-1 w-0 text-nowrap truncate'}>
                 {props.title}
               </div>
