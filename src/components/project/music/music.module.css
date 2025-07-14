@@ -3,7 +3,7 @@
     --play-progress-color: rgba(0, 0, 153, .25);
     --play-progress-value: 0%;
     --transition-duration: .3s;
-    --transition-cubic-bezier:cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-cubic-bezier: cubic-bezier(0.34, 1.56, 0.64, 1);
     border-radius: 40px;
     width: auto;
     display: inline-flex;
@@ -115,19 +115,21 @@
     padding-right: 7px;
     padding-left: 14px;
     background-image: linear-gradient(to right, transparent, var(--play-color), var(--play-color), var(--play-color));
-    opacity: 0;
     width: 96px;
     height: 100%;
     right: 0;
     top: 0;
     z-index: 4;
+    opacity: .5;
+    transform: translateX(100%);
 }
 
 .play .music-controller-actions {
-    transition: opacity var(--transition-duration) var(--transition-cubic-bezier);
+    transition: all var(--transition-duration) var(--transition-cubic-bezier);
 }
 
 .play .music-controller:hover .music-controller-actions {
+    transform: translateX(0%);
     opacity: 1;
 }
 
