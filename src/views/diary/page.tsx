@@ -244,7 +244,7 @@ const DiaryPage = () => {
         <div className={'flex-1 ml-0 xl:ml-[40px] pt-6 xl:pt-0 pl-[8px] xl:w-0 w-full'}>
           <AnimatePresence mode="wait">
             <motion.div
-              key={date.getDate()} // 使用唯一标识驱动动画重播
+              key={date.getDate()+date.getMonth()} // 使用唯一标识驱动动画重播
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}

@@ -207,7 +207,7 @@ export const HomeDiary = () => {
       <div className={'flex-1 ml-0 xl:ml-[40px] mt-4 xl:mt-0'}>
         <AnimatePresence mode="wait">
           <motion.div
-            key={date.getDate()} // 使用唯一标识驱动动画重播
+            key={date.getDate()+date.getMonth()} // 使用唯一标识驱动动画重播
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
