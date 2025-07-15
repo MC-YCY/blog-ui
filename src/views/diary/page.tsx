@@ -16,7 +16,7 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react'
 import { Accountability, DiaryWriteButton } from '@/components/pages/diary/diary-wrate-button'
 import { DiaryType, Diary as DiaryApiType } from '@/types/diary'
 import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
-import { createDiary, getDiarys } from '@/api/diary.api.ts'
+import { createDiary, getDiarys, getMonthDiartsCount } from '@/api/diary.api.ts'
 import { toast } from 'sonner'
 import { defaultData } from '@/views/diary/data.tsx'
 import { AnimatePresence, motion } from 'motion/react'
@@ -136,6 +136,9 @@ const DiaryPage = () => {
   useEffect(() => {
     getList()
   }, [page, date])
+  useEffect(() => {
+    getMonthCounts()
+  }, [date])
   const [username, setUsername] = useState<string>('')
   const onSubmit = async (content: string, setOpen: (arg0: boolean) => void) => {
     if (!(content && content.trim()) || !(username && content.trim())) {
@@ -167,6 +170,46 @@ const DiaryPage = () => {
       duration: 60000,
     })
   }
+  const [monthCounts, setMonthCounts] = useState<{ count: number, day: number, month: number }[]>([])
+  const recordMonth = useRef<number>(-1)
+  const getMonthCounts = () => {
+    if (recordMonth.current === date.getMonth()) return
+    getMonthDiartsCount({
+      date: dayjs(date).format('YYYY-MM'),
+    }).then(res => {
+      setMonthCounts(res.map((item) => {
+        return {
+          ...item,
+          month: date.getMonth(),
+        }
+      }))
+    }).finally(() => {
+      recordMonth.current = date.getMonth()
+    })
+  }
+  const customDay = (record) => {
+    let findCount = monthCounts.find((item) => {
+      if (item.month === record.month && item.day === record.day) {
+        return item
+      }
+    })
+    let count = findCount?.count || 0
+    let info = null
+    if (count) {
+      info = <div
+        className={'w-[6px] h-[6px] absolute right-[10px] top-[10px] rounded-[50%] bg-[#425aef] shadow-[0_8px_16px_-4px_#2c2d300c] flex'}>
+      </div>
+    }
+    const baseClassName = `w-full h-full flex items-center justify-center text-[14px] relative`
+    if (date.getDate() === record.day && date.getMonth() === record.month) {
+      return <div className={`${baseClassName} bg-foreground text-background rounded-[4px]`}>{record.day}{info}</div>
+    }
+    if (record.status === 1) {
+      return <div className={`${baseClassName}`}>{record.day}{info}</div>
+    } else {
+      return <div className={`${baseClassName} opacity-55`}>{record.day}{info}</div>
+    }
+  }
   return <div className={'pt-[64px] overflow-hidden'}>
     <Container>
       <PartTitle title={'灵光一现一些想法'} description={'落魄前端，加班前的幻想...'}
@@ -193,12 +236,22 @@ const DiaryPage = () => {
               <IconSquareRoundedChevronRightFilled onClick={onNextMonth} width={24} height={24}
                                                    className={'cursor-pointer'}></IconSquareRoundedChevronRightFilled>
             </div>
-            <Calendar cellHeight={52} open={open} date={date} firstDayOfWeek={1}
+            <Calendar customDay={customDay} cellHeight={52} open={open} date={date} firstDayOfWeek={1}
                       onClick={clickCalendarItem}></Calendar>
           </div>
         </div>
         <div className={'flex-1 ml-0 xl:ml-[40px] pt-6 xl:pt-0 pl-[8px] xl:w-0 w-full'}>
-          <DiarySwiper list={list} setCurrent={setCurrent}></DiarySwiper>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={date.getDate()} // 使用唯一标识驱动动画重播
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+            >
+              <DiarySwiper list={list} setCurrent={setCurrent}></DiarySwiper>
+            </motion.div>
+          </AnimatePresence>
           <div className={'mt-6 text-[14px] text-[#ccc] text-center'}>
             <SmartPagination
               current={page}

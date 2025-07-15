@@ -7,3 +7,6 @@ export const createDiary = (data: CreateDiaryDto) => {
 export const getDiarys = (data: GetDiariesDto) => {
   return Get('/blog/diaries', data)
 }
+export const getMonthDiartsCount = (data: { date:string, username?: string }) => {
+  return Get('/blog/diaries/month', data)
+}
