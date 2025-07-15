@@ -20,6 +20,7 @@ import { createDiary, getDiarys, getMonthDiartsCount } from '@/api/diary.api.ts'
 import { toast } from 'sonner'
 import { defaultData } from '@/views/diary/data.tsx'
 import { AnimatePresence, motion } from 'motion/react'
+import { dateTableCell } from '@/components/project/calendar/types'
 
 const DiarySwiper = ({ setCurrent, list }: { setCurrent: (current: DiaryType) => void, list: DiaryType[] }) => {
   const swiperInstance = useRef<SwiperRef | null>(null)
@@ -177,7 +178,7 @@ const DiaryPage = () => {
     getMonthDiartsCount({
       date: dayjs(date).format('YYYY-MM'),
     }).then(res => {
-      setMonthCounts(res.map((item) => {
+      setMonthCounts(res.map((item: any) => {
         return {
           ...item,
           month: date.getMonth(),
@@ -187,7 +188,7 @@ const DiaryPage = () => {
       recordMonth.current = date.getMonth()
     })
   }
-  const customDay = (record) => {
+  const customDay = (record: dateTableCell) => {
     let findCount = monthCounts.find((item) => {
       if (item.month === record.month && item.day === record.day) {
         return item

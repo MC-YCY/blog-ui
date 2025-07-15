@@ -13,6 +13,7 @@ import { Diary } from '@/components/project/diary/diary'
 import { useNavigate } from 'react-router-dom'
 import { getDiarys, getMonthDiartsCount } from '@/api/diary.api.ts'
 import { AnimatePresence, motion } from 'motion/react'
+import { dateTableCell } from '@/components/project/calendar/types'
 
 export const HomeDiary = () => {
   const [open, setOpen] = useState(true)
@@ -146,7 +147,7 @@ export const HomeDiary = () => {
     getMonthDiartsCount({
       date: dayjs(date).format('YYYY-MM'),
     }).then(res => {
-      setMonthCounts(res.map((item) => {
+      setMonthCounts(res.map((item: any) => {
         return {
           ...item,
           month: date.getMonth(),
@@ -156,7 +157,7 @@ export const HomeDiary = () => {
       recordMonth.current = date.getMonth()
     })
   }
-  const customDay = (record) => {
+  const customDay = (record: dateTableCell) => {
     let findCount = monthCounts.find((item) => {
       if (item.month === record.month && item.day === record.day) {
         return item
