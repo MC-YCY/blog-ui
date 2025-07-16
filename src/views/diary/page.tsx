@@ -160,6 +160,7 @@ const DiaryPage = () => {
           await createDiary({ content: content, username: username })
           setOpen(false)
           getList()
+          getMonthCounts()
         },
       },
       cancel: {
