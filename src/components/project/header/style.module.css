@@ -47,9 +47,9 @@
 }
 
 .header-background {
-    background-color: var(--background);
+    background-color: transparent;
     background-size: 4px 4px;
-    backdrop-filter: blur(24px);
+    backdrop-filter: blur(10px);
     transition: all .15s ease-in-out;
 }
 
