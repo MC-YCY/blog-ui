@@ -27,7 +27,7 @@ const HeaderNavigate = () => {
   const goRoute = (route: { path: string }) => {
     navigate(route.path)
   }
-  return <div className="hidden lg:block flex-1 mt-[-5px]">
+  return <div className="hidden lg:block flex-1 mt-[-3px]">
     <div
       className={cn('flex justify-center align-center text-sm text-foreground gap-[48px] cursor-pointer', style.navbar)}>
       {
