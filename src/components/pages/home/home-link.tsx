@@ -350,10 +350,10 @@ export const HomeLink = () => {
         className="w-full h-full ml-auto mr-auto pb-5!"
       >
         {
-          list.map((item) => {
+          list.map((item,idx) => {
             return (
               <SwiperSlide
-                key={`links-${item.id}`}
+                key={`links-${idx}`}
                 style={{
                   backgroundImage: `url(${item.banner})`,
                   backgroundSize: '100% 100%',
