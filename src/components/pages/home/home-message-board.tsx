@@ -19,8 +19,26 @@ export const HomeMessageBoard = () => {
     getMessages({
       page: 1,
       limit: 32,
-    }).then(res => {
-      setList(res.data)
+    }).then(resData => {
+      const res = resData.data;
+      // 确保返回的是数组
+      const fetchedList = Array.isArray(res) ? res : []
+
+      // 补充欢迎卡片到8个
+      const welcomeCards: MessageBoard[] = []
+      const neededCount = 8 - fetchedList.length
+
+      if (neededCount > 0) {
+        for (let i = 0; i < neededCount; i++) {
+          welcomeCards.push({
+            username: '虚位以待',
+            content: '知其然不知其所以然',
+            date: '2025/7/18'
+          })
+        }
+      }
+      // 合并原始数据和补充数据
+      setList([...fetchedList, ...welcomeCards])
     })
   }
   useEffect(() => {
