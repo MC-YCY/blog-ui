@@ -6,7 +6,7 @@ import {
     PictureTextSvgIcon,
     DiaryTextSvgIcon,
     AboutTextSvgIcon
-} from '@/components/project/svg-icons/text'
+} from '@/components/project/svg-icons/text.tsx'
 
 export const blogConfig = {
     routes: [

@@ -2,6 +2,22 @@
     position: relative;
 }
 
+.active span {
+    position: relative;
+}
+
+.active span:before {
+    content: '';
+    width: 50%;
+    height: 2px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: linear-gradient(135deg, rgba(67, 203, 255, 0.8) 10%, rgba(151, 8, 204, 0.8) 100%);
+    background-color: var(--foreground, #000);
+}
+
 .active g,
 .active path {
     stroke: url(#HomeTextSvgIconCyberGradient);

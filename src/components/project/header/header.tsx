@@ -5,7 +5,7 @@ import { ThemeSwitch } from '@/components/project/theme-switch/theme-switch'
 import { HeaderMobileMenu } from './header-mobile-menu'
 import { cn } from '@/lib/utils'
 import style from './style.module.css'
-import { blogConfig } from '@/blog.config'
+import { blogConfig } from '@/constant/blog.config.ts'
 import { useEffect, useRef, useState } from 'react'
 import { throttle } from 'lodash-es'
 import { motion, useScroll } from 'framer-motion'
@@ -15,7 +15,7 @@ const HeaderLogo = () => {
   const navigate = useNavigate()
   return <>
     <div className="w-[300px]">
-      <div className="w-[150px] cursor-pointer" onClick={()=>navigate('/home')}>
+      <div className="w-[120px] cursor-pointer" onClick={()=>navigate('/home')}>
         <SignatureGroup></SignatureGroup>
       </div>
     </div>
@@ -27,7 +27,7 @@ const HeaderNavigate = () => {
   const goRoute = (route: { path: string }) => {
     navigate(route.path)
   }
-  return <div className="hidden lg:block flex-1">
+  return <div className="hidden lg:block flex-1 mt-[-5px]">
     <div
       className={cn('flex justify-center align-center text-sm text-foreground gap-[48px] cursor-pointer', style.navbar)}>
       {
@@ -37,7 +37,10 @@ const HeaderNavigate = () => {
             className = cn('font-bold', style.active, 'active')
           }
           return <div key={route.path} className={cn(className, 'w-[42px]')} onClick={() => goRoute(route)}>
-            <route.icon className={className}></route.icon>
+            <span>
+              {route.name}
+            </span>
+            {/*<route.icon className={className}></route.icon>*/}
           </div>
         })
       }

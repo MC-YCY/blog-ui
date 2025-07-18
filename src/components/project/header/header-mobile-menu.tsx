@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/drawer'
 import { ListSelect } from '@/components/project/list-select/list-select'
 import { useState } from 'react'
-import { blogConfig } from '@/blog.config'
+import { blogConfig } from '@/constant/blog.config.ts'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 export const HeaderMobileMenu = () => {
