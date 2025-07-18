@@ -140,6 +140,7 @@ export const Header = () => {
     </div>
     {/*opacityClassName*/}
     <div
+      data-class={opacityClassName}
       className={cn('w-full h-[64px] fixed z-[20] pointer-events-none', translateYClassName, style.headerBackground)}></div>
   </>
 }

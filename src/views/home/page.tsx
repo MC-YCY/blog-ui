@@ -9,6 +9,7 @@ import { HomePicture } from '@/components/pages/home/home-picture'
 import { HomeMessageBoard } from '@/components/pages/home/home-message-board'
 import { HomePanel } from '@/components/pages/home/home-panel.tsx'
 import { LazyContent } from '@/components/inview-lazy-content.tsx'
+import { HomeLink } from '@/components/pages/home/home-link.tsx'
 
 export default function Home() {
   return <div>
@@ -32,6 +33,9 @@ export default function Home() {
     </LazyContent>
     <LazyContent>
       <HomeMessageBoard></HomeMessageBoard>
+    </LazyContent>
+    <LazyContent>
+      <HomeLink></HomeLink>
     </LazyContent>
     <LazyContent>
       <HomePanel></HomePanel>
