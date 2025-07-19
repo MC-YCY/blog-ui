@@ -8,6 +8,7 @@ import IsqqwBanner from '@/assets/images/data-slide/isqqw-banner.png'
 import SaBlogBanner from '@/assets/images/data-slide/sa-blog-banner.jpg'
 import NextBlogBanner from '@/assets/images/data-slide/next-blog-banner.jpg'
 import { useVisitStore } from '@/stores/visitStore.ts'
+import { useEffect } from 'react'
 
 const list = [
   {
@@ -122,7 +123,10 @@ const HomeDataCardCount = () => {
   </div>
 }
 const HomeDataCardDate = () => {
-  const { today } = useVisitStore()
+  const { today, updateCount } = useVisitStore()
+  useEffect(() => {
+    updateCount()
+  }, [])
   return <div
     className={'h-full flex flex-col justify-center xl:py-[32px] xl:px-[40px] pl-4 pt-2 bg-[linear-gradient(121deg,rgba(239,184,174,0.2)_0%,rgba(127,156,76,0.2)_100%)] rounded-[14px] cursor-pointer  bg-background shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]'}>
     <div className={'text-[24px] xl:text-[64px] h-[24px] xl:h-[64px] flex items-center text-primary'}>{today}</div>
