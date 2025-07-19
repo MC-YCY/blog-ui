@@ -362,12 +362,12 @@ export const HomeLink = () => {
                 className={`cursor-pointer transition-[all_0.3s_linear] border rounded-2xl box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]`}
               >
                 <div
-                  className="w-full h-full flex flex-col py-[10px] px-4 rounded-2xl backdrop-blur-[7px] bg-[rgba(255,255,255,.1)] dark:bg-[rgba(0,0,0,.4)]"
+                  className="group hover:backdrop-blur-[0px] transition-all duration-300 w-full h-full flex flex-col py-[10px] px-4 rounded-2xl backdrop-blur-[7px] bg-[rgba(255,255,255,.1)] dark:bg-[rgba(0,0,0,.4)]"
                   style={{
                     backgroundImage: getCardColor(.3, .3),
                   }}>
                   <div
-                    className="text-foreground line-clamp-10 xl:line-clamp-5 lg:line-clamp-5 md:line-clamp-5">
+                    className="group-hover:opacity-0 transition-all duration-300 text-foreground line-clamp-10 xl:line-clamp-5 lg:line-clamp-5 md:line-clamp-5">
                     {item.content}
                   </div>
                   <div className="mt-auto">
