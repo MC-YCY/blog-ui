@@ -9,7 +9,7 @@ import BannerD from '@/assets/images/panel/wallhaven-3l828y.jpg';
 export const HomePanel = () =>{
   return <>
     <Container>
-      <PartTitle title={'一个有趣的组件'} description={'试着点击它们'} />
+      <PartTitle title={'未来城市'} description={'是科技爆炸、还是奇幻古老科技浮现...'} />
       <div className="w-full mt-3 xl:mt-6 h-[76vh] max-h-[680px]">
         <ExtendPanel cards={[
           {
