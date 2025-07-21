@@ -10,6 +10,10 @@ NestJS 深度整合 TypeScript 的强类型特性，结合class-validator实现�
 
 前端用来尝试一种只提供逻辑的ui组件库，使用到了React、Tailwindcss、Radix UI、Aceternity UI、Vite、TypeScript、Socket.Io
 
+![](./src/assets/readme/images/a54660b14b7f40388152236edb87aeae~tplv-73owjymdk6-jj-mark-v1_0_0_0_0_5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5pil56eL5Y2K5aSP_q75.webp)
+
+![](./src/assets/readme/images/d90533801c634fa08f82bd01b91ce6c0~tplv-73owjymdk6-jj-mark-v1_0_0_0_0_5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5pil56eL5Y2K5aSP_q75.webp)
+
 ## 前端
 - react
 - vite
@@ -68,36 +72,12 @@ github https://github.com/MC-YCY/blog-service
 .env.production       # 生产环境变量
 ```
 
-## 图片预览&功能概述
+## 管理系统
 
-### 首页
+https://gitee.com/yin-chunyang/blog-manage
 
-- hero部分
-- 网站统计、友情网站轮播图
-- 随记-简略
-- 一些小demo
-- 文章-简略最多展示6条
-- 图库轮播图
-- 留言
-- 友情链接
-- 一个面板组件
-
-![](./src/assets/readme/images/home.webp)
-
-### 文章
-
-![](./src/assets/readme/images/article.webp)
-
-### 图库
-
-![](./src/assets/readme/images/picture.webp)
-
-### 随记
-
-详细的日记，最多5页，超过后分页器显示
-
-![](./src/assets/readme/images/diary.webp)
-
-### 关于
-
-![](./src/assets/readme/images/about.webp)
+- 字典
+- 角色
+- 用户
+- 菜单
+- 资源
