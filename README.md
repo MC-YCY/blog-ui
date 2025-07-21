@@ -1,8 +1,16 @@
-next-blog迁移版本，主要样式挺好看，加上master分支的接口联调一下
+在线预览：https://www.sa-blog.online/home
 
-preview:http://47.93.248.11:3100/
+作为一名技术爱好者，拥有一个功能完善、美观且高效的个人博客是展示专业能力和分享见解的理想方式。下面我将从用户体验和技术实现角度，解析如何使用 React 和 Tailwind CSS 构建一个令人印象深刻的博客平台。
 
-![](./src/assets/readme-1.png)
+用来尝试NestJs框架搭建的博客，NestJS 作为一款渐进式 Node.js 框架，凭借其企业级架构设计与开箱即用的生态，成为我开发博客后端服务的核心选择。
+
+其模块化设计（@Module）与依赖注入（DI）机制，使得代码分层清晰，结合TypeORM实现数据层高效管理，JWT与Passport模块无缝集成身份认证，保障系统安全。通过@nestjs/swagger自动生成 API 文档，配合Redis缓存与Throttler限流，显著提升接口性能。
+
+NestJS 深度整合 TypeScript 的强类型特性，结合class-validator实现请求数据验证，减少潜在错误。无论是基于Express的高并发处理能力，还是通过WebSocket实现实时交互，NestJS 都为博客系统提供了灵活、可维护的架构基础，完美支撑从用户管理到内容发布的全场景需求。
+
+前端用来尝试一种只提供逻辑的ui组件库，使用到了React、Tailwindcss、Radix UI、Aceternity UI、Vite、TypeScript、Socket.Io
+
+## 前端
 - react
 - vite
 - typescript
@@ -12,7 +20,7 @@ preview:http://47.93.248.11:3100/
 - zustand
 - zod
 
-## 目录说明
+### 目录介绍
 ```shell
 /src
   |- /api           # 接口
@@ -33,12 +41,63 @@ preview:http://47.93.248.11:3100/
 .env.production     # 生产环境变量
 ```
 
-**next.js版本：**
+## 后端
+gitee https://gitee.com/yin-chunyang/blog-service
 
-https://sa-next-blog.netlify.app/
+github https://github.com/MC-YCY/blog-service
 
-https://github.com/MC-YCY/next-blog
+- nestjs
+- typescript
+- nest-cli
+- mysql2
+- socket.io
+- typeorm
 
-----
+### 目录介绍
 
-后端：https://github.com/MC-YCY/blog-service
+```shell
+/src
+  |- /api             # 所有的controller
+  |- /config          # 一些配置
+  |- /notification    # 消息通知相关实体，网关
+  |- /shared          # 非消息通知所有的entity，dto，service等
+  |- /types           #
+  │- app.module.ts    # app入口
+  │- main.ts          # 启动文件
+.env.development      # 开发环境变量
+.env.production       # 生产环境变量
+```
+
+## 图片预览&功能概述
+
+### 首页
+
+- hero部分
+- 网站统计、友情网站轮播图
+- 随记-简略
+- 一些小demo
+- 文章-简略最多展示6条
+- 图库轮播图
+- 留言
+- 友情链接
+- 一个面板组件
+
+![](./src/assets/readme/images/home.webp)
+
+### 文章
+
+![](./src/assets/readme/images/article.webp)
+
+### 图库
+
+![](./src/assets/readme/images/picture.webp)
+
+### 随记
+
+详细的日记，最多5页，超过后分页器显示
+
+![](./src/assets/readme/images/diary.webp)
+
+### 关于
+
+![](./src/assets/readme/images/about.webp)
