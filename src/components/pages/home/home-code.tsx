@@ -4,10 +4,10 @@ import { PartTitle, PartTitleAction } from '@/components/project/part-title/part
 import { ProjectCard } from '@/components/project/project-card'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Container } from '@/components/project/container'
-import CodeBannerA from '@/assets/images/code-banner/white.jpg'
-import CodeBannerB from '@/assets/images/code-banner/blue.jpg'
-import CodeBannerC from '@/assets/images/code-banner/pink.png'
-import CodeBannerD from '@/assets/images/code-banner/black.jpg'
+import CodeBannerA from '@/assets/images/code-banner/webp/white.webp'
+import CodeBannerB from '@/assets/images/code-banner/webp/blue.webp'
+import CodeBannerC from '@/assets/images/code-banner/webp/pink-2.webp'
+import CodeBannerD from '@/assets/images/code-banner/webp/black.webp'
 import { cn } from '@/lib/utils.ts'
 
 const list = [

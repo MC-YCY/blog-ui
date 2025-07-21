@@ -1,10 +1,10 @@
 import { PartTitle } from '@/components/project/part-title/part-title.tsx'
 import { Container } from '@/components/project/container'
 import { ExtendPanel } from '@/components/project/extend-panel/extend-panel.tsx'
-import BannerA from '@/assets/images/panel/wallhaven-mlpwdk.jpg';
-import BannerB from '@/assets/images/panel/25673.png';
-import BannerC from '@/assets/images/panel/wallhaven-v9rr2p.jpg';
-import BannerD from '@/assets/images/panel/wallhaven-3l828y.jpg';
+import BannerA from '@/assets/images/panel/webp/wallhaven-mlpwdk.webp';
+import BannerB from '@/assets/images/panel/webp/25673.webp';
+import BannerC from '@/assets/images/panel/webp/wallhaven-v9rr2p.webp';
+import BannerD from '@/assets/images/panel/webp/wallhaven-3l828y.webp';
 
 export const HomePanel = () =>{
   return <>
