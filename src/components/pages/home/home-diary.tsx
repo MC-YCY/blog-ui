@@ -170,7 +170,7 @@ export const HomeDiary = () => {
         className={'w-[6px] h-[6px] absolute right-[10px] top-[10px] rounded-[50%] bg-[#425aef] shadow-[0_8px_16px_-4px_#2c2d300c] flex'}>
       </div>
     }
-    const baseClassName = `w-full h-full flex items-center justify-center text-[14px] relative`
+    const baseClassName = `w-full h-full flex items-center justify-center text-[14px] relative select-none`
     if (date.getDate() === record.day && date.getMonth() === record.month) {
       return <div className={`${baseClassName} bg-foreground text-background rounded-[4px]`}>{record.day}{info}</div>
     }
