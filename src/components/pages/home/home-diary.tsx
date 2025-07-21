@@ -216,7 +216,7 @@ export const HomeDiary = () => {
             <Diary
               className1={'min-h-[500px]'}
               className2={'min-h-[500px]'}
-              className3={'min-h-[400px]'}
+              className3={'min-h-[400px] line-clamp-14'}
               title={current.title}
               date={dayjs(current.date).format('YYYY年MM月DD日')}
               weather={<IconSunFilled width={24} height={24} color={'#ecca2f'} />}
