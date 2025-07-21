@@ -1,103 +1,78 @@
-在线预览：https://www.sa-blog.online/home
 
-作为一名技术爱好者，拥有一个功能完善、美观且高效的个人博客是展示专业能力和分享见解的理想方式。下面我将从用户体验和技术实现角度，解析如何使用 React 和 Tailwind CSS 构建一个令人印象深刻的博客平台。
 
-用来尝试NestJs框架搭建的博客，NestJS 作为一款渐进式 Node.js 框架，凭借其企业级架构设计与开箱即用的生态，成为我开发博客后端服务的核心选择。
+# Blog-UI
 
-其模块化设计（@Module）与依赖注入（DI）机制，使得代码分层清晰，结合TypeORM实现数据层高效管理，JWT与Passport模块无缝集成身份认证，保障系统安全。通过@nestjs/swagger自动生成 API 文档，配合Redis缓存与Throttler限流，显著提升接口性能。
+一个用于博客系统的 UI 组件库，提供丰富的博客相关界面组件与功能模块。
 
-NestJS 深度整合 TypeScript 的强类型特性，结合class-validator实现请求数据验证，减少潜在错误。无论是基于Express的高并发处理能力，还是通过WebSocket实现实时交互，NestJS 都为博客系统提供了灵活、可维护的架构基础，完美支撑从用户管理到内容发布的全场景需求。
+## 目录介绍
 
-前端用来尝试一种只提供逻辑的ui组件库，使用到了React、Tailwindcss、Radix UI、Aceternity UI、Vite、TypeScript、Socket.Io
+- `components/`: 组件目录，包含博客系统所需的各种 UI 组件。
+- `views/`: 页面视图目录，包含博客的页面结构。
+- `api/`: API 接口目录，提供与后端交互的接口。
+- `assets/`: 静态资源目录，包含图片与样式文件。
+- `types/`: 类型定义目录，包含项目中使用的 TypeScript 类型定义。
+- `utils/`: 工具函数目录，包含请求处理、帧率监控等实用函数。
+- `stores/`: 状态管理目录，使用 Zustand 进行状态存储。
+- `constant/`: 常量定义目录，包含博客配置、路由等常量。
 
-## 前端
-- react
-- vite
-- typescript
-- tailwindcss
-- axios
-- @radix-ui
-- zustand
-- zod
+## 功能概述
 
-### 目录介绍
-```shell
-/src
-  |- /api           # 接口
-  |- /assets        # 静态资源
-  |- /components    # 公用组件
-  |- /constant      # 一些常量，路由，菜单数组等等
-  |- /hooks         # 自定义hooks
-  |- /lib       
-  |- /provider      # 一些系统功能方法
-  |- /stores        # 全局状态store
-  |- /types         # 存放ts类型（后端DTO）
-  |- /views         # 页面文件夹
-  |- App.tsx        # app入口
-  |- index.css      # css主题色
-  |- main.tsx       # 应用文件
-  |- vite-env.d.ts  # ts扩展
-.env.development    # 开发环境变量
-.env.production     # 生产环境变量
+- **首页**: 提供文章、日记、图库、面板等内容的展示。
+- **文章**: 展示博客文章列表，支持文章详情查看。
+- **图库**: 提供图片轮播展示功能。
+- **随记**: 展示日记内容，支持日记撰写和提交。
+- **关于**: 包含作者信息、留言、技能展示等内容。
+- **主题切换**: 支持深色与浅色主题切换。
+- **响应式设计**: 适配移动设备与桌面设备。
+
+## 安装
+
+确保已安装 [Node.js](https://nodejs.org) 和 [npm](https://www.npmjs.com/)。
+
+1. 克隆仓库：
+   ```bash
+   git clone https://gitee.com/yin-chunyang/blog-ui
+   ```
+
+2. 进入项目目录：
+   ```bash
+   cd blog-ui
+   ```
+
+3. 安装依赖：
+   ```bash
+   npm install
+   # 或者使用 pnpm
+   pnpm install
+   ```
+
+## 使用
+
+运行本地开发服务器：
+```bash
+npm run dev
+# 或使用 pnpm
+pnpm run dev
 ```
 
-## 后端
-gitee https://gitee.com/yin-chunyang/blog-service
+## 项目结构
 
-github https://github.com/MC-YCY/blog-service
+- `src/App.tsx`: 主应用组件。
+- `src/index.html`: 项目入口 HTML 文件。
+- `src/main.tsx`: 主渲染逻辑。
+- `src/components/`: 包含所有 UI 组件。
+- `src/views/`: 包含页面结构。
+- `src/api/`: 包含与后端通信的 API 接口。
+- `src/assets/`: 图片、图标和样式文件。
+- `src/types/`: TypeScript 类型定义。
+- `src/utils/`: 工具函数。
+- `src/stores/`: Zustand 状态存储。
+- `src/constant/`: �`: 常量定义。
 
-- nestjs
-- typescript
-- nest-cli
-- mysql2
-- socket.io
-- typeorm
+## 贡献
 
-### 目录介绍
+我们欢迎社区贡献！请查看 [LICENSE](LICENSE) 文件了解授权信息。
 
-```shell
-/src
-  |- /api             # 所有的controller
-  |- /config          # 一些配置
-  |- /notification    # 消息通知相关实体，网关
-  |- /shared          # 非消息通知所有的entity，dto，service等
-  |- /types           #
-  │- app.module.ts    # app入口
-  │- main.ts          # 启动文件
-.env.development      # 开发环境变量
-.env.production       # 生产环境变量
-```
+## 许可证
 
-## 图片预览&功能概述
-
-### 首页
-
-- hero部分
-- 网站统计、友情网站轮播图
-- 随记-简略
-- 一些小demo
-- 文章-简略最多展示6条
-- 图库轮播图
-- 留言
-- 友情链接
-- 一个面板组件
-
-![](./src/assets/readme/images/home.webp)
-
-### 文章
-
-![](./src/assets/readme/images/article.webp)
-
-### 图库
-
-![](./src/assets/readme/images/picture.webp)
-
-### 随记
-
-详细的日记，最多5页，超过后分页器显示
-
-![](./src/assets/readme/images/diary.webp)
-
-### 关于
-
-![](./src/assets/readme/images/about.webp)
+本项目使用 [Apache-2.0](LICENSE) 许可证。
