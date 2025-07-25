@@ -63,12 +63,16 @@ export const PictureSwiperItemContentOptions = (props: PictureSwiperItemContentO
     {
       props.children && props.children.map((item) => {
         return <SwiperSlide key={item.url} className={'!w-[calc(33.33%-14px)]'}>
-          <div className={cn('h-[100px] relative bg-[rgba(0,0,0,.65)] transition-[all_0.3s_linear]')}
+          <div className={cn('h-[100px] relative bg-[rgba(0,0,0,.65)] transition-[all_0.3s_linear] flex overflow-hidden')}
                onClick={() => props.setStates(item)}>
-            <img
-              decoding="async"
-              className={cn(item.url === props.active ? 'opacity-100' : 'opacity-50', 'transition-[opacity_0.3s_linear] object-[50%_30%] w-full h-full object-cover')}
-              src={item.thumbnail ?? item.url} alt="" />
+            {
+              item.thumbnail?.split(',').map((v) => {
+                return <img
+                  decoding="async"
+                  className={cn(item.url === props.active ? 'opacity-100' : 'opacity-50', 'select-none transition-[opacity_0.3s_linear] object-[50%_30%] flex-1 h-full object-cover')}
+                  src={v ?? item.url} alt="" />
+              })
+            }
           </div>
         </SwiperSlide>
       })
@@ -113,18 +117,22 @@ export const PictureSwiperItemContent = (props: PictureSwiperItemContentType) =>
       <AnimatePresence mode="sync">
         <motion.div
           key={current.url}
-          className="absolute inset-0"
+          className="absolute inset-0 flex w-full overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <img
-            decoding="async"
-            className={'object-[50%_30%] w-full h-full object-cover'}
-            onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
-            src={current.url}
-            alt={''} />
+          {
+            current.url.split(',').map((v) => {
+              return <img
+                decoding="async"
+                className={'object-[50%_30%] flex-1 h-full object-cover select-none'}
+                onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
+                src={v}
+                alt={''} />
+            })
+          }
         </motion.div>
       </AnimatePresence>
     </div>

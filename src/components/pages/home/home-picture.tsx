@@ -15,8 +15,6 @@ import {
 import {
   LinQiTingA,
   LinQiTingAthumbnail,
-  MaQiuYuanA,
-  MaQiuYuanAthumbnail,
   LiShengXuanA,
   LiShengXuanAthumbnail,
   XingNuanG,
@@ -99,14 +97,6 @@ const PictureSwiper = ({ setPreview }: { setPreview: (arg0: PictureType) => void
           date: '2025/5/22',
           url: LinQiTingA,
           thumbnail: LinQiTingAthumbnail,
-        },
-        {
-          name: '马秋元',
-          tip: '是简简单单的欣赏',
-          describe: '2022年底，马秋元拍摄短剧《小魔女秋元》正式踏入娱乐圈。2023年3月份参演首部古装剧集《回到古代当太子》，随后陆续拍摄《洛泱公主》、《一不小心撩错人》、《重生后我成了皇叔的心尖宠》、《少帅天天求复合》、《白月光攻略手册》、《合约期间爱上她》、《落花时节又逢君》、《清宫辞》、《桃花马上请长缨》等多部影视作品。2024年9月搭档杨泽出演古装甜宠剧《春宵》。',
-          date: '2025/5/22',
-          url: MaQiuYuanA,
-          thumbnail: MaQiuYuanAthumbnail,
         },
         {
           name: '黎晟萱',

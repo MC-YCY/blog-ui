@@ -68,7 +68,7 @@ import {
   BiZhiAthumbnail,
   BiZhiBthumbnail,
   BiZhiCthumbnail,
-  BiZhiDthumbnail,
+  BiZhiDthumbnail, LiShengXuanD, LiShengXuanDthumbnail, LiShengXuanE, LiShengXuanEthumbnail,
 } from '@/constant/picture.url.ts'
 import { LazyContent } from '@/components/inview-lazy-content.tsx'
 
@@ -221,6 +221,14 @@ const PicturePage = () => {
           date: '2025/5/22',
           url: LiShengXuanC,
           thumbnail: LiShengXuanCthumbnail,
+        },
+        {
+          name: '黎晟萱',
+          tip: '是简简单单的欣赏',
+          describe: '一个理科生（应该算正在努力当演员）的养成系演员！短剧《开局女帝盯上了我的彩礼》《练气3000层，开局收女帝为徒》《犹为离人照落花》《厉总，江秘书她离职了》《你竟然是我的前妻》《爱上你的心脏》《上岸吧人鱼殿下》《婚姻的温度》《肥妻逆袭，冷酷厂长追疯了》《原谅他99次》《沈总，你养的金丝雀变凤凰了》《丑妃倾天下：禁欲王爷宠疯了》',
+          date: '2025/7/25',
+          url: [LiShengXuanE,LiShengXuanD, LiShengXuanE].join(','),
+          thumbnail: [LiShengXuanEthumbnail,LiShengXuanDthumbnail, LiShengXuanEthumbnail].join(','),
         },
       ],
     },
