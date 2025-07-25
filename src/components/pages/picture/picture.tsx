@@ -28,11 +28,18 @@ export interface PictureSwiperItemContentType extends PictureType {
 export const PicturePreview = (current: PictureType) => {
   return <>
     <PhotoProvider>
-      <PhotoView key={current.url} src={current.url}>
-        <SpanButton tabIndex={-1} className={'w-[36px]! h-[36px] flex items-center justify-center'}>
-          <IconMaximize width={24} height={24}></IconMaximize>
-        </SpanButton>
-      </PhotoView>
+      {
+        current.url.split(',').map((r, index) => {
+          if (index === 0) {
+            return <PhotoView key={r} src={r}>
+              <SpanButton tabIndex={-1} className={'w-[36px]! h-[36px] flex items-center justify-center'}>
+                <IconMaximize width={24} height={24}></IconMaximize>
+              </SpanButton>
+            </PhotoView>
+          }
+          return <PhotoView key={r} src={r}></PhotoView>
+        })
+      }
     </PhotoProvider>
   </>
 }
@@ -65,14 +72,17 @@ export const PictureSwiperItemContentOptions = (props: PictureSwiperItemContentO
         return <SwiperSlide key={item.url} className={'!w-[calc(33.33%-14px)]'}>
           <div className={cn('h-[100px] relative bg-[rgba(0,0,0,.65)] transition-[all_0.3s_linear] flex overflow-hidden')}
                onClick={() => props.setStates(item)}>
-            {
-              item.thumbnail?.split(',').map((v) => {
-                return <img
-                  decoding="async"
-                  className={cn(item.url === props.active ? 'opacity-100' : 'opacity-50', 'select-none transition-[opacity_0.3s_linear] object-[50%_30%] flex-1 h-full object-cover')}
-                  src={v ?? item.url} alt="" />
-              })
-            }
+            <div className={cn('w-full h-full flex', item.url === props.active ? 'opacity-100' : 'opacity-50')}>
+              {
+                item.thumbnail?.split(',').map((v) => {
+                  return <img
+                    style={{ width: `calc(100% / ${item.thumbnail?.split(',').length})` }}
+                    decoding="async"
+                    className={cn('select-none transition-[opacity_0.3s_linear] object-[50%_30%] h-full object-cover')}
+                    src={v ?? item.url} alt="" />
+                })
+              }
+            </div>
           </div>
         </SwiperSlide>
       })
@@ -126,6 +136,7 @@ export const PictureSwiperItemContent = (props: PictureSwiperItemContentType) =>
           {
             current.url.split(',').map((v) => {
               return <img
+                style={{ width: `calc(100% / ${current.url.split(',').length})` }}
                 decoding="async"
                 className={'object-[50%_30%] flex-1 h-full object-cover select-none'}
                 onLoad={(e) => e.currentTarget.classList.add('opacity-100')}
