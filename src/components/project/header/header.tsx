@@ -37,7 +37,8 @@ const HeaderNavigate = () => {
           if (route.path === location.pathname) {
             className = cn('font-bold', style.active, 'active')
           }
-          return <div key={route.path} className={cn(className, 'w-[42px]')} onClick={() => goRoute(route)}>
+          // 'w-[42px]'
+          return <div key={route.path} className={cn(className)} onClick={() => goRoute(route)}>
             <span>
               {route.name}
             </span>
