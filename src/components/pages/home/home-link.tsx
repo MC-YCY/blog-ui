@@ -4,7 +4,6 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Grid, Scrollbar } from 'swiper/modules'
 import dayjs from 'dayjs'
 import { getCardColor } from '@/lib/getCardColor.ts'
-import banner from '@/assets/images/panel/25673_thumbnail.png'
 import { LinkType } from '@/types/link.ts'
 import { useEffect, useRef, useState } from 'react'
 import {
@@ -257,40 +256,32 @@ export const LinkWriteButton = ({ getList }: { getList: () => void }) => {
 }
 
 export const HomeLink = () => {
-  const [list, setList] = useState<LinkType[]>([
-    {
-      banner: banner,
-      title: '春秋半夏',
-      content: `一名吹牛开发工程师什么都不会，这也不学那也不学。
-时间轮回, 一年又一年,你还在想着新技术出来了,
-继续学习什么NextJs, 什么NuxtJs, 什么NestJs......
-而你身边的人, 在考虑啥时候买第二套房子、什么时候生二胎
-你还在捣鼓你的破代码.`,
-      url: 'https:sa-blog.online',
-    },
-  ])
+  const [list, setList] = useState<LinkType[]>([])
+  const installDefaultList = (res: never[]) => {
+    // 确保返回的是数组
+    const fetchedList = Array.isArray(res) ? res : []
 
-  const getList = () => {
-    getLinkList().then((res) => {
-      // 确保返回的是数组
-      const fetchedList = Array.isArray(res) ? res : []
+    // 补充欢迎卡片到8个
+    const welcomeCards: LinkType[] = []
+    const neededCount = 8 - fetchedList.length
 
-      // 补充欢迎卡片到8个
-      const welcomeCards: LinkType[] = []
-      const neededCount = 8 - fetchedList.length
-
-      if (neededCount > 0) {
-        for (let i = 0; i < neededCount; i++) {
-          welcomeCards.push({
-            banner: '',
-            title: `友链位虚位以待 ${i + 1}`,
-            content: '您的博客链接将在这里展示，欢迎交换友链！',
-            url: '',
-          })
-        }
+    if (neededCount > 0) {
+      for (let i = 0; i < neededCount; i++) {
+        welcomeCards.push({
+          banner: '',
+          title: `友链位虚位以待 ${i + 1}`,
+          content: '您的博客链接将在这里展示，欢迎交换友链！',
+          url: '',
+        })
       }
-      // 合并原始数据和补充数据
-      setList([...fetchedList, ...welcomeCards])
+    }
+    // 合并原始数据和补充数据
+    setList([...fetchedList, ...welcomeCards])
+  }
+  const getList = () => {
+    installDefaultList([])
+    getLinkList().then((res) => {
+      installDefaultList(res)
     })
   }
   useEffect(() => {
@@ -350,7 +341,7 @@ export const HomeLink = () => {
         className="w-full h-full ml-auto mr-auto pb-5!"
       >
         {
-          list.map((item,idx) => {
+          list.map((item, idx) => {
             return (
               <SwiperSlide
                 key={`links-${idx}`}
