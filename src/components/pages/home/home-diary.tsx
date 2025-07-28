@@ -183,7 +183,7 @@ export const HomeDiary = () => {
   return <Container>
     <PartTitle title={'随记'} description={'记录一点灵感、想法、故事...'}></PartTitle>
     <div className={'w-full mt-3 xl:mt-6 block xl:flex'}>
-      <div className={'w-full xl:w-[450px]'}>
+      <div className={'w-full xl:w-[420px]'}>
         <div
           className={'pt-4 pb-2 px-4 shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)] rounded-[14px]'}>
           <div className={'flex justify-between h-[30px] items-center pb-4 pt-2 box-border px-6'}>
@@ -194,7 +194,7 @@ export const HomeDiary = () => {
             <IconSquareRoundedChevronRightFilled onClick={onNextMonth} width={24} height={24}
                                                  className={'cursor-pointer'}></IconSquareRoundedChevronRightFilled>
           </div>
-          <Calendar customDay={(record) => customDay(record)} openEvent={true} cellHeight={58} open={open} date={date}
+          <Calendar customDay={(record) => customDay(record)} openEvent={true} cellHeight={52} open={open} date={date}
                     firstDayOfWeek={1}
                     onClick={clickCalendarItem} onToggle={onToggle}></Calendar>
         </div>
