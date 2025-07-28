@@ -364,7 +364,7 @@ export const AboutComment = () => {
     await createCommentsWebApi(info)
     let nPage = 1
     if (flat) {
-      nPage = page;
+      nPage = page
     }
     setPage(nPage)
     getComments(nPage, pageSize)
@@ -428,7 +428,7 @@ export const AboutComment = () => {
           />
         })
       }
-      <div className={'flex justify-center w-full mt-10 sticky bottom-10'}>
+      <div className={'flex justify-center w-full mt-10 sticky md:bottom-10 bottom-[80px]'}>
         <SmartPagination
           total={total}
           current={page}

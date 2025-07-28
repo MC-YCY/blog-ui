@@ -320,13 +320,13 @@ export const HomeLink = () => {
             grid: { rows: 2 },
           },
           1024: {
-            slidesPerView: 4,
+            slidesPerView: 3,
             grid: { rows: 2 },
           },
         }}
         slidesPerView={1}
         grid={{ rows: 1 }}
-        spaceBetween={24}
+        spaceBetween={32}
         pagination={{ clickable: true }}
         scrollbar={{
           hide: false,

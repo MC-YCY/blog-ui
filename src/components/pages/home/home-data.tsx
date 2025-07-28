@@ -139,15 +139,15 @@ export const HomeData = () => {
     <div className={'w-full flex flex-col-reverse xl:flex-row mt-3 xl:mt-6'}>
       <div
         className={'xl:min-w-[320px] flex justify-between xl:flex-col md:flex-row xl:w-[320px] w-full mt-[20px] xl:mt-0'}>
-        <div className={'w-full h-[100px] xl:h-[190px]'}>
+        <div className={'w-full h-[100px] xl:h-[194px]'}>
           <HomeDataCardCount></HomeDataCardCount>
         </div>
-        <div className={'w-full h-[100px] xl:h-[190px] ml-[20px] xl:ml-0'}>
+        <div className={'w-full h-[100px] xl:h-[194px] ml-[20px] xl:ml-0'}>
           <HomeDataCardDate></HomeDataCardDate>
         </div>
       </div>
       <div
-        className={'h-[420px] xl:flex-1 xl:w-auto w-full xl:ml-[40px] bg-background shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)] rounded-[14px] overflow-hidden'}>
+        className={'h-[420px] xl:flex-1 xl:w-auto w-full xl:ml-[32px] bg-background shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)] rounded-[14px] overflow-hidden'}>
         <HomeDataSwiper></HomeDataSwiper>
       </div>
     </div>

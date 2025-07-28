@@ -110,7 +110,7 @@ const ArticlePage = () => {
           }
         </div>
       </div>
-      <div className={'flex justify-center w-full mt-10 sticky bottom-10'}>
+      <div className={'flex justify-center w-full mt-10 sticky md:bottom-10 bottom-[80px]'}>
         <SmartPagination
           current={page}
           total={total}
