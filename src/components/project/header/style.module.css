@@ -41,6 +41,7 @@
 }
 
 .navbar div {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", serif;
     font-size: 16px;
     position: relative;
 }

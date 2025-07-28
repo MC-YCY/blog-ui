@@ -130,7 +130,7 @@ export const Header = () => {
       className={cn('w-full fixed top-0 z-[30]', translateYClassName, style.header)}>
       <div
         className={cn(
-          'max-w-[100rem] mt-[7px] mx-auto h-[50px] px-4 md:px-8 flex items-center justify-between',
+          'max-w-[1400px] mt-[7px] mx-auto h-[50px] px-4 md:px-8 flex items-center justify-between',
           'bg-[rgba(255,255,255,.3)] dark:bg-[rgba(0,0,0,.3)] backdrop-blur-2xl rounded-[40px]',
           'shadow-[0_0_10px_rgba(0,0,0,0.15)] dark:shadow-[0_0_8px_rgba(255,255,255,.12)]')}>
         <HeaderLogo></HeaderLogo>

@@ -154,6 +154,15 @@ import importWoBuJiaoLongXiaF from '@/assets/images/演员/我不叫龙虾/group
 import importWoBuJiaoLongXiaG from '@/assets/images/演员/我不叫龙虾/group-b-3.webp'
 import importWoBuJiaoLongXiaH from '@/assets/images/演员/我不叫龙虾/group-b-4.webp'
 import importWoBuJiaoLongXiaI from '@/assets/images/演员/我不叫龙虾/group-c-1.webp'
+import importWoBuJiaoLongXiaJ from '@/assets/images/演员/我不叫龙虾/group-b-5.webp'
+import importWoBuJiaoLongXiaK from '@/assets/images/演员/我不叫龙虾/group-b-6.webp'
+import importWoBuJiaoLongXiaL from '@/assets/images/演员/我不叫龙虾/group-b-7.webp'
+import importWoBuJiaoLongXiaM from '@/assets/images/演员/我不叫龙虾/group-b-8.webp'
+import importWoBuJiaoLongXiaN from '@/assets/images/演员/我不叫龙虾/group-b-9.webp'
+import importWoBuJiaoLongXiaO from '@/assets/images/演员/我不叫龙虾/group-b-10.webp'
+import importWoBuJiaoLongXiaP from '@/assets/images/演员/我不叫龙虾/group-b-11.webp'
+import importWoBuJiaoLongXiaQ from '@/assets/images/演员/我不叫龙虾/group-b-12.webp'
+import importWoBuJiaoLongXiaR from '@/assets/images/演员/我不叫龙虾/group-b-13.webp'
 import importWoBuJiaoLongXiaAthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-a-1.webp'
 import importWoBuJiaoLongXiaBthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-a-2.webp'
 import importWoBuJiaoLongXiaCthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-a-3.webp'
@@ -163,6 +172,15 @@ import importWoBuJiaoLongXiaFthumbnail from '@/assets/images/演员/我不叫龙
 import importWoBuJiaoLongXiaGthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-b-3.webp'
 import importWoBuJiaoLongXiaHthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-b-4.webp'
 import importWoBuJiaoLongXiaIthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-c-1.webp'
+import importWoBuJiaoLongXiaJthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-b-5.webp'
+import importWoBuJiaoLongXiaKthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-b-6.webp'
+import importWoBuJiaoLongXiaLthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-b-7.webp'
+import importWoBuJiaoLongXiaMthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-b-8.webp'
+import importWoBuJiaoLongXiaNthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-b-9.webp'
+import importWoBuJiaoLongXiaOthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-b-10.webp'
+import importWoBuJiaoLongXiaPthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-b-11.webp'
+import importWoBuJiaoLongXiaQthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-b-12.webp'
+import importWoBuJiaoLongXiaRthumbnail from '@/assets/images/演员/我不叫龙虾/thumbnail/group-b-13.webp'
 
 export const LinQiTingA  = importLinQiTingA
 export const LinQiTingB  = importLinQiTingB
@@ -320,6 +338,15 @@ export const WoBuJiaoLongXiaF = importWoBuJiaoLongXiaF;
 export const WoBuJiaoLongXiaG = importWoBuJiaoLongXiaG;
 export const WoBuJiaoLongXiaH = importWoBuJiaoLongXiaH;
 export const WoBuJiaoLongXiaI = importWoBuJiaoLongXiaI;
+export const WoBuJiaoLongXiaJ = importWoBuJiaoLongXiaJ;
+export const WoBuJiaoLongXiaK = importWoBuJiaoLongXiaK;
+export const WoBuJiaoLongXiaL = importWoBuJiaoLongXiaL;
+export const WoBuJiaoLongXiaM = importWoBuJiaoLongXiaM;
+export const WoBuJiaoLongXiaN = importWoBuJiaoLongXiaN;
+export const WoBuJiaoLongXiaO = importWoBuJiaoLongXiaO;
+export const WoBuJiaoLongXiaP = importWoBuJiaoLongXiaP;
+export const WoBuJiaoLongXiaQ = importWoBuJiaoLongXiaQ;
+export const WoBuJiaoLongXiaR = importWoBuJiaoLongXiaR;
 export const WoBuJiaoLongXiaAthumbnail = importWoBuJiaoLongXiaAthumbnail;
 export const WoBuJiaoLongXiaBthumbnail = importWoBuJiaoLongXiaBthumbnail;
 export const WoBuJiaoLongXiaCthumbnail = importWoBuJiaoLongXiaCthumbnail;
@@ -329,3 +356,12 @@ export const WoBuJiaoLongXiaFthumbnail = importWoBuJiaoLongXiaFthumbnail;
 export const WoBuJiaoLongXiaGthumbnail = importWoBuJiaoLongXiaGthumbnail;
 export const WoBuJiaoLongXiaHthumbnail = importWoBuJiaoLongXiaHthumbnail;
 export const WoBuJiaoLongXiaIthumbnail = importWoBuJiaoLongXiaIthumbnail;
+export const WoBuJiaoLongXiaJthumbnail = importWoBuJiaoLongXiaJthumbnail;
+export const WoBuJiaoLongXiaKthumbnail = importWoBuJiaoLongXiaKthumbnail;
+export const WoBuJiaoLongXiaLthumbnail = importWoBuJiaoLongXiaLthumbnail;
+export const WoBuJiaoLongXiaMthumbnail = importWoBuJiaoLongXiaMthumbnail;
+export const WoBuJiaoLongXiaNthumbnail = importWoBuJiaoLongXiaNthumbnail;
+export const WoBuJiaoLongXiaOthumbnail = importWoBuJiaoLongXiaOthumbnail;
+export const WoBuJiaoLongXiaPthumbnail = importWoBuJiaoLongXiaPthumbnail;
+export const WoBuJiaoLongXiaQthumbnail = importWoBuJiaoLongXiaQthumbnail;
+export const WoBuJiaoLongXiaRthumbnail = importWoBuJiaoLongXiaRthumbnail;
