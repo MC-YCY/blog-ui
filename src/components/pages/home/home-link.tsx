@@ -347,7 +347,8 @@ export const HomeLink = () => {
                 key={`links-${idx}`}
                 style={{
                   backgroundImage: `url(${item.banner})`,
-                  backgroundSize: '100% 100%',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center center',
                 }}
                 onClick={() => goPreview(item)}
                 className={`relative cursor-pointer transition-[all_0.3s_linear] border rounded-2xl box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]`}
