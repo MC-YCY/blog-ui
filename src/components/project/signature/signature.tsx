@@ -122,7 +122,7 @@ export const SignatureGroup = ({
                                  s2Class,
                                }: { s2Class?: string }) => {
   return <div className="w-full h-full relative">
-    <div className="top-0 left-0 z-[1] opacity-[0.3] w-full h-full">
+    <div className="top-0 left-0 z-[1] w-full h-full">
       <Signature></Signature>
     </div>
     <div className="absolute top-0 left-0 z-[2] w-full h-full">

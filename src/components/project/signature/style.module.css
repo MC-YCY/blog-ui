@@ -40,7 +40,7 @@
     transition: all .4s ease-in-out;
     stroke-dashoffset: 1px;
     stroke-dasharray: 3000% 0;
-    animation: logo-anim 6s ease forwards infinite;
+    animation: logo-anim 16s ease forwards infinite;
     transform-origin: center;
     stroke: url(#cyberGradient);
     animation-delay: inherit;
@@ -48,6 +48,6 @@
 
 .signature,
 .signature path {
-    fill: var(--background);
-    stroke: var(--background);
+    fill: rgba(67, 203, 255, 0.05);
+    stroke: rgba(67, 203, 255, 0.3);
 }
