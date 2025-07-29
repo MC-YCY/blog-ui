@@ -263,7 +263,7 @@ export const HomeLink = () => {
 
     // 补充欢迎卡片到8个
     const welcomeCards: LinkType[] = []
-    const neededCount = 8 - fetchedList.length
+    const neededCount = 6 - fetchedList.length
 
     if (neededCount > 0) {
       for (let i = 0; i < neededCount; i++) {
@@ -356,7 +356,7 @@ export const HomeLink = () => {
                 <div
                   className="absolute inset-[-1px] group hover:backdrop-blur-[0px] hover:bg-[rgba(0,0,0,0)] hover:dark:bg-[rgba(0,0,0,.3)] transition-all duration-300 flex flex-col py-[11px] px-4 rounded-2xl backdrop-blur-[3px] bg-[rgba(255,255,255,.3)] dark:bg-[rgba(0,0,0,.6)]"
                   style={{
-                    backgroundImage: getCardColor(.2, .2),
+                    backgroundImage: getCardColor(.1, .1),
                   }}>
                   <div
                     className="group-hover:opacity-0 transition-all duration-300 text-foreground line-clamp-10 xl:line-clamp-5 lg:line-clamp-5 md:line-clamp-5">

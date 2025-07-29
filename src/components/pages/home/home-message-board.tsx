@@ -21,7 +21,7 @@ export const HomeMessageBoard = () => {
 
     // 补充欢迎卡片到8个
     const welcomeCards: MessageBoard[] = []
-    const neededCount = 8 - fetchedList.length
+    const neededCount = 6 - fetchedList.length
 
     if (neededCount > 0) {
       for (let i = 0; i < neededCount; i++) {
