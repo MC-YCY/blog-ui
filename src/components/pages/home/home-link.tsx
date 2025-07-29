@@ -29,6 +29,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@/components/ui/textarea.tsx'
 import { toast } from 'sonner'
 import { createLink, getLinkList } from '@/api/link.api.ts'
+import { cn } from '@/lib/utils.ts'
 
 const WriteForm = ({ setOpen, getList }: { setOpen: (arg: boolean) => void, getList: () => void }) => {
   const formSchema = z.object({
@@ -272,6 +273,7 @@ export const HomeLink = () => {
           title: `友链位虚位以待 ${i + 1}`,
           content: '您的博客链接将在这里展示，欢迎交换友链！',
           url: '',
+          id: new Date().getTime() + i,
         })
       }
     }
@@ -344,14 +346,16 @@ export const HomeLink = () => {
           list.map((item, idx) => {
             return (
               <SwiperSlide
-                key={`links-${idx}`}
+                key={`links-${item.id}`}
                 style={{
                   backgroundImage: `url(${item.banner})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center center',
+                  animationDelay: (idx * 0.15) + 's',
                 }}
                 onClick={() => goPreview(item)}
-                className={`relative cursor-pointer transition-[all_0.3s_linear] border rounded-2xl box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]`}
+                className={cn(`relative cursor-pointer transition-[all_0.3s_linear] border rounded-2xl box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]`,
+                  'animate__animated animate__fadeInUp')}
               >
                 <div
                   className="absolute inset-[-1px] group hover:backdrop-blur-[0px] hover:bg-[rgba(0,0,0,0)] hover:dark:bg-[rgba(0,0,0,.3)] transition-all duration-300 flex flex-col py-[11px] px-4 rounded-2xl backdrop-blur-[3px] bg-[rgba(255,255,255,.3)] dark:bg-[rgba(0,0,0,.6)]"

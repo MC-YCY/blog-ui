@@ -3,6 +3,7 @@
 @import '@/assets/css/code-back.css';
 @import "tailwindcss";
 @import 'react-photo-view/dist/react-photo-view.css';
+@import 'animate.css';
 
 @plugin "tailwindcss-animate";
 

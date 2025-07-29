@@ -71,7 +71,9 @@ export const HomeCode = () => {
         {
           list.map((item, index) => {
             return <SwiperSlide key={item.banner + index}
-                                className={cn('w-[100%]! md:!w-[calc(50%-16px)] xl:!w-[calc(33.33%-21.33px)] py-[10px]')}>
+                                style={{ animationDelay: (0.5 * index)+'s' }}
+                                className={cn('w-[100%]! md:!w-[calc(50%-16px)] xl:!w-[calc(33.33%-21.33px)] py-[10px]',
+                                  'animate__animated animate__bounceInRight')}>
               <ProjectCard project={item.name} date={item.date} tip={item.tip}
                            banner={item.banner} code={item.git} url={item.preview}></ProjectCard>
             </SwiperSlide>

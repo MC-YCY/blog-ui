@@ -103,7 +103,7 @@ const ArticlePage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px_32px]">
           {
             articleList.map((article, index) => {
-              return <div key={'home-article' + index}>
+              return <div key={'home-article' + article.id} className={'animate__animated animate__fadeInUp'} style={{animationDelay:(index * 0.05)+'s'}}>
                 <Article {...article} onClick={(state) => clickItem(state)}></Article>
               </div>
             })

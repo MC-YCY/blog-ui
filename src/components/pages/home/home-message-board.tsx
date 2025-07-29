@@ -11,6 +11,7 @@ import { toast } from 'sonner'
 import { createMessage, getMessages } from '@/api/messages.api.ts'
 import dayjs from 'dayjs'
 import { getCardColor } from '@/lib/getCardColor.ts'
+import { cn } from '@/lib/utils.ts'
 
 export const HomeMessageBoard = () => {
   const [list, setList] = useState<MessageBoard[]>([])
@@ -29,6 +30,7 @@ export const HomeMessageBoard = () => {
           username: '虚位以待',
           content: '知其然不知其所以然',
           date: '2025/7/18',
+          id: new Date().getTime() + i,
         })
       }
     }
@@ -137,11 +139,13 @@ export const HomeMessageBoard = () => {
             list.map((item, idx) => {
               return (
                 <SwiperSlide
-                  key={`msg-${idx}`}
+                  key={`msg-${item.id}`}
                   style={{
                     backgroundImage: getCardColor(),
+                    animationDelay: (idx * 0.15) + 's',
                   }}
-                  className={`transition-[all_0.3s_linear] bg-background py-[10px] border rounded-2xl px-4 box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]`}
+                  className={cn('transition-[all_0.3s_linear] bg-background py-[10px] border rounded-2xl px-4 box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]',
+                    'animate__animated animate__fadeInUp')}
                 >
                   <div className="w-full h-full flex flex-col">
                     <div
