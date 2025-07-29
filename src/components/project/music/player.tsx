@@ -93,10 +93,12 @@ export const MusicPlayer = ({ className,musicList }: Props) => {
             <div className={style.musicBanner}>
               <img src={currentMusic.banner} alt="" />
             </div>
-            <span className={style.musicName}
+            <div className={style.musicName}
                   style={{ 'width': (currentMusic.name.length + currentMusic.singer.length + 1) + 'em' }}>
-              {currentMusic.name} - {currentMusic.singer}
-            </span>
+              <span>
+                {currentMusic.name} - {currentMusic.singer}
+              </span>
+            </div>
           </div>
           <div className={style.musicController}>
             <div className={style.musicControllerActions}>

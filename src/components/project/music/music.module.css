@@ -85,10 +85,6 @@
 .music-name {
     font-size: 13px;
     max-width: 120px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-wrap: nowrap;
     color: var(--foreground, #333);
     transition: all var(--transition-duration) var(--transition-cubic-bezier);
     padding-right: 14px;
@@ -96,6 +92,15 @@
     display: flex;
     box-sizing: content-box;
     align-items: center;
+}
+
+.music-name span {
+    width: 0;
+    flex: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: nowrap;
 }
 
 .music-controller {

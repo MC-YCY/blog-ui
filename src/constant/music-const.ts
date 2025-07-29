@@ -6,6 +6,8 @@ import RJZYZMp3 from '@/assets/music/人间这一遭.mp3'
 import RJZYZBanner from '@/assets/music/人间这一遭.png'
 import LUOMp3 from '@/assets/music/落.mp3'
 import LUOBanner from '@/assets/music/落.png'
+import YYXMp3 from '@/assets/music/鸳鸯戏.mp3';
+import YYXBanner from '@/assets/music/鸳鸯戏.webp';
 
 export interface MusicConstType {
   rawLyrics: string,
@@ -16,6 +18,46 @@ export interface MusicConstType {
 }
 
 export const MusicConst:MusicConstType[] = [
+  {
+    rawLyrics:`[00:00.0]鸳鸯戏 (DJ南瓜饼版) - Babystop_山竹/伊笑/南瓜饼
+[00:00.21]词：家浚
+[00:00.25]曲：家浚/乐金震
+[00:00.32]编曲：孙星辰
+[00:00.34]哎呦小娘子你莫忧
+[00:04.36]待到春来又雪满楼
+[00:08.52]不负天长不负地久
+[00:12.4]你我白首
+[01:30.38]烛灯下的旧情意谁理
+[01:32.58]西窗外的良人泣不易
+[01:34.66]举杯谁和明月提起她在远方等你
+[01:38.869995]等你再落下几笔
+[01:40.94]等你再弹奏几曲
+[01:43.020004]等你再回到故里等你金榜把名题
+[01:47.46]砚上三五笔
+[01:51.6]落墨鹧鸪啼
+[01:55.7]谁识曲中意
+[02:00.14]断弦等你系
+[02:03.0]哎呦小情郎你莫愁
+[02:07.21]此生只为你挽红袖
+[02:11.32]三巡酒过月上枝头
+[02:15.23]我心悠悠
+[02:19.68]哎呦小娘子你莫忧
+[02:23.88]待到春来又雪满楼
+[02:27.99]不负天长不负地久
+[02:31.92]你我白首
+[02:36.62]哎呦小情郎你莫愁
+[02:40.54001]此生只为你挽红袖
+[02:44.7]三巡酒过月上枝头
+[02:48.56]我心悠悠
+[02:53.04001]哎呦小娘子你莫忧
+[02:57.19]待到春来又雪满楼
+[03:01.46]不负天长不负地久
+[03:05.22]你我白首`,
+    name:'鸳鸯戏',
+    singer:'Babystop_山竹&伊笑',
+    banner:YYXBanner,
+    music:YYXMp3
+  },
   {
     rawLyrics:`[00:00.03]落 (花开花落日升日没) - 唐伯虎Annie
 [00:02.22]词 Lyrics：潇然
