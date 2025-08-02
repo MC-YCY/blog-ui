@@ -19,5 +19,14 @@ export const AboutMessage = () => {
         })
       }
     </div>
+    <div className={'text-foreground text-[14px] leading-[32px]'}>
+      <p className={'mt-[18px]'}><b className={'text-[18px]'}>上面都是AI啊</b></p>
+      <p className={'mt-[18px] indent-[2em]'}>最初驱动的原因，就是用来面试作为媒介叙述技能.学习热门的tailwindcss和供逻辑的ui组件库,尝试从需求、前端开发、服务端开发、部署的一套流程.</p>
+      <p className={'mt-[18px] indent-[2em]'}>经常看到各类技术博客对 Vue、React、Angular 等框架的对比讨论。其实无论使用哪个框架，核心都是 JavaScript 的能力。框架更多是提供设计模式和开发体验的差异，底层依然离不开 DOM 操作和原生 API。当被问到“XX框架如何实现某个效果”时，更希望探讨的是基础原理的通用解决方案，而非特定框架的语法差异。毕竟解决问题的核心逻辑，往往与框架无关。</p>
+    </div>
+    <div className={'text-foreground text-[14px] leading-[32px]'}>
+      <p className={'mt-[18px]'}><b className={'text-[18px]'}>一点优化方式</b></p>
+      <p className={'mt-[18px] indent-[2em]'}>图片资源已全面采用WebP格式进行手动转换，前端构建流程中配置了自动图片压缩。首页针对多内容场景实施了以下性能优化策略：1.可视区域动态加载、2.路由懒加载、3.老版本则使用defer方式减少同时加载元素数量，异步加载元素；针对图库组件，添加原图和缩略图切换通过点击缩略图触发，减少不必要的浪费</p>
+    </div>
   </div>
 }

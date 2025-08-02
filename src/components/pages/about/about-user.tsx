@@ -18,8 +18,8 @@ export const AboutUser = () => {
     <div className={'hidden md:flex flex-col justify-around items-start py-[10px] text-[14px] font-bold'}>
       <div className={cn('ml-[-16px]', styleClassName, style.ani)}>什么牛都吹 🐂</div>
       <div className={cn(styleClassName, style.ani)}>文档看不懂 📃</div>
-      <div className={cn(styleClassName, style.ani)}>臭敲代码的 🐟</div>
-      <div className={cn('ml-[-16px]', styleClassName, style.ani)}>分享与热心 😁</div>
+      <div className={cn(styleClassName, style.ani)}>代码都不会 🐟</div>
+      <div className={cn('ml-[-16px]', styleClassName, style.ani)}>请查看文档 😁</div>
     </div>
   </div>
 }

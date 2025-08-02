@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import { getDiarys, getMonthDiartsCount } from '@/api/diary.api.ts'
 import { AnimatePresence, motion } from 'motion/react'
 import { dateTableCell } from '@/components/project/calendar/types'
+import calendarPreviewMp4 from '@/assets/mp4/calendar.mp4'
 
 export const HomeDiary = () => {
   const [open, setOpen] = useState(true)
@@ -202,6 +203,9 @@ export const HomeDiary = () => {
           <a href="https://gitee.com/yin-chunyang/react-calendar" className={'underline'} target={'_blank'}>
             react日历组件,一个可以上下收起展开的日历,收起展示所在日期一周的信息,展开展示月的信息.
           </a>
+          <div className={'mt-4'}>
+            <a href={calendarPreviewMp4} className={'underline'} target={'_blank'}>功能预览.mp4</a>
+          </div>
         </div>
       </div>
       <div className={'flex-1 ml-0 xl:ml-[40px] mt-4 xl:mt-0'}>
