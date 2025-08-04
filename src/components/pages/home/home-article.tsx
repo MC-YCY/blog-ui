@@ -16,6 +16,8 @@ import { SpanButton } from '@/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 import { allArticlesList } from '@/api/article.api.ts'
 import useThemeStore from '@/stores/themeStore.ts'
+import { motion } from 'framer-motion'
+import { MotionModuleConfig } from '@/constant/motion-module.config.ts'
 
 export const HomeArticle = () => {
   const navigate = useNavigate()
@@ -43,7 +45,7 @@ export const HomeArticle = () => {
     setPreviewOpen(true)
   }
   const { theme } = useThemeStore()
-  return <Container className={'xl:pt-[54px] pt-[14px]'}>
+  return <Container isTransition={false} className={'xl:pt-[54px] pt-[14px]'}>
     <Drawer open={previewOpen} onClose={() => setPreviewOpen(false)}>
       <DrawerContent>
         <DrawerHeader>
@@ -67,13 +69,15 @@ export const HomeArticle = () => {
     <PartTitle title={'一些"小作文"'}
                description={'天天看各种框架比较，看的是瑟瑟发抖...'}></PartTitle>
     <div className={'mt-3 xl:mt-6'}>
-      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_32px]">
+      <div
+                  className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_32px]">
         {
           articleList.map((article, index) => {
-            return <div key={'home-article' + article.id} className={'animate__animated animate__fadeInUp'}
-                        style={{ animationDelay: (index * 0.15) + 's' }}>
+            return <motion.div
+              key={'home-article' + article.id}
+              {...MotionModuleConfig.containerVariantsProps(index)}>
               <Article {...article} onClick={(state) => clickItem(state)}></Article>
-            </div>
+            </motion.div>
           })
         }
       </div>

@@ -14,16 +14,28 @@ const AboutPage = () => {
       className={'xl:pt-[128px] pt-[88px] bg-[linear-gradient(180deg,rgba(196,255,255,0.3)_0%,rgba(0,0,0,0)_100%)] dark:bg-[linear-gradient(180deg,rgba(196,255,255,0.1)_0%,rgba(0,0,0,0)_100%)] xl:pb-[64px]! pb-[24px]!'}>
       <AboutUser></AboutUser>
     </div>
-    <Container className={'pt-0! cursor-default max-w-[1400px]'}>
+    <Container isTransition={false} className={'pt-0! cursor-default max-w-[1400px]'}>
       <div
         className={'text-[36px] text-foreground opacity-90 mb-[40px] font-bold text-center cursor-default'}>关于本站
       </div>
-      <AboutIntroduce></AboutIntroduce>
-      <AboutSkill></AboutSkill>
-      <AboutPersonality></AboutPersonality>
-      <AboutGames></AboutGames>
-      <AboutMessage></AboutMessage>
-      <AboutComment></AboutComment>
+      <Container className={'p-0! m-0!'}>
+        <AboutIntroduce></AboutIntroduce>
+      </Container>
+      <Container className={'p-0! m-0!'}>
+        <AboutSkill></AboutSkill>
+      </Container>
+      <Container className={'p-0! m-0!'}>
+        <AboutPersonality></AboutPersonality>
+      </Container>
+      <Container className={'p-0! m-0!'}>
+        <AboutGames></AboutGames>
+      </Container>
+      <Container className={'p-0! m-0!'}>
+        <AboutMessage></AboutMessage>
+      </Container>
+      <Container className={'p-0! m-0!'}>
+        <AboutComment></AboutComment>
+      </Container>
     </Container>
   </div>
 }

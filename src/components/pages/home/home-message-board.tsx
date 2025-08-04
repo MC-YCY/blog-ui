@@ -136,16 +136,14 @@ export const HomeMessageBoard = () => {
           className="w-full h-full ml-auto mr-auto pb-5!"
         >
           {
-            list.map((item, idx) => {
+            list.map((item) => {
               return (
                 <SwiperSlide
                   key={`msg-${item.id}`}
                   style={{
                     backgroundImage: getCardColor(),
-                    animationDelay: (idx * 0.15) + 's',
                   }}
-                  className={cn('transition-[all_0.3s_linear] bg-background py-[10px] border rounded-2xl px-4 box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]',
-                    'animate__animated animate__fadeInUp')}
+                  className={cn('transition-[all_0.3s_linear] bg-background py-[10px] border rounded-2xl px-4 box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]')}
                 >
                   <div className="w-full h-full flex flex-col">
                     <div

@@ -700,8 +700,8 @@ const PicturePage = () => {
       ],
     },
   ])
-  return <div className={'pt-[64px]'}>
-    <Container>
+  return <div className={'pt-[32px]'}>
+    <Container isTransition={false}>
       <PartTitle
         title={'一些"小藏品"'}
         description={'信我都是在群里收藏的，我想你们知道我是个收藏仔...'}>
@@ -709,7 +709,9 @@ const PicturePage = () => {
       {
         list.map((item, index) => {
           return <LazyContent key={item.url + index}>
-            <PicturePageItem item={item} index={index}></PicturePageItem>
+            <Container className={'p-0! m-0!'}>
+              <PicturePageItem item={item} index={index}></PicturePageItem>
+            </Container>
           </LazyContent>
         })
       }

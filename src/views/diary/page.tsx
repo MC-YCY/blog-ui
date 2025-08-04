@@ -213,7 +213,7 @@ const DiaryPage = () => {
       return <div className={`${baseClassName} opacity-55`}>{record.day}{info}</div>
     }
   }
-  return <div className={'pt-[64px] overflow-hidden'}>
+  return <div className={'pt-[32px] overflow-hidden'}>
     <Container>
       <PartTitle title={'灵光一现一些想法'} description={'落魄前端，加班前的幻想...'}
                  action={<DiaryWriteButton

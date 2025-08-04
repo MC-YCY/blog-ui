@@ -21,6 +21,8 @@ import {
 import { ArticleTags } from '@/constant/article-tags.ts'
 import MDEditor from '@uiw/react-md-editor'
 import useThemeStore from '@/stores/themeStore.ts'
+import { MotionModuleConfig } from '@/constant/motion-module.config.ts'
+import { motion } from 'framer-motion'
 
 const ArticlePage = () => {
   const [articleList, setArticleList] = useState<ArticleType[]>([])
@@ -56,8 +58,8 @@ const ArticlePage = () => {
     setPage(1)
   }
   const { theme } = useThemeStore()
-  return <div className={'pt-[64px] min-h-[calc(100vh-64px)]'}>
-    <Container>
+  return <div className={'pt-[32px] min-h-[calc(100vh-64px)]'}>
+    <Container isTransition={false}>
       <Drawer open={previewOpen} onClose={() => setPreviewOpen(false)}>
         <DrawerContent>
           <DrawerHeader>
@@ -103,9 +105,10 @@ const ArticlePage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px_32px]">
           {
             articleList.map((article, index) => {
-              return <div key={'home-article' + article.id} className={'animate__animated animate__fadeInUp'} style={{animationDelay:(index * 0.05)+'s'}}>
+              return <motion.div {...MotionModuleConfig.containerVariantsProps(index)}
+                                 key={'home-article' + article.id}>
                 <Article {...article} onClick={(state) => clickItem(state)}></Article>
-              </div>
+              </motion.div>
             })
           }
         </div>

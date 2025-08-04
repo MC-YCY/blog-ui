@@ -9,6 +9,8 @@ import CodeBannerB from '@/assets/images/code-banner/webp/blue.webp'
 import CodeBannerC from '@/assets/images/code-banner/webp/pink-2.webp'
 import CodeBannerD from '@/assets/images/code-banner/webp/black.webp'
 import { cn } from '@/lib/utils.ts'
+import { MotionModuleConfig } from '@/constant/motion-module.config.ts'
+import { motion } from 'framer-motion'
 
 const list = [
   {
@@ -52,7 +54,7 @@ export const HomeCode = () => {
     { label: 'Echarts', value: 'echarts' },
     { label: 'JavaScript', value: 'js' },
   ]
-  return <Container className={'overflow-x-hidden overflow-y-visible'}>
+  return <Container isTransition={false} className={'overflow-x-hidden overflow-y-visible'}>
     <PartTitle title={'一些"小挂件"'}
                description={'重复造的轮子罢了，知其然不知其所以然...'} action={
       <div className={'max-w-[100%] lg:max-w-[340px] overflow-x-hidden'}>
@@ -71,11 +73,11 @@ export const HomeCode = () => {
         {
           list.map((item, index) => {
             return <SwiperSlide key={item.banner + index}
-                                style={{ animationDelay: (0.5 * index)+'s' }}
-                                className={cn('w-[100%]! md:!w-[calc(50%-16px)] xl:!w-[calc(33.33%-21.33px)] py-[10px]',
-                                  'animate__animated animate__bounceInRight')}>
-              <ProjectCard project={item.name} date={item.date} tip={item.tip}
-                           banner={item.banner} code={item.git} url={item.preview}></ProjectCard>
+                                className={cn('w-[100%]! md:!w-[calc(50%-16px)] xl:!w-[calc(33.33%-21.33px)] py-[10px]')}>
+              <motion.div {...MotionModuleConfig.containerVariantsProps(index)}>
+                <ProjectCard project={item.name} date={item.date} tip={item.tip}
+                             banner={item.banner} code={item.git} url={item.preview}></ProjectCard>
+              </motion.div>
             </SwiperSlide>
           })
         }

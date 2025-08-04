@@ -343,7 +343,7 @@ export const HomeLink = () => {
         className="w-full h-full ml-auto mr-auto pb-5!"
       >
         {
-          list.map((item, idx) => {
+          list.map((item) => {
             return (
               <SwiperSlide
                 key={`links-${item.id}`}
@@ -351,11 +351,9 @@ export const HomeLink = () => {
                   backgroundImage: `url(${item.banner})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center center',
-                  animationDelay: (idx * 0.15) + 's',
                 }}
                 onClick={() => goPreview(item)}
-                className={cn(`relative cursor-pointer transition-[all_0.3s_linear] border rounded-2xl box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]`,
-                  'animate__animated animate__fadeInUp')}
+                className={cn(`relative cursor-pointer transition-[all_0.3s_linear] border rounded-2xl box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]`)}
               >
                 <div
                   className="absolute inset-[-1px] group hover:backdrop-blur-[0px] hover:bg-[rgba(0,0,0,0)] hover:dark:bg-[rgba(0,0,0,.3)] transition-all duration-300 flex flex-col py-[11px] px-4 rounded-2xl backdrop-blur-[3px] bg-[rgba(255,255,255,.3)] dark:bg-[rgba(0,0,0,.6)]"
