@@ -33,9 +33,7 @@ const AboutPage = () => {
       <Container className={'p-0! m-0!'}>
         <AboutMessage></AboutMessage>
       </Container>
-      <Container className={'p-0! m-0!'}>
-        <AboutComment></AboutComment>
-      </Container>
+      <AboutComment></AboutComment>
     </Container>
   </div>
 }

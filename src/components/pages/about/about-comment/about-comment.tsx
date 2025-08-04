@@ -10,6 +10,8 @@ import { useLocation } from 'react-router-dom'
 import style from './style.module.css'
 import { SmartPagination } from '@/components/ui/pagination-controller.tsx'
 import { useSearchParams } from 'react-router-dom'
+import { MotionModuleConfig } from '@/constant/motion-module.config.ts'
+import { motion } from 'framer-motion'
 
 interface Comment extends CommentWeb {
   className?: string;
@@ -414,18 +416,20 @@ export const AboutComment = () => {
     </div>
     <div className={'w-full mt-3 xl:mt-6'}>
       {
-        comments.map((comment: Comment) => {
-          return <CommentContent
-            clickAnchor={() => updateParams}
-            InnerClassName={'border-none!'}
-            hashScrollElement={hashScrollElement}
-            key={comment.id}
-            {...comment}
-            activeCommentId={activeCommentId}
-            onCommentClick={handleCommentClick}
-            onSubmit={(info) => onSubmit(info, true)}
-            className={'mb-[10px]'}
-          />
+        comments.map((comment: Comment,index: number) => {
+          return <motion.div key={comment.id} {...MotionModuleConfig.containerVariantsProps(index)}>
+            <CommentContent
+              clickAnchor={() => updateParams}
+              InnerClassName={'border-none!'}
+              hashScrollElement={hashScrollElement}
+              key={comment.id}
+              {...comment}
+              activeCommentId={activeCommentId}
+              onCommentClick={handleCommentClick}
+              onSubmit={(info) => onSubmit(info, true)}
+              className={'mb-[10px]'}
+            />
+          </motion.div>
         })
       }
       <div className={'flex justify-center w-full mt-10 sticky md:bottom-10 bottom-[80px]'}>
