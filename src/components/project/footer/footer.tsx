@@ -5,7 +5,7 @@ import gaIcon from '@/assets/images/ga.png'
 
 export const Footer = () => {
   return <div className={'bg-[#000] mt-20'}>
-    <div className={'max-w-[100rem] mx-auto py-10 px-2 md:px-8 flex flex-wrap'}>
+    <div className={'max-w-[1400px] mx-auto py-10 px-2 md:px-8 flex flex-wrap'}>
       <div className={'text-background text-[14px] flex items-center cursor-default'}>
         <img src={gaIcon} className={'h-[20px]'} alt="" />
         <span className={'ml-[4px]'}>京ICP备2025133833号</span>
