@@ -30,6 +30,8 @@ import { Textarea } from '@/components/ui/textarea.tsx'
 import { toast } from 'sonner'
 import { createLink, getLinkList } from '@/api/link.api.ts'
 import { cn } from '@/lib/utils.ts'
+import { MotionModuleConfig } from '@/constant/motion-module.config.ts'
+import { motion } from 'framer-motion'
 
 const WriteForm = ({ setOpen, getList }: { setOpen: (arg: boolean) => void, getList: () => void }) => {
   const formSchema = z.object({
@@ -256,6 +258,38 @@ export const LinkWriteButton = ({ getList }: { getList: () => void }) => {
   </>
 }
 
+const HomeLinkItem = ({ item }: { item: LinkType }) => {
+  return <div
+    style={{
+      backgroundImage: `url(${item.banner})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center',
+    }}
+    className={cn(`relative cursor-pointer transition-[all_0.3s_linear] border rounded-2xl box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]`, 'w-full h-full')}>
+
+    <div
+      className="absolute inset-[-1px] group hover:backdrop-blur-[0px] hover:bg-[rgba(0,0,0,0)] hover:dark:bg-[rgba(0,0,0,.3)] transition-all duration-300 flex flex-col py-[11px] px-4 rounded-2xl backdrop-blur-[3px] bg-[rgba(255,255,255,.3)] dark:bg-[rgba(0,0,0,.6)]"
+      style={{
+        backgroundImage: item.banner ? getCardColor(.1, .1) : getCardColor(.05, .05),
+      }}>
+      <div
+        className="group-hover:opacity-0 transition-all duration-300 text-foreground line-clamp-10 xl:line-clamp-5 lg:line-clamp-5 md:line-clamp-5">
+        {item.content}
+      </div>
+      <div className="mt-auto">
+        <div className="flex items-center">
+                      <span className="font-bold text-[14px]">
+                                              {item.title}
+                                            </span>
+        </div>
+        <div className="text-[12px] text-foreground opacity-75 mt-2">
+          {dayjs(item.date).format('YYYY/MM/DD HH:mm:ss')}
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
 export const HomeLink = () => {
   const [list, setList] = useState<LinkType[]>([])
   const installDefaultList = (res: never[]) => {
@@ -343,38 +377,18 @@ export const HomeLink = () => {
         className="w-full h-full ml-auto mr-auto pb-5!"
       >
         {
-          list.map((item) => {
+          list.map((item, index) => {
             return (
               <SwiperSlide
                 key={`links-${item.id}`}
-                style={{
-                  backgroundImage: `url(${item.banner})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center center',
-                }}
                 onClick={() => goPreview(item)}
-                className={cn(`relative cursor-pointer transition-[all_0.3s_linear] border rounded-2xl box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]`)}
               >
-                <div
-                  className="absolute inset-[-1px] group hover:backdrop-blur-[0px] hover:bg-[rgba(0,0,0,0)] hover:dark:bg-[rgba(0,0,0,.3)] transition-all duration-300 flex flex-col py-[11px] px-4 rounded-2xl backdrop-blur-[3px] bg-[rgba(255,255,255,.3)] dark:bg-[rgba(0,0,0,.6)]"
-                  style={{
-                    backgroundImage: getCardColor(.1, .1),
-                  }}>
-                  <div
-                    className="group-hover:opacity-0 transition-all duration-300 text-foreground line-clamp-10 xl:line-clamp-5 lg:line-clamp-5 md:line-clamp-5">
-                    {item.content}
-                  </div>
-                  <div className="mt-auto">
-                    <div className="flex items-center">
-                      <span className="font-bold text-[14px]">
-                                              {item.title}
-                                            </span>
-                    </div>
-                    <div className="text-[12px] text-foreground opacity-75 mt-2">
-                      {dayjs(item.date).format('YYYY/MM/DD HH:mm:ss')}
-                    </div>
-                  </div>
-                </div>
+                <motion.div
+                  className={'w-full h-full'}
+                  key={'home-link' + item.id}
+                  {...MotionModuleConfig.containerVariantsProps(index)}>
+                  <HomeLinkItem item={item}></HomeLinkItem>
+                </motion.div>
               </SwiperSlide>
             )
           })

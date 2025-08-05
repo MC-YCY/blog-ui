@@ -37,7 +37,7 @@ export const Diary = ({
       </div>
     </div>
     <div style={{ '--background-image': `url(${backgroundImage})` } as React.CSSProperties}
-         className={cn(style.content, className3, 'cursor-default dark:opacity-65 whitespace-pre-wrap')}>
+         className={cn(style.content, className3, 'cursor-default dark:opacity-65 whitespace-pre-wrap break-all')}>
       {content}
     </div>
   </div>

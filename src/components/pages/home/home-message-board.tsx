@@ -12,6 +12,44 @@ import { createMessage, getMessages } from '@/api/messages.api.ts'
 import dayjs from 'dayjs'
 import { getCardColor } from '@/lib/getCardColor.ts'
 import { cn } from '@/lib/utils.ts'
+import { MotionModuleConfig } from '@/constant/motion-module.config.ts'
+import { motion } from 'framer-motion'
+
+const HomeMessageBoardItem = ({ item }: {item: MessageBoard }) => {
+  return <>
+    <div
+      className={cn('transition-[all_0.3s_linear] bg-background py-[10px] border rounded-2xl px-4 box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]',
+        'w-full h-full')}
+      style={{
+        backgroundImage: getCardColor(0.05,0.05),
+      }}>
+
+      <div className="w-full h-full flex flex-col">
+        <div
+          className="text-foreground line-clamp-10 xl:line-clamp-5 lg:line-clamp-5 md:line-clamp-5 opacity-85 whitespace-pre-wrap break-all">
+          {item.content}
+        </div>
+        <div className="mt-auto">
+          <div className="flex items-center">
+            <div
+              style={{ backgroundImage: getCardColor(0.3, 0.4) }}
+              className="rounded-full w-[32px] h-[32px] bg-[rgba(0,0,0,.15)] dark:bg-[rgba(255,255,255,.15)]  shadow-[inset_0_0_8px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_6px_rgba(255,255,255,.1)] text-background justify-center flex items-center text-[14px]"
+            >
+              {item.username[0]}
+            </div>
+            <span className="ml-2 font-bold text-[14px]">
+                              {item.username}
+                            </span>
+          </div>
+          <div className="text-[12px] text-foreground opacity-75 mt-2">
+            {dayjs(item.date).format('YYYY/MM/DD HH:mm:ss')}
+          </div>
+        </div>
+      </div>
+    </div>
+  </>
+
+}
 
 export const HomeMessageBoard = () => {
   const [list, setList] = useState<MessageBoard[]>([])
@@ -107,11 +145,11 @@ export const HomeMessageBoard = () => {
           style={{ padding: '10px 10px' }}
           breakpoints={{
             640: {
-              slidesPerView: 2,
-              grid: { rows: 2 },
+              slidesPerView: 1,
+              grid: { rows: 1 },
             },
             768: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               grid: { rows: 2 },
             },
             1024: {
@@ -136,37 +174,15 @@ export const HomeMessageBoard = () => {
           className="w-full h-full ml-auto mr-auto pb-5!"
         >
           {
-            list.map((item) => {
+            list.map((item,index) => {
               return (
-                <SwiperSlide
-                  key={`msg-${item.id}`}
-                  style={{
-                    backgroundImage: getCardColor(),
-                  }}
-                  className={cn('transition-[all_0.3s_linear] bg-background py-[10px] border rounded-2xl px-4 box-border shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]')}
-                >
-                  <div className="w-full h-full flex flex-col">
-                    <div
-                      className="text-foreground line-clamp-10 xl:line-clamp-5 lg:line-clamp-5 md:line-clamp-5 opacity-85">
-                      {item.content}
-                    </div>
-                    <div className="mt-auto">
-                      <div className="flex items-center">
-                        <div
-                          style={{ backgroundImage: getCardColor(0.3, 0.4) }}
-                          className="rounded-full w-[32px] h-[32px] bg-[rgba(0,0,0,.15)] dark:bg-[rgba(255,255,255,.15)]  shadow-[inset_0_0_8px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_6px_rgba(255,255,255,.1)] text-background justify-center flex items-center text-[14px]"
-                        >
-                          {item.username[0]}
-                        </div>
-                        <span className="ml-2 font-bold text-[14px]">
-                                              {item.username}
-                                            </span>
-                      </div>
-                      <div className="text-[12px] text-foreground opacity-75 mt-2">
-                        {dayjs(item.date).format('YYYY/MM/DD HH:mm:ss')}
-                      </div>
-                    </div>
-                  </div>
+                <SwiperSlide key={`msg-${item.id}`}>
+                  <motion.div
+                    className={'w-full h-full'}
+                    key={'home-message-board' + item.id}
+                    {...MotionModuleConfig.containerVariantsProps(index)}>
+                    <HomeMessageBoardItem item={item}></HomeMessageBoardItem>
+                  </motion.div>
                 </SwiperSlide>
               )
             })
