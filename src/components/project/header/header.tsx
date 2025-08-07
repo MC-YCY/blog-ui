@@ -94,7 +94,9 @@ export const Header = () => {
       window.removeEventListener('scroll', handleScroll)
       window.addEventListener('scrollend', handleScrollEnd)
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, {
+      passive: true,
+    })
     // window.addEventListener('hashchange', handleHashChange);
     // 在锚点滚动后触发事件，也就是锚点hash更新后触发这时候已经滚动了，在scroll事件前因此删除scroll事件无效
     const clickMockBeforeHashChange = () => {
