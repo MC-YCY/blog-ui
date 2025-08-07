@@ -6,8 +6,10 @@ import RJZYZMp3 from '@/assets/music/人间这一遭.mp3'
 import RJZYZBanner from '@/assets/music/人间这一遭.png'
 import LUOMp3 from '@/assets/music/落.mp3'
 import LUOBanner from '@/assets/music/落.png'
-import YYXMp3 from '@/assets/music/鸳鸯戏.mp3';
-import YYXBanner from '@/assets/music/鸳鸯戏.webp';
+import YYXMp3 from '@/assets/music/鸳鸯戏.mp3'
+import YYXBanner from '@/assets/music/鸳鸯戏.webp'
+import PYPNZMp3 from '@/assets/music/朋友陪你醉.mp3'
+import PYPNZBanner from '@/assets/music/朋友陪你醉.webp'
 
 export interface MusicConstType {
   rawLyrics: string,
@@ -17,9 +19,59 @@ export interface MusicConstType {
   music: string,
 }
 
-export const MusicConst:MusicConstType[] = [
+export const MusicConst: MusicConstType[] = [
   {
-    rawLyrics:`[00:00.0]鸳鸯戏 (DJ南瓜饼版) - Babystop_山竹/伊笑/南瓜饼
+    rawLyrics: `[00:00.09]朋友陪你醉(DJ 版)-风景线
+[00:00.84]多远的距离多久没联系
+[00:03.57]朋友的情依然埋藏在心底
+[00:07.17]朋友陪你醉陪你流泪
+[00:10.83]只有朋友才知道你活得累不累
+[00:14.46]朋友陪你笑陪你陶醉
+[00:18.09]只有朋友才明白你快乐最珍贵
+[00:22.2]朋友陪你醉为你伤悲
+[00:25.38]只有朋友才了解你为谁而心碎
+[00:29.07]朋友从不会在乎你贫穷富贵
+[00:32.72]既然和你做朋友我一生不后悔
+[00:35.94]如果你在生活之中迷失了方向
+[00:42.72]请你相信有我陪你你会变坚强
+[00:45.75]无论生活的压力还是爱情不如意
+[00:49.2]今朝有酒今朝陪你一起醉到底
+[00:53.76]无论如今你的日子过得怎么样
+[00:57.42]不要忘记我们曾经一样的梦想
+[01:00.42]不管多远的距离多久没联系
+[01:03.84]朋友的情依然埋藏在心底
+[01:07.5]朋友陪你醉陪你流泪
+[01:11.19]只有朋友才知道你活得累不累
+[01:14.85]朋友陪你笑陪你陶醉
+[01:18.51]只有朋友才明白你快乐最珍贵
+[01:22.62]朋友陪你醉为你伤悲
+[01:25.8]只有朋友才了解你为谁而心碎
+[01:29.49]朋友从不会在乎你贫穷富贵
+[01:33.15]既然和你做朋友我一生不后悔
+[01:58.89]如果你在生活之中迷失了方向
+[02:10.62]请你相信有我陪你你会变坚强
+[02:13.62]无论生活的压力还是爱情不如意
+[02:17.07]今朝有酒今朝陪你一起醉到底
+[02:21.63]无论如今你的日子过得怎么样
+[02:25.29001]不要忘记我们曾经一样的梦想
+[02:28.29001]不管多远的距离多久没联系
+[02:31.74]朋友的情依然埋藏在心底
+[02:35.37]朋友陪你醉陪你流泪
+[02:39.06]只有朋友才知道你活得累不累
+[02:42.72]朋友陪你笑陪你陶醉
+[02:46.38]只有朋友才明白你快乐最珍贵
+[02:50.49]朋友陪你醉为你伤悲
+[02:53.67]只有朋友才了解你为谁而心碎
+[02:57.36]朋友从不会在乎你贫穷富贵
+[03:01.02]既然和你做朋友我一生不后悔
+[03:36.0]未经许可,不得翻唱或使用`,
+    name: '朋友陪你醉',
+    singer: '风景线',
+    banner: PYPNZBanner,
+    music: PYPNZMp3,
+  },
+  {
+    rawLyrics: `[00:00.0]鸳鸯戏 (DJ南瓜饼版) - Babystop_山竹/伊笑/南瓜饼
 [00:00.21]词：家浚
 [00:00.25]曲：家浚/乐金震
 [00:00.32]编曲：孙星辰
@@ -53,13 +105,13 @@ export const MusicConst:MusicConstType[] = [
 [02:57.19]待到春来又雪满楼
 [03:01.46]不负天长不负地久
 [03:05.22]你我白首`,
-    name:'鸳鸯戏',
-    singer:'Babystop_山竹&伊笑',
-    banner:YYXBanner,
-    music:YYXMp3
+    name: '鸳鸯戏',
+    singer: 'Babystop_山竹&伊笑',
+    banner: YYXBanner,
+    music: YYXMp3,
   },
   {
-    rawLyrics:`[00:00.03]落 (花开花落日升日没) - 唐伯虎Annie
+    rawLyrics: `[00:00.03]落 (花开花落日升日没) - 唐伯虎Annie
 [00:02.22]词 Lyrics：潇然
 [00:02.99]曲 Composed：潇然
 [00:03.75]编曲 Arranger：罗刚
@@ -111,10 +163,10 @@ export const MusicConst:MusicConstType[] = [
 [02:47.93]潮起潮落 月圆月没
 [02:50.9]看破不说破
 [02:53.82]太单薄 与谁能说`,
-    name:'落',
-    singer:'唐伯虎Annie',
-    music:LUOMp3,
-    banner:LUOBanner
+    name: '落',
+    singer: '唐伯虎Annie',
+    music: LUOMp3,
+    banner: LUOBanner,
   },
   {
     rawLyrics: `[00:00.0]人间这一遭（人生这一杯酒啊）-木杰
