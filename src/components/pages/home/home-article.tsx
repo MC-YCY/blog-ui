@@ -18,6 +18,7 @@ import { allArticlesList } from '@/api/article.api.ts'
 import useThemeStore from '@/stores/themeStore.ts'
 import { motion } from 'framer-motion'
 import { MotionModuleConfig } from '@/constant/motion-module.config.ts'
+import { defaultArticle } from '@/constant/default-article.ts'
 
 export const HomeArticle = () => {
   const navigate = useNavigate()
@@ -29,7 +30,13 @@ export const HomeArticle = () => {
       tag: '',
       title: '',
     }).then(res => {
-      setArticleList(res.items)
+      if (res.items.length <= 0) {
+        setArticleList(defaultArticle)
+      } else {
+        setArticleList(res.items)
+      }
+    }).catch(() => {
+      setArticleList(defaultArticle)
     })
   }
   useEffect(() => {
@@ -70,7 +77,7 @@ export const HomeArticle = () => {
                description={'天天看各种框架比较，看的是瑟瑟发抖...'}></PartTitle>
     <div className={'mt-3 xl:mt-6'}>
       <div
-                  className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_32px]">
+        className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-[20px_32px]">
         {
           articleList.map((article, index) => {
             return <motion.div

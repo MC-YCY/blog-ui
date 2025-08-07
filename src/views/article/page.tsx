@@ -23,6 +23,7 @@ import MDEditor from '@uiw/react-md-editor'
 import useThemeStore from '@/stores/themeStore.ts'
 import { MotionModuleConfig } from '@/constant/motion-module.config.ts'
 import { motion } from 'framer-motion'
+import { defaultArticle } from '@/constant/default-article.ts'
 
 const ArticlePage = () => {
   const [articleList, setArticleList] = useState<ArticleType[]>([])
@@ -38,7 +39,13 @@ const ArticlePage = () => {
       title: '',
     }).then(res => {
       setTotal(res.total)
-      setArticleList(res.items)
+      if (res.items.length <= 0) {
+        setArticleList(defaultArticle)
+      } else {
+        setArticleList(res.items)
+      }
+    }).catch(() => {
+      setArticleList(defaultArticle)
     })
   }
   useEffect(() => {

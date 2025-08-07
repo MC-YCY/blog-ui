@@ -6,7 +6,7 @@ export interface Role {
   id: number;
   name: string;
   code: string;
-  users: User[];
-  permissions: Permission[];
-  menus: Menu[];
+  users?: User[];
+  permissions?: Permission[];
+  menus?: Menu[];
 }

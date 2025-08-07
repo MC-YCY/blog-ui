@@ -11,13 +11,13 @@ export interface Article {
   tags: Array<string>;
   readme: string | ReactNode;
   banner: string;
-  createdAt: Date;
+  createdAt: Date | string;
   viewCount: number;
   author: User;
-  likedBy: User[];
-  comments: BaseComment[];
-  favorites: Favorite[];
-  status: ArticleStatus;
+  likedBy?: User[];
+  comments?: BaseComment[];
+  favorites?: Favorite[];
+  status: ArticleStatus | string;
   likeCount: number;
 }
 export interface CreateArticleDto {
