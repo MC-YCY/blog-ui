@@ -18,12 +18,10 @@ import importMaQiuYuanEthumbnail from '@/assets/images/演员/马秋元/thumbnai
 
 import importLiShengXuanA from '@/assets/images/演员/黎晟萱/webp/group-a-3.webp'
 import importLiShengXuanB from '@/assets/images/演员/黎晟萱/webp/group-a-2.webp'
-import importLiShengXuanC from '@/assets/images/演员/黎晟萱/webp/group-a-1.webp'
 import importLiShengXuanD from '@/assets/images/演员/黎晟萱/webp/group-b-1.webp'
 import importLiShengXuanE from '@/assets/images/演员/黎晟萱/webp/group-b-2.webp'
 import importLiShengXuanAthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-3.jpg'
 import importLiShengXuanBthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-2.jpg'
-import importLiShengXuanCthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-a-1.jpg'
 import importLiShengXuanDthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-b-1.webp'
 import importLiShengXuanEthumbnail from '@/assets/images/演员/黎晟萱/thumbnail/group-b-2.webp'
 
@@ -202,12 +200,10 @@ export const MaQiuYuanEthumbnail  = importMaQiuYuanEthumbnail
 
 export const LiShengXuanA  = importLiShengXuanA
 export const LiShengXuanB  = importLiShengXuanB
-export const LiShengXuanC  = importLiShengXuanC
 export const LiShengXuanD  = importLiShengXuanD
 export const LiShengXuanE  = importLiShengXuanE
 export const LiShengXuanAthumbnail  = importLiShengXuanAthumbnail
 export const LiShengXuanBthumbnail  = importLiShengXuanBthumbnail
-export const LiShengXuanCthumbnail  = importLiShengXuanCthumbnail
 export const LiShengXuanDthumbnail  = importLiShengXuanDthumbnail
 export const LiShengXuanEthumbnail  = importLiShengXuanEthumbnail
 
