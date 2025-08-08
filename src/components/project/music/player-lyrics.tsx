@@ -15,7 +15,7 @@ function parseLrc(lrc: string): LyricLine[] {
       if (!match) return null
       const [, min, sec, text] = match
       return {
-        time: (parseInt(min) * 60 + parseFloat(sec)) * .96,
+        time: (parseInt(min) * 60 + parseFloat(sec)),
         text: text.trim(),
       }
     })
