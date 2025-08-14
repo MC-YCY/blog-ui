@@ -15,7 +15,7 @@ export const Article = (props: ArticleComponentType) => {
   return <div className={cn('w-full pt-[28px]', props.preview && 'max-h-[70vh] overflow-y-auto max-w-[100rem] mx-auto px-2 md:px-8')}>
     <div
       onClick={() => props.onClick && props.onClick(props)}
-      className={cn('w-full p-[24px]  rounded-[14px] border-[1px] border-[rgba(255,255,255,.15)]', !props.preview && 'shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]')}>
+      className={cn('bg-background w-full p-[24px]  rounded-[14px] border-[1px] border-[rgba(255,255,255,.15)]', !props.preview && 'shadow-[0_0_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_8px_rgba(255,255,255,.1)]')}>
       <div className={'h-[70px] w-full relative'}>
         <div className={'h-[120px] absolute bottom-0 w-full block md:flex xl:flex'}>
           <div

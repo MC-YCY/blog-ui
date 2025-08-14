@@ -140,7 +140,7 @@ const CommentInput = ({ id, onSubmit, username }: Comment) => {
           value={value}
           onChange={handleInput}
           className={cn(
-            'bg-background shadow-[0_8px_16px_-4px_#2c2d300c] transition-all duration-300 px-[16px] py-[16px] pb-[40px] block w-full outline-none rounded-[10px]',
+            'shadow-[0_8px_16px_-4px_#2c2d300c] transition-all duration-300 px-[16px] py-[16px] pb-[40px] block w-full outline-none rounded-[10px]',
             'border border-[#e3e8f7] dark:border-[#3d3d3f] focus:border-[#425aef]',
             'resize-none overflow-hidden min-h-[120px]',
           )}
@@ -155,7 +155,7 @@ const CommentInput = ({ id, onSubmit, username }: Comment) => {
       </div>
       <div className={'block md:flex my-[8px]'}>
         <div
-          className={'flex-1 h-[32px] mr-0 md:mr-[10px] mt-[10px] md:mt-0 bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
+          className={'flex-1 h-[32px] mr-0 md:mr-[10px] mt-[10px] md:mt-0 shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
           <label>
             <span className={'absolute left-0 top-0 h-[32px] flex items-center px-[20px] font-bold'}>QQ</span>
             <input
@@ -166,7 +166,7 @@ const CommentInput = ({ id, onSubmit, username }: Comment) => {
           </label>
         </div>
         <div
-          className={'flex-1 h-[32px] mr-0 md:mr-[10px] mt-[10px] md:mt-0 bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
+          className={'flex-1 h-[32px] mr-0 md:mr-[10px] mt-[10px] md:mt-0 shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
           <label>
             <span className={'absolute left-0 top-0 h-[32px] flex items-center px-[20px] font-bold'}>邮箱</span>
             <input
@@ -176,7 +176,7 @@ const CommentInput = ({ id, onSubmit, username }: Comment) => {
           </label>
         </div>
         <div
-          className={'flex-1 h-[32px] mr-0 md:mr-[10px] mt-[10px] md:mt-0 bg-background shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
+          className={'flex-1 h-[32px] mr-0 md:mr-[10px] mt-[10px] md:mt-0 shadow-[0_8px_16px_-4px_#2c2d300c] relative text-[14px]'}>
           <label>
             <span className={'absolute left-0 top-0 h-[32px] flex items-center px-[20px] font-bold'}>网址</span>
             <input

@@ -206,9 +206,9 @@ export const AboutSkill = () => {
 
       <div className={'w-full mt-[10px] relative'}>
         <div
-          className={'absolute bg-[linear-gradient(90deg,var(--background),rgba(0,0,0,0))] left-0 top-0 h-full w-[10%] z-10'}></div>
+          className={'dark:hidden absolute bg-[linear-gradient(90deg,var(--background),rgba(0,0,0,0))] left-0 top-0 h-full w-[10%] z-10'}></div>
         <div
-          className={'absolute bg-[linear-gradient(-90deg,var(--background),rgba(0,0,0,0))] right-0 top-0 h-full w-[10%] z-10'}></div>
+          className={'dark:hidden absolute bg-[linear-gradient(-90deg,var(--background),rgba(0,0,0,0))] right-0 top-0 h-full w-[10%] z-10'}></div>
         <div className={'w-full overflow-x-hidden'}>
           <div className={cn('inline-flex', style.aniRowLeft)}>
             {skills.map((skill, index) => {
@@ -266,9 +266,9 @@ export const AboutSkill = () => {
       <div className={'px-0 md:px-[20px] relative'}>
         <div className={'w-full h-[260px]'} ref={chartRef}></div>
         <div
-          className={'absolute bg-[linear-gradient(90deg,var(--background),rgba(0,0,0,0))] left-0 top-0 h-full w-[10%] z-10 pointer-events-none'}></div>
+          className={'dark:hidden absolute bg-[linear-gradient(90deg,var(--background),rgba(0,0,0,0))] left-0 top-0 h-full w-[10%] z-10 pointer-events-none'}></div>
         <div
-          className={'absolute bg-[linear-gradient(-90deg,var(--background),rgba(0,0,0,0))] right-0 top-0 h-full w-[10%] z-10 pointer-events-none'}></div>
+          className={'dark:hidden absolute bg-[linear-gradient(-90deg,var(--background),rgba(0,0,0,0))] right-0 top-0 h-full w-[10%] z-10 pointer-events-none'}></div>
       </div>
     </div>
   </div>
