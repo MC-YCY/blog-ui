@@ -27,6 +27,7 @@ export const ProjectCard = (props: ProjectCardProps) => {
           height={'100%'}
           loadingIndicator={<Loading className={'w-full h-full'} />}
           className={'rounded-[10px_10px_0_0] w-full h-full object-cover'}
+          imageStyle={{ objectPosition: 'center 30%' }}
         />
       </div>
       <div className={'p-[16px] flex flex-col justify-between box-content'}>

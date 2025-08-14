@@ -4,20 +4,17 @@ import { PartTitle, PartTitleAction } from '@/components/project/part-title/part
 import { ProjectCard } from '@/components/project/project-card'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Container } from '@/components/project/container'
-import CodeBannerA from '@/assets/images/code-banner/webp/white.webp'
-import CodeBannerB from '@/assets/images/code-banner/webp/blue.webp'
-import CodeBannerC from '@/assets/images/code-banner/webp/pink-2.webp'
-import CodeBannerD from '@/assets/images/code-banner/webp/black.webp'
 import { cn } from '@/lib/utils.ts'
 import { MotionModuleConfig } from '@/constant/motion-module.config.ts'
 import { motion } from 'framer-motion'
+import { WoBuJiaoLongXiaA, WoBuJiaoLongXiaB, WoBuJiaoLongXiaC, WoBuJiaoLongXiaD } from '@/constant/picture.url.ts'
 
 const list = [
   {
     name: 'react-calendar',
     date: '2024/08/14',
     tip: '组件/日历',
-    banner: CodeBannerA,
+    banner: WoBuJiaoLongXiaA,
     git: 'https://gitee.com/yin-chunyang/react-calendar',
     preview: 'https://juejin.cn/post/7403426280940912640',
   },
@@ -25,7 +22,7 @@ const list = [
     name: 'online-editing-echarts',
     date: '2024/02/05',
     tip: '组件/echarts编辑器',
-    banner: CodeBannerB,
+    banner: WoBuJiaoLongXiaB,
     git: 'https://gitee.com/yin-chunyang/online-editing-echarts',
     preview: 'https://juejin.cn/post/7447407817684647951',
   },
@@ -33,7 +30,7 @@ const list = [
     name: 'mars3d-marker',
     date: '2025/05/02',
     tip: '功能/地图标注、图片标注',
-    banner: CodeBannerC,
+    banner: WoBuJiaoLongXiaC,
     git: 'https://gitee.com/yin-chunyang/mars3d-marker',
     preview: '',
   },
@@ -41,7 +38,7 @@ const list = [
     name: 'antvx6条形码信息',
     date: '2024/09/02',
     tip: '功能/组件调整、生成png',
-    banner: CodeBannerD,
+    banner: WoBuJiaoLongXiaD,
     git: 'https://gitee.com/yin-chunyang/vue3-antvx6-null-edge-designer',
     preview: 'https://juejin.cn/post/7418123700166361123',
   },
