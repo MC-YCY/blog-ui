@@ -6,7 +6,6 @@ import { Container } from '@/components/project/container'
 import { cn } from '@/lib/utils'
 import IsqqwBanner from '@/assets/images/data-slide/webp/isqqw-banner.webp'
 import SaBlogBanner from '@/assets/images/data-slide/webp/sa-blog-banner.webp'
-import NextBlogBanner from '@/assets/images/data-slide/webp/next-blog-banner.webp'
 import { useVisitStore } from '@/stores/visitStore.ts'
 import { useEffect } from 'react'
 
@@ -25,42 +24,24 @@ const list = [
     ],
   },
   {
-    title: 'sa-blog',
-    tip: 'NestJs服务端博客网站',
+    title: 'SA-BLOG',
+    tip: 'React、NestJs打造',
     describe: `用来尝试NestJs框架搭建的博客，前端用来尝试一种只提供逻辑的ui组件库，使用到了React、Tailwindcss、Radix UI、Aceternity UI、Vite、TypeScript、Socket.Io`,
     banner: SaBlogBanner,
     buttons: [
       {
         text: '预览',
-        href: 'http://47.93.248.11/home/',
+        href: 'https://www.sa-blog.online/home',
         opacity: 'opacity-100',
       },
       {
-        text: 'git',
+        text: 'BLOG-Ui',
         href: 'https://gitee.com/yin-chunyang/blog-ui',
         opacity: 'opacity-60',
       },
       {
-        text: 'git',
+        text: 'BLOG-Service',
         href: 'https://gitee.com/yin-chunyang/blog-service',
-        opacity: 'opacity-60',
-      },
-    ],
-  },
-  {
-    title: 'next-blog',
-    tip: 'Next.js尝试',
-    describe: `学习NextJs而创建,用到了Tailwindcss、Radix UI、Aceternity UI、TypeScript`,
-    banner: NextBlogBanner,
-    buttons: [
-      {
-        text: '预览',
-        href: 'https://682ebcb8dd766bbffd257727--sa-next-blog.netlify.app/',
-        opacity: 'opacity-100',
-      },
-      {
-        text: 'git',
-        href: 'https://github.com/MC-YCY/next-blog',
         opacity: 'opacity-60',
       },
     ],
@@ -85,7 +66,7 @@ const HomeDataSwiper = () => {
             <div className={'w-full h-full relative'}>
               <div
                 className={'h-full w-full absolute left-0 top-0 z-[2] bg-[linear-gradient(90deg,var(--background),rgba(255,255,255,0))]'}>
-                <div className={'w-[100%] flex flex-col p-[40px] h-full xl:w-[470px]'}>
+                <div className={'w-[100%] flex flex-col md:p-[40px] p-[20px] h-full xl:w-[470px]'}>
                   <div className={'text-[32px] line-[1.34]'}>{item.title}</div>
                   <div className={'text-[16px] line-[1.5] pt-[16px]'}>
                     {item.tip}
@@ -97,7 +78,7 @@ const HomeDataSwiper = () => {
                     {
                       item.buttons.map((btn) => {
                         return <a key={btn.href} target={'_blank'} href={btn.href}
-                                  className={cn('px-5 h-[48px] rounded-[8px] bg-foreground text-background flex justify-center items-center text-[14px]', btn.opacity)}>{btn.text}</a>
+                                  className={cn('px-[10px] md:px-5 h-[34px] md:h-[48px] rounded-[8px] bg-foreground text-background flex justify-center items-center text-[14px]', btn.opacity)}>{btn.text}</a>
                       })
                     }
                   </div>
