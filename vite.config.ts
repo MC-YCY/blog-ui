@@ -43,7 +43,7 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       host: '0.0.0.0', // 监听所有网络接口（包括局域网 IP）
-      port: 5173,      // 可选：指定端口
+      port: 5555,      // 可选：指定端口
       proxy: {
         [env.VITE_APP_API_PREFIX]: {
           target: env.VITE_APP_BASE_API,
