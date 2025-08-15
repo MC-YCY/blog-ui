@@ -1,5 +1,6 @@
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button.tsx'
-import { Select } from '@radix-ui/react-select'
 import {
   SelectContent,
   SelectGroup,
@@ -8,11 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select.tsx'
-import { JSX, useEffect, useState } from 'react'
-
-// --- 可调参数 ---
-const BOARD_WIDTH = 9 // 棋盘宽度
-const BOARD_HEIGHT = 10 // 棋盘高度
+import { Select } from '@radix-ui/react-select'
 
 // 玩家：1=红方(玩家)，2=黑方(AI)
 export enum Player {
@@ -57,7 +54,7 @@ const PieceSymbol: Record<PieceType, string> = {
   [PieceType.BlackChariot]: '车',
   [PieceType.BlackCannon]: '炮',
   [PieceType.BlackPawn]: '卒',
-}
+};
 
 // 棋子所属玩家
 const PieceOwner: Record<PieceType, Player> = {
@@ -76,7 +73,7 @@ const PieceOwner: Record<PieceType, Player> = {
   [PieceType.BlackChariot]: Player.Black,
   [PieceType.BlackCannon]: Player.Black,
   [PieceType.BlackPawn]: Player.Black,
-}
+};
 
 // 棋子价值（用于AI评估）
 const PieceValue: Record<PieceType, number> = {
@@ -95,7 +92,7 @@ const PieceValue: Record<PieceType, number> = {
   [PieceType.BlackChariot]: 900,
   [PieceType.BlackCannon]: 450,
   [PieceType.BlackPawn]: 100,
-}
+};
 
 // 难度
 export type DifficultyKey = 'easy' | 'medium' | 'hard' | 'expert';
@@ -104,7 +101,7 @@ const DIFFICULTIES: ReadonlyArray<{ key: DifficultyKey; label: string }> = [
   { key: 'medium', label: '入门' },
   { key: 'hard', label: '进阶' },
   { key: 'expert', label: '大师' },
-] as const
+] as const;
 
 // --- 基础类型 ---
 export type Coord = readonly [number, number];
@@ -118,6 +115,10 @@ export type Move = {
 // 棋盘类型
 export type Cell = PieceType;
 export type Board = Cell[][];
+
+// 棋盘尺寸
+const BOARD_WIDTH = 9;
+const BOARD_HEIGHT = 10;
 
 // --- 工具函数 ---
 function inBounds(x: number, y: number): boolean {
@@ -134,7 +135,7 @@ function emptyBoard(): Board {
 
 function initialBoard(): Board {
   const board = emptyBoard();
-  
+
   // 黑方（上方）
   board[0][0] = PieceType.BlackChariot;
   board[0][1] = PieceType.BlackHorse;
@@ -152,7 +153,7 @@ function initialBoard(): Board {
   board[3][4] = PieceType.BlackPawn;
   board[3][6] = PieceType.BlackPawn;
   board[3][8] = PieceType.BlackPawn;
-  
+
   // 红方（下方）
   board[9][0] = PieceType.RedChariot;
   board[9][1] = PieceType.RedHorse;
@@ -170,7 +171,7 @@ function initialBoard(): Board {
   board[6][4] = PieceType.RedPawn;
   board[6][6] = PieceType.RedPawn;
   board[6][8] = PieceType.RedPawn;
-  
+
   return board;
 }
 
@@ -178,10 +179,10 @@ function initialBoard(): Board {
 function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
   const piece = board[x][y];
   if (piece === PieceType.Empty) return [];
-  
+
   const moves: Coord[] = [];
   const player = PieceOwner[piece];
-  
+
   // 根据不同棋子类型获取可能的移动
   switch (piece) {
     case PieceType.RedKing:
@@ -191,7 +192,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
       const kingMaxY = 5;
       const kingMinX = player === Player.Red ? 7 : 0;
       const kingMaxX = player === Player.Red ? 9 : 2;
-      
+
       // 上下左右移动一格
       const kingDirs = [[0, 1], [1, 0], [0, -1], [-1, 0]];
       for (const [dx, dy] of kingDirs) {
@@ -203,12 +204,12 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
           }
         }
       }
-      
+
       // 将帅对面特殊规则
       const otherKingType = player === Player.Red ? PieceType.BlackKing : PieceType.RedKing;
       let sameCol = true;
       let otherKingX = -1;
-      
+
       // 检查是否在同一列
       for (let i = 0; i < BOARD_HEIGHT; i++) {
         if (i !== x && board[i][y] === otherKingType) {
@@ -216,25 +217,25 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
           break;
         }
       }
-      
+
       // 检查两个王之间是否有其他棋子
       if (otherKingX !== -1) {
         const minX = Math.min(x, otherKingX);
         const maxX = Math.max(x, otherKingX);
-        
+
         for (let i = minX + 1; i < maxX; i++) {
           if (board[i][y] !== PieceType.Empty) {
             sameCol = false;
             break;
           }
         }
-        
+
         if (sameCol) {
           moves.push([otherKingX, y]); // 可以直接吃掉对方的将/帅
         }
       }
       break;
-      
+
     case PieceType.RedAdvisor:
     case PieceType.BlackAdvisor:
       // 仕/士只能在九宫格内斜线移动
@@ -242,7 +243,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
       const advisorMaxY = 5;
       const advisorMinX = player === Player.Red ? 7 : 0;
       const advisorMaxX = player === Player.Red ? 9 : 2;
-      
+
       // 斜线移动
       const advisorDirs = [[1, 1], [1, -1], [-1, 1], [-1, -1]];
       for (const [dx, dy] of advisorDirs) {
@@ -255,13 +256,13 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
         }
       }
       break;
-      
+
     case PieceType.RedElephant:
     case PieceType.BlackElephant:
       // 相/象只能在己方区域内移动，且不能过河
       const elephantMaxX = player === Player.Red ? 9 : 4; // 不能过河
       const elephantMinX = player === Player.Red ? 5 : 0;
-      
+
       // 象走田字
       const elephantDirs = [[2, 2], [2, -2], [-2, 2], [-2, -2]];
       for (const [dx, dy] of elephantDirs) {
@@ -269,7 +270,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
         const ny = y + dy;
         const mx = x + dx/2; // 象眼位置
         const my = y + dy/2;
-        
+
         if (inBounds(nx, ny) && nx >= elephantMinX && nx <= elephantMaxX) {
           // 象眼不能被塞住
           if (board[mx][my] === PieceType.Empty) {
@@ -280,7 +281,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
         }
       }
       break;
-      
+
     case PieceType.RedHorse:
     case PieceType.BlackHorse:
       // 马走日字
@@ -292,7 +293,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
         [-1, 0], [-1, 0], [0, -1], [0, 1],
         [0, -1], [0, 1], [1, 0], [1, 0]
       ];
-      
+
       for (let i = 0; i < horseDirs.length; i++) {
         const [dx, dy] = horseDirs[i];
         const [bx, by] = horseBlockDirs[i];
@@ -300,7 +301,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
         const ny = y + dy;
         const mx = x + bx; // 马腿位置
         const my = y + by;
-        
+
         if (inBounds(nx, ny)) {
           // 马腿不能被塞住
           if (board[mx][my] === PieceType.Empty) {
@@ -311,7 +312,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
         }
       }
       break;
-      
+
     case PieceType.RedChariot:
     case PieceType.BlackChariot:
       // 车可以横竖移动任意距离，直到遇到棋子
@@ -333,7 +334,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
         }
       }
       break;
-      
+
     case PieceType.RedCannon:
     case PieceType.BlackCannon:
       // 炮移动规则：移动时与车相同，但吃子时需要跳过一个棋子
@@ -347,7 +348,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
           nx += dx;
           ny += dy;
         }
-        
+
         // 吃子部分（需要跳过一个棋子）
         if (inBounds(nx, ny)) { // 找到第一个棋子
           nx += dx;
@@ -365,7 +366,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
         }
       }
       break;
-      
+
     case PieceType.RedPawn:
       // 兵只能向前移动，过河后可以左右移动
       if (x > 0) { // 向前移动
@@ -373,7 +374,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
           moves.push([x-1, y]);
         }
       }
-      
+
       if (x <= 4) { // 已过河，可以左右移动
         if (y > 0 && (board[x][y-1] === PieceType.Empty || PieceOwner[board[x][y-1]] !== player)) {
           moves.push([x, y-1]);
@@ -383,7 +384,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
         }
       }
       break;
-      
+
     case PieceType.BlackPawn:
       // 卒只能向前移动，过河后可以左右移动
       if (x < BOARD_HEIGHT-1) { // 向前移动
@@ -391,7 +392,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
           moves.push([x+1, y]);
         }
       }
-      
+
       if (x >= 5) { // 已过河，可以左右移动
         if (y > 0 && (board[x][y-1] === PieceType.Empty || PieceOwner[board[x][y-1]] !== player)) {
           moves.push([x, y-1]);
@@ -402,7 +403,7 @@ function getPossibleMoves(board: Board, [x, y]: Coord): Coord[] {
       }
       break;
   }
-  
+
   return moves;
 }
 
@@ -411,7 +412,7 @@ function isCheck(board: Board, player: Player): boolean {
   // 找到国王位置
   let kingPos: Coord | null = null;
   const kingType = player === Player.Red ? PieceType.RedKing : PieceType.BlackKing;
-  
+
   for (let x = 0; x < BOARD_HEIGHT; x++) {
     for (let y = 0; y < BOARD_WIDTH; y++) {
       if (board[x][y] === kingType) {
@@ -421,12 +422,12 @@ function isCheck(board: Board, player: Player): boolean {
     }
     if (kingPos) break;
   }
-  
+
   if (!kingPos) return false; // 应该不会发生
-  
+
   // 检查对方所有棋子是否可以吃掉国王
   const opponent = player === Player.Red ? Player.Black : Player.Red;
-  
+
   for (let x = 0; x < BOARD_HEIGHT; x++) {
     for (let y = 0; y < BOARD_WIDTH; y++) {
       const piece = board[x][y];
@@ -440,14 +441,14 @@ function isCheck(board: Board, player: Player): boolean {
       }
     }
   }
-  
+
   return false;
 }
 
 // 检查是否将死
 function isCheckmate(board: Board, player: Player): boolean {
   if (!isCheck(board, player)) return false;
-  
+
   // 尝试所有可能的移动，看是否能解除将军
   for (let x = 0; x < BOARD_HEIGHT; x++) {
     for (let y = 0; y < BOARD_WIDTH; y++) {
@@ -458,7 +459,7 @@ function isCheckmate(board: Board, player: Player): boolean {
           const newBoard = cloneBoard(board);
           newBoard[move[0]][move[1]] = newBoard[x][y];
           newBoard[x][y] = PieceType.Empty;
-          
+
           if (!isCheck(newBoard, player)) {
             return false; // 找到一步可以解除将军的棋
           }
@@ -466,7 +467,7 @@ function isCheckmate(board: Board, player: Player): boolean {
       }
     }
   }
-  
+
   return true; // 无法解除将军，将死
 }
 
@@ -475,10 +476,10 @@ function getValidMoves(board: Board, coord: Coord): Coord[] {
   const [x, y] = coord;
   const piece = board[x][y];
   if (piece === PieceType.Empty) return [];
-  
+
   const player = PieceOwner[piece];
   const possibleMoves = getPossibleMoves(board, coord);
-  
+
   // 过滤掉会导致自己被将军的移动
   return possibleMoves.filter(([nx, ny]) => {
     const newBoard = cloneBoard(board);
@@ -488,55 +489,10 @@ function getValidMoves(board: Board, coord: Coord): Coord[] {
   });
 }
 
-// 评估棋盘状态（从player视角）
-function evaluateBoard(board: Board, player: Player): number {
-  let score = 0;
-  
-  // 基础评分：棋子价值
-  for (let x = 0; x < BOARD_HEIGHT; x++) {
-    for (let y = 0; y < BOARD_WIDTH; y++) {
-      const piece = board[x][y];
-      if (piece !== PieceType.Empty) {
-        const pieceValue = PieceValue[piece];
-        if (PieceOwner[piece] === player) {
-          score += pieceValue;
-        } else {
-          score -= pieceValue;
-        }
-      }
-    }
-  }
-  
-  // 位置评分（可以根据棋子位置给予额外分数）
-  // 这里简化处理，实际可以为每种棋子在不同位置设置不同权重
-  
-  // 将军加分
-  const opponent = player === Player.Red ? Player.Black : Player.Red;
-  if (isCheck(board, opponent)) {
-    score += 50;
-  }
-  
-  // 被将军减分
-  if (isCheck(board, player)) {
-    score -= 50;
-  }
-  
-  // 将死判断
-  if (isCheckmate(board, opponent)) {
-    score += 10000; // 赢了
-  }
-  
-  if (isCheckmate(board, player)) {
-    score -= 10000; // 输了
-  }
-  
-  return score;
-}
-
 // AI移动函数
 function aiMove(board: Board, difficulty: DifficultyKey): Move | null {
   const who = Player.Black; // AI执黑
-  
+
   // 收集所有可能的移动
   const allMoves: Move[] = [];
   for (let x = 0; x < BOARD_HEIGHT; x++) {
@@ -555,15 +511,15 @@ function aiMove(board: Board, difficulty: DifficultyKey): Move | null {
       }
     }
   }
-  
+
   if (allMoves.length === 0) return null;
-  
+
   // 根据难度选择不同的AI策略
   switch (difficulty) {
     case 'easy':
       // 随机移动
       return allMoves[Math.floor(Math.random() * allMoves.length)];
-      
+
     case 'medium':
       // 贪心策略：选择能吃掉最有价值棋子的移动
       allMoves.sort((a, b) => {
@@ -572,7 +528,7 @@ function aiMove(board: Board, difficulty: DifficultyKey): Move | null {
         return bValue - aValue;
       });
       return allMoves[0];
-      
+
     case 'hard':
     case 'expert':
       // 使用极小化极大算法
@@ -600,40 +556,40 @@ function minimaxRoot(board: Board, depth: number, player: Player): Move | null {
       }
     }
   }
-  
+
   if (allMoves.length === 0) return null;
-  
+
   let bestMove = allMoves[0];
   let bestValue = -Infinity;
-  
+
   for (const move of allMoves) {
     const newBoard = cloneBoard(board);
     newBoard[move.to[0]][move.to[1]] = newBoard[move.from[0]][move.from[1]];
     newBoard[move.from[0]][move.from[1]] = PieceType.Empty;
-    
+
     const value = minimax(newBoard, depth - 1, -Infinity, Infinity, false, player);
     if (value > bestValue) {
       bestValue = value;
       bestMove = move;
     }
   }
-  
+
   return bestMove;
 }
 
 // 极小化极大算法
 function minimax(board: Board, depth: number, alpha: number, beta: number, isMaximizing: boolean, player: Player): number {
   if (depth === 0) {
-    return evaluateBoard(board, player);
+    return 0; // 简化评估
   }
-  
+
   const opponent = player === Player.Red ? Player.Black : Player.Red;
   const currentPlayer = isMaximizing ? player : opponent;
-  
+
   // 检查是否将死
   if (isCheckmate(board, player)) return -10000;
   if (isCheckmate(board, opponent)) return 10000;
-  
+
   if (isMaximizing) {
     let maxScore = -Infinity;
     for (let x = 0; x < BOARD_HEIGHT; x++) {
@@ -645,7 +601,7 @@ function minimax(board: Board, depth: number, alpha: number, beta: number, isMax
             const newBoard = cloneBoard(board);
             newBoard[nx][ny] = newBoard[x][y];
             newBoard[x][y] = PieceType.Empty;
-            
+
             const moveScore = minimax(newBoard, depth - 1, alpha, beta, false, player);
             maxScore = Math.max(maxScore, moveScore);
             alpha = Math.max(alpha, moveScore);
@@ -666,7 +622,7 @@ function minimax(board: Board, depth: number, alpha: number, beta: number, isMax
             const newBoard = cloneBoard(board);
             newBoard[nx][ny] = newBoard[x][y];
             newBoard[x][y] = PieceType.Empty;
-            
+
             const moveScore = minimax(newBoard, depth - 1, alpha, beta, true, player);
             minScore = Math.min(minScore, moveScore);
             beta = Math.min(beta, moveScore);
@@ -679,7 +635,7 @@ function minimax(board: Board, depth: number, alpha: number, beta: number, isMax
   }
 }
 
-export default function Chess(): JSX.Element {
+export default function Chess() {
   const [board, setBoard] = useState<Board>(() => initialBoard());
   const [turn, setTurn] = useState<Player.Red | Player.Black>(Player.Red); // 红先
   const [selectedCell, setSelectedCell] = useState<Coord | null>(null);
@@ -688,8 +644,7 @@ export default function Chess(): JSX.Element {
   const [history, setHistory] = useState<Move[]>([]); // 保存走子历史
   const [aiEnabled, setAiEnabled] = useState<boolean>(true); // 是否对战AI
   const [gameOver, setGameOver] = useState<{winner: Player | null}>({winner: null});
-  const [movingPiece, setMovingPiece] = useState<{piece: PieceType, from: Coord, to: Coord} | null>(null); // 正在移动的棋子
-  
+
   // 检查游戏是否结束
   useEffect(() => {
     if (isCheckmate(board, Player.Red)) {
@@ -698,12 +653,11 @@ export default function Chess(): JSX.Element {
       setGameOver({winner: Player.Red});
     }
   }, [board]);
-  
+
   // AI移动
   useEffect(() => {
     if (!aiEnabled) return;
     if (gameOver.winner) return;
-    if (movingPiece) return; // 棋子移动动画过程中不执行AI移动
     if (turn === Player.Black) {
       // 添加延迟，让AI思考看起来更自然
       const timer = setTimeout(() => {
@@ -711,87 +665,63 @@ export default function Chess(): JSX.Element {
         if (move) {
           const [fromX, fromY] = move.from;
           const [toX, toY] = move.to;
-          
-          // 设置移动动画
-          setMovingPiece({
-            piece: move.piece,
-            from: [fromX, fromY],
-            to: [toX, toY]
+
+          // 更新棋盘状态
+          setBoard((prevBoard) => {
+            const newBoard = cloneBoard(prevBoard);
+            newBoard[toX][toY] = newBoard[fromX][fromY];
+            newBoard[fromX][fromY] = PieceType.Empty;
+            return newBoard;
           });
-          
-          // 延迟执行实际的棋盘更新，等待动画完成
-          setTimeout(() => {
-            setBoard((prevBoard) => {
-              const newBoard = cloneBoard(prevBoard);
-              newBoard[toX][toY] = newBoard[fromX][fromY];
-              newBoard[fromX][fromY] = PieceType.Empty;
-              return newBoard;
-            });
-            
-            setHistory((prev) => [...prev, move]);
-            setMovingPiece(null);
-            setTurn(Player.Red);
-          }, 300); // 300ms动画时间
+
+          setHistory((prev) => [...prev, move]);
+          setTurn(Player.Red);
         }
       }, 500);
-      
+
       return () => clearTimeout(timer);
     }
-  }, [turn, aiEnabled, difficulty, gameOver.winner, board, movingPiece]);
-  
+  }, [turn, aiEnabled, difficulty, gameOver.winner, board]);
+
   // 处理棋子选择
   const handleCellClick = (x: number, y: number) => {
     if (gameOver.winner) return;
     if (turn === Player.Black && aiEnabled) return; // AI回合不能操作
-    if (movingPiece) return; // 棋子移动动画过程中不能操作
-    
+
     const piece = board[x][y];
-    
+
     // 如果已经选中了一个棋子，并且点击的是有效移动位置
     if (selectedCell && validMoves.some(([mx, my]) => mx === x && my === y)) {
       const [fromX, fromY] = selectedCell;
       const fromPiece = board[fromX][fromY];
       const toPiece = board[x][y];
-      
-      // 设置移动动画
-      setMovingPiece({
-        piece: fromPiece,
-        from: [fromX, fromY],
-        to: [x, y]
+
+      // 执行移动
+      setBoard((prevBoard) => {
+        const newBoard = cloneBoard(prevBoard);
+        newBoard[x][y] = newBoard[fromX][fromY];
+        newBoard[fromX][fromY] = PieceType.Empty;
+        return newBoard;
       });
-      
+
+      // 记录历史
+      setHistory((prev) => [...prev, {
+        from: [fromX, fromY],
+        to: [x, y],
+        piece: fromPiece,
+        captured: toPiece !== PieceType.Empty ? toPiece : undefined
+      }]);
+
       // 清除选择状态
       setSelectedCell(null);
       setValidMoves([]);
-      
-      // 延迟执行实际的棋盘更新，等待动画完成
-      setTimeout(() => {
-        // 执行移动
-        setBoard((prevBoard) => {
-          const newBoard = cloneBoard(prevBoard);
-          newBoard[x][y] = newBoard[fromX][fromY];
-          newBoard[fromX][fromY] = PieceType.Empty;
-          return newBoard;
-        });
-        
-        // 记录历史
-        setHistory((prev) => [...prev, {
-          from: [fromX, fromY],
-          to: [x, y],
-          piece: fromPiece,
-          captured: toPiece !== PieceType.Empty ? toPiece : undefined
-        }]);
-        
-        // 清除移动动画状态
-        setMovingPiece(null);
-        
-        // 切换回合
-        setTurn(turn === Player.Red ? Player.Black : Player.Red);
-      }, 300); // 300ms动画时间
-      
+
+      // 切换回合
+      setTurn(turn === Player.Red ? Player.Black : Player.Red);
+
       return;
     }
-    
+
     // 如果点击的是自己的棋子，选中它
     if (piece !== PieceType.Empty && PieceOwner[piece] === turn) {
       setSelectedCell([x, y]);
@@ -802,7 +732,7 @@ export default function Chess(): JSX.Element {
       setValidMoves([]);
     }
   };
-  
+
   // 重置游戏
   const resetGame = () => {
     setBoard(initialBoard());
@@ -812,28 +742,17 @@ export default function Chess(): JSX.Element {
     setHistory([]);
     setGameOver({winner: null});
   };
-  
+
   // 悔棋
   const undoMove = () => {
     if (history.length === 0) return;
-    if (movingPiece) return; // 棋子移动动画过程中不能悔棋
-    
+
     // 如果对战AI，需要撤销两步（玩家+AI）
     const stepsToUndo = aiEnabled ? 2 : 1;
     const newHistory = [...history];
     const movesToUndo = newHistory.splice(-stepsToUndo);
-    
+
     if (movesToUndo.length > 0) {
-      // 获取最后一步移动，用于动画效果
-      const lastMove = movesToUndo[movesToUndo.length - 1];
-      
-      // 设置移动动画（反向移动）
-      setMovingPiece({
-        piece: lastMove.piece,
-        from: lastMove.to, // 注意这里是反向的
-        to: lastMove.from
-      });
-      
       // 重建棋盘
       const newBoard = initialBoard();
       for (let i = 0; i < newHistory.length; i++) {
@@ -841,71 +760,98 @@ export default function Chess(): JSX.Element {
         newBoard[move.to[0]][move.to[1]] = move.piece;
         newBoard[move.from[0]][move.from[1]] = PieceType.Empty;
       }
-      
-      // 延迟执行实际的棋盘更新，等待动画完成
-      setTimeout(() => {
-        setBoard(newBoard);
-        setHistory(newHistory);
-        setTurn(Player.Red); // 悔棋后总是红方回合
-        setSelectedCell(null);
-        setValidMoves([]);
-        setGameOver({winner: null});
-        setMovingPiece(null);
-      }, 300); // 300ms动画时间
+
+      setBoard(newBoard);
+      setHistory(newHistory);
+      setTurn(Player.Red); // 悔棋后总是红方回合
+      setSelectedCell(null);
+      setValidMoves([]);
+      setGameOver({winner: null});
     }
   };
-  
+
   // 单元格大小
   const cellSize = 40; // px
-  
+
   return (
-    <div className="w-full">
-      <div className="mb-4 flex flex-col sm:flex-row sm:items-end gap-3">
-        <div className="flex-1">
-          <p className="text-sm text-gray-500 mt-1">
-            小贴士：专家模式使用深度3的极小化极大搜索；进阶模式使用深度2的搜索；入门模式使用贪心策略；新手模式随机移动。
-          </p>
+    <div className="w-full max-w-4xl mx-auto p-4 min-h-screen">
+      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">中国象棋</h1>
+
+      <div className="mb-6 flex flex-col md:flex-row justify-between items-center gap-4 p-4 rounded-xl shadow-md">
+        <div className="flex items-center gap-2">
+          <div className="text-lg font-semibold">
+            当前回合：
+            <span className={`ml-2 ${turn === Player.Red ? "text-red-600" : "text-gray-800"}`}>
+              {turn === Player.Red ? "红方" : "黑方"}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Select value={difficulty} defaultValue="medium"
+                    onValueChange={(value: DifficultyKey) => setDifficulty(value)}>
+              <SelectTrigger className="w-[120px] bg-background text-foreground">
+                <SelectValue placeholder="对手难度" />
+              </SelectTrigger>
+              <SelectContent className="z-[10] bg-popover text-popover-foreground">
+                <SelectGroup>
+                  <SelectLabel>难度选择</SelectLabel>
+                  {
+                    DIFFICULTIES.map((item) => {
+                      return <SelectItem key={item.key} value={item.key}>{item.label}</SelectItem>
+                    })
+                  }
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+
+            <Button
+              onClick={() => setAiEnabled((v) => !v)}
+              className={`px-4 py-1.5 rounded-lg text-sm font-medium ${
+                aiEnabled
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-200 text-gray-800"
+              }`}
+            >
+              {aiEnabled ? '对战：电脑' : '对战：双人'}
+            </Button>
+          </div>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <Select value={difficulty} defaultValue="medium"
-                  onValueChange={(value: DifficultyKey) => setDifficulty(value)}>
-            <SelectTrigger className="w-[120px] bg-background text-foreground">
-              <SelectValue placeholder="对手难度" />
-            </SelectTrigger>
-            <SelectContent className="z-[10] bg-popover text-popover-foreground">
-              <SelectGroup>
-                <SelectLabel>难度选择</SelectLabel>
-                {
-                  DIFFICULTIES.map((item) => {
-                    return <SelectItem key={item.key} value={item.key}>{item.label}</SelectItem>
-                  })
-                }
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+
+        <div className="flex gap-3">
           <Button
-            onClick={() => setAiEnabled((v) => !v)}
+            onClick={undoMove}
           >
-            {aiEnabled ? '对战：电脑' : '对战：双人'}
-          </Button>
-          <Button onClick={undoMove}>
             悔棋
           </Button>
-          <Button onClick={resetGame}>
+          <Button
+            onClick={resetGame}
+          >
             重新开始
           </Button>
         </div>
       </div>
-      
+
+      <div className="mb-4 p-4 bg-amber-50 rounded-xl border border-amber-200 text-sm text-amber-700">
+        <p>小贴士：专家模式使用深度3的极小化极大搜索；进阶模式使用深度2的搜索；入门模式使用贪心策略；新手模式随机移动。</p>
+      </div>
+
       {/* 棋盘 */}
-      <div className="w-full flex justify-center mt-[40px]">
-        <div className="relative inline-block bg-yellow-100 rounded-2xl p-3 shadow-inner border">
+      <div className="w-full flex justify-center">
+        <div className="relative inline-block bg-amber-100 rounded-xl p-4 shadow-lg border-4 border-amber-800">
           {gameOver.winner && (
-            <div className="absolute inset-0 bg-[rgba(255,255,255,.5)] dark:bg-[rgba(0,0,0,.5)] z-10 rounded-2xl flex items-center justify-center text-xl font-bold">
-              {gameOver.winner === Player.Red ? '红方胜利！🎉' : '黑方胜利！🎉'}
+            <div className="absolute inset-0 bg-[rgba(255,255,255,0.8)] z-10 rounded-xl flex flex-col items-center justify-center text-2xl font-bold">
+              <div className={`${gameOver.winner === Player.Red ? "text-red-600" : "text-gray-800"} mb-2`}>
+                {gameOver.winner === Player.Red ? '红方胜利！🎉' : '黑方胜利！🎉'}
+              </div>
+              <button
+                onClick={resetGame}
+                className="mt-4 px-6 py-2 bg-green-600 text-white rounded-lg text-lg font-medium hover:bg-green-700 transition-colors"
+              >
+                再来一局
+              </button>
             </div>
           )}
-          
+
           <div
             className="grid"
             style={{
@@ -920,27 +866,27 @@ export default function Chess(): JSX.Element {
               const piece = board[x][y];
               const isSelected = selectedCell && selectedCell[0] === x && selectedCell[1] === y;
               const isValidMove = validMoves.some(([mx, my]) => mx === x && my === y);
-              
+
               // 棋盘样式
-              let cellClass = "relative flex items-center justify-center hover:bg-yellow-200/60 focus:outline-none";
-              
+              let cellClass = "relative flex items-center justify-center hover:bg-amber-200/60 focus:outline-none";
+
               // 选中和可移动位置的样式
               if (isSelected) {
-                cellClass += " bg-yellow-300/70";
+                cellClass += " bg-amber-300/70";
               } else if (isValidMove) {
                 cellClass += " bg-green-200/70";
               }
-              
+
               // 棋子样式
-              let pieceClass = "flex items-center justify-center rounded-full w-9 h-9 font-bold text-lg";
+              let pieceClass = "flex items-center justify-center rounded-full w-8 h-8 font-bold text-lg z-10";
               if (piece !== PieceType.Empty) {
                 pieceClass += PieceOwner[piece] === Player.Red
-                  ? " bg-red-100 text-red-600 border-2 border-red-600"
-                  : " bg-gray-800 text-white border-2 border-gray-800";
+                  ? " bg-red-100 text-red-600 border-2 border-red-600 shadow-md"
+                  : " bg-gray-800 text-white border-2 border-gray-800 shadow-md";
               }
-              
+
               return (
-                <button
+                <motion.div
                   key={i}
                   className={cellClass}
                   onClick={() => handleCellClick(x, y)}
@@ -950,120 +896,119 @@ export default function Chess(): JSX.Element {
                   <div className="absolute inset-0 pointer-events-none">
                     {/* 横线 */}
                     {x > 0 && x < BOARD_HEIGHT && (
-                      <div className="absolute left-0 right-0 top-1/2 h-px bg-yellow-800/60 transform -translate-y-1/2"></div>
+                      <div className="absolute left-0 right-0 top-1/2 h-px bg-amber-800/60 transform -translate-y-1/2"></div>
                     )}
-                    
+
                     {/* 竖线 */}
                     {y > 0 && y < BOARD_WIDTH-1 && (
-                      <div className="absolute top-0 bottom-0 left-1/2 w-px bg-yellow-800/60 transform -translate-x-1/2"></div>
+                      <div className="absolute top-0 bottom-0 left-1/2 w-px bg-amber-800/60 transform -translate-x-1/2"></div>
                     )}
-                    
+
                     {/* 九宫格斜线 */}
                     {((x === 0 && y === 3) || (x === 9 && y === 3)) && (
-                      <div className="absolute w-[56px] h-[56px] border-b border-yellow-800/60 transform rotate-45"></div>
+                      <div className="absolute w-[56px] h-[56px] border-b border-amber-800/60 transform rotate-45"></div>
                     )}
                     {((x === 0 && y === 5) || (x === 9 && y === 5)) && (
-                      <div className="absolute w-[56px] h-[56px] border-b border-yellow-800/60 transform -rotate-45"></div>
+                      <div className="absolute w-[56px] h-[56px] border-b border-amber-800/60 transform -rotate-45"></div>
                     )}
-                    
+
                     {/* 兵/卒位置标记 */}
                     {((x === 3 && (y === 0 || y === 2 || y === 4 || y === 6 || y === 8)) ||
                       (x === 6 && (y === 0 || y === 2 || y === 4 || y === 6 || y === 8))) && (
-                      <div className="absolute w-2 h-2 border-t border-r border-yellow-800/60 top-0 right-0"></div>
+                      <div className="absolute w-2 h-2 border-t border-r border-amber-800/60 top-0 right-0"></div>
                     )}
                     {((x === 3 && (y === 0 || y === 2 || y === 4 || y === 6 || y === 8)) ||
                       (x === 6 && (y === 0 || y === 2 || y === 4 || y === 6 || y === 8))) && (
-                      <div className="absolute w-2 h-2 border-t border-l border-yellow-800/60 top-0 left-0"></div>
+                      <div className="absolute w-2 h-2 border-t border-l border-amber-800/60 top-0 left-0"></div>
                     )}
                     {((x === 3 && (y === 0 || y === 2 || y === 4 || y === 6 || y === 8)) ||
                       (x === 6 && (y === 0 || y === 2 || y === 4 || y === 6 || y === 8))) && (
-                      <div className="absolute w-2 h-2 border-b border-r border-yellow-800/60 bottom-0 right-0"></div>
+                      <div className="absolute w-2 h-2 border-b border-r border-amber-800/60 bottom-0 right-0"></div>
                     )}
                     {((x === 3 && (y === 0 || y === 2 || y === 4 || y === 6 || y === 8)) ||
                       (x === 6 && (y === 0 || y === 2 || y === 4 || y === 6 || y === 8))) && (
-                      <div className="absolute w-2 h-2 border-b border-l border-yellow-800/60 bottom-0 left-0"></div>
+                      <div className="absolute w-2 h-2 border-b border-l border-amber-800/60 bottom-0 left-0"></div>
                     )}
-                    
+
                     {/* 炮位置标记 */}
                     {((x === 2 && (y === 1 || y === 7)) ||
                       (x === 7 && (y === 1 || y === 7))) && (
-                      <div className="absolute w-2 h-2 border-t border-r border-yellow-800/60 top-0 right-0"></div>
+                      <div className="absolute w-2 h-2 border-t border-r border-amber-800/60 top-0 right-0"></div>
                     )}
                     {((x === 2 && (y === 1 || y === 7)) ||
                       (x === 7 && (y === 1 || y === 7))) && (
-                      <div className="absolute w-2 h-2 border-t border-l border-yellow-800/60 top-0 left-0"></div>
+                      <div className="absolute w-2 h-2 border-t border-l border-amber-800/60 top-0 left-0"></div>
                     )}
                     {((x === 2 && (y === 1 || y === 7)) ||
                       (x === 7 && (y === 1 || y === 7))) && (
-                      <div className="absolute w-2 h-2 border-b border-r border-yellow-800/60 bottom-0 right-0"></div>
+                      <div className="absolute w-2 h-2 border-b border-r border-amber-800/60 bottom-0 right-0"></div>
                     )}
                     {((x === 2 && (y === 1 || y === 7)) ||
                       (x === 7 && (y === 1 || y === 7))) && (
-                      <div className="absolute w-2 h-2 border-b border-l border-yellow-800/60 bottom-0 left-0"></div>
+                      <div className="absolute w-2 h-2 border-b border-l border-amber-800/60 bottom-0 left-0"></div>
                     )}
                   </div>
-                  
-                  {/* 棋子 */}
+
+                  {/* 棋子 - 使用motion.div添加动画 */}
                   {piece !== PieceType.Empty && (
-                    <div className={`${pieceClass} transition-transform duration-300 ease-in-out`}>
-                      {PieceSymbol[piece]}
-                    </div>
-                  )}
-                  
-                  {/* 移动中的棋子（动画效果） */}
-                  {movingPiece && movingPiece.from[0] === x && movingPiece.from[1] === y && (
-                    <div 
-                      className={`${PieceOwner[movingPiece.piece] === Player.Red
-                        ? "bg-red-100 text-red-600 border-2 border-red-600"
-                        : "bg-gray-800 text-white border-2 border-gray-800"
-                      } absolute flex items-center justify-center rounded-full w-9 h-9 font-bold text-lg z-10 transition-all duration-300 ease-in-out`}
-                      style={{
-                        transform: `translate(${(movingPiece.to[1] - movingPiece.from[1]) * cellSize}px, ${(movingPiece.to[0] - movingPiece.from[0]) * cellSize}px)`,
-                      }}
+                    <motion.div
+                      layout
+                      className={pieceClass}
+                      initial={{ scale: 0.8 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 15 }}
                     >
-                      {PieceSymbol[movingPiece.piece]}
-                    </div>
+                      {PieceSymbol[piece]}
+                    </motion.div>
                   )}
-                </button>
+                </motion.div>
               );
             })}
           </div>
+
+          {/* 楚河汉界 */}
+          <div className="absolute top-[50%] left-0 right-0 flex justify-center transform -translate-y-1/2 pointer-events-none">
+            <div className="bg-amber-800 text-white px-16 py-1 rounded-full text-sm font-bold">
+              楚河　　　　　　汉界
+            </div>
+          </div>
         </div>
       </div>
-      
-      {/* 当前回合信息 */}
-      <div className="mt-4 text-center">
-        {!gameOver.winner && (
-          <p className="text-lg font-semibold">
-            当前回合：
-            <span className={turn === Player.Red ? "text-red-600" : "text-gray-800"}>
-              {turn === Player.Red ? "红方" : "黑方"}
-            </span>
-          </p>
-        )}
-      </div>
-      
+
       {/* 历史记录 */}
-      <div className="mt-4 max-h-40 overflow-auto bg-white/60 dark:bg-gray-800/60 rounded-xl border p-2 text-xs">
-        <div className="mb-1 font-semibold">着法记录（最近在前）</div>
-        <ol className="space-y-0.5">
+      <div className="mt-8 max-h-48 overflow-auto rounded-xl border p-4 text-sm shadow-md">
+        <div className="font-bold mb-2 text-gray-700">着法记录（最近在前）</div>
+        <ol className="space-y-1">
           {[...history].reverse().map((move, idx) => {
             const [fromX, fromY] = move.from;
             const [toX, toY] = move.to;
             const player = PieceOwner[move.piece];
             return (
-              <li key={idx} className="flex justify-between">
-                <span>
-                  {player === Player.Red ? "红" : "黑"}：
+              <li key={idx} className="flex justify-between items-center py-1 border-b border-gray-100">
+                <span className="flex items-center gap-2">
+                  <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${
+                    player === Player.Red
+                      ? "bg-red-100 text-red-600 border border-red-300"
+                      : "bg-gray-800 text-white"
+                  }`}>
+                    {player === Player.Red ? "红" : "黑"}
+                  </span>
                   {PieceSymbol[move.piece]} ({fromX},{fromY}) → ({toX},{toY})
                   {move.captured ? ` 吃${PieceSymbol[move.captured]}` : ""}
                 </span>
-                <span className="text-gray-400">#{history.length - idx}</span>
+                <span className="text-gray-400 text-xs">#{history.length - idx}</span>
               </li>
             );
           })}
+          {history.length === 0 && (
+            <li className="text-gray-400 text-center py-4">暂无记录</li>
+          )}
         </ol>
       </div>
+
+      <footer className="mt-8 text-center text-gray-500 text-sm">
+        <p>中国象棋 - 传统策略游戏 | 使用 React 和 framer-motion 构建</p>
+      </footer>
     </div>
   );
 }
