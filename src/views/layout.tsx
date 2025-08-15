@@ -15,7 +15,7 @@ const Layout = () => {
       <MusicPlayer musicList={MusicConst}
                    className={'sticky left-[20px] bottom-[20px] z-[50] mt-[60px] shadow-[0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_00000050]'}></MusicPlayer>
       <Footer></Footer>
-      <img src={ShareBanner} className={'w-screen h-screen fixed left-0 top-0 z-[-1] pointer-none'} alt="" />
+      <img src={ShareBanner} className={'w-screen h-screen fixed left-0 top-0 z-[-1] pointer-none object-cover object-top'} alt="" />
     </>
   )
 }
